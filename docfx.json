@@ -23,9 +23,7 @@
           "api/**.yml",
           "api/index.md",
           "about/**.md",
-          "about/**/toc.yml",
-          "public/**.md",
-          "public/**/toc.yml"
+          "public/**.md"
         ]
       },
       {
@@ -33,9 +31,7 @@
           "articles/**.md",
           "articles/**/toc.yml",
           "about/**.md",
-          "about/**/toc.yml",
           "public/**.md",
-          "public/**/toc.yml",
           "toc.yml",
           "*.md"
         ],

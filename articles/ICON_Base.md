@@ -1,5 +1,5 @@
 
-![logo.png](logo.png)
+![logo.png](../images/logo.png)
 
 
 <h1>Documentation and Procedure</h1>  
@@ -15,217 +15,14 @@
 
 **insite GmbH**
 
-<h1>Contents</h1>
-<ol>
-<li><a href="#Introduction">Introduction</a></li>
-<ol>
-<li><a href="#Purpose%20and%20Objective">Purpose and Objective</a></li>
-<li><a href="#Definitons%2C%20Acronyms%2C%20Abbreviations">Definitons, Acronyms, Abbreviations</a></li>
-</ol>
-<li><a href="#General%20Description">General Description</a></li>
-<ol>
-<li><a href="#System%20Environment">System Environment</a></li>
-<li><a href="#Starting%20ICONMain.exe">Starting ICONMain.exe</a></li>
-<li><a href="#Version%20Information%20of%20all%20loaded%20ICON%20Components">Version Information of all loaded ICON Components</a></li>
-<li><a href="#How%20does%20ICON%20work?">How does ICON work?</a></li>
-</ol>
-<li><a href="#Configuration">Configuration</a></li>
-<ol>
-<li><a href="#Configuration%20&#60;log4net&#62;">Configuration &#60;log4net&#62;</a></li>
-<li><a href="#Configuration%20&#60;Includes&#62;">Configuration &#60;Includes&#62;</a></li>
-<li><a href="#Configuration%20&#60;ICONGlobals&#62;">Configuration &#60;ICONGlobals&#62;</a></li>
-<li><a href="#Configuration%20&#60;ICONNetwork&#62;">Configuration &#60;ICONNetwork&#62;</a></li>
-<li><a href="#Configuration%20&#60;ICONPlcs&#62;">Configuration &#60;ICONPlcs&#62;</a></li>
-<ol>
-<li><a href="#Specific%20Parameters%20for%20Acces%20via%20OPC">Specific Parameters for Acces via OPC</a></li>
-<li><a href="#Specific%20Parameters%20for%20Acces%20via%20AGLink">Specific Parameters for Acces via AGLink</a></li>
-<li><a href="#Specific%20Parameters%20for%20Access%20via%20LibNoDave">Specific Parameters for Access via LibNoDave</a></li>
-<li><a href="#Specific%20Parameters%20for%20Access%20via%20Snap7">Specific Parameters for Access via Snap7</a></li>
-</ol>
-<li><a href="#Configuration%20&#60;ICONProtocols&#62;">Configuration &#60;ICONProtocols&#62;</a></li>
-<ol>
-<li><a href="#Standard%20Protocols">Standard Protocols</a></li>
-<li><a href="#User-defined%20Protocols">User-defined Protocols</a></li>
-<ol>
-<li><a href="#Format%20Strings">Format Strings</a></li>
-<li><a href="#Members">Members</a></li>
-<li><a href="#RequestParseRule/IncomingParseRule">RequestParseRule/IncomingParseRule</a></li>
-<li><a href="#RequestBuildRule">RequestBuildRule</a></li>
-<li><a href="#DefaultResponseBuildRule">DefaultResponseBuildRule</a></li>
-<li><a href="#ErrorResponseBuildRule">ErrorResponseBuildRule</a></li>
-<li><a href="#AckParseRule">AckParseRule</a></li>
-</ol>
-</ol>
-<li><a href="#Configuration%20&#60;ICONModuleInstances&#62;">Configuration &#60;ICONModuleInstances&#62;</a></li>
-<li><a href="#Spooling">Spooling</a></li>
-<ol>
-<li><a href="#Configuration%20Spooler">Configuration Spooler</a></li>
-<li><a href="#Manual%20Spooler">Manual Spooler</a></li>
-<li><a href="#Spooler%20Persistor">Spooler Persistor</a></li>
-</ol>
-<li><a href="#Multi-XML%20Configurations">Multi-XML Configurations</a></li>
-</ol>
-<li><a href="#GUI%20of%20ICON">GUI of ICON</a></li>
-<ol>
-<li><a href="#Status%20Bar">Status Bar</a></li>
-<li><a href="#Logger">Logger</a></li>
-<li><a href="#Connections">Connections</a></li>
-<li><a href="#Spooler">Spooler</a></li>
-<ol>
-<li><a href="#Spooler%20Configuration">Spooler Configuration</a></li>
-<li><a href="#Spooler%20with%20History">Spooler with History</a></li>
-</ol>
-<li><a href="#MemBasedMsgSource">MemBasedMsgSource</a></li>
-<li><a href="#MemBasedMsgSink">MemBasedMsgSink</a></li>
-</ol>
-<li><a href="#Module">Module</a></li>
-<ol>
-<li><a href="#ICONSocket.dll">ICONSocket.dll</a></li>
-<ol>
-<li><a href="#Configuration1">Configuration</a></li>
-</ol>
-<li><a href="#Socketmanagement.dll">Socketmanagement.dll</a></li>
-<ol>
-<li><a href="#Configuration2">Configuration</a></li>
-</ol>
-<li><a href="#ICONSerial.dll">ICONSerial.dll</a></li>
-<ol>
-<li><a href="#Configuration3">Configuration</a></li>
-</ol>
-<li><a href="#MemBasedMsgSink.dll">MemBasedMsgSink.dll</a></li>
-<ol>
-<li><a href="#Configuration4">Configuration</a></li>
-<ol>
-<li><a href="#DoMultiSlotHandshake">DoMultiSlotHandshake</a></li>
-</ol>
-<li><a href="#Signal%20Time%20Diagram%20Slot%20%28MemBasedMsgSink%29">Signal Time Diagram Slot (MemBasedMsgSink)</a></li>
-<li><a href="#Impl">Impl</a></li>
-<ol>
-<li><a href="#PlcBasedMsgImpl.dll">PlcBasedMsgImpl.dll</a></li>
-<ol>
-<li><a href="#PLC%20Interface%20Structure">PLC Interface Structure</a></li>
-<li><a href="#PLC%20Interface%20Bits">PLC Interface Bits</a></li>
-</ol>
-<li><a href="#PLC2COMSinkImpl.dll">PLC2COMSinkImpl.dll</a></li>
-<ol>
-<li><a href="#PLC%20Interface%20Structure1">PLC Interface Structure</a></li>
-<li><a href="#PLC%20Interface%20Bits1">PLC Interface Bits</a></li>
-<li><a href="#Extended%20Configuration">Extended Configuration</a></li>
-</ol>
-</ol>
-<li><a href="#GUI%20MemBasedMsgSink">GUI MemBasedMsgSink</a></li>
-</ol>
-<li><a href="#MemBasedMsgSource.dll">MemBasedMsgSource.dll</a></li>
-<ol>
-<li><a href="#Configuration5">Configuration</a></li>
-<li><a href="#Signal%20Time%20Diagram">Signal Time Diagram</a></li>
-<li><a href="#Impl1">Impl</a></li>
-<ol>
-<li><a href="#SimplePlcBasedMsgSourceImpl.dll">SimplePlcBasedMsgSourceImpl.dll</a></li>
-<ol>
-<li><a href="#PLC%20Interface%20Structure2">PLC Interface Structure</a></li>
-<li><a href="#PLC%20Interface%20Bits2">PLC Interface Bits</a></li>
-</ol>
-<li><a href="#PLCBasedMsgImpl.dll">PLCBasedMsgImpl.dll</a></li>
-<ol>
-<li><a href="#PLC%20Interface%20Structure3">PLC Interface Structure</a></li>
-<li><a href="#PLC%20Interface%20Bits3">PLC Interface Bits</a></li>
-<li><a href="#Extended%20Configuration1">Extended Configuration</a></li>
-</ol>
-<li><a href="#PlcBasedFNCallOrientedImpl.dll">PlcBasedFNCallOrientedImpl.dll</a></li>
-<ol>
-<li><a href="#PLC%20Interface%20Structure4">PLC Interface Structure</a></li>
-<li><a href="#PLC%20Interface%20Bits4">PLC Interface Bits</a></li>
-</ol>
-<li><a href="#JisImpl.dll">JisImpl.dll</a></li>
-<ol>
-<li><a href="#PLC%20Interface%20Structure5">PLC Interface Structure</a></li>
-<li><a href="#PLC%20Interface%20Bits5">PLC Interface Bits</a></li>
-<li><a href="#Extended%20Configuration2">Extended Configuration</a></li>
-</ol>
-</ol>
-<li><a href="#GUI%20MemBasedMsgSource">GUI MemBasedMsgSource</a></li>
-</ol>
-<li><a href="#FunctionCallAdapter">FunctionCallAdapter</a></li>
-<ol>
-<li><a href="#Function%20Handler">Function Handler</a></li>
-<ol>
-<li><a href="#IconFileFunctionHandler.dll">IconFileFunctionHandler.dll</a></li>
-<ol>
-<li><a href="#Data%20Structure%20In">Data Structure In</a></li>
-<li><a href="#Data%20Structure%20Out">Data Structure Out</a></li>
-</ol>
-</ol>
-</ol>
-<li><a href="#Payload%20Converter%20Adapter">Payload Converter Adapter</a></li>
-<ol>
-<li><a href="#Script%20Executor">Script Executor</a></li>
-</ol>
-<li><a href="#Router">Router</a></li>
-<ol>
-<li><a href="#DataBasedMsgRouter">DataBasedMsgRouter</a></li>
-<ol>
-<li><a href="#Sinks">Sinks</a></li>
-</ol>
-</ol>
-<li><a href="#JisImpl.dll1">JisImpl.dll</a></li>
-<ol>
-<li><a href="#Configuration6">Configuration</a></li>
-<li><a href="#PLC%20Interface%20Structure6">PLC Interface Structure</a></li>
-<li><a href="#PLC%20Interface%20Bits6">PLC Interface Bits</a></li>
-</ol>
-<li><a href="#PLCUserLevel.dll">PLCUserLevel.dll</a></li>
-<ol>
-<li><a href="#Configuration7">Configuration</a></li>
-</ol>
-<li><a href="#ModuleInstanceManager">ModuleInstanceManager</a></li>
-<ol>
-<li><a href="#DataBasedModuelInstanceManager">DataBasedModuelInstanceManager</a></li>
-<ol>
-<li><a href="#Configuration8">Configuration</a></li>
-</ol>
-</ol>
-<li><a href="#Event%20Distributor">Event Distributor</a></li>
-<ol>
-<li><a href="#TcpEventDistributor">TcpEventDistributor</a></li>
-<ol>
-<li><a href="#Configuration9">Configuration</a></li>
-</ol>
-</ol>
-</ol>
-<li><a href="#Example%20Configurations">Example Configurations</a></li>
-<ol>
-<li><a href="#Gateway%20with%20two%20passive%20endpoints%20under%20RFC1006%20with%20raw%20data">Gateway with two passive endpoints under RFC1006 with raw data</a></li>
-<li><a href="#Gateway%20with%20passive%20and%20active%20endpoint%20under%20RFC1006%20with%20raw%20data">Gateway with passive and active endpoint under RFC1006 with raw data</a></li>
-<li><a href="#Passive%20endpoint%20under%20RFC1006%20with%20receipt%20of%20raw%20data%20for%20forwarding%20to%20a%20PLC">Passive endpoint under RFC1006 with receipt of raw data for forwarding to a PLC</a></li>
-<li><a href="#Gateway%20with%20two%20passive%20endpoints%20under%20RFC1006%20with%20structured%20data%20%28protocol%20implementation%29">Gateway with two passive endpoints under RFC1006 with structured data (protocol implementation)</a></li>
-<li><a href="#TCP%20passive%20endpoint%20with%20receipt%20of%20structured%20data%20%28protocol%20implementation%29%20for%20forwarding%20to%20a%20PLC">TCP passive endpoint with receipt of structured data (protocol implementation) for forwarding to a PLC</a></li>
-<li><a href="#Decoupling%20data%20forwarding%20by%20means%20of%20spooling">Decoupling data forwarding by means of spooling</a></li>
-<li><a href="#PLC%20as%20data%20source%20%28send%20compartment%29%20and%20data%20sink%20%28slot%29">PLC as data source (send compartment) and data sink (slot)</a></li>
-<li><a href="#PLC%20as%20data%20source%20with%20an%20IP%20connection%20as%20recipient">PLC as data source with an IP connection as recipient</a></li>
-<li><a href="#Example%20configuration%20with%20a%20SocketManager">Example configuration with a SocketManager</a></li>
-</ol>
-<li><a href="#A%20Data%20Transport%20Sequence%20in%20ICON">A Data Transport Sequence in ICON</a></li>
-<li><a href="#Installation">Installation</a></li>
-<ol>
-<li><a href="#Files%20generated%20during%20runtime">Files generated during runtime</a></li>
-<li><a href="#AddOns">AddOns</a></li>
-</ol>
-<li><a href="#Appendix%20A">Appendix A</a></li>
-<ol>
-<li><a href="#Umlaut's%20in%20the%20configuration%20file">Umlaut's in the configuration file</a></li>
-</ol>
-<li><a href="#Change%20Directory">Change Directory</a></li>
-</ol>
+
 
 	
-<a name="Introduction"></a>
 ---  
 #Introduction#
 
 ICON (insite communication node) is a modularly configurable software application for the transport of data. "Transport" means that data is transported from a source to a sink while the source can also receive a response (usually from the sink). 
 
-<a name="Purpose and Objective"></a>
 ---  
 ##Purpose and Objective##
 
@@ -233,7 +30,6 @@ ICON defines a data transport rule, which is the same for all existing and futur
 
 ICON can be thought of as an Inter-Process Communication(IPC)-kernel.
 
-<a name="Definitons, Acronyms, Abbreviations"></a>
 ---  
 ##Definitons, Acronyms, Abbreviations##
 
@@ -246,19 +42,16 @@ ICON can be thought of as an Inter-Process Communication(IPC)-kernel.
 *  **Spooler:** Buffer for messages (also persistent)
 
 
-<a name="General Description"></a>
 ---  
 #General Description#
 
 The special features and setting options of the software are described below. 
 
-<a name="System Environment"></a>
 ---  
 ##System Environment##
 
 The software was written in C&#35; for the .NET Framework 4.0.
 
-<a name="Starting ICONMain.exe"></a>
 ---  
 ##Starting ICONMain.exe##
 
@@ -267,7 +60,7 @@ When starting the application, the following splash screen appears:
 
 
 
-![ICON_splashscreen_2_2.png](ICON_splashscreen_2_2.png)
+![ICON_splashscreen_2_2.png](../images/ICON_splashscreen_2_2.png)
    
 
 Once all the information has been read out from the XML file and the system has configured itself, the main window appears.  
@@ -276,7 +69,7 @@ Starting without any existing configuration file or with a configuration file wi
  Or &#60;ICONConfigs&#62;&#60;ICONConfig&#62;&#60;/ICONConfig&#62;&#60;/ICONConfigs&#62;):
 
 
-![ICON_noconfig_2_2.png](ICON_noconfig_2_2.png)
+![ICON_noconfig_2_2.png](../images/ICON_noconfig_2_2.png)
 
 An existing configuration file named "ICON.xml" in the application directory is detected and loaded by ICON. If you would like to use other configuration files, you can transfer an argument with the complete directory and file name to ICONMain.exe when starting.
 
@@ -285,7 +78,7 @@ Starting with a configuration file:
    
 
 
-![config_2_2.png](config_2_2.png)
+![config_2_2.png](../images/config_2_2.png)
    
 
 When starting, ICON outputs the configuration file from the started XML file to the logger file. In addition, the network connections and network status are logged when starting. This can be helpful for debugging.  
@@ -297,18 +90,16 @@ In the ICON application window, two tabs can be seen as a permanent part of the 
 
 In the Logger Control below are buttons: **Fatal**, **Error**, **Warn**, **Info** and **Debug**. With these you can filter the messages. Please note that there also is a notice message type which cannot be controlled with the GUI. In addition, the filtering does not only apply to the view in the window but also to the messages in the logger file.
 
-<a name="Version Information of all loaded ICON Components"></a>
 ---  
 ##Version Information of all loaded ICON Components##
 
 
-![config_2_3.png](config_2_3.png)
+![config_2_3.png](../images/config_2_3.png)
 
   
 
 To obtain information about all assemblies currently loaded, you can click on the INSITE-LOGO in the upper right corner. By clicking, all information is collected and displayed in a list. The entries of the list can be selected and copied to the clipboard with Copy&Paste. Clicking once again closes this display and the standard interface of ICON is displayed again.
 
-<a name="How does ICON work?"></a>
 ---  
 ##How does ICON work?##
 
@@ -349,11 +140,9 @@ The status of a message can be as follows:
 "Created" and "Locked" are set by the source, the other statuses will usually be set by the Message-Dispatcher.
 
 
-<a name="Configuration"></a>
 ---  
 #Configuration#
 
-<a name="Configuration &#60;log4net&#62;"></a>
 ---  
 ##Configuration &#60;log4net&#62;##
 
@@ -406,7 +195,7 @@ Example of a configuration section in XML:
 
 
 
-![warning_icon.png](warning_icon.png)
+![warning_icon.png](../images/warning_icon.png)
 
 *  ICON provides two types of information specifically for the Logger: "methodName" and "modulePath".
 *  If a "log4net.Appender.MemoryAppender" is configured, it is essential to ensure that   
@@ -417,7 +206,6 @@ For setting options and additional information on this 3rdParty component, pleas
 <http://logging.apache.org/log4net/>
 
 
-<a name="Configuration &#60;Includes&#62;"></a>
 ---  
 ##Configuration &#60;Includes&#62;##
 
@@ -451,7 +239,6 @@ The name of ICONConfig must also be the same.
 
 
 
-<a name="Configuration &#60;ICONGlobals&#62;"></a>
 ---  
 ##Configuration &#60;ICONGlobals&#62;##
 
@@ -493,7 +280,7 @@ In the Globals section, application-wide settings are performed.
 *  **Tracing: ** Used to output additional debug messages.  
 
 
-![warning_icon.png](warning_icon.png)
+![warning_icon.png](../images/warning_icon.png)
 The system will slow down considerably when activating tracing due to the huge number of messages logged!
 *  **Performing:** Creates additional output with timing information as debug messages.	In particular, those are access times to a PLC, or cycle times of the send and receive buffer processing. Please note that this may also slow down the system.
 *  **LoggerViewShowPanel:** With the "*LoggerViewShowPanel*" parameter, the additional functions of the Logger page can be deactivated to only display the log outputs.
@@ -527,7 +314,6 @@ also see <https://msdn.microsoft.com/en-us/library/system.net.sockets.socket.sen
 
 
 
-<a name="Configuration &#60;ICONNetwork&#62;"></a>
 ---  
 ##Configuration &#60;ICONNetwork&#62;##
 
@@ -554,7 +340,6 @@ The order would then be as follows:
   2.   Resolution via C:\Windows\System32\drivers\etc\hosts
   3.   Resolution via DNS
 
-<a name="Configuration &#60;ICONPlcs&#62;"></a>
 ---  
 ##Configuration &#60;ICONPlcs&#62;##
 
@@ -574,7 +359,6 @@ Here, any number of PLCs can be configured. Enter a section for each PLC.
 *  **WriteCacheEnabled:** If true, each Write is cached. A write operation only takes place when there is a change between real data and cache data. If false, each Write is written!
 *  **WriteCacheItemMaxAge:** Controls the obsolescence of the cache. Only used with "WriteCacheEnabled = true" (To be specified in milliseconds)
 
-<a name="Specific Parameters for Acces via OPC"></a>
 ---  
 ###Specific Parameters for Acces via OPC###
 
@@ -594,7 +378,6 @@ Here, any number of PLCs can be configured. Enter a section for each PLC.
 *  **OPCConnectionName:** Specifies the name of the connection to be used for communication
 *  **ConnectAsLeanServer:** If true, *BrowseServerAddressSpace*, *ItemProperties* and *ConnectionPoints* are deactivated (e.g. necessary for WinAC-OPC-Server)
 
-<a name="Specific Parameters for Acces via AGLink"></a>
 ---  
 ###Specific Parameters for Acces via AGLink###
 
@@ -621,7 +404,6 @@ Here, any number of PLCs can be configured. Enter a section for each PLC.
 *  **AGLinkSlotNr:** Slot number
 *  **AGLinkTimeout:** Timeout
 
-<a name="Specific Parameters for Access via LibNoDave"></a>
 ---  
 ###Specific Parameters for Access via LibNoDave###
 
@@ -647,7 +429,6 @@ Here, any number of PLCs can be configured. Enter a section for each PLC.
 *  **LibNoDaveTimeout:** Timeout
 *  **LibNoDaveEnableDebug:** Debug
 
-<a name="Specific Parameters for Access via Snap7"></a>
 ---  
 ###Specific Parameters for Access via Snap7###
 
@@ -666,7 +447,6 @@ Here, any number of PLCs can be configured. Enter a section for each PLC.
 *  **Snap7RackNr:** Rack number
 *  **Snap7SlotNr:** Slot number
 
-<a name="Configuration &#60;ICONProtocols&#62;"></a>
 ---  
 ##Configuration &#60;ICONProtocols&#62;##
 
@@ -678,7 +458,6 @@ In this section, the default values for ServerPort and LocalServerPort can be se
 ```  
 
 
-<a name="Standard Protocols"></a>
 ---  
 ###Standard Protocols###
 
@@ -701,7 +480,6 @@ Example:
 ```  
 
 
-<a name="User-defined Protocols"></a>
 ---  
 ###User-defined Protocols###
 
@@ -780,7 +558,6 @@ Example of a user-defined protocol:
 ```  
 
 
-<a name="Format Strings"></a>
 ---  
 ####Format Strings####
    
@@ -796,7 +573,6 @@ The format can be defined using the Format Strings as the name suggests. Here is
 ```  
 
 
-<a name="Members"></a>
 ---  
 ####Members####
  
@@ -905,7 +681,6 @@ Let us assume, for example, that the value is 12:
 </table>
 
 
-<a name="RequestParseRule/IncomingParseRule"></a>
 ---  
 ####RequestParseRule/IncomingParseRule####
  
@@ -936,7 +711,6 @@ Used for fixed datagram lengths, also overwrites the minLength attribute.
 
 Used to determine the PayloadLength; *optional*
 
-<a name="RequestBuildRule"></a>
 ---  
 ####RequestBuildRule####
  
@@ -944,7 +718,6 @@ Used to determine the PayloadLength; *optional*
 
 Used to create a standard acknowledgement.
 
-<a name="DefaultResponseBuildRule"></a>
 ---  
 ####DefaultResponseBuildRule####
  
@@ -953,7 +726,6 @@ Used to create a standard acknowledgement.
 
 Used to create a standard query with data content. If an *ErrorResponseBuildRule* is defined, ICON decides independently which of the two BuildRules is used (depending on whether an error occurs or not).
 
-<a name="ErrorResponseBuildRule"></a>
 ---  
 ####ErrorResponseBuildRule####
  
@@ -961,7 +733,6 @@ Used to create a standard query with data content. If an *ErrorResponseBuildRule
 
 See [DefaultResponseBuildRule](#DefaultResponseBuildRule)
 
-<a name="AckParseRule"></a>
 ---  
 ####AckParseRule####
  
@@ -969,7 +740,6 @@ See [DefaultResponseBuildRule](#DefaultResponseBuildRule)
 
 Used to check whether the acknowledgement is for the specified UD protocol.
 
-<a name="Configuration &#60;ICONModuleInstances&#62;"></a>
 ---  
 ##Configuration &#60;ICONModuleInstances&#62;##
 
@@ -987,14 +757,12 @@ Example:
 
 The configuration of every single module or assembly then is individual and to be taken from the chapter [Module](#Module).
 
-<a name="Spooling"></a>
 ---  
 ##Spooling##
 
 <a name="Spooling"></a>
 The spooling can be activated at [ICONSockets](#ICONSocket.dll), AlarmPDEMConverter and at [MemBasedMsgSink.dll](#MemBasedMsgSink.dll), etc. An active spooling accepts the data transfer from the source and forwards this decoupled to the sink. The spooling can be configured in multiple ways. See following chapter.
 
-<a name="Configuration Spooler"></a>
 ---  
 ###Configuration Spooler###
 
@@ -1032,7 +800,7 @@ The default value of "Mode" is 0.
   
 
 
-![info_icon.png](info_icon.png)
+![info_icon.png](../images/info_icon.png)
 If persistor is configured, a maximum number of 100,000 applies.
   
 
@@ -1051,7 +819,7 @@ If AllowMoreThanOnePendingMsg=true, several messages waiting for a response can 
 
 
 
-![info_icon.png](info_icon.png)
+![info_icon.png](../images/info_icon.png)
 
 
 
@@ -1068,20 +836,18 @@ By the configuration of a "GUI" section the spooler buffers the data in a file. 
 
 
 
-![info_icon.png](info_icon.png)
+![info_icon.png](../images/info_icon.png)
 
 
 
 If "MaxNumberOfItems" is changed when the persistor is configured, the associated persistor file must then be deleted manually.
 
-<a name="Manual Spooler"></a>
 ---  
 ###Manual Spooler###
 
 <a name="Manual_Spooler"></a>
 A manual spooler does not execute its Puts automatically but only when triggered by the module. Such spoolers are only the spoolers from JisReceiveImpl at present.
 
-<a name="Spooler Persistor"></a>
 ---  
 ###Spooler Persistor###
 
@@ -1103,7 +869,7 @@ Define the name of the file with "filename".
 
 
 
-![warning_icon.png](warning_icon.png)
+![warning_icon.png](../images/warning_icon.png)
 
 
 
@@ -1113,7 +879,6 @@ Avoid unfavourable values so that the system is not preoccupied with frequent de
 
 FlushWatchdogTimeout allows you to define the timeout in milliseconds after which the spooler data should be flushed.
 
-<a name="Multi-XML Configurations"></a>
 ---  
 ##Multi-XML Configurations##
 
@@ -1140,23 +905,22 @@ For example, select a configuration and then click on activate.
 
 
 
-![ICON_Config_Selec_3_9.png](ICON_Config_Selec_3_9.png)
+![ICON_Config_Selec_3_9.png](../images/ICON_Config_Selec_3_9.png)
 
   
 
 
-![ICON_Config_Selec2_3_9.png](ICON_Config_Selec2_3_9.png)
+![ICON_Config_Selec2_3_9.png](../images/ICON_Config_Selec2_3_9.png)
 
 
 The selected configuration is displayed in the title of the ICON application.
 
 
-![ICON_Config_Selec3_3_9.png](ICON_Config_Selec3_3_9.png)
+![ICON_Config_Selec3_3_9.png](../images/ICON_Config_Selec3_3_9.png)
 
 
 
 
-<a name="GUI of ICON"></a>
 ---  
 #GUI of ICON#
 
@@ -1168,22 +932,21 @@ ICON supports two styles:
 *  **Navigation with tabs**  
 
 
-![ICON_tabnavi.png](ICON_tabnavi.png)
+![ICON_tabnavi.png](../images/ICON_tabnavi.png)
 
 *  **Navigation with trees**  
 
 
-![ICON_treenavi.png](ICON_treenavi.png)
+![ICON_treenavi.png](../images/ICON_treenavi.png)
 
 For details, see the section [Configuration &#60;ICONGlobals&#62;](#Configuration_ICONGlobals)
 
-<a name="Status Bar"></a>
 ---  
 ##Status Bar##
 
 
 
-![ICON_GUI_Statusbar.png](ICON_GUI_Statusbar.png)
+![ICON_GUI_Statusbar.png](../images/ICON_GUI_Statusbar.png)
 
 
 The status bar in ICON consists of three areas:
@@ -1192,27 +955,25 @@ The status bar in ICON consists of three areas:
   2.   **User-defined display:** Here, modules can display information (only one module can be displayed at a time)
   3.   **User rights:** If a UserLevel module is configured in ICON, the current LevelStatus is displayed here.
 
-<a name="Logger"></a>
 ---  
 ##Logger##
 
 
 
-![ICON_GUI_Logger.png](ICON_GUI_Logger.png)
+![ICON_GUI_Logger.png](../images/ICON_GUI_Logger.png)
 
 If you double click on a row in the logger, the cell will be copied to the clipboard.
   
 
 
 
-![ICON_GUI_Logger2.png](ICON_GUI_Logger2.png)
+![ICON_GUI_Logger2.png](../images/ICON_GUI_Logger2.png)
 
 
 
 If you right-click on a row, you can copy all rows to the clipboard via the popup menu.
 
 
-<a name="Connections"></a>
 ---  
 ##Connections##
 
@@ -1220,27 +981,26 @@ If you right-click on a row, you can copy all rows to the clipboard via the popu
 
 
 
-![ICON_GUI_Connec.png](ICON_GUI_Connec.png)
+![ICON_GUI_Connec.png](../images/ICON_GUI_Connec.png)
 
   
 
 
-![ICON_GUI_Connec2.png](ICON_GUI_Connec2.png)
+![ICON_GUI_Connec2.png](../images/ICON_GUI_Connec2.png)
 
 
 
-<a name="Spooler"></a>
 ---  
 ##Spooler##
 
 
 
-![ICON_GUI_Spooler.png](ICON_GUI_Spooler.png)
+![ICON_GUI_Spooler.png](../images/ICON_GUI_Spooler.png)
 
   
 
 
-![ICON_GUI_Spooler2.png](ICON_GUI_Spooler2.png)
+![ICON_GUI_Spooler2.png](../images/ICON_GUI_Spooler2.png)
 
 In the spooler you can see a row entry with the most essential information for each message. In the lower status bar (light blue), the total number of messages in the spooler and the next item to be processed are displayed. You can also find the last action and name ("Label") of the spooler here.  
 
@@ -1251,7 +1011,7 @@ If you double click on a row, the cell will be copied to the clipboard.
 
 
 
-![ICON_GUI_Spooler3.png](ICON_GUI_Spooler3.png)
+![ICON_GUI_Spooler3.png](../images/ICON_GUI_Spooler3.png)
 
 
 
@@ -1264,11 +1024,11 @@ If you right-click here, you will see the following popup menu:
 
 
 
-![ICON_GUI_Spooler4.png](ICON_GUI_Spooler4.png)
+![ICON_GUI_Spooler4.png](../images/ICON_GUI_Spooler4.png)
   
 
 
-![ICON_GUI_Spooler5.png](ICON_GUI_Spooler5.png)
+![ICON_GUI_Spooler5.png](../images/ICON_GUI_Spooler5.png)
 
 
 
@@ -1281,7 +1041,7 @@ If you right-click here, you will see the following popup menu:
 
 
 
-![ICON_GUI_Spooler6.png](ICON_GUI_Spooler6.png)
+![ICON_GUI_Spooler6.png](../images/ICON_GUI_Spooler6.png)
 
 Above, you can see a spooler with
   
@@ -1293,7 +1053,6 @@ Above, you can see a spooler with
 Therefore, only the first 20 and last 30 items are displayed. Between this there is an empty row with "&#42;&#42;&#42;".
 As stated above, deleting this "&#42;&#42;&#42;"-row will delete all messages hidden under it (in this case, all messages between the first 20 and the last 30!)
 
-<a name="Spooler Configuration"></a>
 ---  
 ###Spooler Configuration###
 
@@ -1336,7 +1095,6 @@ As stated above, deleting this "&#42;&#42;&#42;"-row will delete all messages hi
 
 In [ICONGlobals](#Configuration_ICONGlobals), you can also modify the font size of the spooler rows for all spoolers.
 
-<a name="Spooler with History"></a>
 ---  
 ###Spooler with History###
 
@@ -1345,11 +1103,11 @@ If the History is configured, then an additional DataGrid with data already proc
   
 
 
-![ICON_GUI_SpoolerHistory1.png](ICON_GUI_SpoolerHistory1.png)
+![ICON_GUI_SpoolerHistory1.png](../images/ICON_GUI_SpoolerHistory1.png)
   
 
 
-![ICON_GUI_SpoolerHistory2.png](ICON_GUI_SpoolerHistory2.png)
+![ICON_GUI_SpoolerHistory2.png](../images/ICON_GUI_SpoolerHistory2.png)
   
 
 The configuration of the History is created as a subsection in the GUI section of the spooler section:
@@ -1428,7 +1186,6 @@ If errors occur when forming columns during the evaluation of conditions, the da
 
 If you select one or more rows in the history list, you can again transmit this data to the sink by clicking the right mouse button or via the context menu.
 
-<a name="MemBasedMsgSource"></a>
 ---  
 ##MemBasedMsgSource##
 
@@ -1436,14 +1193,14 @@ If you select one or more rows in the history list, you can again transmit this 
 In the upper left corner the configured "Label" is displayed for identification. If some of the slots do not appear, there is a vertical scrollbar to move the display. (However, ICON always tries to use the maximum amount of space available, thus, if the window is enlarged, the viewing area will be enlarged, too)  
 
 
-![ICON_MemMsgSrc.png](ICON_MemMsgSrc.png)
+![ICON_MemMsgSrc.png](../images/ICON_MemMsgSrc.png)
 
   
 
 To query the last error of a slot or to view the telegram sent with this slot, you click on the corresponding button (e.g. A1). If a slot is selected, it will then turn yellow and the last error and telegram data will be displayed below. It is also possible to perform a reset. This means that the bits return to their initial position.  
 
 
-![ICON_MemMsgSrc2.png](ICON_MemMsgSrc2.png)
+![ICON_MemMsgSrc2.png](../images/ICON_MemMsgSrc2.png)
 
   
 
@@ -1460,34 +1217,30 @@ Mouse **double-click** on ID:
 A tooltip is displayed by double-clicking on ID  
 
 
-![ICON_MemMsgSrc3.png](ICON_MemMsgSrc3.png)
+![ICON_MemMsgSrc3.png](../images/ICON_MemMsgSrc3.png)
 
 
 
-<a name="MemBasedMsgSink"></a>
 ---  
 ##MemBasedMsgSink##
 
 The MemBasedMsgSink GUI behaves in exactly the same way as described in the previous chapter on [MemBasedMsgSource](#MemBasedMsgSource).  
 
 
-![ICON_MemMsgSink.png](ICON_MemMsgSink.png)
+![ICON_MemMsgSink.png](../images/ICON_MemMsgSink.png)
 
 
-<a name="Module"></a>
 ---  
 #Module#
 
 <a name="Module"></a>
 
-<a name="ICONSocket.dll"></a>
 ---  
 ##ICONSocket.dll##
 
 <a name="ICONSocket.dll"></a>
 An ICON Socket depicts a fix in the configuration parameterised active(client) or passive(server) socket connection. As of now, the TCP and RFC1006 protocol are supported. 
 
-<a name="Configuration1"></a>
 ---  
 ###Configuration###
 
@@ -1546,13 +1299,11 @@ Meaning of the individual parameters:
 
 **When a TCP socket is initialised, the Keep-Alive-Timeout is set to 2 hours and the Keep-Alive-Interval is set to 1 second.**
 
-<a name="Socketmanagement.dll"></a>
 ---  
 ##Socketmanagement.dll##
 
 The SocketManager can dynamically create active sockets, if the attributes necessary for this were set by a WACC protocol. Besides the active sockets, passive connections can be parameterised as well. The management of several sockets enables the SocketManager to decide which connection is used to send based on the telegram destination.
 
-<a name="Configuration2"></a>
 ---  
 ###Configuration###
 
@@ -1583,14 +1334,12 @@ Set "ImmediatelyAcknowledge" to 1 to receive immediate acknowledgements before t
 
 **SpoolAlways:** Spooling is always done, no matter what the setting is.  
 
-<a name="ICONSerial.dll"></a>
 ---  
 ##ICONSerial.dll##
 
 This module opens a Com-Port and acts as an interface between Com-Port and Plc in order to write data from the Port to the Plc and vice versa.
 The serial ports are only started if these also exist when starting ICON. This means that if a COM3 is present in the system, it will also be opened; if no Port 3 is present, no attempt will ever be made to open this either (not even if KeepAliveTime and AutoReconnect was parameterised).
 
-<a name="Configuration3"></a>
 ---  
 ###Configuration###
 
@@ -1614,11 +1363,11 @@ The serial ports are only started if these also exist when starting ICON. This m
 
 
 
-![warning_icon.png](warning_icon.png)
+![warning_icon.png](../images/warning_icon.png)
  It is only possible to first open a port without an error with .Net 4.0.  
 
 
-![warning_icon.png](warning_icon.png)
+![warning_icon.png](../images/warning_icon.png)
  Detecting whether a port is disconnected depends on the respective driver. Some drivers ensure error-free behaviour after reconnecting the device even without Disconnect.  
 
   
@@ -1651,14 +1400,12 @@ Meaning of the individual parameters:
 *  **AutoReconnect:** If set to true, another attempt is made to reconnect after detecting the disconnected ComPort.
 *  **KeepAliveTime:** Specifies the time interval, at which it should be checked whether the ComPort still exists.
 
-<a name="MemBasedMsgSink.dll"></a>
 ---  
 ##MemBasedMsgSink.dll##
 
 <a name="MemBasedMsgSink.dll"></a>
 This module should be used if the Plc should serve as a data sink. Here, a transfer handshake takes place with the Plc.
 
-<a name="Configuration4"></a>
 ---  
 ###Configuration###
 
@@ -1700,7 +1447,6 @@ Meaning of the individual parameters:
 
 The GUI and Spooler sections are optional and are described in the following chapters.  
 
-<a name="DoMultiSlotHandshake"></a>
 ---  
 ####DoMultiSlotHandshake####
  
@@ -1709,7 +1455,7 @@ The GUI and Spooler sections are optional and are described in the following cha
 The "DoMultiSlotHandshake" parameter is only relevant for operation with a spooler and may only be set to "true" in this case. It changes the interaction between the spooler and MemBasedMsgSink.   
 
 
-![warning_icon.png](warning_icon.png)
+![warning_icon.png](../images/warning_icon.png)
  If DoMultiSlotHandshake = true, a spooler must be integrated and the "AllowMoreThanOnePendingMsg" parameter must be set to "true" for the integrated spooler.  
 
 If a MemBasedMsgSink has more than one slot, more than one message can be located in "delivery" at the same time. For example, in the case of 3 empty slots, 3 messages can be taken from the spooler immediately and transferred to the respective slot. However, the strategy for the handshake handling then is different: Since ICON works further on with a thread in this situation, it is not possible to wait "synchronously" for handshake signals (as is the case with "DoMultiSlotHandshake" = false), but instead ICON "scans" all slots in succession for any change in the handshake bit with a Timeout time of 100ms. A connected PLC that processes and acknowledges all slots in a cycle virtually "in parallel", for example, is thus handled more efficiently. At the same time, the spooler must be able to handle multiple pending messages, because those may only be removed by the PLC after the acknowledgement. Since the program internal equal treatment always resulted in different combinations of problems (the spooler is also used in the interaction with other MessageSinks) it was decided to control this special "operating mode", which actually only exists with multiple slots for a MemBasedMsgSink, via the configuration and to branch program-internal accordingly.  
@@ -1730,11 +1476,9 @@ Thus, to summarise, only the following combinations are allowed:
 
 
 
-<a name="Signal Time Diagram Slot (MemBasedMsgSink)"></a>
 ---  
 ###Signal Time Diagram Slot (MemBasedMsgSink)###
 
-<a name="Impl"></a>
 ---  
 ###Impl###
 
@@ -1742,14 +1486,12 @@ Thus, to summarise, only the following combinations are allowed:
 The MemBasedMsgSink can use various implementations, afterwards the variants currently possible are listed.  
 
 
-<a name="PlcBasedMsgImpl.dll"></a>
 ---  
 ####PlcBasedMsgImpl.dll####
    
 
   
 
-<a name="PLC Interface Structure"></a>
 ---  
 #####PLC Interface Structure#####
  
@@ -1769,7 +1511,6 @@ The MemBasedMsgSink can use various implementations, afterwards the variants cur
 
 
 
-<a name="PLC Interface Bits"></a>
 ---  
 #####PLC Interface Bits#####
  
@@ -1808,16 +1549,14 @@ The MemBasedMsgSink can use various implementations, afterwards the variants cur
 
 
 
-![warning_icon.png](warning_icon.png)
+![warning_icon.png](../images/warning_icon.png)
  SpecialAck is only effective if the spooler mode is set to 2
 
-<a name="PLC2COMSinkImpl.dll"></a>
 ---  
 ####PLC2COMSinkImpl.dll####
  
   
 
-<a name="PLC Interface Structure1"></a>
 ---  
 #####PLC Interface Structure#####
  
@@ -1833,7 +1572,6 @@ The MemBasedMsgSink can use various implementations, afterwards the variants cur
 
 
 
-<a name="PLC Interface Bits1"></a>
 ---  
 #####PLC Interface Bits#####
  
@@ -1868,7 +1606,6 @@ The MemBasedMsgSink can use various implementations, afterwards the variants cur
 
 
 
-<a name="Extended Configuration"></a>
 ---  
 #####Extended Configuration#####
  
@@ -1908,7 +1645,6 @@ Meaning of the individual parameters:
 	
 
 
-<a name="GUI MemBasedMsgSink"></a>
 ---  
 ###GUI MemBasedMsgSink###
 
@@ -1931,17 +1667,15 @@ Meaning of the individual parameters:
 *  **RefreshInterval:** Specified in milliseconds and should be set to a value the system can handle  
 	
 
-![warning_icon.png](warning_icon.png)
+![warning_icon.png](../images/warning_icon.png)
  If set to 0, the GUI is constantly refreshed which may overload the system
 *  **RefreshOnlyIfVisible:** Determines whether the GUI is only refreshed when it is selected
 
-<a name="MemBasedMsgSource.dll"></a>
 ---  
 ##MemBasedMsgSource.dll##
 
 This module should be used if the PLC should serve as a data source. Herem a transfer handshake takes place with the PLC
 
-<a name="Configuration5"></a>
 ---  
 ###Configuration###
 
@@ -1992,31 +1726,27 @@ Meaning of the individual parameters:
 
 
 
-![warning_icon.png](warning_icon.png)
+![warning_icon.png](../images/warning_icon.png)
  Please always use "ThreadBasedExecutor". Only use others after consultation  
 
   
 
 The GUI section is optional and is described in the following chapters.
 
-<a name="Signal Time Diagram"></a>
 ---  
 ###Signal Time Diagram###
 
 
-<a name="Impl1"></a>
 ---  
 ###Impl###
 
 The MemBasedMsgSource can use various implementations, in the following, the variants currently possible are listed
 
-<a name="SimplePlcBasedMsgSourceImpl.dll"></a>
 ---  
 ####SimplePlcBasedMsgSourceImpl.dll####
  
   
 
-<a name="PLC Interface Structure2"></a>
 ---  
 #####PLC Interface Structure#####
  
@@ -2034,7 +1764,6 @@ The MemBasedMsgSource can use various implementations, in the following, the var
 
 
 
-<a name="PLC Interface Bits2"></a>
 ---  
 #####PLC Interface Bits#####
  
@@ -2062,13 +1791,11 @@ The MemBasedMsgSource can use various implementations, in the following, the var
 
 
 
-<a name="PLCBasedMsgImpl.dll"></a>
 ---  
 ####PLCBasedMsgImpl.dll####
  
   
 
-<a name="PLC Interface Structure3"></a>
 ---  
 #####PLC Interface Structure#####
  
@@ -2087,7 +1814,6 @@ The MemBasedMsgSource can use various implementations, in the following, the var
 
 
 
-<a name="PLC Interface Bits3"></a>
 ---  
 #####PLC Interface Bits#####
  
@@ -2138,7 +1864,6 @@ Pointer to the telegram:
 
 
 
-<a name="Extended Configuration1"></a>
 ---  
 #####Extended Configuration#####
  
@@ -2157,13 +1882,11 @@ Meaning of the individual parameters:
 
 *  **Slots:** Number of slots used
 
-<a name="PlcBasedFNCallOrientedImpl.dll"></a>
 ---  
 ####PlcBasedFNCallOrientedImpl.dll####
  
   
 
-<a name="PLC Interface Structure4"></a>
 ---  
 #####PLC Interface Structure#####
  
@@ -2182,7 +1905,6 @@ Meaning of the individual parameters:
 
 
 
-<a name="PLC Interface Bits4"></a>
 ---  
 #####PLC Interface Bits#####
  
@@ -2232,13 +1954,11 @@ Pointer to the telegram:
 
 
 
-<a name="JisImpl.dll"></a>
 ---  
 ####JisImpl.dll####
  
   
 
-<a name="PLC Interface Structure5"></a>
 ---  
 #####PLC Interface Structure#####
  
@@ -2278,7 +1998,6 @@ Data:
 
   
 
-<a name="PLC Interface Bits5"></a>
 ---  
 #####PLC Interface Bits#####
  
@@ -2315,7 +2034,6 @@ Data:
 
 
 
-<a name="Extended Configuration2"></a>
 ---  
 #####Extended Configuration#####
  
@@ -2355,13 +2073,11 @@ Meaning of the individual parameters:
 *  **FixedIdentifierDataOffset:** (only valid if the length was also specified) Defines the identifier fixed, the entire header then must no longer be present
 *  **FixedIdentifierDataLength:**  (only valid if the offset was also specified) Defines the identifier fixed, the entire header then must no longer be present
 
-<a name="GUI MemBasedMsgSource"></a>
 ---  
 ###GUI MemBasedMsgSource###
 
 The configuration of the GUI corresponds exactly to the the configuration of the [GUI of MemBasedMsgSink](#GUI MemBasedMsgSink)
 
-<a name="FunctionCallAdapter"></a>
 ---  
 ##FunctionCallAdapter##
 
@@ -2522,17 +2238,14 @@ Example with "ICONFileFunctionHandler.dll":
 ```  
 
 
-<a name="Function Handler"></a>
 ---  
 ###Function Handler###
 
-<a name="IconFileFunctionHandler.dll"></a>
 ---  
 ####IconFileFunctionHandler.dll####
  
   
 
-<a name="Data Structure In"></a>
 ---  
 #####Data Structure In#####
  
@@ -2552,7 +2265,6 @@ Example with "ICONFileFunctionHandler.dll":
 
 
 
-<a name="Data Structure Out"></a>
 ---  
 #####Data Structure Out#####
  
@@ -2568,7 +2280,6 @@ Example with "ICONFileFunctionHandler.dll":
 
 
 
-<a name="Payload Converter Adapter"></a>
 ---  
 ##Payload Converter Adapter##
 
@@ -2593,7 +2304,6 @@ Meaning of the individual parameters:
 *  **Sink:** Here, the sink is the next station of the message, as with all other modules. Therefore, this module is entered as sink with the previous station, too.
 *  **PayloadConverterHandler:** Through this parameter various implementations can now be made available to the adapter
 
-<a name="Script Executor"></a>
 ---  
 ###Script Executor###
 
@@ -2681,13 +2391,11 @@ namespace ICON.Communication.Modules.Adapters
 ```  
 
 
-<a name="Router"></a>
 ---  
 ##Router##
 
 A router can be switched between any modules and is used to distribute messages to various sinks.
 
-<a name="DataBasedMsgRouter"></a>
 ---  
 ###DataBasedMsgRouter###
 
@@ -2716,10 +2424,9 @@ Meaning of the individual parameters:
 *  **DeleteNonRoutableMsg:** Suppresses the error which occurs if no default sink is specified and no sink can be determined
 
 
-![warning_icon.png](warning_icon.png)
+![warning_icon.png](../images/warning_icon.png)
  The telegrams which do not find any sinks are then deleted.
 
-<a name="Sinks"></a>
 ---  
 ####Sinks####
  
@@ -2741,13 +2448,11 @@ Meaning of the individual parameters:
   *  **Value:** '01'  -->  i.e. in the attribute Payload at Offset 114 Length 2 there must be 01.	
 
 
-<a name="JisImpl.dll1"></a>
 ---  
 ##JisImpl.dll##
 
 The JisImpl handles the functionality of JISReceive as a seperate module here.
 
-<a name="Configuration6"></a>
 ---  
 ###Configuration###
 
@@ -2804,7 +2509,6 @@ Meaning of the individual parameters:
 
 
 
-<a name="PLC Interface Structure6"></a>
 ---  
 ###PLC Interface Structure###
 
@@ -2819,7 +2523,6 @@ Meaning of the individual parameters:
 
 
 
-<a name="PLC Interface Bits6"></a>
 ---  
 ###PLC Interface Bits###
 
@@ -2863,7 +2566,6 @@ As of now, the following bits are defined:
 
 
 
-<a name="PLCUserLevel.dll"></a>
 ---  
 ##PLCUserLevel.dll##
 
@@ -2872,10 +2574,9 @@ This module can be used to read out user levels from the PLC. These levels then 
   
 
 
-![ICON_PLCUserLeveldll.png](ICON_PLCUserLeveldll.png)
+![ICON_PLCUserLeveldll.png](../images/ICON_PLCUserLeveldll.png)
   
 
-<a name="Configuration7"></a>
 ---  
 ###Configuration###
 
@@ -2905,17 +2606,14 @@ Meaning of the individual parameters:
 *  **NoRights:** Specifies the values for which no rights apply, the same syntax as in AllRights is used
 
 
-<a name="ModuleInstanceManager"></a>
 ---  
 ##ModuleInstanceManager##
 
 An Instance Manage Module can change the parameters during runtime. This means that modules can be parameterised based on a template and provided with placeholders. On request, these templates are then retrieved and also terminated again.
 
-<a name="DataBasedModuelInstanceManager"></a>
 ---  
 ###DataBasedModuelInstanceManager###
 
-<a name="Configuration8"></a>
 ---  
 ####Configuration####
  
@@ -2991,19 +2689,16 @@ Meaning of the individual parameters:
     *  **ICONModuleTemplate:** Template for an ICON module. Here, also an entire module can be added and the modifiable parameters are later filled with these variables		
 	
 
-<a name="Event Distributor"></a>
 ---  
 ##Event Distributor##
 
 An EventDistributor can distribute various events (currently Start, Stop, Restart and Shutdown).
 
-<a name="TcpEventDistributor"></a>
 ---  
 ###TcpEventDistributor###
 
 This EventDistributor distributes the events in the form of telegrams. Thus, for example, a telegram can be sent, that ICON was now started or stopped.
 
-<a name="Configuration9"></a>
 ---  
 ####Configuration####
  
@@ -3039,11 +2734,9 @@ Parameterisation of the telegrams:
 
 \{[BuildRuleName]\{|[AttributeName=AttributeValue]\};\}
 
-<a name="Example Configurations"></a>
 ---  
 #Example Configurations#
 
-<a name="Gateway with two passive endpoints under RFC1006 with raw data"></a>
 ---  
 ##Gateway with two passive endpoints under RFC1006 with raw data##
 
@@ -3071,7 +2764,6 @@ Parameterisation of the telegrams:
 
 This configuration insantiates two Rfc1006 passive endpoints and forwards the raw data from one to the other, provided that a partner is connected on both endpoints "EndPoint1" and "EndPoint2". The "Sink" parameter determines who the respective data of an instance should reach. This means that the "Sink" from "EndPoint1" is "EndPoint2" and from "EndPoint2" is "EndPoint1".
 
-<a name="Gateway with passive and active endpoint under RFC1006 with raw data"></a>
 ---  
 ##Gateway with passive and active endpoint under RFC1006 with raw data##
 
@@ -3104,7 +2796,6 @@ This configuration instantiates two Rfc1006 passive endpoints, one as a passive 
 
 You specify the connection partner using the "Host" parameter. If "Host" is not specified or is allocated with "localhost", "127.0.0.1" or "0.0.0.0", then the socket is instantiated as a Passive Endpoint. If an explicit IP address or resolvable DNS (Domain Name System) is specified, then an Active-Endpoint is instantiated. An active endpoint will usually try to connect to the remote host in a secondly cycle, which then has to be a passive remote host.
 
-<a name="Passive endpoint under RFC1006 with receipt of raw data for forwarding to a PLC"></a>
 ---  
 ##Passive endpoint under RFC1006 with receipt of raw data for forwarding to a PLC##
 
@@ -3143,7 +2834,6 @@ You specify the connection partner using the "Host" parameter. If "Host" is not 
 
 To get access to a PLC (Programmable Logic Controller) e.g. via OPC (OLE for Process Control), it is necessary to configure a PLC Accessor. See section "ICONPlcs" that can include any number of accessors. An implemented module then gains access via the assigned configuration name, e.g. MainOPC here.
 
-<a name="Gateway with two passive endpoints under RFC1006 with structured data (protocol implementation)"></a>
 ---  
 ##Gateway with two passive endpoints under RFC1006 with structured data (protocol implementation)##
 
@@ -3176,7 +2866,6 @@ To get access to a PLC (Programmable Logic Controller) e.g. via OPC (OLE for Pro
 
 If a protocol is used for transmission of the data, then the protocols in the "ICONProtocols" section must be specified. The reference to these is then set in the modules via the "ProtImpl" parameter. The received data stream is not monitored at Rfc1006. This means that the data must be sent correctly en bloc. This is not the case with a classic TCP connection.
 
-<a name="TCP passive endpoint with receipt of structured data (protocol implementation) for forwarding to a PLC"></a>
 ---  
 ##TCP passive endpoint with receipt of structured data (protocol implementation) for forwarding to a PLC##
 
@@ -3217,7 +2906,6 @@ If a protocol is used for transmission of the data, then the protocols in the "I
 
 With TCP, a protocol implementer must be specified. the processing of raw data is not possible here. If, in this example, data is received via TCP and it cannot be forwarded to the sink because the PLC has not yet processed previous data, then a negative acknowledgement is generated. If, however, no disruptions occur, then a positive acknowledgement is sent.
 
-<a name="Decoupling data forwarding by means of spooling"></a>
 ---  
 ##Decoupling data forwarding by means of spooling##
 
@@ -3270,7 +2958,6 @@ The data is spooled by specifying the section type spooler. The spooler can be c
 
 A complete configuration overview can be found in the chapter on ["Spooling"](#Spooling)
 
-<a name="PLC as data source (send compartment) and data sink (slot)"></a>
 ---  
 ##PLC as data source (send compartment) and data sink (slot)##
 
@@ -3316,7 +3003,6 @@ A minimum configuration could be as follows:
 ```  
 
 
-<a name="PLC as data source with an IP connection as recipient"></a>
 ---  
 ##PLC as data source with an IP connection as recipient##
 
@@ -3358,7 +3044,6 @@ A minimum configuration could be as follows:
 
 If a spooler is configured to a module of an "ICONSocket.dll", then the data must be marked with the spool flag. This is usually done by prefixing with the WACC04-Header.
 
-<a name="Example configuration with a SocketManager"></a>
 ---  
 ##Example configuration with a SocketManager##
 
@@ -3405,13 +3090,11 @@ If, for example, a passive endpoint is instantiated, an active partner will cert
 
 
 
-<a name="A Data Transport Sequence in ICON"></a>
 ---  
 #A Data Transport Sequence in ICON#
 
 	
 
-<a name="Installation"></a>
 ---  
 #Installation#
 
@@ -3427,7 +3110,6 @@ to be installed and available on the destination under Windows.
 
 The ICON files can be copied to any directory and ICONMain.exe can then be started from there.
 
-<a name="Files generated during runtime"></a>
 ---  
 ##Files generated during runtime##
 
@@ -3440,7 +3122,6 @@ ICON generates files independently. Here are the meanings:
 
 Application specific modules also generate files when necessary, such as the "AlarmManager.cch" and "SequenceNumber.cnt".
 
-<a name="AddOns"></a>
 ---  
 ##AddOns##
 
@@ -3450,11 +3131,9 @@ Under the "AddOns" folder in the application directory, the following dlls can b
 
 If "RedGate.MemoryProfiler.Snapshot.dll" in the "AddOns" folder is provided, ICON will request a snapshot every 60 seconds.
 
-<a name="Appendix A"></a>
 ---  
 #Appendix A#
 
-<a name="Umlaut's in the configuration file"></a>
 ---  
 ##Umlaut's in the configuration file##
 
@@ -3506,7 +3185,6 @@ In order to also work with umlauts in the configuration file, some configuration
 
 
 
-<a name="Change Directory"></a>
 ---  
 #Change Directory#
 

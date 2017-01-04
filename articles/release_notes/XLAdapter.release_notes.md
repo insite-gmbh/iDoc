@@ -1,0 +1,1 @@
+# XLAdapter - Release Notes

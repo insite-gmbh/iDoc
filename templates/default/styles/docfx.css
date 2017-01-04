@@ -273,13 +273,18 @@ article section {
   padding-right: 5px;
 }
 #autocollapse .navbar-brand svg path {
-  fill: #ddd;
+  fill: #eee;
 }
 #autocollapse .navbar-brand:hover {
   background-color: #1562d9;
 }
 #autocollapse .navbar-brand:hover svg path {
   fill: #fff!important;
+}
+header .link-to-homepage {
+  position: absolute;
+  top: 8px;
+  right: 8px;
 }
 
 .collapse.in,

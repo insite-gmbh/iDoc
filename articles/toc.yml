@@ -3,41 +3,84 @@
   href: intro.md
 - name: AWLConverter
   href: AWLConverter.md
+  items: 
+  - name: Release Notes
+    href: release_notes/AWLConverter.release_notes.md
 - name: BilderArchivieren
   href: BilderArchivieren.md
+  items: 
+  - name: Release Notes
+    href: release_notes/BilderArchivieren.release_notes.md
 - name: BinaryReaderWriters
   href: BinaryReaderWriters.md
+  items: 
+  - name: Release Notes
+    href: release_notes/BinaryReaderWriters.release_notes.md
 - name: Comparator
   href: Comparator.md
+  items: 
+  - name: Release Notes
+    href: release_notes/Comparator.release_notes.md
 - name: Comparer
   href: Comparer.md
+  items: 
+  - name: Release Notes
+    href: release_notes/Comparer.release_notes.md
 - name: ExcelToPLC
   href: ExcelToPLC.md
+  items: 
+  - name: Release Notes
+    href: release_notes/ExcelToPLC.release_notes.md
 - name: ICON
   href: ICON.md
   items:
   - name: ICON_Base
     href: ICON_Base.md
     items: 
-    - name: Documentation
-      href: ICON_Base.md
     - name: Release Notes
-      href: release_notes/ICON_Base_release_notes.md
+      href: release_notes/ICON_Base.release_notes.md
   - name: ICON_Components_BMW
     href: ICON_Components_BMW.md
+    items: 
+    - name: Release Notes
+      href: release_notes/ICON_Components_BMW.release_notes.md
 - name: IDAT
   href: IDAT_DataDef.md
+  items: 
+  - name: Release Notes
+    href: release_notes/IDAT_DataDef.release_notes.md
 - name: IMON
   href: IMON.md
+  items: 
+  - name: Release Notes
+    href: release_notes/IMON.release_notes.md
 - name: IPOT
   href: IPOT.md
+  items: 
+  - name: Release Notes
+    href: release_notes/IPOT.release_notes.md
 - name: Matrix
   href: Matrix.md
+  items: 
+  - name: Release Notes
+    href: release_notes/Matrix.release_notes.md
 - name: ParaSave
   href: ParaSave.md
+  items: 
+  - name: Release Notes
+    href: release_notes/ParaSave.release_notes.md
 - name: PLCDataManager
   href: PLCDataManager.md
+  items: 
+  - name: Release Notes
+    href: release_notes/PLCDataManager.release_notes.md
 - name: WinCCAlarmServer
   href: WinCCAlarmServer.md
+  items: 
+  - name: Release Notes
+    href: release_notes/WinCCAlarmServer.release_notes.md
 - name: XLAdapter
   href: XLAdapter.md
+  items: 
+  - name: Release Notes
+    href: release_notes/XLAdapter.release_notes.md

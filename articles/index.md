@@ -5,9 +5,8 @@
 
 ### [ICON - Insite COmmunication Node](ICON.md)
 #### [ICON Base](ICON_Base.md)
-[Release Notes](release_notes/ICON_Base.release_notes.md)
 #### [ICON Components BMW](ICON_Components_BMW.md)
-[Release Notes](release_notes/ICON_Components_BMW.md)
+#### [Release Notes](release_notes/ICON.release_notes.md)
 
 ### [IDAT - Insite DAta Tool](IDAT.md)
 [Release Notes](release_notes/IDAT.release_notes.md)

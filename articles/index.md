@@ -7,7 +7,7 @@
 
 - [ICON - Insite COmmunication Node](ICON.md)
   -  [ICON Base](ICON_Base.md)
-  -  [ICON Components BMW](ICON_Components_BMW.md)
+  -  [ICON Components](ICON_Components.md)
   -  [Release Notes](release_notes/ICON.release_notes.md)
 
 - [IDAT - Insite DAta Tool](IDAT.md)

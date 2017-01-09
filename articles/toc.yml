@@ -15,8 +15,8 @@
   items:
   - name: ICON_Base
     href: ICON_Base.md
-  - name: ICON_Components_BMW
-    href: ICON_Components_BMW.md
+  - name: ICON_Components
+    href: ICON_Components.md
   - name: Release Notes
     href: release_notes/ICON.release_notes.md
 - name: IDAT

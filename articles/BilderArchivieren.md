@@ -1,6 +1,3 @@
-<h1>BMW Steyr NGD</h1>
-  
-
 <h1>Software Specification</h1>  
 
 <h1>BilderArchivieren (ArchiveImages)</h1>

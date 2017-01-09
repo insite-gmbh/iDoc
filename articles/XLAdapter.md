@@ -156,7 +156,7 @@ The output file, in which the written data is output in Hex format, is optional.
 selector="100" offset="0" type="BinaryFile">
         <Operations>
           <Write var="MyDBSchraub">
-            <![CDATA[@C:\BMW\IDAT\apps\XLAdapterExecutor\testdata\ExcelTestdaten.xlsx
+            <![CDATA[@C:\IDAT\apps\XLAdapterExecutor\testdata\ExcelTestdaten.xlsx
              !TEST
              !C"F7M000"R"F7M000"
              .Margin(0,1,63,GroupSameSequence)

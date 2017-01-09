@@ -931,27 +931,27 @@ If a device is identified as Default (see [PLCDevices](#PDEM_PlcDevices)  -->  F
 **Samples:**  
 
 
-![ICON_CBMW_Alarmmanagement_1_1.png](../images/ICON_CBMW_Alarmmanagement_1_1.png)
+![ICON_Components_Alarmmanagement_1_1.png](../images/ICON_Components_Alarmmanagement_1_1.png)
   
 
 
-![ICON_CBMW_Alarmmanagement_1_2.png](../images/ICON_CBMW_Alarmmanagement_1_2.png)
+![ICON_Components_Alarmmanagement_1_2.png](../images/ICON_Components_Alarmmanagement_1_2.png)
   
 
 
-![ICON_CBMW_Alarmmanagement_2_1.png](../images/ICON_CBMW_Alarmmanagement_2_1.png)
+![ICON_Components_Alarmmanagement_2_1.png](../images/ICON_Components_Alarmmanagement_2_1.png)
   
 
 
-![ICON_CBMW_Alarmmanagement_2_2.png](../images/ICON_CBMW_Alarmmanagement_2_2.png)
+![ICON_Components_Alarmmanagement_2_2.png](../images/ICON_Components_Alarmmanagement_2_2.png)
   
 
 
-![ICON_CBMW_Alarmmanagement_3_1.png](../images/ICON_CBMW_Alarmmanagement_3_1.png)
+![ICON_Components_Alarmmanagement_3_1.png](../images/ICON_Components_Alarmmanagement_3_1.png)
   
 
 
-![ICON_CBMW_Alarmmanagement_3_2.png](../images/ICON_CBMW_Alarmmanagement_3_2.png)
+![ICON_Components_Alarmmanagement_3_2.png](../images/ICON_Components_Alarmmanagement_3_2.png)
   
 
 ---  
@@ -1175,11 +1175,11 @@ There is no such translation table for IPM since the structure of the IPM telegr
   
 
 
-![ICON_Components_BMW_struct_alloc1.png](../images/ICON_Components_BMW_struct_alloc1.png)
+![ICON_Components_struct_alloc1.png](../images/ICON_Components_struct_alloc1.png)
   
 
 
-![ICON_Components_BMW_struct_alloc2.png](../images/ICON_Components_BMW_struct_alloc2.png)
+![ICON_Components_struct_alloc2.png](../images/ICON_Components_struct_alloc2.png)
   
 
 ---  

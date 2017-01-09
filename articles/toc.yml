@@ -1,5 +1,10 @@
 - name: Introduction
   href: index.md
+- name: AWLConverter
+  href: AWLConverter.md
+  items: 
+  - name: Release Notes
+    href: release_notes/AWLConverter.release_notes.md
 - name: BilderArchivieren
   href: BilderArchivieren.md
   items: 
@@ -22,11 +27,6 @@
     items: 
     - name: Release Notes
       href: release_notes/IDAT_DataDef.release_notes.md
-  - name: AWLConverter
-    href: AWLConverter.md
-    items: 
-    - name: Release Notes
-      href: release_notes/AWLConverter.release_notes.md
   - name: BinaryReaderWriters
     href: BinaryReaderWriters.md
     items: 

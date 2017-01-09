@@ -4,8 +4,6 @@
 ## Contents
 ### [IDAT DataDef](IDAT_DataDef.md)
 [Release Notes](release_notes/IDAT_DataDef.release_notes.md)
-### [AWLConverter](AWLConverter.md)
-[Release Notes](release_notes/AWLConverter.release_notes.md)
 ### [BinaryReaderWriters](BinaryReaderWriters.md)
 [Release Notes](release_notes/BinaryReaderWriters.release_notes.md)
 ### [Comparator](Comparator.md)

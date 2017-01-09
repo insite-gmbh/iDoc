@@ -6,11 +6,6 @@
   items: 
   - name: Release Notes
     href: release_notes/BilderArchivieren.release_notes.md
-- name: ExcelToPLC
-  href: ExcelToPLC.md
-  items: 
-  - name: Release Notes
-    href: release_notes/ExcelToPLC.release_notes.md
 - name: ICON
   href: ICON.md
   items:
@@ -52,6 +47,11 @@
     items: 
     - name: Release Notes
       href: release_notes/Comparer.release_notes.md
+  - name: ExcelToPLC
+    href: ExcelToPLC.md
+    items: 
+    - name: Release Notes
+      href: release_notes/ExcelToPLC.release_notes.md
   - name: IMON
     href: IMON.md
     items: 

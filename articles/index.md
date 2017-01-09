@@ -3,9 +3,6 @@
 ### [BilderArchivieren](BilderArchivieren.md)
 [Release Notes](release_notes/IDAT_DataDef.release_notes.md)
 
-### [ExcelToPLC](ExcelToPLC.md)
-[Release Notes](release_notes/ExcelToPLC.release_notes.md)
-
 ### [ICON - Insite COmmunication Node](ICON.md)
 #### [ICON Base](ICON_Base.md)
 [Release Notes](release_notes/ICON_Base.release_notes.md)
@@ -24,6 +21,8 @@
 [Release Notes](release_notes/Comparator.release_notes.md)
 #### [Comparer](Comparer.md)
 [Release Notes](release_notes/Comparer.release_notes.md)
+#### [ExcelToPLC](ExcelToPLC.md)
+[Release Notes](release_notes/ExcelToPLC.release_notes.md)
 #### [IMON - Insite MONitor](IMON.md)
 [Release Notes](release_notes/IMON.release_notes.md)
 #### [PLCDataManager](PLCDataManager.md)

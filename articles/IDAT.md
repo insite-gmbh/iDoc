@@ -12,6 +12,8 @@
 [Release Notes](release_notes/Comparator.release_notes.md)
 ### [Comparer](Comparer.md)
 [Release Notes](release_notes/Comparer.release_notes.md)
+### [ExcelToPLC](ExcelToPLC.md)
+[Release Notes](release_notes/ExcelToPLC.release_notes.md)
 ### [IMON - Insite MONitor](IMON.md)
 [Release Notes](release_notes/IMON.release_notes.md)
 ### [PLCDataManager](PLCDataManager.md)

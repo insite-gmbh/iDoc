@@ -8,7 +8,7 @@
         <a class="back-to-top" href="#top">Back to top</a>
       </span>
       {{{_appFooter}}}
-      {{^_appFooter}}<span>Copyright © 2016 insite Ingenieurgesellschaft für Steuerungs- und Informationstechnik mbH{{/_appFooter}}
+      {{^_appFooter}}<span>Copyright © 2017 insite Ingenieurgesellschaft für Steuerungs- und Informationstechnik mbH{{/_appFooter}}
     </div>
   </div>
 </footer>

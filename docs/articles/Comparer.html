@@ -1,0 +1,325 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Software Specification </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Software Specification ">
+    <meta name="generator" content="docfx 2.8.2.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="text/javascript" href="../styles/encrypter.js">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        <a href="http://www.insite-gmbh.de" class="link-to-homepage" target="_blank" title="opens the website of insite in a new tab">
+            <img src="../images/whitefontlogo.png">
+        </a>        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+              <h1>Software Specification</h1>
+                
+
+<h1>Comparer</h1>
+
+
+
+<p><strong>insite GmbH</strong></p>
+<hr>
+<h1 id="introduction">Introduction</h1>
+<p>A Comparer is a software component that is part of the IDAT system and is used for a cyclical comparison of data. Various comparers exist, depending on the type of data they observe. Depending on the comparison results, different actions can be defined.</p>
+<hr>
+<h2 id="purpose-and-objective">Purpose and Objective</h2>
+<p>A Comparer is an interchangeable component that monitors and compares data (files, Excel data, PLC data ...)</p>
+<hr>
+<h2 id="definitions-acronyms-abbreviations">Definitions, Acronyms, Abbreviations</h2>
+<ul>
+<li><strong>PLC:</strong> Programmable Logic Controller</li>
+<li><strong>SPS:</strong> Speicher Programmierbare Steuerung</li>
+<li><strong>LibNoDave:</strong> A free library for the communication with a PLC</li>
+<li><strong>Data definition file (DDF):</strong> A file that describes the structure and mapping of (PLC) data</li>
+<li><strong>Mapping:</strong> A variable is mapped to a defined data area</li>
+</ul>
+<hr>
+<h1 id="general-description">General Description</h1>
+<p>The special features and setting options of the software are described below. </p>
+<hr>
+<h2 id="system-environment">System Environment</h2>
+<p>The software is written in C&#35; with Visual Studio 2010 for the Target framework .NET 4.0. </p>
+<p><img src="../images/warning_icon.png" alt="warning_icon.png">
+ .NET 4.5 is not used since it does not guarantee any compatibility with XP.</p>
+<hr>
+<h2 id="framework">Framework</h2>
+<p>This components are a part of IDAT and are also configured using the IoC components of IDAT (for more details, please refer to the chapter Configuration).</p>
+<hr>
+<h2 id="host-application">Host application</h2>
+<p>In this installation and use case, there is one host application that uses comparers. It is called &quot;IMON&quot; and has it&#39;s own &quot;IMON User Guide&quot;.</p>
+<hr>
+<h1 id="comparers">Comparers</h1>
+<p>The following section examines the currently existing comparers and points out the options and configurations.</p>
+<p>All comparers are linked to the application by implementing the following interface:</p>
+<pre><code class="lang-javascript">arer
+{
+    public interface IComparer
+    {
+        void Configure(XElement xmlSetup);
+        void RunOnce(); 
+        void Start();
+        void Stop();
+    }
+}
+</code></pre><hr>
+<h2 id="filecomparer">FileComparer</h2>
+<p>This component compares files as well as their contents if necessary (see <a href="#ContentComparison">ContentComparison</a>). On a change of the monitored file, an event can be created.</p>
+<hr>
+<h3 id="configuration">Configuration</h3>
+<pre><code class="lang-html">&lt;Comparer impl=&quot;IMONFileComparer&quot;&gt;
+    &lt;PollingCycle&gt;10&lt;/PollingCycle&gt;
+    &lt;Source&gt;&lt;![CDATA[D:\Test.xlsx]]&gt;&lt;/Source&gt;
+    &lt;Destination&gt;&lt;![CDATA[D:\tmp\]]&gt;&lt;/Destination&gt;
+    &lt;Executor&gt;
+        ...
+    &lt;/Executor&gt;
+&lt;/Comparer&gt;
+</code></pre><table><tr><th>Parameter </th><th> Description</th></tr>
+<tr><td>PollingCycle </td><td> Test every x seconds for a change</td></tr>
+<tr><td>Source </td><td> The files to be checked are specified here</td></tr>
+<tr><td>   </td><td> (file name with wildcards possible)</td></tr>
+<tr><td>Destination </td><td> Destination directory. It contains the last version of the file. The</td></tr>
+<tr><td>   </td><td> source file may change and is compared to the version stored here</td></tr>
+<tr><td>Executor </td><td> Actions that are executed in the case of inequality</td></tr>
+</table>
+
+
+
+
+
+
+<hr>
+<h4 id="execute">Execute</h4>
+<pre><code class="lang-html">&lt;Executor&gt;
+    &lt;Execute filter=&quot;(.*\.xlsx)&quot; eventHandler=&quot;IDATExecutor&quot; 
+             errorEventHandler=&quot;IDATErrorExecutor&quot;  
+             errorValueName=&quot;CurrentErrorCode&quot; hint=&quot;none&quot; /&gt;
+    &lt;Execute filter=&quot;(.*\.xlsx)&quot; 
+             eventHandler=&quot;C:\Execute.bat&quot; /&gt;
+&lt;/Executor&gt;
+</code></pre><hr>
+<h5 id="contentcomparison">ContentComparison</h5>
+<p><a name="ContentComparison"></a></p>
+<table><tr><th>Attribute </th><th> Description</th></tr>
+<tr><td>filter </td><td> RegEx file filter (e.g.: .&#42;.xlsx for all xlsx files )</td></tr>
+<tr><td>eventHandler </td><td> Can either be an EventHandler or an executable file</td></tr>
+<tr><td>   </td><td> (see document EventHandler)</td></tr>
+<tr><td>errorEventHandler </td><td> EventHandler executed when an error occurs</td></tr>
+<tr><td>errorValueName </td><td> Name of the constant that should record the Errorcode</td></tr>
+<tr><td>hint </td><td> Not used at present</td></tr>
+</table>
+
+
+
+<hr>
+<h2 id="datacomparer">DataComparer</h2>
+<p>This component was developed to integrate interfaces to the PLC. For example, you can implement a handshake protocol that works on different flags written/read by the PLC and the PC to implement a safe data exchange mechanism. You can declare actions that depend on a certain flag in the PLC so it is executed when a certain condition is met.</p>
+<p>Such actions can be</p>
+<ul>
+<li>Opening batch files or invoking processes.</li>
+<li>Writing a block of data to the PLC.</li>
+<li>Setting other handshake flags in the PLC.</li>
+</ul>
+<p>and more.</p>
+<hr>
+<h3 id="configuration-1">Configuration</h3>
+<pre><code class="lang-html">&lt;Comparer impl=&quot;IMONDataComparer&quot;&gt;
+    &lt;PollingCycle&gt;3&lt;/PollingCycle&gt;
+    &lt;DataDefFilename&gt;D:\IDATSchrauberDB.xml&lt;/DataDefFilename&gt;
+    &lt;OutputFilename&gt;IMONDataComparerOutput.xml&lt;/OutputFilename&gt;
+    &lt;Actions&gt;
+        &lt;Action writeVar=&quot;IfError.ErrorCode&quot; eventHandler=&quot;IDATExecutor&quot;  /&gt;
+        &lt;Action writeVar=&quot;IfError.ErrorOccured&quot; eventHandler=&quot;IDATExecutor&quot;  /&gt;
+        &lt;Action readVar=&quot;IfRead.UpdateRequired&quot; compValue=&quot;true&quot; 
+                eventHandler=&quot;IDATExecutor&quot; errorEventHandler=&quot;IDATErrorExecutor&quot; 
+                errorValueName=&quot;CurrentErrorCode&quot; hint=&quot;none&quot; /&gt;
+        &lt;Action readVar=&quot;IfRead.UpdateRequired&quot; compValue=&quot;false&quot; 
+                writeVar=&quot;IfWrite.UpdateRequiredDetected&quot; writeValue=&quot;false&quot; 
+                errorEventHandler=&quot;IDATErrorExecutor&quot; errorValueName=&quot;CurrentErrorCode&quot; 
+                hint=&quot;none&quot; /&gt;
+        &lt;Action readVar=&quot;IfRead.Toggle&quot; compValue=&quot;true&quot; writeVar=&quot;IfWrite.Toggle&quot; 
+                writeValue=&quot;false&quot; errorEventHandler=&quot;IDATErrorExecutor&quot; 
+                errorValueName=&quot;CurrentErrorCode&quot; hint=&quot;none&quot; /&gt;
+        &lt;Action readVar=&quot;IfRead.Toggle&quot; compValue=&quot;false&quot; writeVar=&quot;IfWrite.Toggle&quot; 
+                writeValue=&quot;true&quot; errorEventHandler=&quot;IDATErrorExecutor&quot; 
+                errorValueName=&quot;CurrentErrorCode&quot; hint=&quot;none&quot; /&gt;
+        &lt;Action readVar=&quot;IfRead.WriteEnabled&quot; compValue=&quot;false&quot; 
+                writeVar=&quot;IfWrite.DataWritten&quot; writeValue=&quot;false&quot; 
+                errorEventHandler=&quot;IDATErrorExecutor&quot; errorValueName=&quot;CurrentErrorCode&quot; 
+                hint=&quot;none&quot; edge=&quot;true&quot; /&gt;
+    &lt;/Actions&gt;
+&lt;/Comparer&gt;
+</code></pre><table><tr><th>Parameter </th><th> Description</th></tr>
+<tr><td>PollingCycle </td><td> Test every x seconds for a change</td></tr>
+<tr><td>DataDefFilename </td><td> Data definition (see documentation Data Definition)</td></tr>
+<tr><td>OutputFilename </td><td> A dump of the read and written data</td></tr>
+<tr><td>Actions </td><td> A series of defined actions</td></tr>
+</table>
+
+
+
+
+
+<hr>
+<h4 id="action">Action</h4>
+<pre><code class="lang-html">&lt;Action readVar=&quot;IfRead.WriteEnabled&quot; compValue=&quot;false&quot; edge=&quot;true&quot;
+                writeVar=&quot;IfWrite.DataWritten&quot; writeValue=&quot;false&quot; 
+                errorEventHandler=&quot;IDATErrorExecutor&quot; errorValueName=&quot;CurrentErrorCode&quot; 
+                hint=&quot;none&quot; /&gt;
+
+        &lt;Action readVar=&quot;IfRead.WriteEnabled&quot; compValue=&quot;true&quot; edge=&quot;true&quot;
+                eventHandler=&quot;C:\Action.bat&quot;
+                errorEventHandler=&quot;IDATErrorExecutor&quot; errorValueName=&quot;CurrentErrorCode&quot; 
+                hint=&quot;none&quot; /&gt;
+
+&lt;Action writeVar=&quot;IfError.ErrorCode&quot; eventHandler=&quot;IDATExecutor&quot;/&gt;
+</code></pre><p>Structure of the variable names: [Mappingname].[Varname]</p>
+<pre><code class="lang-html">&lt;Mapping name=&quot;IfRead&quot; var=&quot;IDATIf&quot; ...&gt;
+    &lt;Operations&gt;
+        &lt;Read name=&quot;WriteEnabled&quot; var=&quot;PLCtoIDAT.WriteEnable&quot; active=&quot;true&quot; /&gt;
+    &lt;/Operations&gt;
+&lt;/Mapping&gt;
+</code></pre><table><tr><th>Attribute </th><th> Description</th></tr>
+<tr><td>readVar </td><td> PLC variable to be read</td></tr>
+<tr><td>compValue </td><td> Value to be compared with</td></tr>
+<tr><td>edge </td><td> Execute action only if value changes</td></tr>
+<tr><td>writeVar </td><td> PLC variable to be written</td></tr>
+<tr><td>writeValue </td><td> Value to be written</td></tr>
+<tr><td>eventHandler </td><td> Can either be an EventHandler or an executable file</td></tr>
+<tr><td>   </td><td> (see document EventHandler)</td></tr>
+<tr><td>errorEventHandler </td><td> EventHandler executed when an error occurs</td></tr>
+<tr><td>errorValueName </td><td> Name of the constant that should record the Errorcode</td></tr>
+<tr><td>hint </td><td> Not used at present</td></tr>
+</table>
+
+
+
+
+
+<p><strong>Examples:</strong>  </p>
+<pre><code class="lang-html">&lt;Action readVar=&quot;IfRead.UpdateRequired&quot; compValue=&quot;true&quot;
+        eventHandler=&quot;IDATExecutor&quot; errorEventHandler=&quot;IDATErrorExecutor&quot;
+        errorValueName=&quot;CurrentErrorCode&quot; hint=&quot;none&quot; /&gt;
+</code></pre><ul>
+<li>Read the Variable UpdateRequired from the Mapping IfRead (=readVar)</li>
+<li>Compare the read value with the value in compValue</li>
+<li>If the value is equal, then execute the EventHandler</li>
+<li>If an error occurs, then execute the ErrorEventhandler and initialise the constant CurrentErrorCode that is to be defined in the DDF as CONST with the error code</li>
+</ul>
+<pre><code class="lang-html">&lt;Action readVar=&quot;IfRead.UpdateRequired&quot; compValue=&quot;false&quot; 
+        writeVar=&quot;IfWrite.UpdateRequiredDetected&quot; writeValue=&quot;false&quot; 
+        errorEventHandler=&quot;IDATErrorExecutor&quot; errorValueName=&quot;CurrentErrorCode&quot;
+        hint=&quot;none&quot; /&gt;
+</code></pre><ul>
+<li>Read the Variable UpdateRequired from the Mapping IfRead (=readVar)</li>
+<li>Compare the read value with the value in compValue</li>
+<li>If the value is equal, then set the variable UpdateRequiredDetected (writeVar) from Mapping IfWrite in the data definition to the value defined in writeValue</li>
+</ul>
+<pre><code class="lang-html">&lt;Action writeVar=&quot;IfError.ErrorCode &quot; eventHandler=&quot;IDATExecutor&quot; /&gt;
+</code></pre><p>The variable ErrorOccured is written with each call (i.e. cyclic), the value to be written is the value entered in the DDF.</p>
+<hr>
+<h1 id="installation">Installation</h1>
+<p>The different comparers come as DLLs and are installed via a simple copy operation together with the other IDAT files.</p>
+<hr>
+<h1 id="change-directory">Change Directory</h1>
+<table><tr><th>Author </th><th> Date </th><th> Remarks</th></tr>
+<tr><td>Benjamin Prömmer </td><td> August 2013 </td><td> Creation</td></tr>
+<tr><td>Karsten Gorkow </td><td> 2016-01-15 </td><td> Revised document</td></tr>
+</table>
+            </article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/insite-gmbh/iDoc/blob/master/articles/Comparer.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a class="back-to-top" href="#top">Back to top</a>
+            </span>
+            
+            <span>Copyright © 2016 insite Ingenieurgesellschaft für Steuerungs- und Informationstechnik mbH
+          </span></div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,659 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>PLCDataManager </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="PLCDataManager ">
+    <meta name="generator" content="docfx 2.8.2.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="text/javascript" href="../styles/encrypter.js">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        <a href="http://www.insite-gmbh.de" class="link-to-homepage" target="_blank" title="opens the website of insite in a new tab">
+            <img src="../images/whitefontlogo.png">
+        </a>        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+              <h1>PLCDataManager</h1>
+              
+
+
+
+<hr>
+<h1 id="introduction">Introduction</h1>
+<p>PLCDataManager is a software application that one one hand makes it possible to backup, restore and compare data modules of a PLC to or from an XML file, while on the other hand, the online/offline data can also be visualized and changed via structured views. The OPC, ODK and LibNoDave interfaces can be used for communication with the PLC.</p>
+<hr>
+<h2 id="purpose-and-objective">Purpose and Objective</h2>
+<p>Creation of module backups so that they can be reloaded again if necessary.</p>
+<hr>
+<h2 id="definitions-acronyms-abbreviations">Definitions, Acronyms, Abbreviations</h2>
+<ul>
+<li><strong>PLC:</strong> Programmable Logic Controller</li>
+<li><strong>SPS:</strong> Speicher Programmierbare Steuerung</li>
+<li><strong>LibNoDave:</strong> Free library for the communication with a PLC.</li>
+<li><strong>ODK:</strong> Simatic WinAC Open Development Kit</li>
+<li><strong>DDF:</strong> Data definition file, a file that describes the structure and mapping of data, in our case data from the PLC. A DDF may also contain a certain snapshot of the data.</li>
+<li><strong>Mapping:</strong> a variable is mapped to a defined data area. </li>
+<li><strong>UC:</strong> User Control </li>
+</ul>
+<hr>
+<h1 id="general-description">General Description</h1>
+<p>The special features and setting options of the software are described below. </p>
+<hr>
+<h2 id="system-environment">System Environment</h2>
+<p>The software is written with C&#35; Visual Studio 2010 for the Target framework .NET 4.0. </p>
+<p><img src="../images/warning_icon.png" alt="warning_icon.png">
+ .NET 4.5 is not used since it does not guarantee any compatibility with XP.</p>
+<hr>
+<h2 id="system-start">System Start</h2>
+<p>When starting the application, all information is read from a XML configuration file.</p>
+<p>An existing configuration file named &quot;PLCDataManagerConfig.xml&quot; in the application directory is detected and loaded by PLCDataManager. If you would like to use other configuration files, you can supply a different configuration file name via the command line when starting the PLCDataManager. </p>
+<hr>
+<h3 id="command-line-parameters">Command Line Parameters</h3>
+<table><tr><th>Short </th><th> Long </th><th> Type </th><th> Default value </th><th> Description</th></tr>
+<tr><th>name </th><th> name </th><th>    </th><th>    </th><th>   </th></tr>
+<tr><td>f </td><td> file </td><td> Parameter </td><td> PLCDataManager </td><td>Configuration file</td></tr>
+<tr><td>   </td><td>    </td><td>    </td><td> Config.xml </td><td>    </td></tr>
+<tr><td>c </td><td> compare </td><td> Switch </td><td>  </td><td> Automatic comparison</td></tr>
+<tr><td>s </td><td> save </td><td> Switch </td><td>  </td><td> Automatic save</td></tr>
+<tr><td>r </td><td> restore </td><td> Switch </td><td>  </td><td> Automatic restore</td></tr>
+<tr><td>v </td><td> visu </td><td> Switch </td><td>  </td><td> Displaying visualisation</td></tr>
+<tr><td>   </td><td>    </td><td>    </td><td>    </td><td> (only in conjunction with c,s,r)</td></tr>
+</table>
+
+
+
+
+
+<p>Example:</p>
+<table>
+ <tr><th>Automatic comparison: </th><td> PLCDataManager.exe –f&quot;C:\PLCDataManager.xml&quot; –c</td></tr><br> <tr><th>Automatic backup: </th><td> PLCDataManager.exe –f&quot;C:\PLCDataManager.xml&quot; –s</td></tr>
+ <tr><th>Automatic backup </th><td> PLCDataManager.exe –f&quot;C:\PLCDataManager.xml&quot; –s -v</td></tr>
+ <tr><th>with visualization: </th><td>   </td></tr>
+</table>
+
+
+<hr>
+<h3 id="automatic-mode">Automatic Mode</h3>
+<p>These parameters enable executing the application in automatic mode. The c, s and r switches are not allowed simultaneously. There is, however, a prioritization if all three are specified:</p>
+<table><tr><th>Priority </th><th> Action</th></tr>
+<tr><td>1 </td><td> Restore</td></tr>
+<tr><td>2 </td><td> Save</td></tr>
+<tr><td>3 </td><td> Compare</td></tr>
+</table>
+
+
+
+
+
+<p>The automatic comparison has a special feature: If the comparison should fail (NOK), a specific bit in a freely definable data word is set in the PLC (see &quot;PLC Interface&quot;). This bit is reset (OK) if a further automatic comparison run or manually triggered comparison no longer results in any differences.</p>
+<hr>
+<h3 id="plc-triggered-mode">PLC-triggered Mode</h3>
+<p>A backup can also be initiated by the PLC. A special interface has to be supplied for this purpose. Furthermore, the files that are backed-up by a PLC-trigger can be different from the ones used in manual or automatic mode. See below for more details.</p>
+<hr>
+<h2 id="data-handling">Data Handling</h2>
+<p>The data is saved in a data definition file.</p>
+<p><img src="../images/warning_icon.png" alt="warning_icon.png">
+ If the underlying structure of the data definitions changes, then the old backup file must be deleted before it is possible to create a new backup. Otherwise, the old structure applies!</p>
+<hr>
+<h1 id="user-interface">User Interface</h1>
+<p>Apart from the normal control elements, the user interface includes the IDATUC that is responsible for displaying the structures. The individual sections of the interface are described in detail below.</p>
+<hr>
+<h2 id="control-elements">Control Elements</h2>
+<table>
+ <tr><th>[1] </th><td colspan="2">Select and deselect</td></tr>
+ <tr><th>[2] </th><td colspan="2">Set the zoom factor for the entire application</td></tr>
+ <tr><th>[3] </th><td colspan="2">Activate and deactivate the online mode (for details see Online Mode)</td></tr>
+ <tr><th>[4] </th><td colspan="2">The following data is displayed in the Name column:</td></tr>
+ <tr><th>   </th><td> Level1: </td><td> Name of the data definition file</td></tr>
+ <tr><th>   </th><td> Level2: </td><td> Name of the mappings of the data definition file</td></tr>
+ <tr><th>   </th><td> Level3-Level[X-1]: </td><td> Name of the data structure</td></tr>
+ <tr><th>   </th><td> Level[x]: </td><td> Name of the variable</td></tr>
+ <tr><th>   </th><td colspan="2">Every single object can be activated or deactivated by the checkbox</td></tr>
+ <tr><th>   </th><td colspan="2">If the character [&#42;] is displayed after the name of the file definition,</td></tr>
+ <tr><th>   </th><td colspan="2">this item is also registered for the PLC-triggered-backup</td></tr>
+ <tr><th>[5] </th><td colspan="2">In this column the data type / name of the data structure is displayed</td></tr>
+ <tr><th>   </th><td colspan="2">(here it is also possible to switch over for displaying the offset in</td></tr>
+ <tr><th>   </th><td colspan="2">binary or hexadecimal format)</td></tr>
+ <tr><th>[6] </th><td colspan="2">In this column the current value in the PLC is displayed</td></tr>
+ <tr><th>[7] </th><td colspan="2">In this column the value that is stored in the last backup is displayed</td></tr>
+ <tr><th>   </th><td colspan="2">(this column can also be edited)</td></tr>
+ <tr><th>[8] </th><td colspan="2">Start of the backup run from the PLC to the file</td></tr>
+ <tr><th>[9] </th><td colspan="2">Start of the comparison run</td></tr>
+ <tr><th>[10] </th><td colspan="2">Start of the restore run from the file to the PLC</td></tr>
+ <tr><th>[11] </th><td colspan="2">Read the data from the PLC and display the data in the user interface</td></tr>
+ <tr><th>   </th><td colspan="2">only the visible variables are read here)</td></tr>
+ <tr><th>[12] </th><td colspan="2">Read the data from the file and display the data in the user interface</td></tr>
+ <tr><th>   </th><td colspan="2">(only the visible variables are read here)</td></tr>
+ <tr><th>[13] </th><td colspan="2">Writes the changes that were made in column [7] to the PLC</td></tr>
+</table>
+
+
+
+<hr>
+<h2 id="progress-displays-and-feedbacks">Progress Displays and Feedbacks</h2>
+<p>When executing an action, the following control elements are displayed.  </p>
+<p><img src="../images/PLCDataManager_control_elements.png" alt="PLCDataManager_control_elements.png"></p>
+<p>A positive feedback during a comparison turns the TextBox green. The control elements first disappear after clicking on the TextBox.  </p>
+<p><img src="../images/PLCDataManager_pos_feedback.png" alt="PLCDataManager_pos_feedback.png"></p>
+<p>A negative feedback during a comparison, or an error, turns the TextBox red. The control elements first disappear after clicking on the TextBox.  </p>
+<p><img src="../images/PLCDataManager_neg_feedback.png" alt="PLCDataManager_neg_feedback.png"></p>
+<hr>
+<h2 id="structure-display-and-data-manipulation">Structure Display and Data Manipulation</h2>
+<p>The item for displaying and manipulating the structure is the core of this application and is also located at its centre. This control element maps the structures existing in the PLC. Hence, you can view, compare or change the current PLC data as well as the backed-up data.</p>
+<p>Thanks to this type of data processing, a &quot;Byte-Bit-Offset&quot; (as common in the PLC-world) no longer has to be used, nor do the values have to be converted. It is also no longer necessary to know the details of all data types, such as the length information contained in the first two bits of a string, in order to manipulate them. This element does this by itself. If, however, it is important for you to see the addresses or the hexadecimal or binary values, this is possible, too. The representation of the values can easily be switched over using the &quot;Type&quot; column and the addresses can be displayed by activating the &quot;Address&quot; column (the addresses are displayed in pointer format).</p>
+<p><img src="../images/PLCDataManager_structure_display.png" alt="PLCDataManager_structure_display.png"></p>
+<hr>
+<h3 id="possible-columns">Possible Columns</h3>
+<p>It is also possible to display other columns (for details on how to do this, please see the chapter <a href="#Configuration">Configuration</a>).  </p>
+<p>This figure shows the possible columns:</p>
+<p><img src="../images/PLCDataManager_poss_columns.png" alt="PLCDataManager_poss_columns.png"></p>
+<table><tr><th>Additional column </th><th> Description</th></tr>
+<tr><td>Address </td><td> This column displays the address of the variables in</td></tr>
+<tr><td>   </td><td> pointer format.</td></tr>
+<tr><td>Access right </td><td> The access right indicates whether the variable can be</td></tr>
+<tr><td>   </td><td> read or written. This is parametrized in the mappings</td></tr>
+<tr><td>   </td><td> with Write and Read operations.</td></tr>
+<tr><td>Last value change </td><td> Here, the timestamp is displayed when the last update</td></tr>
+<tr><td>   </td><td> of the variable was performed.</td></tr>
+<tr><td>   </td><td> (Last read operation of the UC) </td></tr>
+</table>
+
+
+
+<hr>
+<h3 id="online-mode">Online Mode</h3>
+<p><img src="../images/PLCDataManager_online_mode.png" alt="PLCDataManager_online_mode.png"></p>
+<p>With this button it is possible to activate an online mode and to deactivate it again. In the online operating mode, all variables currently visible in the structure display are updated cyclically with the current data in the PLC.</p>
+<hr>
+<h1 id="configuration">Configuration</h1>
+<p><a name="Configuration"></a>
+The configuration of the application is divided into two files. The first file (called &quot;PLCDataManager.exe.config&quot;) contains the settings for the user interface, whereas the &quot;PLCDataManager.xml&quot;-file contains the settings for the application. </p>
+<hr>
+<h2 id="configuration-of-the-user-interface-ui">Configuration of the User Interface (UI)</h2>
+<pre><code class="lang-html">&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;configuration&gt;
+&lt;configSections&gt;
+    &lt;sectionGroup name=&quot;applicationSettings&quot; 
+                  type=&quot;System.Configuration.ApplicationSettingsGroup, System,
+                  Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot; &gt;
+        &lt;section name=&quot;PLCDataManager.Properties.Settings&quot; 
+                 type=&quot;System.Configuration.ClientSettingsSection, System,
+                 Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089&quot;
+                 requirePermission=&quot;false&quot; /&gt;
+    &lt;/sectionGroup&gt;
+&lt;/configSections&gt;
+&lt;startup&gt;
+&lt;supportedRuntime version=&quot;v4.0&quot; sku=&quot;.NETFramework,Version=v4.0&quot;/&gt;
+&lt;/startup&gt;
+&lt;applicationSettings&gt;
+   &lt;PLCDataManager.Properties.Settings&gt;
+            &lt;setting name=&quot;DefaultFontSize&quot; serializeAs=&quot;String&quot;&gt;
+                &lt;value&gt;12&lt;/value&gt;
+            &lt;/setting&gt;
+            &lt;setting name=&quot;Zoom&quot; serializeAs=&quot;String&quot;&gt;
+                &lt;value&gt;150&lt;/value&gt;
+            &lt;/setting&gt;
+            &lt;setting name=&quot;ShowAccessRightColumn&quot; serializeAs=&quot;String&quot;&gt;
+                &lt;value&gt;False&lt;/value&gt;
+            &lt;/setting&gt;
+            &lt;setting name=&quot;ShowLastValueChangeColumn&quot; serializeAs=&quot;String&quot;&gt;
+                &lt;value&gt;False&lt;/value&gt;
+            &lt;/setting&gt;
+            &lt;setting name=&quot;ShowAddressColumn&quot; serializeAs=&quot;String&quot;&gt;
+                &lt;value&gt;True&lt;/value&gt;
+            &lt;/setting&gt;
+        &lt;/PLCDataManager.Properties.Settings&gt;
+    &lt;/applicationSettings&gt;
+&lt;/configuration&gt;
+</code></pre><table><tr><th>Variable </th><th> Description</th></tr>
+<tr><td>DefaultFontSize </td><td> Sets the default font size.</td></tr>
+<tr><td>Zoom </td><td> Sets the initial zoom factor on start up.</td></tr>
+<tr><td>ShowAccessRightColumn </td><td> If &quot;True&quot;, the &quot;Access right&quot; column is shown.</td></tr>
+<tr><td>ShowLastValueChangeColumn </td><td> If &quot;True&quot;, the &quot;Last value change&quot; column is shown.</td></tr>
+<tr><td>ShowAddressColumn </td><td> If &quot;True&quot;, the &quot;Address&quot; column is shown.</td></tr>
+</table>
+
+
+
+
+
+<hr>
+<h2 id="configuration-of-the-application">Configuration of the Application</h2>
+<pre><code class="lang-html">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;Setup&gt;
+    &lt;Assemblies&gt;
+        &lt;Assembly path=&quot;ResolverImpl.dll&quot;/&gt;
+        &lt;Assembly path=&quot;OPCReaderWriter.dll&quot;/&gt;
+        &lt;Assembly path=&quot;DataDefReaderWriter.dll&quot;/&gt;
+        &lt;Assembly path=&quot;S7Converter.dll&quot;/&gt;
+        &lt;Assembly path=&quot;PLCDataManager.Logic.dll&quot;/&gt;
+        &lt;Assembly path=&quot;ComparatorUC.dll&quot;/&gt;
+    &lt;/Assemblies&gt;
+    &lt;Instances&gt;
+        &lt;Resolvers&gt;
+            &lt;Resolver name=&quot;Resolver&quot;/&gt;
+        &lt;/Resolvers&gt;
+        &lt;Converters&gt;
+            &lt;Converter name=&quot;S7Converter&quot;/&gt;
+        &lt;/Converters&gt;
+        &lt;Comparators&gt;
+            &lt;Comparator name=&quot;UCComparator&quot; /&gt;
+        &lt;/Comparators&gt;
+        &lt;BinaryReaderWriters&gt;
+            &lt;BinaryReaderWriter name=&quot;OPCReaderWriter&quot;&gt;
+                &lt;ServerName&gt;OPC.SimaticNet&lt;/ServerName&gt;
+                &lt;ProtocolName&gt;S7&lt;/ProtocolName&gt;
+                &lt;ConnectionName&gt;RTX&lt;/ConnectionName&gt;
+                &lt;ItemSyntax&gt;SimaticNet&lt;/ItemSyntax&gt;
+            &lt;/BinaryReaderWriter&gt;
+            &lt;BinaryReaderWriter name=&quot;DataDefReaderWriter&quot;&gt;
+&lt;File&gt;&lt;![CDATA[&gt;&lt;..\Dat\Konfig\PLCDataManagerConfig.xml//Setup/Instances/
+    PLCDataManagers/PLCDataManager[@name=&#39;PLCDataManager&#39;]/DefPaths;..\Dat\Konfig\
+    PLCDataManagerConfig.xml//Setup/Instances/PLCDataManagers/
+    PLCDataManager[@name=&#39;PLCDataManager&#39;]/DefPathsAuto]]&gt;
+&lt;/File&gt;
+&lt;OutPath&gt;&lt;![CDATA[&gt;&lt;..\Dat\Konfig\PLCDataManagerConfig.xml//Setup/Instances/
+PLCDataManagers/PLCDataManager[@name=&#39;PLCDataManager&#39;]/OutPaths]]&gt;
+&lt;/OutPath&gt;
+            &lt;/BinaryReaderWriter&gt;
+        &lt;/BinaryReaderWriters&gt;
+        &lt;PLCDataManagers&gt;
+            &lt;PLCDataManager name=&quot;PLCDataManager&quot;&gt;
+                &lt;DefPaths&gt;&lt;![CDATA[..\Dat\Konfig\Normal]]&gt;&lt;/DefPaths&gt;
+                &lt;DefPathsAuto&gt;&lt;![CDATA[..\Dat\Konfig\Auto]]&gt;&lt;/DefPathsAuto&gt;
+                &lt;OutPaths&gt;&lt;![CDATA[..\Dat\DBSave]]&gt;&lt;/OutPaths&gt;
+                &lt;InterfaceDef&gt;&lt;![CDATA[..\Dat\Konfig\Interface\Interface.xml]]&gt;
+                &lt;/InterfaceDef&gt;
+                &lt;SaveCommand&gt;PLCinterface.Steuern.Sichern&lt;/SaveCommand&gt;
+                &lt;CompareState&gt;PLCinterface.status.Vergleich_io&lt;/CompareState&gt;
+                &lt;SaveFinished&gt;PLCinterface.status.Sichern_beendet&lt;/SaveFinished&gt;
+                &lt;OptimizeMemUsage&gt;False&lt;/OptimizeMemUsage&gt;
+                &lt;SaveFinishedBatchJob&gt;D:\Programme\IDat\_PcDm_CopyToServer.bat 
+                                      $OutPaths&lt;/SaveFinishedBatchJob&gt;
+                &lt;BatchJobTimeout&gt;5000&lt;/BatchJobTimeout&gt;                                                                
+                &lt;BatchJobCancelled&gt;PLCinterface.status.BatchJobCancelled
+                &lt;/BatchJobCancelled&gt;
+                &lt;Logger&gt;
+                  &lt;log4net&gt;
+                            ...
+                  &lt;/log4net&gt;
+                &lt;/Logger&gt;
+            &lt;/PLCDataManager&gt;
+        &lt;/PLCDataManagers&gt;
+    &lt;/Instances&gt;
+&lt;/Setup&gt;
+</code></pre><hr>
+<h3 id="assemblies">Assemblies</h3>
+<p>In this section, all required assemblies are specified.</p>
+<hr>
+<h3 id="instances">Instances</h3>
+<p>In this section, all required instances of the defined assemblies are configured.</p>
+<hr>
+<h4 id="resolvers">Resolvers</h4>
+<p>In this section, the Resolver is parametrized. The default configuration is sufficient for this application, you should not change it.</p>
+<hr>
+<h4 id="converters">Converters</h4>
+<p>In this section, the Converter is parametrized. The default configuration of the S7 converter is sufficient for this application, you should not change it.</p>
+<hr>
+<h4 id="comparators">Comparators</h4>
+<p>In this section, the Comparators are parametrized. The default configuration of the UC Comparator is sufficient for this application, you should not change it.</p>
+<hr>
+<h4 id="binaryreaderwriters">BinaryReaderWriters</h4>
+<p>In this section, the BinaryReaderWriters are parametrized. Two instances are required for this application.</p>
+<p>The first <strong>BinaryReaderWriter</strong> must be configured for online access. You can select between <em>OPC</em>, <em>ODK</em>, <em>Snap7</em> and <em>LibNoDave</em> as the communication path to the PLC. For <em>ODK</em> and <em>LibNoDave</em> the default configuration is sufficient in most cases, for <em>OPC</em> please see an example at the beginning of this chapter (for further details, please refer to the documentation of the relevant BinaryReaderWriter).</p>
+<p>The second BinaryReaderWriter <strong>&quot;DataDefReaderWriter&quot;</strong> is configured for offline access.  </p>
+<p><img src="../images/warning_icon.png" alt="warning_icon.png">
+ You must not change any setting for this instance, since the application may not work correctly afterwards! Furthermore, these settings are deprecated and updated versions of this application will use an internal, hard-coded instance for offline access.</p>
+<hr>
+<h4 id="plcdatamanagers">PLCDataManagers</h4>
+<hr>
+<h5 id="plcdatamanager">PLCDataManager</h5>
+<p><a name="PLCDataManager"></a>
+In this section, the paths and commands of the application are declared.</p>
+<table><tr><th>Variable </th><th> Description</th></tr>
+<tr><td>DefPaths </td><td> Specifies the first location(s) of data definition files</td></tr>
+<tr><td>   </td><td> (DDF) for manual and auto backup. The files in this</td></tr>
+<tr><td>   </td><td> location are ignored by the PLC-triggered backup!</td></tr>
+<tr><td>   </td><td> There are several options here:</td></tr>
+<tr><td>   </td><td> 1.) Specification of the file names separated by a semicolon</td></tr>
+<tr><td>   </td><td> 2.) Specification of paths to one or more data definition files</td></tr>
+<tr><td>   </td><td> separated by a semicolon</td></tr>
+<tr><td>DefPathsPLCTriggered </td><td> Specifies the second location(s) of DDFs for manual and</td></tr>
+<tr><td>   </td><td> auto backup and it specifies the location(s) of the DDFs</td></tr>
+<tr><td>   </td><td> that are used for the PLC-triggered backup.</td></tr>
+<tr><td>   </td><td> Attention: A DDF must not be specified twice,</td></tr>
+<tr><td>   </td><td> also in respect to the settings in DefPaths!</td></tr>
+<tr><td>   </td><td> (the Options are the same as above)</td></tr>
+<tr><td>OutPaths </td><td> The path where the backups are stored is specified here</td></tr>
+<tr><td>InterfaceDef </td><td> The path to a DDF that can serve as a PLC interface is</td></tr>
+<tr><td>   </td><td> specified here.</td></tr>
+<tr><td>   </td><td> (If nothing is specified, the PLC interface is disabled)</td></tr>
+<tr><td>SaveCommand </td><td> The PLC-variable responsible for starting a backup is</td></tr>
+<tr><td></td><td> specified here. Each time this variable changes from</td></tr>
+<tr><td></td><td> <em>False</em> to <em>True</em>, the backup is triggered</td></tr>
+<tr><td>CompareState </td><td> The PLC-variable that gets written to signal the</td></tr>
+<tr><td></td><td> comparison result to the PLC is specified here</td></tr>
+<tr><td></td><td> (<em>True</em>=Unequal, <em>False</em>=Equal)</td></tr>
+<tr><td>SaveFinished </td><td> he PLC-variable that gets set from PLCDataManager</td></tr>
+<tr><td></td><td> after the completion of a PLC-triggered backup is</td></tr>
+<tr><td></td><td> specified here (this bit must be reset by the PLC</td></tr>
+<tr><td></td><td> before triggering new backup cycle)</td></tr>
+<tr><td>OptimizeMemUsage </td><td> This parameter ensures that the memory usage is reduced.</td></tr>
+<tr><td></td><td> Attention: Enabling this may have a negative impact on</td></tr>
+<tr><td></td><td> the application performance</td></tr>
+<tr><td>SaveFinishedBatchJob </td><td> A path to an executable file can be specified here. This</td></tr>
+<tr><td></td><td> file is executed after the backup is completed. This function,</td></tr>
+<tr><td></td><td> for example, can be used to move the files to a backup server</td></tr>
+<tr><td>BatchJobTimeOut </td><td> A timeout for the completion of the batch job can be specified</td></tr>
+<tr><td></td><td> here. If the job times out, it is cancelled. 0 = &quot;no timeout&quot;</td></tr>
+<tr><td>BatchJobCancelled </td><td>If the batch job returns an error code, this bit is set.</td></tr>
+<tr><td></td><td> It is reset after the next successful run.</td></tr>
+<tr><td>Logger </td><td> log4Net (open source logging system) is parameterised here.</td></tr>
+<tr><td></td><td> It is recommended to leave it as it is, since it determines</td></tr>
+<tr><td></td><td> the location, size and content of the log files used for diag-</td></tr>
+<tr><td></td><td> nosing purposes. If you’re interested, see the web for details.</td></tr>
+</table>
+
+
+
+
+
+<hr>
+<h1 id="data-definition-file">Data Definition File</h1>
+<pre><code class="lang-html">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;DataDef Endianness=&quot;Host-Endianess&quot; Encoding=&quot;Base16&quot;
+         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xmlns=&quot;http://www.insite-gmbh.de/IDAT/DataDef&quot;
+         xsi:schemaLocation=&quot;http://www.insite-gmbh.de/IDAT/DataDef
+                             TypeDefinition/DataDef.xsd&quot;&gt;
+  &lt;!-- Structs are the userdefined types --&gt;
+  &lt;Types&gt;
+    &lt;Struct name=&quot;DB_Optionen_Allgemein&quot;&gt;
+      &lt;Var name=&quot;Rechnername&quot; type=&quot;STRING&quot; length=&quot;16&quot; /&gt;
+      &lt;Var name=&quot;Ziel_BST1&quot; type=&quot;STRING&quot; length=&quot;8&quot; /&gt;
+      &lt;Var name=&quot;Ziel_BST2&quot; type=&quot;STRING&quot; length=&quot;8&quot; /&gt;
+      &lt;Var name=&quot;Ziel_BST3&quot; type=&quot;STRING&quot; length=&quot;8&quot; /&gt;
+      &lt;Var name=&quot;Ziel_BST4&quot; type=&quot;STRING&quot; length=&quot;8&quot; /&gt;
+      &lt;Var name=&quot;Ziel_BST5&quot; type=&quot;STRING&quot; length=&quot;8&quot; /&gt;
+      &lt;Var name=&quot;Ziel_BST6&quot; type=&quot;STRING&quot; length=&quot;8&quot; /&gt;
+      &lt;Var name=&quot;BST1_vorh&quot; type=&quot;BOOL&quot; /&gt;
+      &lt;Var name=&quot;BST2_vorh&quot; type=&quot;BOOL&quot; /&gt;
+      &lt;Var name=&quot;BST3_vorh&quot; type=&quot;BOOL&quot; /&gt;
+      &lt;Var name=&quot;BST4_vorh&quot; type=&quot;BOOL&quot; /&gt;
+      &lt;Var name=&quot;BST5_vorh&quot; type=&quot;BOOL&quot; /&gt;
+      &lt;Var name=&quot;BST6_vorh&quot; type=&quot;BOOL&quot; /&gt;
+      &lt;Var name=&quot;Repaplatz&quot; type=&quot;BOOL&quot; /&gt;
+      &lt;Var name=&quot;HAP_NOT_Aus_vorhanden&quot; type=&quot;BOOL&quot; /&gt;
+      &lt;Var name=&quot;Ausw_WT_zu_PalRepa_BST1&quot; type=&quot;BOOL&quot; /&gt;
+      &lt;Var name=&quot;Fliessmontage&quot; type=&quot;BOOL&quot; /&gt;
+      &lt;Var name=&quot;Pneumatik_vorhanden&quot; type=&quot;BOOL&quot; /&gt;
+      &lt;Struct name=&quot;AP&quot; countItems=&quot;6&quot;&gt;
+        &lt;Var name=&quot;virtuell&quot; type=&quot;BOOL&quot; /&gt;
+        &lt;Var name=&quot;ApVisu_Vorh&quot; type=&quot;BOOL&quot; /&gt;
+        &lt;Var name=&quot;AP_IST_DT&quot; type=&quot;BOOL&quot; /&gt;
+        &lt;Var name=&quot;zugeordnet_zu&quot; type=&quot;INT&quot; /&gt;
+      &lt;/Struct&gt;
+      &lt;Var name=&quot;Konfig_Ordner_Pfad&quot; type=&quot;STRING&quot; length=&quot;80&quot; /&gt;
+      &lt;Var name=&quot;Safety_Checksum&quot; type=&quot;DWORD&quot; /&gt;
+      &lt;Var name=&quot;SHUT_DOWN_Verz_Zeit&quot; type=&quot;INT&quot; /&gt;
+      &lt;Var name=&quot;Shut_down_abgew&quot; type=&quot;BOOL&quot; /&gt;
+      &lt;Var name=&quot;Shut_Down_OPC2USV&quot; type=&quot;BOOL&quot; /&gt;
+    &lt;/Struct&gt;
+  &lt;/Types&gt;
+  &lt;!-- declare the Values you want to use --&gt;
+  &lt;Vars&gt;
+    &lt;Var name=&quot;Options&quot; type=&quot;DB_Optionen_Allgemein&quot; /&gt;
+  &lt;/Vars&gt;
+  &lt;!-- define the mapping and the operations on the values--&gt;
+  &lt;Mappings&gt;
+    &lt;Mapping name=&quot;Opt&quot; var=&quot;Options&quot; source=&quot;OPCReaderWriter&quot; selector=&quot;251&quot;
+            offset=&quot;0&quot; type=&quot;BinaryFile&quot; active=&quot;true&quot; &gt;
+      &lt;Filters&gt;
+        &lt;Filter var=&quot;Safety_Checksum&quot; /&gt;
+      &lt;/Filters&gt;
+      &lt;Operations&gt;
+        &lt;Read/&gt;
+        &lt;Write/&gt;
+      &lt;/Operations&gt;
+    &lt;/Mapping&gt;
+  &lt;/Mappings&gt;
+&lt;/DataDef&gt;
+</code></pre><hr>
+<h2 id="types">Types</h2>
+<p>This section is filled by the Tool AWLConverter and contains the definitions of the data blocks. For further details, please refer to the documentation for AWLConverter.</p>
+<hr>
+<h2 id="vars">Vars</h2>
+<p>In this section, variables are declared that are elements of the element type declared in Types. These variables can then be used in the mappings.</p>
+<hr>
+<h2 id="mappings">Mappings</h2>
+<p>Variables can be mapped to different data areas and read and write operations can then be executed via the mappings. Additionally, filters can be declared, too. These filters only apply to write operations. A filtered variable is not rewritten to the PLC.</p>
+<hr>
+<h1 id="plc-interface">PLC-Interface</h1>
+<p>The data modules that can be backed-up by a PLC-trigger-bit must be parametrized in the configuration (<a href="#PLCDataManager">&quot;DefPathsPLCTriggered&quot;</a>). Furthermore, any bit will serve the purpose of an interface to the PLC in case of an automatic comparison. The data area must be declared via a data definition and the bits required must be specified in the configuration.</p>
+<p><strong>Currently supported bits are:</strong></p>
+<p><strong>Control Bits:</strong></p>
+<table>
+ <tr><th>SaveCommand </th><td> Backup request of the data definitions that are defined via the</td></tr>
+ <tr><th>   </th><td> &quot;DefPathsPLCTriggered&quot; (formerly &quot;DefPathsAuto&quot;) setting.</td></tr>
+</table>
+
+
+
+
+<p>Example of a file definition for the PLC interfacec:  </p>
+<pre><code class="lang-html">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;DataDef Endianness=&quot;Host-Endianess&quot; Encoding=&quot;Base16&quot;
+         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+         xmlns=&quot;http://www.insite-gmbh.de/IDAT/DataDef&quot;
+         xsi:schemaLocation=&quot;http://www.insite-gmbh.de/IDAT/DataDef
+         TypeDefinition/DataDef.xsd&quot;&gt;
+  &lt;!-- Structs are the userdefined types --&gt;
+  &lt;Types&gt;
+    &lt;Struct name=&quot;DB_parasave&quot;&gt;
+      &lt;Struct name=&quot;status&quot;&gt;
+        &lt;Var name=&quot;Vergleich_io&quot; type=&quot;BOOL&quot; /&gt;
+        &lt;Var name=&quot;Sichern_beendet&quot; type=&quot;BOOL&quot; /&gt;
+        &lt;Var name=&quot;BatchJobCancelled&quot; type=&quot;BOOL&quot; /&gt;
+      &lt;/Struct&gt;
+      &lt;Struct name=&quot;Steuern&quot;&gt;
+        &lt;Var name=&quot;Res_0&quot; type=&quot;BOOL&quot; /&gt;
+        &lt;Var name=&quot;Sichern&quot; type=&quot;BOOL&quot; /&gt;
+        &lt;Var name=&quot;res&quot; type=&quot;BOOL&quot; /&gt;
+      &lt;/Struct&gt;
+    &lt;/Struct&gt;
+  &lt;/Types&gt;
+  &lt;!-- declare the Values you want to use --&gt;
+  &lt;Vars&gt;
+    &lt;Var name=&quot;PLCinterface&quot; type=&quot;DB_parasave&quot; /&gt;
+  &lt;/Vars&gt;
+  &lt;!-- define the mapping and the operations on the values--&gt;
+  &lt;Mappings&gt;
+    &lt;Mapping name=&quot;interface&quot; var=&quot;PLCinterface&quot; source=&quot;OPCReaderWriter&quot;
+             selector=&quot;220&quot; type=&quot;BinaryFile&quot;&gt;
+      &lt;Operations&gt;
+        &lt;Read/&gt;
+        &lt;Write/&gt;
+      &lt;/Operations&gt;
+    &lt;/Mapping&gt;
+  &lt;/Mappings&gt;
+&lt;/DataDef&gt;
+</code></pre><p>Associated entries in the configuration:</p>
+<pre><code class="lang-html">&lt;SaveCommand&gt;PLCinterface.Steuern.Sichern&lt;/SaveCommand&gt;
+&lt;CompareState&gt;PLCinterface.status.Vergleich_io&lt;/CompareState&gt;
+&lt;SaveFinished&gt;PLCinterface.status.Sichern_beendet&lt;/SaveFinished&gt;
+&lt;BatchJobCancelled&gt;PLCinterface.status.BatchJobCancelled&lt;/BatchJobCancelled&gt;
+</code></pre><hr>
+<h1 id="installation">Installation</h1>
+<p>A successful installation requires that </p>
+<ol>
+<li>Microsoft .NET Framework 4.0 Servicepack 1 </li>
+<li>Microsoft Visual C++ 2010 Redistributable Package</li>
+<li>WIN AC RTX 2009 or higher for using ODK</li>
+</ol>
+<p>are installed and available on the destination system under Windows.</p>
+<p>PLCDataManager includes the following EXE and DLLs (date January 2013):</p>
+<table><tr><th>Assembly </th><th> Manufacturer</th></tr>
+<tr><td>CommandLine.dll </td><td>   </td></tr>
+<tr><td>ComparatorUC.dll </td><td> insite GmbH</td></tr>
+<tr><td>DataDef.dll </td><td> insite GmbH</td></tr>
+<tr><td>DataDefReaderWriter.dll </td><td> insite GmbH</td></tr>
+<tr><td>IDATUC.ViewModel.dll </td><td> insite GmbH</td></tr>
+<tr><td>IDATUC.ViewModel.resources.dll </td><td> insite GmbH</td></tr>
+<tr><td>IDATUC.WPFView.dll </td><td> insite GmbH</td></tr>
+<tr><td>Insite.Controls.dll </td><td> insite GmbH</td></tr>
+<tr><td>Interfaces.dll </td><td> insite GmbH</td></tr>
+<tr><td>Ioc.dll </td><td> insite GmbH</td></tr>
+<tr><td>libnodave.dll </td><td>   </td></tr>
+<tr><td>libnodave.net.dll </td><td>   </td></tr>
+<tr><td>LibNoDaveReaderWriter.dll </td><td> insite GmbH</td></tr>
+<tr><td>log4net.dll </td><td> The Apache Software Foundation</td></tr>
+<tr><td>ODKCCXLib.dll </td><td> insite GmbH</td></tr>
+<tr><td>ODKCCXLib&#95;CS.dll </td><td> insite GmbH</td></tr>
+<tr><td>ODKCCXReaderWriter.dll </td><td> insite GmbH</td></tr>
+<tr><td>OPCReaderWriter.dll </td><td> insite GmbH</td></tr>
+<tr><td>PLCDataManager.exe </td><td> insite GmbH</td></tr>
+<tr><td>PLCDataManager.Logic.dll </td><td> insite GmbH</td></tr>
+<tr><td>PLCDataManager.resources.dll </td><td> insite GmbH</td></tr>
+<tr><td>PLCHelpers.dll </td><td> insite GmbH</td></tr>
+<tr><td>PLCItemAccessor.dll </td><td> insite GmbH</td></tr>
+<tr><td>PLCOPCAccessor.dll </td><td> insite GmbH</td></tr>
+<tr><td>PLCOPCdotNETLib.dll </td><td> VISCOM</td></tr>
+<tr><td>ResolverImpl.dll </td><td> insite GmbH</td></tr>
+<tr><td>S7Converter.dll </td><td> insite GmbH</td></tr>
+<tr><td>SMHeapManager.dll </td><td> insite GmbH</td></tr>
+<tr><td>ViewModelBase.dll </td><td> insite GmbH</td></tr>
+<tr><td>XPathDataReaderWriter.dll </td><td> insite GmbH</td></tr>
+</table>
+
+
+
+
+
+<p>These files can be copied to any directory and the application can then be started from there.</p>
+<h1 id="document-history">Document history</h1>
+<table><tr><th>Author </th><th> Date </th><th> Remarks</th></tr>
+<tr><td>Benjamin Prömmer </td><td> January 2013 </td><td> Creation</td></tr>
+<tr><td>Ralf Gedrat </td><td> January 2013 </td><td> Brief editing</td></tr>
+<tr><td>Benjamin Prömmer </td><td> February 2013 </td><td> Behaviour of the PLC interface extended</td></tr>
+<tr><td>Benjamin Prömmer </td><td> February 2013 </td><td> New OptimizeMemUsage parameter extended</td></tr>
+<tr><td>Benjamin Prömmer </td><td> August 2013 </td><td> New parameter for Batchjob extended</td></tr>
+<tr><td>Benjamin Prömmer </td><td> December 2014 </td><td> Documentation reference changed from</td></tr>
+<tr><td>   </td><td>    </td><td> AWLXMLConverter to AWLConverter</td></tr>
+<tr><td>Benjamin Prömmer </td><td> 2015-09-16 </td><td> Bug fixes, enhancements:</td></tr>
+<tr><td>   </td><td>    </td><td> Automatic cmd without -v is now possible</td></tr>
+<tr><td>   </td><td>    </td><td> If a DB does not exist, comparison result</td></tr>
+<tr><td>   </td><td>    </td><td> will be displayed in red</td></tr>
+<tr><td>   </td><td>    </td><td> Column widths are stored for each user after</td></tr>
+<tr><td>   </td><td>    </td><td> shutting down the application</td></tr>
+<tr><td>   </td><td>    </td><td> A context menu was added that allows hiding</td></tr>
+<tr><td>   </td><td>    </td><td> of certain columns</td></tr>
+<tr><td>   </td><td>    </td><td> Filtered data is displayed with a grey text colour</td></tr>
+<tr><td>   </td><td>    </td><td> Failed comparisons are displayed with</td></tr>
+<tr><td>   </td><td>    </td><td> a red text colour</td></tr>
+<tr><td>   </td><td>    </td><td> In online-mode, online and offline</td></tr>
+<tr><td>   </td><td>    </td><td> data are now automatically refreshed</td></tr>
+<tr><td>Karsten Gorkow </td><td> 2016-01-11 </td><td> Changed some misleading information</td></tr>
+<tr><td>Karsten Gorkow </td><td> 2016-01-12 </td><td> Removed errors and unnecessary details</td></tr>
+<tr><td>Karsten Gorkow </td><td> 2016-01-14 </td><td> Minor changes and additions</td></tr>
+</table>
+
+
+
+
+<table>
+ <tr><th></th></tr>
+</table>
+            </article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/insite-gmbh/iDoc/blob/master/articles/PLCDataManager.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a class="back-to-top" href="#top">Back to top</a>
+            </span>
+            
+            <span>Copyright © 2016 insite Ingenieurgesellschaft für Steuerungs- und Informationstechnik mbH
+          </span></div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

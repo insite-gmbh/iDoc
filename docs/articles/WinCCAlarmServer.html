@@ -1,0 +1,302 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>WinCCAlarmServer </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="WinCCAlarmServer ">
+    <meta name="generator" content="docfx 2.8.2.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="text/javascript" href="../styles/encrypter.js">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        <a href="http://www.insite-gmbh.de" class="link-to-homepage" target="_blank" title="opens the website of insite in a new tab">
+            <img src="../images/whitefontlogo.png">
+        </a>        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+              <h1>WinCCAlarmServer</h1>
+              
+
+
+
+<p><strong>insite GmbH</strong></p>
+<hr>
+<h1 id="overview">Overview</h1>
+<hr>
+<h2 id="general-information">General Information</h2>
+<p>The program &quot;WinCCAlarmServer&quot; transmits the current state and progress of alarm states to a connected TCP/IP client. The source of the alarm data is a Message Archive table (&quot;Meldearchiv&quot;) in a database on a Microsoft SQL server. By cyclically polling this database table the current status of the alarms registered there is determined, transformed into telegrams and forwarded to the client. Some entries in the table signal error states in the communication between the WinCC-Runtime environment and PLC or the Offline-Status of the WinCC-Runtime. These entries serve as a &quot;marker&quot;, e.g. to implicitly terminate or generally ignore alarm states. The features for detecting such entries can be defined via the configuration file.</p>
+<hr>
+<h2 id="preparation-of-the-microsoft-sql-server">Preparation of the Microsoft SQL Server</h2>
+<p>The Microsoft SQL Server Express can be used, for example, as a database. This can be obtained free of charge from Microsoft via the Internet.   </p>
+<p>Before you can work with the WinCCAlarmServer, however, the SQL server must be patched by several SQL scripts after the initial installation. This patch ensures that the Message Archive will contain a column &quot;SeqID&quot; also after a new installation, which can guarantee the chronology of the registered events. The scripts are provided by Siemens and must be executed once (e.g. with the aid of the application &quot;Microsoft SQL Server Management Studio Express&quot; - part of the aforementioned Express package). </p>
+<hr>
+<h1 id="program-window">Program Window</h1>
+<p>The application window essentially represents four main states:  </p>
+<ol>
+<li><strong>Enable polling ticker:</strong> The Polling database can be switched on and off (Default: on)</li>
+<li>** Verbindungsanzeige:** Address and connection port of the currently connected TCP/IP-Client.</li>
+<li><strong>Aktuelle Meldungen:</strong> The table shows the currently pending alarms.</li>
+<li><strong>Datenbankverbindung:</strong> The whole window is displayed in red and placed in the foreground when there is no database connection.</li>
+</ol>
+<hr>
+<h2 id="database-connection-ok-but-no-client-connected">Database connection ok, but no client connected</h2>
+<p><img src="../images/WinCC_dbok_noclient.png" alt="WinCC_dbok_noclient.png"></p>
+<hr>
+<h2 id="database-connection-not-ok-and-no-client-connection">Database connection not ok and no client connection</h2>
+<p><img src="../images/WinCC_dbnok_noclient.png" alt="WinCC_dbnok_noclient.png"></p>
+<hr>
+<h2 id="database-conenction-ok-and-a-client-is-connected">Database conenction ok and a client is connected</h2>
+<p><img src="../images/WinCC_dbok_client_connected.png" alt="WinCC_dbok_client_connected.png"></p>
+<hr>
+<h1 id="files">Files</h1>
+<hr>
+<h2 id="configuration-file">Configuration file</h2>
+<p>These are XML files. A standard text editor or (better) an XML editor (e.g. the free &quot;XML Notepad&quot;, download from Microsoft) can be used for editing.</p>
+<hr>
+<h3 id="xml">XML?</h3>
+<p>An XML document consists of the following elements. An element comprises a Start-Tag and End-Tag. Between the Start-Tag and End-Tag of an element can either be an element value or additional elements. This allows data structures to be mapped hierarchically:</p>
+<pre><code class="lang-html">&lt;person&gt;                Start-Tag of the person element
+    &lt;name&gt;              Start-Tag of the name element
+        Gorkow          Value of the name element
+    &lt;/name&gt;             End-Tag of the name element
+    &lt;first name&gt;        Start-Tag of the first name element
+        Karsten         Value of the first name element
+    &lt;first name&gt;        End-Tag of the first name element
+&lt;person&gt;                End-Tag of the person element
+</code></pre><p>In the case of the configuration file, e.g. all application specific settings are stored in elements with the following structure:</p>
+<pre><code class="lang-html">&lt;SettingNameDescription&gt;Value&lt;/SettingNameDescription&gt;
+</code></pre><hr>
+<h3 id="configuration-parameters">Configuration Parameters</h3>
+<p>The configuration parameters and a description of their position in the configuration file will now follow. The path to the element concerned is presented here according to a path on a data carrier with the &quot;/&quot; as a delimiter. If an attribute value plays a role for the selection, the name and value of the attribute is attached to the element in round brackets.</p>
+<p>Example of the above server port:</p>
+<pre><code class="lang-html">&lt;TCPIPPort&gt;7777&lt;/TCPIPPort&gt;
+</code></pre><hr>
+<h4 id="connection-string-to-the-database">Connection string to the database</h4>
+<p><strong>Element:</strong> DBConnectionString  </p>
+<p><strong>Default:</strong> Data Source=.$\backslash\backslash$SQLEXPRESS;Initial Catalog=ARCHIV1;Integrated Security=True</p>
+<hr>
+<h4 id="severport">Severport</h4>
+<p><strong>Element:</strong> TCPIPPort  </p>
+<p><strong>Default:</strong> 7777</p>
+<hr>
+<h4 id="polling-interval-for-database-in-milliseconds">Polling interval for database in milliseconds</h4>
+<p><strong>Element:</strong> DBPollingRate  </p>
+<p><strong>Default:</strong> 2000</p>
+<hr>
+<h4 id="name-of-the-database-table-meldearchiv">Name of the database table (Meldearchiv)</h4>
+<p><strong>Element:</strong> DBTableName  </p>
+<p><strong>Default:</strong> Meldearchiv&#95;10</p>
+<hr>
+<h4 id="substring-in-the-message-text-of-the-wincc-runtime-online-message">Substring in the message text of the WinCC Runtime online message</h4>
+<p><strong>Element:</strong> MsgTextOnline  </p>
+<p><strong>Default:</strong> Change to the &#39;Online&#39; operating mode.</p>
+<hr>
+<h4 id="content-of-the-msgproc-column-for-online-message-of-the-wincc-runtime">Content of the MsgProc column for online message of the WinCC-Runtime</h4>
+<p><strong>Element:</strong> MsgProcOnline  </p>
+<p><strong>Default:</strong> 1</p>
+<p>A value &#60;= 0 in this parameter causes this column to be ignored when searching this dataset.</p>
+<hr>
+<h4 id="content-of-the-msgclass-column-for-online-message-of-the-wincc-runtime">Content of the MsgClass column for online message of the WinCC-Runtime</h4>
+<p><strong>Element:</strong> MsgClassOnline  </p>
+<p><strong>Default:</strong> 3</p>
+<p>A value &#60;= 0 in this parameter causes this column to be ignored when searching this dataset.</p>
+<hr>
+<h4 id="content-of-the-msgnumber-column-for-online-message-of-the-wincc-runtime">Content of the MsgNumber column for online message of the WinCC-Runtime</h4>
+<p><strong>Element:</strong> MsgNumberOnline  </p>
+<p><strong>Default:</strong> 110001</p>
+<p>A value &#60;= 0 in this parameter causes this column to be ignored when searching this dataset.</p>
+<hr>
+<h4 id="substring-in-the-message-text-in-the-event-of-a-connection-disruption-to-the-plc">Substring in the message text in the event of a connection disruption to the PLC</h4>
+<p><strong>Element:</strong> MsgTextConnDown  </p>
+<p><strong>Default:</strong> Connection terminated</p>
+<hr>
+<h4 id="content-of-the-msgproc-column-in-the-event-of-a-connection-disruption-to-the-plc">Content of the MsgProc column in the event of a connection disruption to the PLC</h4>
+<p><strong>Element:</strong> MsgProcConnDown  </p>
+<p><strong>Default:</strong> 1</p>
+<p>A value &#60;= 0 in this parameter causes this column to be ignored when searching this dataset.</p>
+<hr>
+<h4 id="content-of-the-msgclass-column-in-the-event-of-a-connection-disruption-to-the-plc">Content of the MsgClass column in the event of a connection disruption to the PLC</h4>
+<p><strong>Element:</strong> MsgClassConnDown  </p>
+<p><strong>Default:</strong> 3</p>
+<p>A value &#60;= 0 in this parameter causes this column to be ignored when searching this dataset</p>
+<hr>
+<h4 id="content-of-the-msgnumber-column-in-the-event-of-a-connection-disruption-to-the-plc">Content of the MsgNumber column in the event of a connection disruption to the PLC</h4>
+<p><strong>Element:</strong> MsgNumberConnDown  </p>
+<p><strong>Default:</strong> 140000</p>
+<p>A value &#60;= 0 in this parameter causes this column to be ignored when searching this dataset.</p>
+<hr>
+<h4 id="substring-in-the-message-text-after-reestablishing-connection-with-plc">Substring in the message text after reestablishing connection with PLC</h4>
+<p><strong>Element:</strong> MsgTextConnUp  </p>
+<p><strong>Default:</strong> Connection established</p>
+<hr>
+<h4 id="content-of-the-msgproc-column-after-reestablishing-connection-with-plc">Content of the MsgProc column after reestablishing connection with PLC</h4>
+<p><strong>Element:</strong> MsgProcConnUp  </p>
+<p><strong>Default:</strong> 1</p>
+<p>A value &#60;= 0 in this parameter causes this column to be ignored when searching this dataset.</p>
+<hr>
+<h4 id="content-of-the-msgclass-column-after-reestablishing-connection-with-plc">Content of the MsgClass column after reestablishing connection with PLC</h4>
+<p><strong>Element:</strong> MsgClassConnUp  </p>
+<p><strong>Default:</strong> 3</p>
+<p>A value &#60;= 0 in this parameter causes this column to be ignored when searching this dataset.</p>
+<hr>
+<h4 id="content-of-the-msgnumber-column-after-reestablishing-connection-with-plc">Content of the MsgNumber column after reestablishing connection with PLC</h4>
+<p><strong>Element:</strong> MsgNumberConnUp  </p>
+<p><strong>Default:</strong> 140000</p>
+<p>A value &#60;= 0 in this parameter causes this column to be ignored when searching this dataset.</p>
+<hr>
+<h4 id="message-text-when-you-exit-winccflex-or-disconnect-the-database-connection">Message text when you exit WinCCflex or disconnect the database connection</h4>
+<p><strong>Element:</strong> MsgTextWinCCFlexDownAlarm  </p>
+<p><strong>Default:</strong> &quot;&quot;</p>
+<p>A value == &quot;&quot; in this parameter means that the message will not be sent.</p>
+<hr>
+<h4 id="msgproc-when-you-exit-winccflex-or-disconnect-the-database-connection">MsgProc when you exit WinCCflex or disconnect the database connection</h4>
+<p><strong>Element:</strong> MsgProcWinCCFlexDownAlarm  </p>
+<p><strong>Default:</strong> 0</p>
+<hr>
+<h4 id="msgclass-when-you-exit-winccflex-or-disconnect-the-database-connection">MsgClass when you exit WinCCflex or disconnect the database connection</h4>
+<p><strong>Element:</strong> MsgClassWinCCFlexDownAlarm  </p>
+<p><strong>Default:</strong> 0</p>
+<hr>
+<h4 id="messages-which-do-not-have-plcmarker-ut-to-be-still-passed">Messages which do not have PLCMarker ut to be still passed</h4>
+<p><strong>Element:</strong> HandledHMIMsgNumbers  </p>
+<p><strong>Default:</strong> &quot;&quot;</p>
+<p>This field can be filled with a semicolon-separated list of message numbers. (e.g .: &quot;320008;320009&quot;)</p>
+<hr>
+<h4 id="disconnection-after-each-polling">Disconnection after each polling</h4>
+<p><strong>Element:</strong> DBDisconnectAfterPolling  </p>
+<p><strong>Default:</strong> false</p>
+<hr>
+<h4 id="marker-for-plc-alarm">Marker for PLC alarm</h4>
+<p><strong>Element:</strong> PLCMarker  </p>
+<p><strong>Default:</strong> WinLC RTX</p>
+<hr>
+<h4 id="do-not-set-any-seqid-filter-when-reading-out-the-alarms-from-the-database">Do not set any SeqID filter when reading out the alarms from the database</h4>
+<p><strong>Element:</strong> UseUnfilteredQuery  </p>
+<p><strong>Default:</strong> false</p>
+<hr>
+<h4 id="number-of-days-the-log-files-are-kept-before-being-deleted">Number of days the log files are kept before being deleted</h4>
+<p><strong>Element:</strong> DaysToKeepLogfiles  </p>
+<p><strong>Default:</strong> 7</p>
+<hr>
+<h4 id="controlling-the-comparison-to-determine-whether-a-leaving-message-belongs-to-a-specific-pending-alarm">Controlling the comparison to determine whether a leaving message belongs to a specific pending alarm</h4>
+<p><strong>Elements:</strong> UseMsgTextToVerifyMsgPair, UseMsgClassToVerifyMsgPair, UseMsgProcToVerifyMsgPair, UseMsgNumberToVerifyMsgPair  </p>
+<p><strong>Default:</strong> all true</p>
+<p>During the allocation, a leaving message for a pending alarm is checked by default for compliance with all 4 message criteria (Text, Proc, Class, Number).  </p>
+<p>This behaviour can be influenced with these flags. If the corresponding flag for a criterion is not set (false), the criterion is ignored during the allocation.</p>
+<hr>
+<h4 id="controlling-the-comparison-to-determine-whether-a-coming-message-is-already-pending">Controlling the comparison to determine whether a coming message is already pending</h4>
+<p><strong>Elements:</strong> UseMsgTextToMatchPendingMsgs, UseMsgClassToMatchPendingMsgs, UseMsgProcToMatchPendingMsgs, UseMsgNumberToMatchPendingMsgs,<br> UseVar1ToMatchPendingMsgs, ... , UseVar8ToMatchPendingMsgs  </p>
+<p><strong>Default:</strong> all true</p>
+<p>Coming alarms are only ever detected as &quot;already pending&quot; if all elements specified with true match.</p>
+<hr>
+<h2 id="log-file">Log File</h2>
+<p>A log file is generated in the current work directory daily - the name of the file is made up as follows:</p>
+<p>LOG&#95;YYYYMMDD.txt  </p>
+<p>(<strong>Y</strong>ear, <strong>M</strong>onth, <strong>D</strong>ay)</p>
+<hr>
+<h1 id="change-directory">Change Directory</h1>
+<table><tr><th>Author </th><th> Date </th><th> Remarks</th></tr>
+<tr><td>Karsten Gorkow </td><td> May 2009 </td><td> First version</td></tr>
+<tr><td>Karsten Gorkow </td><td> May 2011 </td><td> Changes from the past updates retained:</td></tr>
+<tr><td>   </td><td>    </td><td> Format of the configuration file</td></tr>
+<tr><td>   </td><td>    </td><td> Flags for controlling the allocation of leaving</td></tr>
+<tr><td>   </td><td>    </td><td> message for the pending alarm</td></tr>
+<tr><td>Karsten Gorkow </td><td> September 2011 </td><td> Default values for configuration file corrected</td></tr>
+<tr><td>   </td><td>    </td><td> Missing configuration entries documented</td></tr>
+<tr><td>Karsten Gorkow </td><td> November 2013 </td><td> Flags added for detecting pending alarms</td></tr>
+</table>
+
+
+            </article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/insite-gmbh/iDoc/blob/master/articles/WinCCAlarmServer.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a class="back-to-top" href="#top">Back to top</a>
+            </span>
+            
+            <span>Copyright © 2016 insite Ingenieurgesellschaft für Steuerungs- und Informationstechnik mbH
+          </span></div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

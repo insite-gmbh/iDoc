@@ -1,0 +1,557 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>IDAT Application Scenario </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="IDAT Application Scenario ">
+    <meta name="generator" content="docfx 2.8.2.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="text/javascript" href="../styles/encrypter.js">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        <a href="http://www.insite-gmbh.de" class="link-to-homepage" target="_blank" title="opens the website of insite in a new tab">
+            <img src="../images/whitefontlogo.png">
+        </a>        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+              <h1>IDAT Application Scenario</h1>
+              
+
+
+<p><strong>Transferring data from Excel to a PLC</strong></p>
+<p><strong>insite GmbH</strong></p>
+<hr>
+<h1 id="introduction">Introduction</h1>
+<p>A request to automatically transfer data from a Microsoft Excel Sheet to a PLC led to the development of a set of components that together form the IDAT family. Though this task could have been done by programming a &quot;monolithic&quot; application that exactly satisfies this request, we chose to implement small components that can be used as building blocks and could be exchanged later if, say, the origin of the data would be a database or a plain text file instead of an Excel sheet, or the receiver of the data will be a certain microprocessor system instead of a Siemens S7 PLC. The flexibility of this approach has a drawback: the orchestration of small components to form an application as seen by the user, involves some configuration that may get more complex. This document aims to make these configuration tasks clearer and may serve as a starting point to a user who wants to alter the functionality of the existing application e.g. for transferring different data.</p>
+<p><strong>Please open the configuration file &quot;IMON.xml&quot; and the DDF</strong><br> <strong>&quot;IDATSchrauberDB.xml&quot; in a text editor for looking up things while reading this guide in order to get a better understanding of what is explained here.</strong></p>
+<h3 id="plc">PLC</h3>
+<p>How data is organized and viewed in a PLC.</p>
+<hr>
+<h3 id="component-oriented-software">Component Oriented Software</h3>
+<p>Not necessary, but it will help, if you are aware of the separation of an application into small building blocks, know how to handle EXEs and DLLs and what an interface, a plug-in or &quot;inversion of control&quot; is.</p>
+<hr>
+<h3 id="xml-xpath">XML, XPath</h3>
+<p>How to work on XML files, how elements and attributes are defined and what a well-formed XML document is. What XPath is and how it is used.</p>
+<hr>
+<h3 id="c35-ienumerable">C&#35;, IEnumerable</h3>
+<p>If you need to implement difficult queries to get the data from Excel and to layout to the format that is used in the PLC, you should know the extension methods of IEnumerable or LINQ.</p>
+<hr>
+<h2 id="definitions-acronyms-abbreviations">Definitions, Acronyms, Abbreviations</h2>
+<ul>
+<li><strong>Data Definition File (DDF):</strong> A file that describes the structure of single or combined variables and defines the mapping of these variables.</li>
+<li><strong>Mapping:</strong> Variables are mapped to a defined data or memory area. </li>
+</ul>
+<hr>
+<h1 id="overview-of-the-implemented-functionality">Overview of the Implemented Functionality</h1>
+<p>To start, here is an overview of the separate functions that make-up the application. They may include subsequent points with a more detailed explanation about the specific functionality and how this functionality could be seen in a more generic way. </p>
+<hr>
+<h2 id="observe-a-certain-excel-file-for-changes">Observe a Certain Excel File for Changes</h2>
+<p><a name="Observe_a_Certain_Excel_File_for_Changes"></a>
+As soon as somebody saves changes in the Excel data, the application detects the modification and starts to transfer the data to the PLC.</p>
+<hr>
+<h3 id="specific-case">Specific Case</h3>
+<p>Do a cyclic check of the file information data of the Excel file and compare the actual modification time to the last detected modification time. If the modification time has changed, transfer the Excel data to the PLC.</p>
+<hr>
+<h3 id="generic-case">Generic Case</h3>
+<p>Do a cyclic check of the file information of one or more files on disk. Compare each modification time and if a certain file has changed, send an event along with the path of the changed file to another component. This is how the &quot;file monitoring&quot; component is implemented. Via its configuration you simply tell this component which file(s) to observe and which component the receiver of the &quot;file changed&quot;-event is. </p>
+<hr>
+<h4 id="even-more-generic-separation-of-monitor-and-comparer">Even more generic: Separation of monitor and comparer</h4>
+<p><a name="Even_more_generic:_Separation_of_monitor_and_comparer"></a>
+To be exact, above functionality is implemented in an even more generic way, by separating the monitor from the comparer. The monitor is responsible to create change events and uses one or more comparer(s) to detect changes. Below, you can see that such a comparer can also be implemented to compare e.g. PLC data. This means the monitor stays the same, but the comparer changes.</p>
+<hr>
+<h2 id="extract-data-from-the-changed-excel-file-and-convert-it-to-data-format-used-in-the-plc">Extract Data from the Changed Excel File and Convert it to Data Format used in the PLC</h2>
+<p>Only a certain part of the data in the Excel file is transferred to the PLC. In the specific case, the selection of data and its location on the spreadsheet is well known. Putting this information statically into the application, would be a bad design flaw, since the data selection may change in the future. So there’s a need to be able to define the extracted and transferred data with a query expression. Since the queried data is normally not arranged as successive lines or a simple rectangle of cells, the query expression can get quite complex. Furthermore, the arrangement of the Excel data normally does not fit the layout of the data in the PLC. So along with the purpose of extracting the data, the query expression also needs to define the conversion to the destination format that is used in the PLC.</p>
+<hr>
+<h3 id="querying-data-from-an-excel-sheet">Querying Data from an Excel Sheet</h3>
+<p>An Excel sheet is a two-dimensional matrix of cells, with each cell containing a single value. Therefore, we developed a simple &quot;query language&quot; that in general deals with the extraction of a rectangular part of this matrix (which, of course, in turn is a matrix). Such a (sub-)matrix equals a C&#35; type of IEnumerable&#60;IEnumerable&#60;string&#62;&#62; and you can append any method that is defined for IEnumerable in C&#35; (Select, Skip, ToList, Where, Aggregate, ...) to modify the final content and the layout of the data. So some knowledge in C&#35; and especially in the extension methods of IEnumerable is a great benefit to understand how the Excel data processing is done. There’s a new documentation called &quot;Matrix User Guide&quot; that contains some examples how to use the query language or – as the Matrix User Guide states – how to build a valid &quot;data moniker&quot;.</p>
+<hr>
+<h3 id="evaluating-queries">Evaluating Queries</h3>
+<p>Since the queries can get quite complex we could supply a tool to test the matrix monikers. It is called “Test Matrix” and is not officially supported nor documented, but you can use it to test if your monikers work as expected. </p>
+<hr>
+<h2 id="transferring-data-to-plc">Transferring Data to PLC</h2>
+<p>The data exchange with the PLC is done by a component called “Executor”. The executor takes a DDF and executes the read and write operations on the mappings that are defined in the DDF. </p>
+<hr>
+<h3 id="phases-of-execution">Phases of Execution</h3>
+<p><a name="Phases_of_Execution"></a>
+When the executor processes a DDF, it goes through several phases of execution:</p>
+<p><strong>1.) Replace constants:</strong> Constants are referenced by &#35;&#60;name of constant&#62;&#35;. All constants are defined at the beginning of the file inside the XML element &#60;Consts&#62;. The executor walks through the DDF and replaces each occurrence of a constant with its value.</p>
+<p><strong>2.) Read all pre-execution data from the PLC:</strong> The executor evaluates all read operations that are marked with the &quot;preex&quot;-attribute set to &quot;true&quot;. Search for preex=&quot;true&quot; in the DDF to locate these operations. The values that are read from the PLC in this phase will be saved to an internal variable cache. These cached variables can then be used to control the further execution of the DDF (phase 3 and 4). In this use case, write operations are activated/deactivated depending on the value of such a variable. For example:</p>
+<pre><code class="lang-html">&lt;Write var=&quot;TimeToCopyFromXLS&quot; active=&quot;#IfRead.WriteEnabled#&quot;&gt;
+    &lt;![CDATA[@#ExcelFile#
+             !#GlobalSheet#
+             !TimeToCopyFromXLS
+       ]]&gt;
+&lt;/Write&gt;
+</code></pre><p>This write operation is only executed in phase 3 if the PLC variable  </p>
+<p>IfRead.WriteEnabled was true during the pre-execution phase. You&#39;ll find many similar examples in the DDF.</p>
+<p><strong>3.) Execute all active write operations:</strong> The data (in this use case mostly values from Excel) will get written to the PLC.</p>
+<p><strong>4.) Execute all active read operations:</strong> The variables defined inside a read operation are read from the PLC and an output file is written. The output file is very similar to the DDF but has nested data.</p>
+<p>The pre-execution phase and therefore the possibility to integrate PLC data into the DDF before executing the actual write and read operations, enable the user to realize a kind of protocol for data exchange between the PLC and the executor.</p>
+<hr>
+<h3 id="play-with-the-executor">Play with the Executor</h3>
+<p>You can test the executor and play with it by using an unsupported tool called &quot;ExecutorCmdLineHost&quot;. It allows you to execute a DDF against a PLC. If you observe the created output files and the data in the PLC you will get a good understanding of how the Executor works. See the manual &quot;XLAdapter.docx&quot; for details.</p>
+<p><strong>Attention: The ExecutorCmdLineHost must be handled with care, since you may overwrite data in the PLC when running it!</strong></p>
+<yamlheader start="145" end="149">##Observe PLC for Data Requests##
+
+As already stated in [Even More Generic: Separation of Monitor and Comparer](#Even_more_generic:_Separation_of_monitor_and_comparer), beside a comparer for file information, a comparer for PLC data is also available. Therefore, the implemented system is able to initiate a transfer from Excel to PLC not only when it detects a change in an Excel file but also when it detects a change in some PLC flag or similar. The PLC uses the flag IfRead.UpdateRequired for this purpose.</yamlheader><h1 id="configuration-file-imonxml">Configuration File IMON.xml</h1>
+<p><a name="Configuration_File_IMON.xml"></a>
+What follows is a commented version of an IMON.xml configuration file. Not all details are explained, its purpose is to give you an overview of what is configured here.</p>
+<pre><code class="lang-html">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;Setup&gt;
+</code></pre><p>The element &#60;Assemblies&#62; lists all assemblies (DLLs) that make up the application.</p>
+<pre><code class="lang-html">    &lt;Assemblies&gt;
+        &lt;Assembly path=&quot;IMONContentMonitor.dll&quot;/&gt;
+        &lt;Assembly path=&quot;IMONFileComparer.dll&quot;/&gt;
+        &lt;Assembly path=&quot;IMONDataComparer.dll&quot;/&gt;
+        &lt;Assembly path=&quot;IMONMatrixContentComparison.dll&quot;/&gt;
+        &lt;Assembly path=&quot;IMONIDATExecutorEventHandler&quot;/&gt;
+        &lt;Assembly path=&quot;ResolverImpl.dll&quot;/&gt;
+        &lt;Assembly path=&quot;OPCReaderWriter.dll&quot;/&gt;
+        &lt;Assembly path=&quot;ExcelDataReader.dll&quot;/&gt;
+        &lt;Assembly path=&quot;S7Converter.dll&quot;/&gt;
+    &lt;/Assemblies&gt;
+</code></pre><p>The element &#60;Instances&#62; configures instances of certain objects that are used by the application.</p>
+<pre><code class="lang-html">    &lt;Instances&gt;
+        &lt;!-- IMON --&gt;
+        &lt;IMonitors&gt;
+            &lt;IMonitor name=&quot;Monitor&quot;&gt;
+</code></pre><p>The element &#60;ContentMonitor&#62; sets up the monitor as described in <a href="#Observe_a_Certain_Excel_File_for_Changes">Observe a Certain Excel File for Changes</a>. Inside the element &#60;ContentMonitor&#62; two comparers are defined.</p>
+<pre><code class="lang-html">              &lt;ContentMonitor&gt;
+</code></pre><p>The first comparer &quot;IMONFileComparer&quot; is configured to detect changes in the Excel file &quot;PGSList&#95;FL.xlsx&quot;. The element &#60;File&#62; is not used directly by the file comparer but serves as a hint, what name the local file has, that serves as the source for the data. It is referenced by an XPath expression in the DDF (see <a href="#DDF_IDATSchrauberDB.xmlDDF">IDATSchrauberDB.xml</a></p>
+<pre><code class="lang-html">           &lt;Comparer impl=&quot;IMONFileComparer&quot;&gt;
+             &lt;PollingCycle&gt;10&lt;/PollingCycle&gt;
+             &lt;Source&gt;&lt;![CDATA[D:\PGSList_FL.xlsx]]&gt;&lt;/Source&gt;
+             &lt;File&gt;&lt;![CDATA[D:\Daten\DH\Konfigs\insite\XLAdapter\PGSList_FL.xlsx]]&gt;
+             &lt;/File&gt;
+             &lt;Destination&gt;&lt;![CDATA[D:\Daten\DH\Konfigs\insite\XLAdapter\]]&gt;
+             &lt;/Destination&gt;
+</code></pre><p>What follows is the name of executor for change events and the name of another executor that is notified, when an error occurs. </p>
+<pre><code class="lang-html">                &lt;Executor&gt;
+                    &lt;Execute filter=&quot;(.*\.xlsx)&quot; eventHandler=&quot;IDATExecutor&quot; 
+                             errorEventHandler=&quot;IDATErrorExecutor&quot; 
+                             errorValueName=&quot;CurrentErrorCode&quot; hint=&quot;none&quot; /&gt;
+                &lt;/Executor&gt;
+</code></pre><p>This is the second comparer &quot;IMONDataComparer&quot; used by the monitor. This is configured to process IDATSchrauberDB.xml</p>
+<pre><code class="lang-html">           &lt;/Comparer&gt;
+           &lt;Comparer impl=&quot;IMONDataComparer&quot;&gt;
+             &lt;PollingCycle&gt;3&lt;/PollingCycle&gt;
+             &lt;DataDefFilename&gt;D:\Daten\DH\Konfigs\insite\XLAdapter\IDATSchrauberDB.xml
+             &lt;/DataDefFilename&gt;
+             &lt;OutputFilename&gt;IMONDataComparerOutput.xml&lt;/OutputFilename&gt;
+</code></pre><p>The following action list implements a part of the handshake protocol with the PLC. The other part is implemented in the DDF used by the executor.  </p>
+<p>This list is essential for the correct working of the application!</p>
+<pre><code class="lang-html">             &lt;Actions&gt;
+                &lt;Action writeVar=&quot;IfError.ErrorCode&quot; eventHandler=&quot;IDATExecutor&quot;  /&gt;
+                &lt;Action writeVar=&quot;IfError.ErrorOccured&quot; eventHandler=&quot;IDATExecutor&quot;  /&gt;
+                &lt;Action readVar=&quot;IfRead.UpdateRequired&quot; compValue=&quot;true&quot; 
+                        eventHandler=&quot;IDATExecutor&quot; 
+                        errorEventHandler=&quot;IDATErrorExecutor&quot; 
+                        errorValueName=&quot;CurrentErrorCode&quot; hint=&quot;none&quot; /&gt;
+                &lt;Action readVar=&quot;IfRead.UpdateRequired&quot; compValue=&quot;false&quot; 
+                        writeVar=&quot;IfWrite.UpdateRequiredDetected&quot; writeValue=&quot;false&quot; 
+                        errorEventHandler=&quot;IDATErrorExecutor&quot; 
+                        errorValueName=&quot;CurrentErrorCode&quot; hint=&quot;none&quot; /&gt;
+                &lt;Action readVar=&quot;IfRead.Toggle&quot; compValue=&quot;true&quot; 
+                        writeVar=&quot;IfWrite.Toggle&quot; writeValue=&quot;false&quot; 
+                        errorEventHandler=&quot;IDATErrorExecutor&quot; 
+                        errorValueName=&quot;CurrentErrorCode&quot; hint=&quot;none&quot; /&gt;
+                &lt;Action readVar=&quot;IfRead.Toggle&quot; compValue=&quot;false&quot; 
+                        writeVar=&quot;IfWrite.Toggle&quot; writeValue=&quot;true&quot; 
+                        errorEventHandler=&quot;IDATErrorExecutor&quot; 
+                        errorValueName=&quot;CurrentErrorCode&quot; hint=&quot;none&quot; /&gt;
+                &lt;Action readVar=&quot;IfRead.WriteEnabled&quot; compValue=&quot;false&quot; 
+                        writeVar=&quot;IfWrite.DataWritten&quot; writeValue=&quot;false&quot; 
+                        errorEventHandler=&quot;IDATErrorExecutor&quot; 
+                        errorValueName=&quot;CurrentErrorCode&quot; hint=&quot;none&quot; edge=&quot;true&quot; /&gt;
+             &lt;/Actions&gt;
+           &lt;/Comparer&gt;
+          &lt;/ContentMonitor&gt;
+         &lt;/IMonitor&gt;
+        &lt;/IMonitors&gt;
+</code></pre><p>Now the event handlers are defined, one for handling the change events (IDATExecutor, see above), the other to handle errors (IDATAErrorExecutor). </p>
+<pre><code class="lang-html">        &lt;IEventHandlers&gt;
+            &lt;IDATExecutorEventHandler name=&quot;IDATExecutor&quot;&gt;
+              &lt;DataDefFilename&gt;D:\Daten\DH\Konfigs\insite\XLAdapter\IDATSchrauberDB.xml
+              &lt;/DataDefFilename&gt;
+              &lt;OutputFilename&gt;ExecutorCmdLineHostOutput.xml&lt;/OutputFilename&gt;
+            &lt;/IDATExecutorEventHandler&gt;
+            &lt;IDATExecutorEventHandler name=&quot;IDATErrorExecutor&quot;&gt;
+              &lt;DataDefFilename&gt;D:\Daten\DH\Konfigs\insite\XLAdapter\IDATSchrauberDB.xml
+              &lt;/DataDefFilename&gt;
+              &lt;OutputFilename&gt;ErrorExecutorCmdLineHostOutput.XML&lt;/OutputFilename&gt;
+            &lt;/IDATExecutorEventHandler&gt;
+        &lt;/IEventHandlers&gt;
+</code></pre><p>You can ignore the next lines, they are more or less &quot;static must-have content&quot; in this application.</p>
+<pre><code class="lang-html">        &lt;IComparers&gt;
+            &lt;IComparer name=&quot;comparer&quot; /&gt;
+        &lt;/IComparers&gt;
+        &lt;IContentComparisons&gt;
+            &lt;IContentComparison name=&quot;ContentComparison&quot; /&gt;
+        &lt;/IContentComparisons&gt;
+        &lt;IResolvers&gt;
+            &lt;IResolver name=&quot;Resolver&quot;&gt;
+            &lt;/IResolver&gt;
+        &lt;/IResolvers&gt;
+</code></pre><p>The binary reader/writers make up the communication channel to the PLC. Here you can change the way the PLC is accessed or configure the OPC server.</p>
+<pre><code class="lang-html">        &lt;IBinaryReaderWriters&gt;
+            &lt;IBinaryReaderWriter name=&quot;OPCReaderWriter&quot; &gt;
+                &lt;ServerName&gt;insite.opc.simu&lt;/ServerName&gt;
+                &lt;aServerName&gt;OPC.SimaticNet&lt;/aServerName&gt;
+                &lt;ProtocolName&gt;S7&lt;/ProtocolName&gt;
+                &lt;ConnectionName&gt;RTX&lt;/ConnectionName&gt;
+                &lt;ItemSyntax&gt;SimaticNet&lt;/ItemSyntax&gt;
+            &lt;/IBinaryReaderWriter&gt;
+        &lt;/IBinaryReaderWriters&gt;
+        &lt;IDataStoreReaderWriters&gt;
+            &lt;IDataStoreReaderWriter name=&quot;ExcelDataReader&quot;&gt;
+            &lt;/IDataStoreReaderWriter&gt;
+    &lt;/IDataStoreReaderWriters&gt;
+</code></pre><p>Don’t change this unless you communicate with something different than a Siemens PLC.</p>
+<pre><code class="lang-html">        &lt;IConverters&gt;
+            &lt;IConverter name=&quot;S7Converter&quot;&gt;
+            &lt;/IConverter&gt;
+        &lt;/IConverters&gt;
+    &lt;/Instances&gt;
+</code></pre><p>The next element configures the log4net logging system. See the web for more details.</p>
+<pre><code class="lang-html">    &lt;log4net&gt;
+    &lt;appender name=&quot;RollingFile&quot; type=&quot;log4net.Appender.RollingFileAppender&quot;&gt;
+      &lt;file value=&quot;IMON.log&quot; /&gt;
+      &lt;appendToFile value=&quot;true&quot; /&gt;
+      &lt;immediateFlush value=&quot;true&quot; /&gt;
+      &lt;maximumFileSize value=&quot;1GB&quot; /&gt;
+      &lt;maxSizeRollBackups value=&quot;-1&quot; /&gt;
+      &lt;rollingStyle value=&quot;Date&quot; /&gt;
+      &lt;datePattern value=&quot;yyyyMMdd&quot; /&gt;
+      &lt;layout type=&quot;log4net.Layout.PatternLayout&quot;&gt;
+        &lt;conversionPattern value=&quot;%date %-6level [%5thread]
+                                  %message - (%file:%line)%newline&quot;/&gt;
+      &lt;/layout&gt;
+    &lt;/appender&gt;
+    &lt;root&gt;
+      &lt;level value=&quot;INFO&quot; /&gt;
+      &lt;appender-ref ref=&quot;RollingFile&quot; /&gt;
+    &lt;/root&gt;
+  &lt;/log4net&gt;
+&lt;/Setup&gt;
+</code></pre><hr>
+<h1 id="ddf-idatschrauberdbxml">DDF IDATSchrauberDB.xml</h1>
+<p><a name="DDF_IDATSchrauberDB.xmlDDF"></a>
+What follows is a commented version of a data definition file. Not all details are explained, its purpose is to give you an overview of what is configured here. To understand how the reference to the Excel data is defined, take a look at the &quot;Matrix User Guide&quot;. There is a real-world example explained that matches the DDF described here.</p>
+<pre><code class="lang-html">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;DataDef Endianness=&quot;Host-Endianess&quot; Encoding=&quot;Base16&quot; 
+         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; 
+         xmlns=&quot;http://www.insite-gmbh.de/IDAT/DataDef&quot; 
+         xsi:schemaLocation=&quot;http://www.insite-gmbh.de/IDAT/DataDef
+                             TypeDefinition/DataDef.xsd&quot;&gt;
+</code></pre><p>Inside the element &#60;Consts&#62; all constants are defined. A constant is referenced by putting it in between two hash characters (&#35;). Constant references get replaced before the DDF is actually executed. Some constants contain (e.g. &quot;ExcelFile&quot;) contain an XPath expression. This means that the value for the constant gets evaluated by dereferencing the XPath. For &quot;ExcelFile&quot; the XPath expression points to the IMON.XML as already explained in <a href="#Configuration_File_IMON.xml">&quot;Configuration File IMON.xml&quot;</a>. You’ll find a lot of information on XPath expressions on the web.</p>
+<pre><code class="lang-html">    &lt;Consts&gt;
+        &lt;Const name=&quot;SetupFile&quot;&gt;D:\Daten\DH\Konfigs\insite\XLAdapter\IMON.xml
+        &lt;/Const&gt;
+        &lt;Const name=&quot;ExcelFile&quot;&gt;
+            &lt;![CDATA[&gt;&lt;#SetupFile#//Setup/Instances/IMonitors/IMonitor
+                       [@name=&#39;Monitor&#39;]/ContentMonitor/Comparer
+                       [@impl=&#39;IMONFileComparer&#39;]/File]]&gt;&lt;/Const&gt;
+        &lt;Const name=&quot;DataSheet&quot;&gt;Current&lt;/Const&gt;
+        &lt;Const name=&quot;GlobalSheet&quot;&gt;Global&lt;/Const&gt;
+        &lt;Const name=&quot;DBNumberIDATPGSData&quot;&gt;241&lt;/Const&gt;
+        &lt;Const name=&quot;OffsetInterface&quot;&gt;0&lt;/Const&gt;
+        &lt;Const name=&quot;OffsetData&quot;&gt;40&lt;/Const&gt;
+        &lt;Const name=&quot;ColumnBTBez&quot;&gt;1&lt;/Const&gt;
+        &lt;Const name=&quot;ColumnChannelNum&quot;&gt;2&lt;/Const&gt;
+        &lt;Const name=&quot;ColumnSlot&quot;&gt;4&lt;/Const&gt;
+        &lt;Const name=&quot;ColumnScrewOrder&quot;&gt;5&lt;/Const&gt;
+        &lt;Const name=&quot;ColumnScrewCase&quot;&gt;6&lt;/Const&gt;
+        &lt;Const name=&quot;ColumnUndoScrewCase&quot;&gt;7&lt;/Const&gt;
+        &lt;Const name=&quot;ColumnFirstProgram&quot;&gt;11&lt;/Const&gt;
+        &lt;Const name=&quot;ColumnLastProgram&quot;&gt;74&lt;/Const&gt;
+        &lt;Const name=&quot;FieldsBeforePrograms&quot;&gt;6&lt;/Const&gt;
+        &lt;Const name=&quot;NumberOfPrograms&quot;&gt;64&lt;/Const&gt;
+        &lt;Const name=&quot;NumberOfColumnsInExcel&quot;&gt;74&lt;/Const&gt;
+        &lt;Const name=&quot;ExcelSelection&quot;&gt;
+             &lt;![CDATA[.Margin(0,1,#NumberOfColumnsInExcel#,GroupSameSequence)
+             .Select(x =&gt; x.Where((y, index) =&gt; 
+             (index == #ColumnBTBez# || index == #ColumnChannelNum# || 
+              index == #ColumnSlot# || index == #ColumnScrewOrder# || 
+              index == #ColumnScrewCase# || index == #ColumnUndoScrewCase# || 
+              (index &gt;= #ColumnFirstProgram# &amp;&amp; 
+               index &lt;= #ColumnLastProgram#))).ToList())
+                .Aggregate(new List&lt;List&lt;string&gt;&gt;(), (list, item) =&gt; 
+                { if (list.Count &lt; 1) { list.Add(item); } 
+                else 
+                { List&lt;string&gt; r = list.First(); 
+                for (int i = (#NumberOfPrograms# + #FieldsBeforePrograms#) - 1;
+                 i &gt;= #FieldsBeforePrograms#; i--) 
+                 { item.Insert(i, r[i]); } list.Add(item); } return list; },
+                 list =&gt; { return list.Skip(1); })
+            ]]&gt;
+        &lt;/Const&gt;
+        &lt;Const name=&quot;CurrentErrorCode&quot;&gt;0&lt;/Const&gt;
+    &lt;/Consts&gt;
+    &lt;!-- Structs are the userdefined types --&gt;
+</code></pre><p>The element &#60;Types&#62; lists all types that are used in the PLC. These are normally PLC UDTs converted by the AWL converter.</p>
+<pre><code class="lang-html">    &lt;Types&gt;
+        &lt;Struct name=&quot;UDT_IDATInterface&quot;&gt;
+            &lt;Struct name=&quot;PLCtoIDAT&quot;&gt;
+                &lt;Var name=&quot;WriteEnable&quot; type=&quot;BOOL&quot; /&gt;
+                &lt;Var name=&quot;UpdateRequired&quot; type=&quot;BOOL&quot; /&gt;
+            &lt;/Struct&gt;
+            &lt;Struct name=&quot;IDATtoPLC&quot;&gt;
+                &lt;Var name=&quot;DataWritten&quot; type=&quot;BOOL&quot; /&gt;
+                &lt;Var name=&quot;UpdateRequiredDetected&quot; type=&quot;BOOL&quot; /&gt;
+                &lt;Var name=&quot;ErrorOccured&quot; type=&quot;BOOL&quot; /&gt;
+                &lt;Var name=&quot;Toggle&quot; type=&quot;BOOL&quot; /&gt;
+                &lt;Var name=&quot;ErrorCode&quot; type=&quot;BYTE&quot; /&gt;
+            &lt;/Struct&gt;
+            &lt;Var name=&quot;CurrentTimeFromPLC&quot; type=&quot;DATE_AND_TIME&quot; /&gt;
+            &lt;Var name=&quot;LastWriteTimeFromIDAT&quot; type=&quot;DATE_AND_TIME&quot; /&gt;
+            &lt;Var name=&quot;TimeToCopyFromXLS&quot; type=&quot;DATE_AND_TIME&quot; /&gt;
+            &lt;Var name=&quot;MonrToCopyFromXLS&quot; type=&quot;STRING&quot; length=&quot;8&quot; /&gt;
+            &lt;Var name=&quot;CopyNowFromXLS&quot; type=&quot;BOOL&quot; /&gt;
+        &lt;/Struct&gt;
+        &lt;Struct name=&quot;UDT_Programm_PGS&quot;&gt;
+        &lt;Struct name=&quot;Bauteil&quot; countItems=&quot;20&quot;&gt;
+            &lt;Var name=&quot;Bauteilbez&quot; type=&quot;STRING&quot; length=&quot;60&quot; /&gt;
+                &lt;Var name=&quot;Kanal_Nr&quot; type=&quot;INT&quot; /&gt;
+                &lt;Var name=&quot;steckplatz&quot; type=&quot;INT&quot; /&gt;
+                &lt;Var name=&quot;Schraubreihenfolge&quot; type=&quot;INT&quot; /&gt;
+                &lt;Var name=&quot;SF&quot; type=&quot;INT&quot; /&gt;
+                &lt;Var name=&quot;Loeseschraubfall&quot; type=&quot;INT&quot; /&gt;
+                &lt;Struct name=&quot;Programm&quot; countItems=&quot;64&quot;&gt;
+                    &lt;Var name=&quot;Prg_Name&quot; type=&quot;CHAR&quot; countItems=&quot;2&quot; /&gt;
+                    &lt;Var name=&quot;Anz_verschr&quot; type=&quot;INT&quot; /&gt;
+                &lt;/Struct&gt;
+            &lt;/Struct&gt;
+        &lt;/Struct&gt;
+        &lt;Struct name=&quot;DB_IDAT_PGSData&quot;&gt;
+            &lt;Struct name=&quot;Bst&quot; countItems=&quot;6&quot;&gt;
+                &lt;Var name=&quot;Bez&quot; type=&quot;STRING&quot; length=&quot;8&quot; /&gt;
+                &lt;Var name=&quot;Aktiv&quot; type=&quot;BOOL&quot; /&gt;
+                &lt;Var name=&quot;Ablauf&quot; type=&quot;UDT_Programm_PGS&quot; /&gt;
+            &lt;/Struct&gt;
+        &lt;/Struct&gt;
+    &lt;/Types&gt;
+</code></pre><p>Give the data you want to work on a name and a type, declare variables in other words.</p>
+<pre><code class="lang-html">    &lt;Vars&gt;
+        &lt;Var name=&quot;IDATIf&quot; type=&quot;UDT_IDATInterface&quot; /&gt;
+        &lt;Var name=&quot;SchraubPara&quot; type=&quot;DB_IDAT_PGSData&quot; /&gt;
+    &lt;/Vars&gt;
+</code></pre><p>A mapping maps a variable to a data block in the PLC – in other words: a mapping assigns the memory used to store the content of a variable to the variable. Inside a mapping the read and write operations that should be performed during the Executor run are defined, too (see remarks below).</p>
+<pre><code class="lang-html">    &lt;Mappings&gt;
+        &lt;Mapping name=&quot;IfRead&quot; var=&quot;IDATIf&quot; source=&quot;OPCReaderWriter&quot; 
+                 selector=&quot;#DBNumberIDATPGSData#&quot; offset=&quot;#OffsetInterface#&quot; 
+                 type=&quot;BinaryFile&quot; active=&quot;#(?)CurrentErrorCode==0#&quot; &gt;
+            &lt;Operations&gt;
+</code></pre><p>The following read operations are the second part of the handshake protocol that handles the data exchange with the PLC. See <a href="#Configuration_File_IMON.xml">&quot;Configuration File IMON.xml&quot;</a> for the first part (&#60;Actions&#62; in IMONDataComparer).</p>
+<pre><code class="lang-html">                &lt;Read name=&quot;WriteEnabled&quot; var=&quot;PLCtoIDAT.WriteEnable&quot; 
+                      active=&quot;true&quot; preex=&quot;true&quot; /&gt;
+                &lt;Read name=&quot;CurrentTimeFromPLC&quot; var=&quot;CurrentTimeFromPLC&quot; 
+                      preex=&quot;true&quot; /&gt;
+                &lt;Read name=&quot;Toggle&quot; var=&quot;IDATtoPLC.Toggle&quot; active=&quot;true&quot;/&gt;
+                &lt;Read name=&quot;UpdateRequired&quot; var=&quot;PLCtoIDAT.UpdateRequired&quot; 
+                      active=&quot;true&quot; preex=&quot;true&quot; /&gt;
+            &lt;/Operations&gt;
+        &lt;/Mapping&gt;
+
+        &lt;Mapping name=&quot;Schraubdaten&quot; var=&quot;SchraubPara&quot; source=&quot;OPCReaderWriter&quot;
+                 selector=&quot;#DBNumberIDATPGSData#&quot; offset=&quot;#OffsetData#&quot; 
+                 type=&quot;BinaryFile&quot; active=&quot;#(?)CurrentErrorCode==0#&quot; &gt;
+            &lt;Operations&gt;
+                &lt;Read name=&quot;NameBST1&quot; var=&quot;Bst[1].Bez&quot; preex=&quot;true&quot;/&gt;
+                 &lt;Read name=&quot;NameBST2&quot; var=&quot;Bst[2].Bez&quot; preex=&quot;true&quot;/&gt;
+                &lt;Read name=&quot;NameBST3&quot; var=&quot;Bst[3].Bez&quot; preex=&quot;true&quot;/&gt;
+                &lt;Read name=&quot;NameBST4&quot; var=&quot;Bst[4].Bez&quot; preex=&quot;true&quot;/&gt;
+                &lt;Read name=&quot;NameBST5&quot; var=&quot;Bst[5].Bez&quot; preex=&quot;true&quot;/&gt;
+                &lt;Read name=&quot;NameBST6&quot; var=&quot;Bst[6].Bez&quot; preex=&quot;true&quot;/&gt;
+
+                &lt;Read name=&quot;AktivBST1&quot; var=&quot;Bst[1].Aktiv&quot; preex=&quot;true&quot;/&gt;
+                &lt;Read name=&quot;AktivBST2&quot; var=&quot;Bst[2].Aktiv&quot; preex=&quot;true&quot;/&gt;
+                &lt;Read name=&quot;AktivBST3&quot; var=&quot;Bst[3].Aktiv&quot; preex=&quot;true&quot;/&gt;
+                &lt;Read name=&quot;AktivBST4&quot; var=&quot;Bst[4].Aktiv&quot; preex=&quot;true&quot;/&gt;
+                &lt;Read name=&quot;AktivBST5&quot; var=&quot;Bst[5].Aktiv&quot; preex=&quot;true&quot;/&gt;
+                &lt;Read name=&quot;AktivBST6&quot; var=&quot;Bst[6].Aktiv&quot; preex=&quot;true&quot;/&gt;
+</code></pre><p>The following write operations are doing the actual transfer of the Excel data to the PLC. See the “Matrix User Guide” for details. Which of the write operations is executed depends on the state of the “WriteEnabled” flags. These flags are evaluated at the pre-execution stage (see <a href="#Phases_of_Execution">Phases of Execution</a>).</p>
+<pre><code class="lang-html">               &lt;Write var=&quot;Bst[1].Ablauf&quot; active=&quot;#(?)AktivBST1==IfRead.WriteEnabled#&quot;&gt;
+                   &lt;![CDATA[@#ExcelFile#
+                    !#DataSheet#
+                    !C&quot;#NameBST1#&quot;R&quot;#NameBST1#&quot;
+                    #ExcelSelection#]]&gt;
+               &lt;/Write&gt;
+               &lt;Write var=&quot;Bst[2].Ablauf&quot; active=&quot;#(?)AktivBST2==IfRead.WriteEnabled#&quot;&gt;
+                   &lt;![CDATA[@#ExcelFile#
+                    !#DataSheet#
+                    !C&quot;#NameBST2#&quot;R&quot;#NameBST2#&quot;
+                       #ExcelSelection#]]&gt;
+               &lt;/Write&gt;
+               &lt;Write var=&quot;Bst[3].Ablauf&quot; active=&quot;#(?)AktivBST3==IfRead.WriteEnabled#&quot;&gt;
+                   &lt;![CDATA[@#ExcelFile#
+                    !#DataSheet#
+                    !C&quot;#NameBST3#&quot;R&quot;#NameBST3#&quot;
+                           #ExcelSelection#]]&gt;
+               &lt;/Write&gt;
+               &lt;Write var=&quot;Bst[4].Ablauf&quot; active=&quot;#(?)AktivBST4==IfRead.WriteEnabled#&quot;&gt;
+                   &lt;![CDATA[@#ExcelFile#
+                    !#DataSheet#
+                    !C&quot;#NameBST4#&quot;R&quot;#NameBST4#&quot;
+                           #ExcelSelection#]]&gt;
+               &lt;/Write&gt;
+               &lt;Write var=&quot;Bst[5].Ablauf&quot; active=&quot;#(?)AktivBST5==IfRead.WriteEnabled#&quot;&gt;
+                   &lt;![CDATA[@#ExcelFile#
+                    !#DataSheet#
+                    !C&quot;#NameBST5#&quot;R&quot;#NameBST5#&quot;
+                           #ExcelSelection#]]&gt;
+               &lt;/Write&gt;
+               &lt;Write var=&quot;Bst[6].Ablauf&quot; active=&quot;#(?)AktivBST6==IfRead.WriteEnabled#&quot;&gt;
+                   &lt;![CDATA[@#ExcelFile#
+                    !#DataSheet#
+                    !C&quot;#NameBST6#&quot;R&quot;#NameBST6#&quot;
+                           #ExcelSelection#]]&gt;
+               &lt;/Write&gt;
+            &lt;/Operations&gt;
+        &lt;/Mapping&gt;
+
+        &lt;Mapping name=&quot;IfWrite&quot; var=&quot;IDATIf&quot; source=&quot;OPCReaderWriter&quot; 
+                 selector=&quot;#DBNumberIDATPGSData#&quot; offset=&quot;#OffsetInterface#&quot; 
+                 type=&quot;BinaryFile&quot; active=&quot;#(?)CurrentErrorCode==0#&quot; &gt;
+            &lt;Operations&gt;
+                &lt;Write var=&quot;TimeToCopyFromXLS&quot; active=&quot;#IfRead.WriteEnabled#&quot; &gt;
+                    &lt;![CDATA[@#ExcelFile#
+                        !#GlobalSheet#
+                        !TimeToCopyFromXLS
+                     ]]&gt;
+                &lt;/Write&gt;
+                &lt;Write var=&quot;MonrToCopyFromXLS&quot; active=&quot;#IfRead.WriteEnabled#&quot; &gt;
+                    &lt;![CDATA[@#ExcelFile#
+                     !#GlobalSheet#
+                     !MonrToCopyFromXLS
+                     ]]&gt;
+                &lt;/Write&gt;
+                &lt;Write var=&quot;CopyNowFromXLS&quot; active=&quot;#IfRead.WriteEnabled#&quot; &gt;
+                    &lt;![CDATA[@#ExcelFile#
+                     !#GlobalSheet#
+                     !CopyNowFromXLS
+                     ]]&gt;
+                &lt;/Write&gt;
+                &lt;Write var=&quot;LastWriteTimeFromIDAT&quot; active=&quot;#IfRead.WriteEnabled#&quot; &gt;
+                 #(RAW)IfRead.CurrentTimeFromPLC#&lt;/Write&gt;
+                &lt;Write name=&quot;DataWritten&quot; var=&quot;IDATtoPLC.DataWritten&quot; 
+                       active=&quot;#IfRead.WriteEnabled#&quot; &gt;#(RAW)IfRead.WriteEnabled#
+                &lt;/Write&gt;
+                &lt;Write name=&quot;UpdateRequiredDetected&quot; 
+                       var=&quot;IDATtoPLC.UpdateRequiredDetected&quot; 
+                       active=&quot;#IfRead.WriteEnabled#&quot; &gt;#(RAW)IfRead.UpdateRequired#
+                &lt;/Write&gt;
+                &lt;Write name=&quot;Toggle&quot; var=&quot;IDATtoPLC.Toggle&quot; active=&quot;false&quot; &gt;0000
+                &lt;/Write&gt;
+            &lt;/Operations&gt;
+        &lt;/Mapping&gt;
+
+        &lt;Mapping name=&quot;IfError&quot; var=&quot;IDATIf&quot; source=&quot;OPCReaderWriter&quot; 
+                 selector=&quot;#DBNumberIDATPGSData#&quot; offset=&quot;#OffsetInterface#&quot; 
+                 type=&quot;BinaryFile&quot; active=&quot;true&quot; &gt;
+            &lt;Operations&gt;
+                &lt;Write name=&quot;ErrorCode&quot; var=&quot;IDATtoPLC.ErrorCode&quot; &gt;
+                 #CurrentErrorCode#&lt;/Write&gt;
+                &lt;Write name=&quot;ErrorOccured&quot; var=&quot;IDATtoPLC.ErrorOccured&quot;&gt;
+                 #(?)CurrentErrorCode!=0#&lt;/Write&gt;
+            &lt;/Operations&gt;
+        &lt;/Mapping&gt;
+    &lt;/Mappings&gt;
+&lt;/DataDef&gt;
+</code></pre><hr>
+<h1 id="document-history">Document History</h1>
+<table><tr><th>Author </th><th> Date </th><th> Remarks</th></tr>
+<tr><td>Karsten Gorkow </td><td> 2014-01-22 </td><td> Initial revision.</td></tr>
+</table>
+            </article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/insite-gmbh/iDoc/blob/master/articles/ExcelToPLC.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a class="back-to-top" href="#top">Back to top</a>
+            </span>
+            
+            <span>Copyright © 2016 insite Ingenieurgesellschaft für Steuerungs- und Informationstechnik mbH
+          </span></div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

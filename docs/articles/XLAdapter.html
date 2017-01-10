@@ -1,0 +1,283 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Software Specification </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Software Specification ">
+    <meta name="generator" content="docfx 2.8.2.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="text/javascript" href="../styles/encrypter.js">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        <a href="http://www.insite-gmbh.de" class="link-to-homepage" target="_blank" title="opens the website of insite in a new tab">
+            <img src="../images/whitefontlogo.png">
+        </a>        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+              <h1>Software Specification</h1>
+                
+
+<h1>XLAdapter</h1>
+
+
+
+<p><strong>insite GmbH</strong></p>
+<hr>
+<h1 id="introduction">Introduction</h1>
+<p>XLAdapter (XL stands for Excel) is a software application for the transport of data. &quot;Transport&quot; means data is transported from one source to a target.</p>
+<hr>
+<h2 id="purpose-and-objective">Purpose and Objective</h2>
+<p>The original idea is the transmission of data from Excel to the PLC. The architecture of the XLAdapter (modular connection of Reader, Writer, Converter and Resolver) allows a wide variety of module implementations to be used. This creates the possibility at present of using an ExcelReader, LibNoDaveWriter, S7Converter and a user-specific ExcelPlcResolver.</p>
+<hr>
+<h2 id="definitions-acronyms-abbreviations">Definitions, Acronyms, Abbreviations</h2>
+<ul>
+<li><strong>LibNoDave:</strong> A free library for the communication with a PLC.</li>
+</ul>
+<hr>
+<h1 id="general-description">General Description</h1>
+<p>The special features and setting options of the software are described below.</p>
+<hr>
+<h2 id="system-environment">System Environment</h2>
+<p>The software is written with C&#35; Visual Studio 2010 for the Target framework .NET 4.0.</p>
+<p><img src="../images/warning_icon.png" alt="warning_icon.png">
+.NET 4.5 is not used since it does not guarantee any compatibility with XP.</p>
+<hr>
+<h2 id="the-functions-at-a-glance">The Functions at a Glance</h2>
+<hr>
+<h3 id="xladaptertestexe">XLAdapterTest.exe</h3>
+<p>This program is intended for developers to test the software.</p>
+<p>An existing configuration file named &quot;AddressResolver.xml&quot; in the application directory is detected and loaded by XLAdapter. If you would like to use other configuration files, you can transfer an argument with the complete directory and file name to XLAdapterTest.exe when starting.</p>
+<p>The structure of the &quot;AddressResolver.xml&quot; is like the configuration file of &quot;ExecutorCmdLineHost.exe&quot; (see the <a href="#ExecutorCmdLineHost.exe">next chapter</a>).</p>
+<p>When starting without an existing configuration file, this message appears:  </p>
+<p><img src="../images/XLAdapter_noconfig.png" alt="XLAdapter_noconfig.png"></p>
+<p>The application window of XLAdapter looks like this:  </p>
+<p><img src="../images/XLAdapter_app_window.png" alt="XLAdapter_app_window.png"></p>
+<p>With Varname you can enter a Resolver Text to determine whether the syntax is consistent. The &quot;ExecutorCmdLineHost&quot; program is started virtually with the &quot;Run executor&quot; button. If an exception should occur, this is displayed in the State.</p>
+<p>The next chapter &#39;ExecutorCmdLineHost.exe&quot; contains more information.</p>
+<hr>
+<h3 id="executorcmdlinehostexe">ExecutorCmdLineHost.exe</h3>
+<p><a name="ExecutorCmdLineHost.exe"></a>
+ExecutorCmdLineHost.exe is activated as follows:  </p>
+<p>Usage: ExecutorCmdLineHost.exe -d&#60;datadeffile&#62; [-c&#60;configfile&#62;] [-o&#60;outputfile&#62;]  </p>
+<p>The data of the file is mandatory here for the data definition. The config file is &quot;execconf.xml&quot; by default if you do not specify any other. A config file must be available, however.  </p>
+<p>The output file, in which the written data is output in Hex format, is optional.</p>
+<hr>
+<h4 id="example-config-file">Example Config File</h4>
+<pre><code class="lang-html">&lt;Setup&gt;
+    &lt;Assemblies&gt;
+        &lt;Assembly path=&quot;ResolverImpl.dll&quot;/&gt;
+        &lt;Assembly path=&quot;LibNoDaveReaderWriter.dll&quot;/&gt;
+        &lt;Assembly path=&quot;ExcelDataReader.dll&quot;/&gt;
+        &lt;Assembly path=&quot;S7Converter.dll&quot;/&gt;
+    &lt;/Assemblies&gt;
+    &lt;Instances&gt;
+        &lt;Resolvers&gt;
+            &lt;Resolver name=&quot;Resolver&quot;&gt;
+            &lt;/Resolver&gt;
+        &lt;/Resolvers&gt;
+        &lt;BinaryReaderWriters&gt;
+            &lt;BinaryReaderWriter name=&quot;LibNoDaveReaderWriter&quot;&gt;
+                &lt;IP&gt;192.168.0.145&lt;/IP&gt;
+                &lt;Port&gt;102&lt;/Port&gt;
+                &lt;Rack&gt;0&lt;/Rack&gt;
+                &lt;Slot&gt;2&lt;/Slot&gt;
+            &lt;/BinaryReaderWriter&gt;
+        &lt;/BinaryReaderWriters&gt;
+        &lt;DataStoreReaderWriters&gt;
+            &lt;DataStoreReaderWriter name=&quot;ExcelDataReader&quot;&gt;
+            &lt;/DataStoreReaderWriter&gt;
+        &lt;/DataStoreReaderWriters&gt;
+        &lt;Converters&gt;
+            &lt;Converter name=&quot;S7Converter&quot;&gt;
+            &lt;/Converter&gt;
+        &lt;/Converters&gt;
+    &lt;/Instances&gt;
+&lt;/Setup&gt;
+</code></pre><hr>
+<h4 id="example-data-definition-file">Example Data Definition File</h4>
+<pre><code class="lang-html">&lt;DataDef Endianness=&quot;Host-Endianess&quot; Encoding=&quot;Base16&quot; 
+         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; 
+         xmlns=&quot;http://www.insite-gmbh.de/IDAT/DataDef&quot; 
+         xsi:schemaLocation=
+         &quot;http://www.insite-gmbh.de/IDAT/DataDef TypeDefinition/DataDef.xsd&quot;&gt;
+    &lt;Types&gt;
+        &lt;Struct name=&quot;DBSchraub&quot;&gt;
+            &lt;Struct name=&quot;Konfig&quot; countItems=&quot;100&quot;&gt;
+                &lt;Var name=&quot;KanalNr&quot; type=&quot;INT&quot; /&gt;
+                &lt;Var name=&quot;Steckplatz&quot; type=&quot;INT&quot; /&gt;
+                &lt;Var name=&quot;Parametersatz&quot; type=&quot;INT&quot; /&gt;
+                &lt;Struct name=&quot;Programm&quot; countItems=&quot;50&quot;&gt;
+                    &lt;Var name=&quot;PrgName&quot; type=&quot;CHAR&quot; countItems=&quot;2&quot; /&gt;
+                    &lt;Var name=&quot;Count&quot; type=&quot;INT&quot; /&gt;
+                &lt;/Struct&gt;
+            &lt;/Struct&gt;
+       &lt;/Struct&gt;
+    &lt;/Types&gt;
+    &lt;Vars&gt;
+        &lt;Var name=&quot;MyDBSchraub&quot; type=&quot;DBSchraub&quot; /&gt;
+    &lt;/Vars&gt;
+    &lt;Mappings&gt;
+      &lt;Mapping name=&quot;Test&quot; var=&quot;MyDBSchraub&quot; source=&quot;LibNoDaveReaderWriter&quot; 
+selector=&quot;100&quot; offset=&quot;0&quot; type=&quot;BinaryFile&quot;&gt;
+        &lt;Operations&gt;
+          &lt;Write var=&quot;MyDBSchraub&quot;&gt;
+            &lt;![CDATA[@C:\IDAT\apps\XLAdapterExecutor\testdata\ExcelTestdaten.xlsx
+             !TEST
+             !C&quot;F7M000&quot;R&quot;F7M000&quot;
+             .Margin(0,1,63,GroupSameSequence)
+             .Select(x =&gt; x.Where((y, index) =&gt; (index == 2 || index == 4 || index == 6
+             || (index &gt;= 10 &amp;&amp; index &lt;=20) || (index &gt;= 22 &amp;&amp; index &lt;=30)
+             || (index &gt;= 32 &amp;&amp; index &lt;=46) || index &gt;= 49)).ToList())
+             .Aggregate(new List&lt;List&lt;string&gt;&gt;(), (list, item) =&gt; { 
+                 if (list.Count &lt; 1){
+                     list.Add(item);
+                 } else { 
+                     List&lt;string&gt; r = list.First();
+                     for (int i = 52; i &gt; 2; i--){
+                         item.Insert(i, r[i]);
+                     } 
+                     list.Add(item);
+                 }
+                 return list;
+             }, list =&gt; { return list.Skip(1); })
+            ]]&gt;
+          &lt;/Write&gt;
+        &lt;/Operations&gt;
+      &lt;/Mapping&gt;
+    &lt;/Mappings&gt;
+&lt;/DataDef&gt;
+</code></pre><hr>
+<h1 id="installation">Installation</h1>
+<p>This requires that </p>
+<ol>
+<li>Microsoft .NET Framework 4.0 Servicepack 1 and</li>
+<li>Microsoft Visual C++ 2010 Redistributable Package</li>
+</ol>
+<p>are installed and available.</p>
+<p>XLAdapter or ExecutorCmdLineHost includes the following EXE and DLLs (date September 2012):</p>
+<ul>
+<li>AddressResolver.exe (19.456 Bytes)</li>
+<li>ExecutorCmdLineHost.exe (9.728 Bytes)</li>
+<li>BinaryDataEncoders.dll (5.120 Bytes)</li>
+<li>BinFileReaderWriter.dll (6.656 Bytes)</li>
+<li>DataDef.dll (30.208 Bytes)</li>
+<li>ExcelDataReader.dll (5.120 Bytes)</li>
+<li>ExcelReader.dll (13.312 Bytes)</li>
+<li>Executor.dll (14.336 Bytes)</li>
+<li>IMatrixReader.dll (10.752 Bytes)</li>
+<li>Interfaces.dll (8.192 Bytes)</li>
+<li>Ioc.dll (22.528 Bytes)</li>
+<li>LibNoDaveReaderWriter.dll (8.704 Bytes)</li>
+<li>LibXLNet.dll (49.664 Bytes)</li>
+<li>MatrixResolver.dll (9.728 Bytes)</li>
+<li>PLCHelpers.dll (16.896 Bytes)</li>
+<li>ResolverImpl.dll (14.848 Bytes)</li>
+<li>S7Converter.dll (17.408 Bytes)</li>
+</ul>
+<p>and these third-party components:</p>
+<ul>
+<li>CommandLine.dll (43.520 Bytes)</li>
+<li>libnodave.dll (126.976 Bytes)</li>
+<li>libnodave.net.dll (14.848 libnodave Bytes)</li>
+<li>libxl.dll (3.096.576 Bytes)</li>
+<li>log4net.dll (286.720 Bytes)</li>
+</ul>
+<p>These files can be copied to any directory and XLAdapter.exe or ExecutorCmdLineHost can then be started from there.</p>
+<h1 id="document-history">Document History</h1>
+<table><tr><th>Author </th><th> Date </th><th> Remarks</th></tr>
+<tr><td>Ralf Gedrat </td><td> September 2012 </td><td> Creation</td></tr>
+<tr><td>Karsten Gorkow </td><td> January 2016 </td><td> Minor Changes</td></tr>
+</table>
+            </article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/insite-gmbh/iDoc/blob/master/articles/XLAdapter.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a class="back-to-top" href="#top">Back to top</a>
+            </span>
+            
+            <span>Copyright © 2016 insite Ingenieurgesellschaft für Steuerungs- und Informationstechnik mbH
+          </span></div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

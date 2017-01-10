@@ -1,0 +1,494 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Software Specification </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Software Specification ">
+    <meta name="generator" content="docfx 2.8.2.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="text/javascript" href="../styles/encrypter.js">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        <a href="http://www.insite-gmbh.de" class="link-to-homepage" target="_blank" title="opens the website of insite in a new tab">
+            <img src="../images/whitefontlogo.png">
+        </a>        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+              <h1>Software Specification</h1>
+                
+
+<h1>IDAT - DataDef</h1>
+
+
+
+<p><strong>insite GmbH</strong></p>
+<hr>
+<h1 id="introduction">Introduction</h1>
+<p>The IDAT data definition is the heart of IDAT. All modules use this component to be able to handle the different structures, variables and mappings.</p>
+<hr>
+<h2 id="purpose-and-objective">Purpose and Objective</h2>
+<p>This module defines a serializable data structure that can map the PLC structures in XML, declare variables as well as define mappings and operations.</p>
+<hr>
+<h2 id="definitions-acronyms-abbreviations">Definitions, Acronyms, Abbreviations</h2>
+<ul>
+<li><strong>PLC:</strong> Programmable Logic Controller</li>
+<li><strong>SPS:</strong> Speicher Programmierbare Steuerung (German for PLC)</li>
+<li><strong>LibNoDave:</strong> A free library for the communication with a PLC</li>
+<li><strong>Data definition:</strong> A file that describes the structure and mapping of the data</li>
+<li><strong>Mapping:</strong> A variable is mapped to a defined data area</li>
+</ul>
+<hr>
+<h1 id="general-description">General Description</h1>
+<p>The special features and setting options of the software are described below. </p>
+<hr>
+<h2 id="system-environment">System Environment</h2>
+<p>The software is written with C&#35; Visual Studio 2010 for the Target framework .NET 4.0. </p>
+<p><img src="../images/warning_icon.png" alt="warning_icon.png">
+ .NET 4.5 is not used since it does not guarantee any compatibility with XP.</p>
+<hr>
+<h2 id="framework">Framework</h2>
+<p>The data definition is a main component of IDAT. It is serialised based on XML and transferred to an executor for execution.</p>
+<hr>
+<h1 id="structure">Structure</h1>
+<p>The example of an empty data definition is shown here. Such an empty definition also serves as a template for the AWLXMLConverter. The individual sections are described in detail below.</p>
+<pre><code class="lang-html">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;DataDef Endianness=&quot;Host-Endianess&quot; Encoding=&quot;Base16&quot; 
+         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; 
+         xmlns=&quot;http://www.insite-gmbh.de/IDAT/DataDef&quot; 
+         xsi:schemaLocation=&quot;http://www.insite-gmbh.de/IDAT/DataDef 
+                             TypeDefinition/DataDef.xsd&quot;&gt;
+  &lt;!--Const could use in the datadefinition --&gt;
+  &lt;Consts&gt;
+  &lt;/Consts&gt;
+  &lt;!-- Structs are the userdefined types --&gt;
+  &lt;Types&gt;
+  &lt;/Types&gt;
+  &lt;!-- declare the Values you want to use --&gt;
+  &lt;Vars&gt;
+  &lt;/Vars&gt;
+  &lt;!-- define the mapping and the operations on the values--&gt;
+  &lt;Mappings&gt;
+  &lt;/Mappings&gt;
+&lt;/DataDef&gt;
+</code></pre><p>Global Attributes:</p>
+<table><tr><th>Attribute </th><th> Description</th></tr>
+<tr><td>Endianess </td><td> Specifies the byte order of the binary data in the document.</td></tr>
+<tr><td>   </td><td> Possible values:</td></tr>
+<tr><td>   </td><td> - Host Endianess</td></tr>
+<tr><td>   </td><td> - LittleEndian</td></tr>
+<tr><td>   </td><td> - BigEndian</td></tr>
+<tr><td>Encoding </td><td> Specifies the encoding of the binary data in the document.</td></tr>
+<tr><td>   </td><td> Possible values:</td></tr>
+<tr><td>   </td><td> - Base16</td></tr>
+<tr><td>   </td><td> - Base32</td></tr>
+<tr><td>   </td><td> - Base64</td></tr>
+</table>
+
+
+
+<hr>
+<h2 id="consts">Consts</h2>
+<p>This section is used in order to perform replacements in the remaining document. Here is an example of the constant declaration</p>
+<pre><code class="lang-html">&lt;Consts&gt;
+    &lt;Const name=&quot;SetupFile&quot;&gt;execconf.xml&lt;/Const&gt;
+    &lt;Const name=&quot;ColumnBTBez&quot;&gt;1&lt;/Const&gt;
+    &lt;Const name=&quot;ColumnChannelNum&quot;&gt;2&lt;/Const&gt;
+    &lt;Const name=&quot;ColumnSlot&quot;&gt;4&lt;/Const&gt;
+&lt;/Consts&gt;
+</code></pre><p>Constants can also be nested, but before using it a constant must first have been declared. The following figure shows an example of this:</p>
+<pre><code class="lang-html">&lt;Const name=&quot;SetupFile&quot;&gt; execconf.xml&lt;/Const&gt;
+&lt;Const name=&quot;ExcelFile&quot;&gt;&lt;![CDATA[&gt;&lt;#SetupFile#//Setup/.../IDAT[@name=&#39;IDAT&#39;]/Excel]]&gt;
+&lt;/Const&gt;
+</code></pre><p>Here, the constant SetupFile is used in the constant ExcelFile for example. Before using a constant, it is necessary to enclose the constant name within hashes.  </p>
+<p>&#35;[NAME&#95;OF&#95;THE&#95;CONSTANT]&#35;</p>
+<p>As can be seen in the example above, the data of the constant ExcelFile is not defined here, but is only defined where the data can be found.<br> There are two options here:</p>
+<table><tr><th>Character </th><th> Description</th></tr>
+<tr><td>@ </td><td> Reading the data from Excel</td></tr>
+<tr><td>&#62;&#60; </td><td> Reading the data via XPath</td></tr>
+</table>
+
+
+
+
+
+<p>Constants can be used with the following elements:  </p>
+<p><strong>Mapping:</strong> name, var, active, source, selector, offset;  </p>
+<p><strong>Read/Write:</strong> name, var, active, Value;  </p>
+<hr>
+<h2 id="types">Types</h2>
+<p>This section is filled by the Tool AWLXMLConverter and contains the definitions of the data blocks. </p>
+<pre><code class="lang-html">&lt;Types&gt;
+    &lt;Struct name=&quot;UDT_IDATInterface&quot;&gt;
+        &lt;Struct name=&quot;PLCtoIDAT&quot;&gt;
+            &lt;Var name=&quot;WriteEnable&quot; type=&quot;BOOL&quot; /&gt;
+        &lt;/Struct&gt;
+        &lt;Struct name=&quot;IDATtoPLC&quot;&gt;
+            &lt;Var name=&quot;DataWritten&quot; type=&quot;BOOL&quot; /&gt;
+        &lt;/Struct&gt;
+        &lt;Var name=&quot;CurrentTimeFromPLC&quot; type=&quot;DATE_AND_TIME&quot; /&gt;
+        &lt;Var name=&quot;LastWriteTimeFromIDAT&quot; type=&quot;DATE_AND_TIME&quot; /&gt;
+        &lt;Var name=&quot;TimeToCopyFromXLS&quot; type=&quot;DATE_AND_TIME&quot; /&gt;
+        &lt;Var name=&quot;MonrToCopyFromXLS&quot; type=&quot;STRING&quot; length=&quot;8&quot; /&gt;
+        &lt;Var name=&quot;CopyNowFromXLS&quot; type=&quot;BOOL&quot; /&gt;
+    &lt;/Struct&gt;
+    &lt;Struct name=&quot;UDT_Programm_PGS&quot;&gt;
+        &lt;Struct name=&quot;Bauteil&quot; countItems=&quot;20&quot;&gt;
+            &lt;Var name=&quot;Bauteilbez&quot; type=&quot;STRING&quot; length=&quot;60&quot; /&gt;
+            &lt;Var name=&quot;Kanal_Nr&quot; type=&quot;INT&quot; /&gt;
+            &lt;Var name=&quot;steckplatz&quot; type=&quot;INT&quot; /&gt;
+            &lt;Var name=&quot;Schraubreihenfolge&quot; type=&quot;INT&quot; /&gt;
+            &lt;Var name=&quot;SF&quot; type=&quot;INT&quot; /&gt;
+            &lt;Var name=&quot;Loeseschraubfall&quot; type=&quot;INT&quot; /&gt;
+            &lt;Struct name=&quot;Programm&quot; countItems=&quot;64&quot;&gt;
+                &lt;Var name=&quot;Prg_Name&quot; type=&quot;CHAR&quot; countItems=&quot;2&quot; /&gt;
+                &lt;Var name=&quot;Anz_verschr&quot; type=&quot;INT&quot; /&gt;
+            &lt;/Struct&gt;
+        &lt;/Struct&gt;
+    &lt;/Struct&gt;
+    &lt;Struct name=&quot;DB_IDAT_PGSData&quot;&gt;
+        &lt;Struct name=&quot;Bst&quot; countItems=&quot;6&quot;&gt;
+        &lt;Var name=&quot;Bez&quot; type=&quot;STRING&quot; length=&quot;8&quot; /&gt;
+        &lt;Var name=&quot;Aktiv&quot; type=&quot;BOOL&quot; /&gt;
+        &lt;Var name=&quot;Ablauf&quot; type=&quot;UDT_Programm_PGS&quot; /&gt;
+        &lt;/Struct&gt;
+    &lt;/Struct&gt;
+&lt;/Types&gt;
+</code></pre><p>There are 2 elements in this section:</p>
+<hr>
+<h3 id="struct">Struct</h3>
+<p>A structure can also have sub-elements. It is possible to declare structures below structures or assign structures simply to another structure, which requires using a Var, as this examples shows:</p>
+<pre><code class="lang-html">&lt;Struct name=&quot;UDT_Funktionsgruppe&quot;&gt;
+    &lt;Var name=&quot;Ueberschrift&quot; type=&quot;STRING&quot; length=&quot;20&quot; /&gt;
+&lt;/Struct&gt;
+
+&lt;Struct name=&quot;Funktionsgruppe&quot; countItems=&quot;19&quot;&gt;
+    &lt;Var name=&quot;FG&quot; type=&quot;UDT_Funktionsgruppe&quot; /&gt;
+&lt;/Struct&gt;
+</code></pre><p>The Struct element has the following attributes:</p>
+<table><tr><th>Attribute </th><th> Description</th></tr>
+<tr><td>name </td><td> Name of the structure</td></tr>
+<tr><td>description </td><td> Description of the structure</td></tr>
+<tr><td>countItems </td><td> An array of this structure can be declared with this. Firstly, the</td></tr>
+<tr><td>   </td><td> number of items can be specified, and secondly, an area as well</td></tr>
+<tr><td>   </td><td> (e.g.: 2..4). It is also possible to use several dimensions</td></tr>
+<tr><td>   </td><td> (e.g. 0..3,0..2)</td></tr>
+</table>
+
+
+
+
+
+<hr>
+<h3 id="var">Var</h3>
+<p><img src="../images/warning_icon.png" alt="warning_icon.png">
+ Var is a leaf element, i.e. no element can be below Var.</p>
+<p>Therefore, this is a valid definition:</p>
+<pre><code class="lang-html">&lt;Struct name=&quot;UDT_Stat_Uebersicht_RF&quot;&gt;
+    &lt;Var name=&quot;Name_RF300&quot; type=&quot;STRING&quot; length=&quot;4&quot; /&gt;
+&lt;/Struct&gt;
+</code></pre><p>But this <strong>NOT</strong> a valid definition:</p>
+<pre><code class="lang-html">&lt;Struct name=&quot;UDT_Stat_Uebersicht_RF&quot;&gt;
+    &lt;Var name=&quot;Name_RF300&quot; type=&quot;STRING&quot; length=&quot;4&quot; &gt;
+        &lt;Var name=&quot;lesen_aktiv&quot; type=&quot;BOOL&quot; /&gt;
+    &lt;/Var&gt;
+&lt;/Struct&gt;
+</code></pre><p>The Var element has the following attributes:</p>
+<table><tr><th>Attribute </th><th> Description</th></tr>
+<tr><td>name </td><td> Name of the structure</td></tr>
+<tr><td>type </td><td> Description of the structure</td></tr>
+<tr><td>length </td><td> This information is used for the String data type</td></tr>
+<tr><td>   </td><td> in order to specify its length.</td></tr>
+<tr><td>countItems </td><td> An array of this structure can be declared with this. Firstly, the</td></tr>
+<tr><td>   </td><td> number of items can be specified, and secondly, an area aswell</td></tr>
+<tr><td>   </td><td> (e.g.: 2..4). It is also possible to use several dimensions</td></tr>
+<tr><td>   </td><td> (e.g. 0..3,0..2)</td></tr>
+</table>
+
+
+
+<hr>
+<h2 id="vars">Vars</h2>
+<p>In this section variables are declared that are elements of the type of element that are declared in Types. These variables can then be used in the mappings.</p>
+<pre><code class="lang-html">&lt;Vars&gt;
+    &lt;Var name=&quot;DB_Ergebnis_BST1&quot; type=&quot;STRUCT_DB_Ergebnis_BST1&quot; 
+         countItems=&quot;0..3,0..2&quot; /&gt;
+    &lt;Var name=&quot;DB_Ergebnis_BST2&quot; type=&quot;DB_BST1_Tel_Material_Anf&quot; /&gt;
+    &lt;Var name=&quot;ASimpleInt&quot; type=&quot;INT&quot; countItems=&quot;3&quot;/&gt;
+    &lt;Var name=&quot;TestBinData&quot; type=&quot;BinDat&quot;/&gt;
+&lt;/Vars&gt;
+</code></pre><p>As can be seen in the example, these variables all have attributes and characteristics of variables in Types and thus will not be elaborated in more detail here.</p>
+<hr>
+<h2 id="mappings">Mappings</h2>
+<p>Variables can be mapped to different areas and operations can then be executed via the Mappings.</p>
+<p>The example below shows two Mappings with multiple operations.  </p>
+<pre><code class="lang-html">&lt;Mappings&gt;
+    &lt;Mapping name=&quot;Test&quot; var=&quot;SchraubPara&quot; source=&quot;OPCReaderWriter&quot; selector=&quot;400&quot;
+             offset=&quot;40&quot; type=&quot;BinaryFile&quot; active=&quot;#If.WriteEnabled#&quot; &gt;
+        &lt;Filters&gt;
+        &lt;/Filters&gt;
+        &lt;Operations&gt;
+            &lt;Read name=&quot;NameBST1&quot; var=&quot;Bst[1].Bez&quot; preex=&quot;true&quot;/&gt;
+            &lt;Read name=&quot;AktivBST1&quot; var=&quot;this[1].Aktiv&quot; preex=&quot;true&quot;/&gt;
+
+            &lt;Write var=&quot;Bst[1].Ablauf&quot; active=&quot;#AktivBST1#&quot;&gt;   
+                &lt;![CDATA[@ExcelTestdaten.xlsx
+                 !Data
+                 !C&quot;#NameBST1#&quot;R&quot;#NameBST1#&quot;
+                 #ExcelSelection#]]&gt;
+            &lt;/Write&gt;
+
+        &lt;/Operations&gt;
+    &lt;/Mapping&gt;
+    &lt;Mapping name=&quot;If&quot; var=&quot;IDATIf&quot; source=&quot;OPCReaderWriter&quot; selector=&quot;400&quot;
+             offset=&quot;0&quot; type=&quot;BinaryFile&quot; aktive=&quot;true&quot; &gt;
+        &lt;Operations&gt;
+            &lt;Read name=&quot;WriteEnabled&quot; var=&quot;PLCtoIDAT.WriteEnable&quot; preex=&quot;true&quot; /&gt;
+        &lt;/Operations&gt;
+    &lt;/Mapping&gt;
+&lt;/Mappings&gt;
+</code></pre><p>The Mapping element has the following attributes:</p>
+<table><tr><th>Attribute </th><th> Description</th></tr>
+<tr><td>name </td><td> The name of the Mapping can be assigned to the Mapping in</td></tr>
+<tr><td>   </td><td> further Mappings using this name (as can be seen in the</td></tr>
+<tr><td>   </td><td> first Mapping on the active Attribute)</td></tr>
+<tr><td>var </td><td> A variable declared in Vars is entered here</td></tr>
+<tr><td>source </td><td> Specifies the BinaryReaderWriter to be used</td></tr>
+<tr><td>selector </td><td> See documentation on BinaryReaderWriters</td></tr>
+<tr><td>offset </td><td> See documentation on BinaryReaderWriters</td></tr>
+<tr><td>type </td><td> The type of underlying data</td></tr>
+<tr><td>active </td><td> A Mapping can be deactivated using this variable</td></tr>
+</table>
+
+
+
+
+
+<p>A Mapping can contain two sub-elements.</p>
+<hr>
+<h3 id="filters">Filters</h3>
+<p>Filters can be declared for write operations. A filtered variable is not rewritten. The example below shows that the entire variable is read and everything is also rewritten with the exception of the Safety&#95;Checksum sub-variable.</p>
+<pre><code class="lang-html">&lt;Mappings&gt;
+    &lt;Mapping name=&quot;Opt&quot; var=&quot;Options&quot; source=&quot;OPCReaderWriter&quot; selector=&quot;251&quot; 
+             offset=&quot;0&quot; type=&quot;BinaryFile&quot; active=&quot;true&quot;&gt;
+        &lt;Filters&gt;
+            &lt;Filter var=&quot;Safety_Checksum&quot; /&gt;
+        &lt;/Filters&gt;
+        &lt;Operations&gt;
+            &lt;Read/&gt;
+            &lt;Write/&gt;
+        &lt;/Operations&gt;
+   &lt;/Mapping&gt;
+&lt;/Mappings&gt;
+</code></pre><hr>
+<h3 id="operations">Operations</h3>
+<p>Operations are executed by the Executor. There are two types of operations, which are described in the two subsections below.</p>
+<hr>
+<h4 id="read">Read</h4>
+<p>The following options are available for the declaration of a Read Operation.</p>
+<pre><code class="lang-html">&lt;Mapping name=&quot;Opt&quot; var=&quot;Options&quot; ... &gt;
+    &lt;Operations&gt;
+        &lt;Read/&gt;
+        &lt;Read var=&quot;this&quot;/&gt;
+        &lt;Read var=&quot;Safety_Checksum&quot;/&gt;
+        &lt;Read var=&quot;this.Safety_Checksum&quot;/&gt;
+        &lt;Read var=&quot;AP&quot;/&gt;
+        &lt;Read var=&quot;this.AP&quot;/&gt;
+        &lt;Read var=&quot;AP.virtuell&quot;/&gt;
+    &lt;/Operations&gt;
+&lt;/Mapping&gt;
+</code></pre><p>An empty Read Operation always refers to the variable specified in var. The same applies to this. If just individual sub-variables are to be read from the Mapping variable, then a separate Read Operation can be specified for each variable.</p>
+<p>After the read operation has been performed, the ReadElement is extended by a data node with the data that was read, as can be seen in the figure below.</p>
+<pre><code class="lang-html">&lt;Mapping name=&quot;Opt&quot; var=&quot;Options&quot; source=&quot;OPCReaderWriter&quot; selector=&quot;251&quot; 
+         type=&quot;BinaryFile&quot;&gt;
+    &lt;Filters&gt;
+        &lt;Filter var=&quot;Safety_Checksum&quot; /&gt;
+    &lt;/Filters&gt;
+    &lt;Operations&gt;
+        &lt;Read&gt;
+            &lt;Data&gt;0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000000000000000000000000000000000000000000000000000000000000000
+            0000&lt;/Data&gt;
+        &lt;/Read&gt;
+    &lt;/Operations&gt;
+&lt;/Mapping&gt;
+</code></pre><p>The Attributes of a Read Operation are:</p>
+<table><tr><th>Attribute </th><th> Description</th></tr>
+<tr><td>name </td><td> If these variables are to be used as a preexecutor variable, a</td></tr>
+<tr><td>   </td><td> name must be specified (For Preexecutor see ???)</td></tr>
+<tr><td>var </td><td> A variable declared in Vars is entered here</td></tr>
+<tr><td>active </td><td> Specifies whether the variable is active or not</td></tr>
+<tr><td>preex </td><td> If this option is set to true, then you can use this variable as a</td></tr>
+<tr><td>   </td><td> constant (Attention: This is only possible with Read!!! If the preex</td></tr>
+<tr><td>   </td><td> is set for Write, no writing is performed)</td></tr>
+</table>
+
+
+
+<hr>
+<h4 id="write">Write</h4>
+<p>The same declaration rules apply to the Write Operation as with the Read Operation, except that there is no preexecutor and the value to be written is not included in the Data Element. The next figure shows what a Write Operation looks like.</p>
+<pre><code class="lang-html">&lt;Mapping name=&quot;DB_Ergebnis_BST1[0]&quot; var=&quot;DB_Ergebnis_BST1&quot; ... &gt;
+
+    &lt;Operations&gt;
+        &lt;Write&gt;
+            0A0B0C0D0E0F1122334455667788998877665544332211AABBCCDDEEFF
+        &lt;/Write&gt;
+        &lt;Write var=&quot;Ergebnis.Ges_Ergebnis.ABGW&quot;&gt;01&lt;/Write&gt;
+        &lt;Write var=&quot;Ergebnis.Ges_Ergebnis.SIO&quot;&gt;01&lt;/Write&gt;
+        &lt;Write var=&quot;Ergebnis.Ges_Ergebnis.HIO&quot;&gt;01&lt;/Write&gt;
+        &lt;Write var=&quot;Ergebnis.Ges_Ergebnis.ZIO&quot;&gt;01&lt;/Write&gt;
+    &lt;/Operations&gt;
+
+&lt;/Mapping&gt;
+</code></pre><p>In the Write operations, an external source can also be specified. This is introduced by the @ sign. An example can be seen here:</p>
+<pre><code class="lang-html">&lt;Write var=&quot;Ablauf&quot; active=&quot;#AktivBST4#&quot;&gt;   
+    &lt;![CDATA[@ExcelTestdaten.xlsx
+     !Data
+     !C&quot;#NameBST4#&quot;R&quot;#NameBST4#&quot;
+     #ExcelSelection#]]&gt;
+&lt;/Write&gt;
+</code></pre><p>For further details on external Excel data, please refer to the documentation of Matrix.</p>
+<hr>
+<h1 id="execution">Execution</h1>
+<p>A data definition is transferred to the Executor, which performs the execution as follows.</p>
+<hr>
+<h2 id="read-in-constants">Read in constants</h2>
+<p>If a constant refers to an external source, this is read in.</p>
+<hr>
+<h2 id="resolving-variablesconstants">Resolving Variables/Constants</h2>
+<p>A replacement of the constants with the values is executed.</p>
+<p>e.g.: Value=&#35;Name&#35;  --&gt;  Value=Test </p>
+<p>There are two special variants:</p>
+<hr>
+<h3 id="raw">RAW</h3>
+<p>A preex variable can be used to write a value, which must be prefixed by the qualifier RAW.</p>
+<p>e.g.: Value=&#35;(RAW)ReadedBoolVal&#35;  --&gt;  Value=01 </p>
+<hr>
+<h3 id="">?</h3>
+<p>A compare operation.</p>
+<p>e.g.: active=&quot;&#35;(?)CurrentErrorCode==0&#35;&quot;  --&gt;  if the CurrentErrorCode equals 0</p>
+<p>Please note that only ==(is equal) and !=(is not equal) are supported at present</p>
+<hr>
+<h2 id="perform-preexecutor">Perform preexecutor</h2>
+<p>The first read cycle is performed, and at the same time, all variables that have set the attribute preex to true are read in.</p>
+<hr>
+<h2 id="resolve-preexecutor">Resolve preexecutor</h2>
+<p>The values of the preex variables are added to the remaining attributes marked by &#35;Variable&#35;.</p>
+<hr>
+<h2 id="perform-readwrite-operations">Perform Read/Write operations</h2>
+<p>The write operations are first performed and then the read operations.  </p>
+<p>The read operation, in turn, intrinsically has the following sequence:</p>
+<p>This means, that after reading, the written data is reread and verified.</p>
+<hr>
+<h1 id="installation">Installation</h1>
+<p>This requires that </p>
+<ol>
+<li>Microsoft .NET Framework 4.0 Servicepack 1 and</li>
+<li>Microsoft Visual C++ 2010 Redistributable Package</li>
+</ol>
+<p>are installed and available on the destination system under Windows.</p>
+<hr>
+<h1 id="change-directory">Change directory</h1>
+<table><tr><th>Author </th><th> Date </th><th> Remarks</th></tr>
+<tr><td>Benjamin Prömmer </td><td> January 2013 </td><td> Creation</td></tr>
+<tr><td>Ralf Gedrat </td><td> January 2013 </td><td> Brief editing</td></tr>
+<tr><td>Benjamin Prömmer </td><td> July/August 2013 </td><td> Resolving the extension of</td></tr>
+<tr><td>   </td><td>    </td><td> variables/constants</td></tr>
+</table>
+            </article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/insite-gmbh/iDoc/blob/master/articles/IDAT_DataDef.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a class="back-to-top" href="#top">Back to top</a>
+            </span>
+            
+            <span>Copyright © 2016 insite Ingenieurgesellschaft für Steuerungs- und Informationstechnik mbH
+          </span></div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

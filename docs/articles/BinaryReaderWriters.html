@@ -1,0 +1,731 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Software Specification </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Software Specification ">
+    <meta name="generator" content="docfx 2.8.2.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="text/javascript" href="../styles/encrypter.js">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        <a href="http://www.insite-gmbh.de" class="link-to-homepage" target="_blank" title="opens the website of insite in a new tab">
+            <img src="../images/whitefontlogo.png">
+        </a>        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+              <h1>Software Specification</h1>
+                
+
+<h1>BinaryReaderWriters</h1>
+
+
+
+<p><strong>insite GmbH</strong></p>
+<hr>
+<h1 id="introduction">Introduction</h1>
+<p>A BinaryReaderWriter is a software component which is part of the IDAT systems and is used for reading and writing data. There are various versions of such BinaryReaderWriters, such as for reading and writing from PLC, files or data definitions.</p>
+<hr>
+<h2 id="purpose-and-objective">Purpose and Objective</h2>
+<p>A BinaryReaderWriter is an interchangeable component. Depending on which technology or target should be written or read, a selection can be made without making changes to the code. This also facilitates the support of future technologies and media, since only a new BinaryReaderWriter needs to be created without having to intervene in existing applications.</p>
+<hr>
+<h2 id="definitions-acronyms-abbreviations">Definitions, acronyms, abbreviations</h2>
+<ul>
+<li><strong>PLC:</strong> Programmable Logic Controller</li>
+<li><strong>SPS:</strong> Speicher Programmierbare Steuerung (german for PLC)</li>
+<li><strong>LibNoDave:</strong> Free library for the communication with a PLC</li>
+<li><strong>ODK:</strong> Simatic WinAC Open Development Kit</li>
+<li><strong>Data Definition:</strong> Is a file that describes the structure and mapping of the data</li>
+<li><strong>Mapping:</strong> A variable is mapped to a defined data area</li>
+<li><strong>IoC:</strong> Inversion of control</li>
+</ul>
+<hr>
+<h1 id="general-description">General Description</h1>
+<p>The special features and setting options of the components are described below. </p>
+<hr>
+<h2 id="system-environment">System Environment</h2>
+<p>The software is written with C&#35; Visual Studio 2010 for the Target framework .NET 4.0.  </p>
+<p><img src="../images/warning_icon.png" alt="warning_icon.png">
+ .NET 4.5 is not used since it does not guarantee any compatibility with XP.</p>
+<hr>
+<h2 id="framework">Framework</h2>
+<p>The BinaryReaderWriters are a part of IDAT, and are also configured using the IoC components of IDAT. (For more details, please refer to the chapter <a href="#Configuration5">Configuration</a>)</p>
+<hr>
+<h1 id="binaryreaderwriters">BinaryReaderWriters</h1>
+<p>The following section examines the currently existing BinaryReaderWriters and points out the options and configurations.</p>
+<p>All BinaryReaderWriters are linked to the application of the following interface:</p>
+<pre><code class="lang-javascript">.Interfaces
+{
+    public class BinaryDataRef
+    {
+        public string Selector { get; set; }
+        public string Offset { get; set; }
+        public string Length { get; set; }
+        public string BitNumber { get; set; }
+        public override string ToString()
+        {
+            return String.Format(&quot;{0} (sel={1}, off={2}, len={3}, bit#={4})&quot;, 
+                base.ToString(), Selector, Offset, Length, BitNumber);
+        }
+    }
+
+    public class DataChangedEvent : EventArgs
+    {
+        public BinaryDataRef DataRef { get; set; }
+        public byte[] Data { get; set; }
+    }
+
+    public interface BinaryReaderWriter
+    {
+        event EventHandler&lt;DataChangedEvent&gt; DataChanged;
+
+        bool Connected { get; }
+
+        void Init(string initString);
+        void Connect(string connectionString);
+        void Disconnect();
+        byte[] Read(BinaryDataRef dataRef);
+        void Write(BinaryDataRef dataRef, byte[] data);
+        void Subscribe(BinaryDataRef dataRef);
+        void Unsubscribe(BinaryDataRef dataRef);
+    }
+}
+</code></pre><hr>
+<h2 id="binfilereaderwriter">BinFileReaderWriter</h2>
+<p>This BinaryReaderWriter is used to read and write files in binary format.</p>
+<hr>
+<h3 id="method-parameter">Method Parameter</h3>
+<hr>
+<h4 id="init">Init</h4>
+<p>The parameter of these methods is not used with this component.</p>
+<hr>
+<h4 id="connect">Connect</h4>
+<p>The parameter of these methods is not used with this component.</p>
+<hr>
+<h4 id="readwrite">Read/Write</h4>
+<p>BinaryDataRef datRef:  </p>
+<table><tr><th>Property </th><th> Description</th></tr>
+<tr><td>Selector </td><td> File name and path</td></tr>
+<tr><td>Offset </td><td> Offset in the file from which reading/writing is to be performed</td></tr>
+<tr><td>Length </td><td> Length of the data in bytes that should be read/written</td></tr>
+<tr><td>BitNumber </td><td> Bit number whose status is to be determined in the specified area</td></tr>
+<tr><td>   </td><td> (e.g. Offset=0, Length=2, BitNumber=8  --&gt;  Bit 1.0 )</td></tr>
+</table>
+
+
+
+<p>%latexverttaableend
+Byte[] data:</p>
+<p>Contains the data to be written. If a bit number is specified, only the state of the byte is evaluated, i.e. if any byte is &#60;&#62; 0, then the state is true.</p>
+<hr>
+<h3 id="configuration">Configuration</h3>
+<p>No further configuration parameters are necessary. It is sufficient to use the default implementation:</p>
+<pre><code class="lang-html">&lt;BinaryReaderWriter name=&quot;BinFileReaderWriter&quot;&gt;
+&lt;/BinaryReaderWriter&gt;
+</code></pre><hr>
+<h3 id="additional-dependencies">Additional Dependencies</h3>
+<table><tr><th>Assembly </th><th> Manufacturer</th></tr>
+<tr><td>log4net.dll </td><td> the Apache Software Foundation</td></tr>
+</table>
+
+
+
+<hr>
+<h2 id="datadefreaderwriter">DataDefReaderWriter</h2>
+<p>This BinaryReaderWriter is used to read and write data definitions. (For details, see Data Definitions section)</p>
+<hr>
+<h3 id="method-parameter-1">Method Parameter</h3>
+<hr>
+<h4 id="init-1">Init</h4>
+<p>The parameter of these methods is not used with this component.</p>
+<hr>
+<h4 id="connect-1">Connect</h4>
+<p>The parameter of this method is provided by the configuration and is an XML node. It configures the following properties:  </p>
+<table><tr><th>Property </th><th> Description</th></tr>
+<tr><td>Files </td><td> Contains all data definition files that can be read or written</td></tr>
+<tr><td>OutPath </td><td> Contains the path where the written file is saved</td></tr>
+<tr><td>PostFix </td><td> Specifies the text placed behind written data. E.G.: &quot;.out.xml&quot;</td></tr>
+<tr><td>BulkWrite </td><td> Specifies that an Out file is first written if another Out file is to be</td></tr>
+<tr><td>   </td><td> processed, if an error occurs or if Disconnect is called (Default: true)</td></tr>
+</table>
+
+
+
+<hr>
+<h4 id="readwrite-1">Read/Write</h4>
+<p>BinaryDataRef dataRef:  </p>
+<table><tr><th>Property </th><th> Description</th></tr>
+<tr><td>Selector </td><td> Selector of the target mapping</td></tr>
+<tr><td>Offset </td><td> Offset in the mapping of the data definition</td></tr>
+<tr><td>Length </td><td> Length of the data in bytes that should be read/written</td></tr>
+<tr><td>BitNumber </td><td> Bit number whose status is to be determined in the specified area</td></tr>
+<tr><td>   </td><td> (e.g. Offset=0, Length=2, BitNumber=8  --&gt;  Bit 1.0)</td></tr>
+</table>
+
+
+
+
+<p>Byte[] data:</p>
+<p>Contains the data to be written. If a bit number is specified, only the state of the byte is evaluated, i.e. if any byte is &#60;&#62; 0, then the state is true.</p>
+<hr>
+<h3 id="configuration-1">Configuration</h3>
+<pre><code class="lang-html">&lt;BinaryReaderWriter name=&quot;DataDefReaderWriter&quot;&gt;
+  &lt;File&gt;&lt;![CDATA[&gt;&lt;..\Dat\Konfig\PLCDataManagerConfig.xml//Setup/Instances/
+  PLCDataManagers/PLCDataManager[@name=&#39;PLCDataManager&#39;]/DefPaths;..\Dat\
+  Konfig\PLCDataManagerConfig.xml//Setup/Instances/PLCDataManagers/PLCDataManager
+  [@name=&#39;PLCDataManager&#39;]/DefPathsAuto]]&gt;&lt;/File&gt; &lt;OutPath&gt;&lt;![CDATA[&gt;&lt;..\Dat\Konfig\
+  PLCDataManagerConfig.xml//Setup/Instances/PLCDataManagers/PLCDataManager
+  [@name=&#39;PLCDataManager&#39;]/OutPaths]]&gt;&lt;/OutPath&gt;
+  &lt;PostFix&gt;.out.xml&lt;/PostFix&gt;
+  &lt;BulkWrite&gt;true&lt;/BulkWrite&gt;
+&lt;/BinaryReaderWriter&gt;
+</code></pre><table><tr><th>Variable </th><th> Description</th></tr>
+<tr><td>File </td><td> The file definitions are specified here. There are several options here:</td></tr>
+<tr><td>   </td><td> 1. Specification of the file name separated by a semicolon</td></tr>
+<tr><td>   </td><td> 2. Specification of paths to the data definitions separated by a</td></tr>
+<tr><td>   </td><td> semicolon</td></tr>
+<tr><td>   </td><td> 3. Speecification of an XPath entry that regers to another entry.</td></tr>
+<tr><td>   </td><td> Introduction of XPath is indicated by &#62;&#60;</td></tr>
+</table>
+
+
+
+
+
+<hr>
+<h3 id="additional-dependencies-1">Additional Dependencies</h3>
+<table><tr><th>Assembly </th><th> Manufacturer</th></tr>
+<tr><td>ResolverImpl.dll </td><td> insite GmbH</td></tr>
+<tr><td>log4net.dll </td><td> The Apache Software Foundation</td></tr>
+</table>
+
+
+
+
+
+<hr>
+<h2 id="libnodavereaderwriter">LibNoDaveReaderWriter</h2>
+<p>This BinaryReaderWriter is used to read and write PLC data. </p>
+<p>LibNoDave is a library that provides the necessary functions for connecting and exchanging data of a Siemens S7 300/400 PLC and other types.</p>
+<hr>
+<h3 id="method-parameter-2">Method Parameter</h3>
+<hr>
+<h4 id="init-2">Init</h4>
+<p>The parameter of these methods is not used with this component.</p>
+<hr>
+<h4 id="connect-2">Connect</h4>
+<p>The parameter of this method is provided by the configuration and is an XML node. It configures the following properties:  </p>
+<table><tr><th>Property </th><th> Description</th></tr>
+<tr><td>IP </td><td> IP address of the control (Default= 127.0.0.1)</td></tr>
+<tr><td>Port </td><td> Access port of the control (Default=102)</td></tr>
+<tr><td>Rack </td><td> Rack number (Default=0)</td></tr>
+<tr><td>Slot </td><td> Slot (Default=2)</td></tr>
+</table>
+
+
+
+
+
+<hr>
+<h4 id="readwrite-2">Read/Write</h4>
+<p>BinaryDataRef dataRef:  </p>
+<table><tr><th>Property </th><th> Description</th></tr>
+<tr><td>Selector </td><td> Selector of the target mapping</td></tr>
+<tr><td>Offset </td><td> Offset in the mapping of the data definition</td></tr>
+<tr><td>Length </td><td> Length of the data in bytes that should be read/written</td></tr>
+<tr><td>BitNumber </td><td> Bit number whose status is to be determined in the specified area</td></tr>
+<tr><td>   </td><td> (e.g. Offset=0, Length=2, BitNumber=8  --&gt;  Bit 1.0 )</td></tr>
+</table>
+
+
+
+
+<p>Byte[] data:</p>
+<p>Contains the data to be written. If a bit number is specified, only the state of the byte is evaluated, i.e. if any byte is &#60;&#62; 0, then the state is true.</p>
+<hr>
+<h3 id="configuration-2">Configuration</h3>
+<pre><code class="lang-html">&lt;BinaryReaderWriter name=&quot;LibNoDaveReaderWriter&quot;&gt;
+    &lt;IP&gt;127.0.0.1&lt;/IP&gt;
+    &lt;Port&gt;102&lt;/Port&gt;
+    &lt;Rack&gt;0&lt;/Rack&gt;
+    &lt;Slot&gt;2&lt;/Slot&gt;
+&lt;/BinaryReaderWriter&gt;
+</code></pre><p>For details on the parameters, see Connect  </p>
+<hr>
+<h3 id="additional-dependencies-2">Additional Dependencies</h3>
+<table><tr><th>Assembly </th><th> Manufacturer</th></tr>
+<tr><td>libnodave.dll </td><td>   </td></tr>
+<tr><td>libnodave.net.dll </td><td>   </td></tr>
+<tr><td>log4net.dll </td><td> The Apache Software Foundation</td></tr>
+</table>
+
+
+
+
+
+<hr>
+<h2 id="odkccxreaderwriter">ODKCCXReaderWriter</h2>
+<p>This BinaryReaderWriter is used to read and write PLC data.</p>
+<p>The new WinAC option Open Development Kit (ODK) allows all resources of the PC to be used flexibly from the control program via three different interfaces in order to extend the PLC functionality to a high level of performance.</p>
+<hr>
+<h3 id="method-parameter-3">Method Parameter</h3>
+<hr>
+<h4 id="init-3">Init</h4>
+<p>The parameter of these methods is not used with this component.</p>
+<hr>
+<h4 id="connect-3">Connect</h4>
+<p>By calling this method, the system checks whether the Shared Memory was already created, the parameter is not necessary. (For details, see Additional Dependencies.)</p>
+<hr>
+<h4 id="readwrite-3">Read/Write</h4>
+<p>BinaryDataRef dataRef:  </p>
+<table><tr><th>Property </th><th> Description</th></tr>
+<tr><td>Selector </td><td> Selector of the target mapping</td></tr>
+<tr><td>Offset </td><td> Offset in the mapping of the data definition</td></tr>
+<tr><td>Length </td><td> Length of the data in bytes that should be read/written</td></tr>
+<tr><td>BitNumber </td><td> Bit number whose status is to be determined in the specified area</td></tr>
+<tr><td>   </td><td> (e.g. Offset=0, Length=2, BitNumber=8 -&#62; Bit 1.0 )</td></tr>
+</table>
+
+
+
+
+<p>Byte[] data:</p>
+<p>Contains the data to be written. If a bit number is specified, only the state of the byte is evaluated, i.e. if any byte is &#60;&#62; 0, then the state is true.</p>
+<hr>
+<h3 id="configuration-3">Configuration</h3>
+<p><a name="Configuration5"></a></p>
+<pre><code class="lang-html">&lt;BinaryReaderWriter name=&quot;ODKCCXReaderWriter&quot;&gt;
+&lt;/BinaryReaderWriter&gt;
+</code></pre><p>No further configuration is necessary here. (For further details, see Additional Dependencies.)</p>
+<hr>
+<h3 id="additional-dependencies-3">Additional Dependencies</h3>
+<table><tr><th>Assembly </th><th> Manufacturer</th></tr>
+<tr><td>ODKCCXLib&#95;CS.dll </td><td> insite GmbH</td></tr>
+<tr><td>SMHeapManager.dll </td><td> insite GmbH</td></tr>
+<tr><td>ODKCCXLib.dll </td><td> insite GmbH</td></tr>
+<tr><td>log4net.dll </td><td> The Apache Software Foundation</td></tr>
+</table>
+
+
+
+
+<p>Before ODKCCXReaderWriter can be used, additional components must be configured and installed.</p>
+<hr>
+<h4 id="registration-of-the-components">Registration of the Components</h4>
+<p>The file ODKCCXLib.dll must be saved in the Windows\System32 directory.</p>
+<p>Registration of the ODKCCXLib&#95;CS.dll in order to be controlled by PLC.  </p>
+<p>regasm.exe ODKCCXLib&#95;CS.dll /codebase  </p>
+<p>Entry of the Dlls in the Global Assembly Cache in order to use the serialisation from different directories.  </p>
+<p>gacutil.exe -i ODKCCXLib&#95;CS.dll  </p>
+<p>gacutil.exe -i SMHeapManager.dll  </p>
+<hr>
+<h4 id="configuration-and-programming-in-the-plc">Configuration and Programming in the PLC</h4>
+<p>An implementation must be performed in the PLC in order to use the ODKBinaryReaderWriter.</p>
+<hr>
+<h5 id="system-function-blocks">System Function Blocks</h5>
+<table><tr><th>Block </th><th> Name </th><th> Description</th></tr>
+<tr><td>SFB65001 </td><td> CREA&#95;COM </td><td> Loads the Dll. Must be called at the start</td></tr>
+<tr><td>SFB65002 </td><td> ASYN&#95;COM </td><td> Must be called cyclically in order to process</td></tr>
+<tr><td>   </td><td>    </td><td>  the read and write commands</td></tr>
+</table>
+
+
+
+<hr>
+<h5 id="example-blocks">Example Blocks</h5>
+<p>An example implementation is shown here.</p>
+<hr>
+<h5 id="data-block-for-configuration">Data Block for Configuration</h5>
+<pre><code class="lang-javascript">CXKonfig&quot;
+TITLE =
+VERSION : 0.1
+
+
+  STRUCT    
+   CREA_COM_STAT : WORD ;   
+   EXEC_COM_STAT : WORD ;   
+   ASYN_COM_STAT : WORD ;   
+   ASYN_BUSY : BOOL ;   
+   ASYN_REQ : BOOL ;    
+   DelayCount : DWORD ; 
+   DLL_NAME : STRING  [254 ] := &#39;*dll:ODKCCXLib.dll&#39;;   
+   RTDLL_NAME : STRING  [254 ] := &#39;&#39;;   
+   OB100Counter : WORD ;    
+   OB100Counter1 : WORD ;   
+  END_STRUCT ;  
+BEGIN
+   CREA_COM_STAT := W#16#0; 
+   EXEC_COM_STAT := W#16#0; 
+   ASYN_COM_STAT := W#16#0; 
+   ASYN_BUSY := FALSE; 
+   ASYN_REQ := FALSE; 
+   DelayCount := DW#16#0; 
+   DLL_NAME := &#39;*dll:ODKCCXLib.dll&#39;; 
+   RTDLL_NAME := &#39;&#39;; 
+   OB100Counter := W#16#0; 
+   OB100Counter1 := W#16#0; 
+END_DATA_BLOCK
+</code></pre><hr>
+<h5 id="function-block-for-calling-up">Function Block for calling up</h5>
+<pre><code class="lang-javascript">CX&quot;
+TITLE =
+AUTHOR : SIMATIC
+FAMILY : COM_FUNC
+VERSION : 0.0
+
+&quot;ASYN_COM&quot;
+BEGIN
+   REQ := FALSE; 
+   OBJHANDLE := W#16#0; 
+   COMMAND := DW#16#0; 
+   BUSY := FALSE; 
+   ERROR := FALSE; 
+   STATUS := W#16#0; 
+END_DATA_BLOCK
+
+FUNCTION_BLOCK &quot;FB_ODKCCX&quot;
+TITLE =
+VERSION : 0.1
+
+
+VAR_INPUT
+  IN_ObjHandle : WORD ; 
+END_VAR
+VAR
+  STAT_RunReq : BOOL  := TRUE;  
+  STAT_StopReq : BOOL ; 
+  STAT_Busy : BOOL ;    
+  STAT_AsynCommStat : WORD ;    
+  STAT_Command : DWORD ;    
+  STAT_Dummy : DWORD ;  
+END_VAR
+BEGIN
+NETWORK
+TITLE =ASYNCHRONOUS CALL (SFB65003) 
+
+      L     W#16#FFFF; 
+      T     #STAT_AsynCommStat; 
+      CALL &quot;ASYN_COM&quot; , &quot;DB_ASYNC_COM&quot; (
+           REQ                      := #STAT_RunReq,
+           OBJHANDLE                := #IN_ObjHandle,
+           COMMAND                  := #STAT_Command,
+           INPUTDATA                := #STAT_Dummy,
+           OUTPUTDATA               := #STAT_Dummy,
+           BUSY                     := #STAT_Busy,
+           STATUS                   := #STAT_AsynCommStat);
+
+      L     #STAT_AsynCommStat; 
+      L     0; 
+      &gt;I    ; // ODK Status &gt; 0
+      SPN   end; // Async call not yet completed continue polling
+
+// ASYN_COM JOB completed. Finish the test and make it ready for the next
+
+      CALL &quot;ASYN_COM&quot; , &quot;DB_ASYNC_COM&quot; (
+           REQ                      := #STAT_StopReq,
+           OBJHANDLE                := #IN_ObjHandle,
+           COMMAND                  := #STAT_Command,
+           BUSY                     := #STAT_Busy,
+           STATUS                   := #STAT_AsynCommStat);
+
+
+NETWORK
+TITLE =
+
+end:  NOP   0; 
+
+END_FUNCTION_BLOCK
+</code></pre><hr>
+<h5 id="calling-up-blocks">Calling up Blocks</h5>
+<pre><code class="lang-javascript">&quot;CYCL_EXC&quot;
+TITLE = &quot;Main Program SMX Start&quot;
+VERSION : 0.1
+
+
+VAR_TEMP
+  OB1_EV_CLASS : BYTE ; //Bits 0-3 = 1 (Coming event), Bits 4-7 = 1 (Event class 1)
+  OB1_SCAN_1 : BYTE ;   //1 (Cold restart scan 1 of OB 1), 3 (Scan 2-n of OB 1)
+  OB1_PRIORITY : BYTE ; //1 (Priority of 1 is lowest)
+  OB1_OB_NUMBR : BYTE ; //1 (Organization block 1, OB1)
+  OB1_RESERVED_1 : BYTE ;   //Reserved for system
+  OB1_RESERVED_2 : BYTE ;   //Reserved for system
+  OB1_PREV_CYCLE : INT ;    //Cycle time of previous OB1 scan (milliseconds)
+  OB1_MIN_CYCLE : INT ; //Minimum cycle time of OB1 (milliseconds)
+  OB1_MAX_CYCLE : INT ; //Maximum cycle time of OB1 (milliseconds)
+  OB1_DATE_TIME : DATE_AND_TIME ;   //Date and time OB1 started
+  Dummy : BOOL ;    
+END_VAR
+BEGIN
+NETWORK
+TITLE =WinAC ODK Initialisieren
+
+      CALL &quot;CREA_COM&quot; , &quot;DB_CREA_COM&quot; (
+           PROGID                   := &quot;DB_ODKCCXKonfig&quot;.DLL_NAME,
+           STATUS                   := &quot;DB_ODKCCXKonfig&quot;.CREA_COM_STAT);
+      NOP   0; 
+NETWORK
+TITLE =WinAC ODK Aufrufen
+
+      CALL &quot;FB_WACUniCycle&quot; , &quot;DI_WACUniCycle&quot; (
+           IN_ObjHandle             := &quot;DB_ODKCCXKonfig&quot;.CREA_COM_STAT);
+      NOP   0; 
+END_ORGANIZATION_BLOCK
+</code></pre><hr>
+<h2 id="opcreaderwriter">OPCReaderWriter</h2>
+<p>This BinaryReaderWriter is used to read and write PLC data. </p>
+<p>OLE for Process Control (OPC) was the original name for the standardised software interfaces that should enable the data exchange between applications of various manufacturers in automation technology. Thanks to the progressive development of these interfaces and associated acceptance concerning the relevance of the OLE object system, only the name OPC without reference to an abbreviation is used today.</p>
+<hr>
+<h3 id="method-parameter-4">Method Parameter</h3>
+<hr>
+<h4 id="init-4">Init</h4>
+<p>The parameter of these methods is not used with this component.</p>
+<hr>
+<h4 id="connect-4">Connect</h4>
+<p>The parameter of this method is provided by the configuration and is an XML node. It configures the following properties:  </p>
+<table><tr><th>Property </th><th> Description</th></tr>
+<tr><td>ServerName </td><td> Name of the OPCServer (Default= insite.opc.simu)</td></tr>
+<tr><td>ProtocolName </td><td> Name of the access protocol (Default=S7)</td></tr>
+<tr><td>ConnectionName </td><td> Name of the connection (Default=RTX) </td></tr>
+<tr><td>IntemSyntax </td><td> Syntax of the items (Default=SimaticNet) possible values:</td></tr>
+<tr><td>   </td><td> -SimaticNet</td></tr>
+<tr><td>   </td><td> -&#62; e.g.: Bit = [pref]DB[DBNr].X[Offset+ Bit/8].[BitNr %8]</td></tr>
+<tr><td>   </td><td> -Sinumerik</td></tr>
+<tr><td>   </td><td> -&#62; e.g.: Bit = DB[DBNr].DBX[Offset+ Bit/8].[BitNr %8]</td></tr>
+<tr><td>   </td><td> -WinAC</td></tr>
+<tr><td>   </td><td> -&#62; e.g.: Bit = DB[DBNr].DBX[Offset+ Bit/8].[BitNr %8]</td></tr>
+<tr><td>   </td><td> -INAT -&#62; e.g.: Bit = DB[DBNr].B[Offset+ Bit/8].[BitNr %8]</td></tr>
+</table>
+
+
+
+<hr>
+<h4 id="readwrite-4">Read/Write</h4>
+<p>BinaryDataRef dataRef:  </p>
+<table><tr><th>Property </th><th> Description</th></tr>
+<tr><td>Selector </td><td> Selector of the target mapping</td></tr>
+<tr><td>Offset </td><td> Offset in the mapping of the data definition</td></tr>
+<tr><td>Length </td><td> Length of the data in bytes that should be read/written</td></tr>
+<tr><td>BitNumber </td><td> Bit number whose status is to be determined in the specified area</td></tr>
+<tr><td>   </td><td> (e.g. Offset=0, Length=2, BitNumber=8 -&#62; Bit 1.0 )</td></tr>
+</table>
+
+
+
+<p>Byte[] data:</p>
+<p>Contains the data to be written. If a bit number is specified, only the state of the byte is evaluated, i.e. if any byte is &#60;&#62; 0, then the state is true.</p>
+<hr>
+<h3 id="configuration-4">Configuration</h3>
+<pre><code class="lang-html">&lt;BinaryReaderWriter name=&quot;OPCReaderWriter&quot;&gt;
+    &lt;ServerName&gt;OPC.SimaticNet&lt;/ServerName&gt;
+    &lt;ProtocolName&gt;S7&lt;/ProtocolName&gt;
+    &lt;ConnectionName&gt;RTX&lt;/ConnectionName&gt;
+    &lt;ItemSyntax&gt;SimaticNet&lt;/ItemSyntax&gt;
+&lt;/BinaryReaderWriter&gt;
+</code></pre><p>For details on the parameters, see Connect.</p>
+<hr>
+<h3 id="additional-dependencies-4">Additional Dependencies</h3>
+<table><tr><th>Assembly </th><th> Manufacturer</th></tr>
+<tr><td>PLCOPCdotNETLib.dll </td><td> VISCOM</td></tr>
+<tr><td>PLCOPCAccessor.dll </td><td> insite GmbH</td></tr>
+<tr><td>log4net.dll </td><td> The Apache Software Foundation</td></tr>
+</table>
+
+
+
+<hr>
+<h1 id="configuration-5">Configuration</h1>
+<pre><code class="lang-html">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;Setup&gt;
+    &lt;Assemblies&gt;
+        &lt;Assembly path=&quot;OPCReaderWriter.dll&quot;/&gt;
+    &lt;/Assemblies&gt;
+    &lt;Instances&gt;
+        &lt;BinaryReaderWriters&gt;            
+            &lt;BinaryReaderWriter name=&quot;OPCReaderWriter&quot;&gt;
+                &lt;ServerName&gt;OPC.SimaticNet&lt;/ServerName&gt;
+                &lt;ProtocolName&gt;S7&lt;/ProtocolName&gt;
+                &lt;ConnectionName&gt;RTX&lt;/ConnectionName&gt;
+                &lt;ItemSyntax&gt;SimaticNet&lt;/ItemSyntax&gt;
+            &lt;/BinaryReaderWriter&gt;
+        &lt;/BinaryReaderWriters&gt;
+    &lt;/Instances&gt;
+&lt;/Setup&gt;
+</code></pre><p>A BinaryReaderWriter as well any IDAT component in the configuration must be made known, this firstly happens in the Assemblies section, where the name of the DLL is entered; secondly, the instance must be declared, which occurs in the Instances/BinaryReaderWriters section. Each BinaryReaderWriter used must be configured here with its name.</p>
+<hr>
+<h1 id="data-definition">Data Definition</h1>
+<pre><code class="lang-html">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;DataDef Endianness=&quot;Host-Endianess&quot; Encoding=&quot;Base16&quot; 
+         xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; 
+         xmlns=&quot;http://www.insite-gmbh.de/IDAT/DataDef&quot; xsi:schemaLocation=
+         &quot;http://www.insite-gmbh.de/IDAT/DataDef TypeDefinition/DataDef.xsd&quot;&gt;
+  &lt;!-- Structs are the userdefined types --&gt;
+  &lt;Types&gt;
+    &lt;Struct name=&quot;DB_Optionen_Allgemein&quot;&gt;
+      &lt;Var name=&quot;Rechnername&quot; type=&quot;STRING&quot; length=&quot;16&quot; /&gt;
+      &lt;Var name=&quot;Ziel_BST1&quot; type=&quot;STRING&quot; length=&quot;8&quot; /&gt;
+      &lt;Var name=&quot;Ziel_BST2&quot; type=&quot;STRING&quot; length=&quot;8&quot; /&gt;
+      &lt;Var name=&quot;Ziel_BST3&quot; type=&quot;STRING&quot; length=&quot;8&quot; /&gt;
+      &lt;Var name=&quot;Ziel_BST4&quot; type=&quot;STRING&quot; length=&quot;8&quot; /&gt;
+      &lt;Var name=&quot;Ziel_BST5&quot; type=&quot;STRING&quot; length=&quot;8&quot; /&gt;
+      &lt;Var name=&quot;Ziel_BST6&quot; type=&quot;STRING&quot; length=&quot;8&quot; /&gt;
+      &lt;Var name=&quot;BST1_vorh&quot; type=&quot;BOOL&quot; /&gt;
+      &lt;Var name=&quot;BST2_vorh&quot; type=&quot;BOOL&quot; /&gt;
+      &lt;Var name=&quot;BST3_vorh&quot; type=&quot;BOOL&quot; /&gt;
+      &lt;Var name=&quot;BST4_vorh&quot; type=&quot;BOOL&quot; /&gt;
+      &lt;Var name=&quot;BST5_vorh&quot; type=&quot;BOOL&quot; /&gt;
+      &lt;Var name=&quot;BST6_vorh&quot; type=&quot;BOOL&quot; /&gt;
+      &lt;Var name=&quot;Repaplatz&quot; type=&quot;BOOL&quot; /&gt;
+      &lt;Var name=&quot;HAP_NOT_Aus_vorhanden&quot; type=&quot;BOOL&quot; /&gt;
+      &lt;Var name=&quot;Ausw_WT_zu_PalRepa_BST1&quot; type=&quot;BOOL&quot; /&gt;
+      &lt;Var name=&quot;Fliessmontage&quot; type=&quot;BOOL&quot; /&gt;
+      &lt;Var name=&quot;Pneumatik_vorhanden&quot; type=&quot;BOOL&quot; /&gt;
+      &lt;Struct name=&quot;AP&quot; countItems=&quot;6&quot;&gt;
+        &lt;Var name=&quot;virtuell&quot; type=&quot;BOOL&quot; /&gt;
+        &lt;Var name=&quot;ApVisu_Vorh&quot; type=&quot;BOOL&quot; /&gt;
+        &lt;Var name=&quot;AP_IST_DT&quot; type=&quot;BOOL&quot; /&gt;
+        &lt;Var name=&quot;zugeordnet_zu&quot; type=&quot;INT&quot; /&gt;
+      &lt;/Struct&gt;
+      &lt;Var name=&quot;Konfig_Ordner_Pfad&quot; type=&quot;STRING&quot; length=&quot;80&quot; /&gt;
+      &lt;Var name=&quot;Safety_Checksum&quot; type=&quot;DWORD&quot; /&gt;
+      &lt;Var name=&quot;SHUT_DOWN_Verz_Zeit&quot; type=&quot;INT&quot; /&gt;
+      &lt;Var name=&quot;Shut_down_abgew&quot; type=&quot;BOOL&quot; /&gt;
+      &lt;Var name=&quot;Shut_Down_OPC2USV&quot; type=&quot;BOOL&quot; /&gt;
+    &lt;/Struct&gt;
+  &lt;/Types&gt;
+  &lt;!-- declare the Values you want to use --&gt;
+  &lt;Vars&gt;
+    &lt;Var name=&quot;Options&quot; type=&quot;DB_Optionen_Allgemein&quot; /&gt;
+  &lt;/Vars&gt;
+  &lt;!-- define the mapping and the operations on the values--&gt;
+  &lt;Mappings&gt;
+    &lt;Mapping name=&quot;Opt&quot; var=&quot;Options&quot; source=&quot;OPCReaderWriter&quot; selector=&quot;251&quot;
+             offset=&quot;0&quot; type=&quot;BinaryFile&quot; active=&quot;true&quot; &gt;
+      &lt;Filters&gt;
+        &lt;Filter var=&quot;Safety_Checksum&quot; /&gt;
+      &lt;/Filters&gt;
+      &lt;Operations&gt;
+        &lt;Read/&gt;
+        &lt;Write/&gt;
+      &lt;/Operations&gt;
+    &lt;/Mapping&gt;
+  &lt;/Mappings&gt;
+&lt;/DataDef&gt;
+</code></pre><hr>
+<h2 id="types">Types</h2>
+<p>This section is filled by the Tool AWLXMLConverter and contains the definitions of the data blocks. For further details, please refer to the documentation for AWLXMLConverter.</p>
+<hr>
+<h2 id="vars">Vars</h2>
+<p>In this section variables are declared that are elements of the type of element which are declared in Types. These variables can then be used in the mappings.</p>
+<hr>
+<h2 id="mappings">Mappings</h2>
+<p>Variables can be mapped to different areas and operations can then be executed via the Mappings. Additionally, filters can be declared, too. These filters only apply to write operations. A filtered variable is not rewritten to the PLC.</p>
+<hr>
+<h1 id="installation">Installation</h1>
+<p>This requires that</p>
+<ol>
+<li>Microsoft .NET Framework 4.0 Servicepack 1 and</li>
+<li>Microsoft Visual C++ 2010 Redistributable Package</li>
+<li>WIN AC RTX 2009 or higher for using ODK</li>
+</ol>
+<p>are installed and available on the destination system under Windows.</p>
+<h1 id="change-directory">Change directory</h1>
+<table><tr><th>Author </th><th> Date </th><th> Remarks</th></tr>
+<tr><td>Benjamin Prömmer </td><td> January 2013 </td><td> Creation</td></tr>
+<tr><td>Ralf Gedrat </td><td> January 2013 </td><td> Brief editing</td></tr>
+<tr><td>Benjamin Prömmer </td><td> February 2013 </td><td> Adding parameters for</td></tr>
+<tr><td>   </td><td>    </td><td> DataDefReaderWriter;</td></tr>
+<tr><td>   </td><td>    </td><td> Configuration of BinaryReaderWriter</td></tr>
+</table>
+            </article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/insite-gmbh/iDoc/blob/master/articles/BinaryReaderWriters.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a class="back-to-top" href="#top">Back to top</a>
+            </span>
+            
+            <span>Copyright © 2016 insite Ingenieurgesellschaft für Steuerungs- und Informationstechnik mbH
+          </span></div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

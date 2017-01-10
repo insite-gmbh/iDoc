@@ -1,0 +1,2467 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Documentation and Procedure </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Documentation and Procedure ">
+    <meta name="generator" content="docfx 2.8.2.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="text/javascript" href="../styles/encrypter.js">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        <a href="http://www.insite-gmbh.de" class="link-to-homepage" target="_blank" title="opens the website of insite in a new tab">
+            <img src="../images/whitefontlogo.png">
+        </a>        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+              
+              <p><img src="../images/logo.png" alt="logo.png"></p>
+<h1>Documentation and Procedure</h1>  
+
+<h1>Description</h1>   
+
+<h1>ICON</h1>
+
+
+<p><strong>I</strong>nsite <strong>CO</strong>mmunication <strong>N</strong>ode</p>
+<p><strong>insite GmbH</strong></p>
+<hr>
+<h1 id="introduction">Introduction</h1>
+<p>ICON (insite communication node) is a modularly configurable software application for the transport of data. &quot;Transport&quot; means that data is transported from a source to a sink while the source can also receive a response (usually from the sink). </p>
+<hr>
+<h2 id="purpose-and-objective">Purpose and Objective</h2>
+<p>ICON defines a data transport rule, which is the same for all existing and future developed modules, making it easy to create customer-specific modules that work with any data. </p>
+<p>ICON can be thought of as an Inter-Process Communication(IPC)-kernel.</p>
+<hr>
+<h2 id="definitons-acronyms-abbreviations">Definitons, Acronyms, Abbreviations</h2>
+<ul>
+<li><strong>ICON: I</strong>nsite <strong>CO</strong>mmunication <strong>N</strong>ode</li>
+<li><strong>TCP/IP:</strong> The TCP network protocol (Transmission Control Protocol) based on the IP (Internet protocol) concerns endpoint-related connections, the so-called sockets. A socket can act as a client, server or listener. In order to describe a broader and more general designation for the states of the sockets, we want to use the terms &quot;Passive&quot; and &quot;Active&quot;. In other words, there is an active and a passive connection partner. With these designations we conform with protocols such as FTP (File Transfer Protocol) or UDP (User Datagram Protocol). Unlike with connectionless protocols such as UDP, in the case of TCP there are endpoint-related connection partners that normally connect from the active partner to the passive partner. A socket&#39;s own endpoint (active as well as passive) we call LocalEndpoint and the endpoint of the connection partner we call RemoteEndpoint.</li>
+<li><strong>PLC:</strong> Programmable Logic Controller</li>
+<li><strong>SPS:</strong> Speicher Programmierbare Steuerung (German for PLC)</li>
+<li><strong>GUI:</strong> Graphical User Interface --&gt; User Interface</li>
+<li><strong>Assembly:</strong> An Assembly is a logical functional unit that is executed under the control of the Common Language Runtime (CLR) by .NET. An Assembly exists physically as a DLL-file or EXE-file.</li>
+<li><strong>Spooler:</strong> Buffer for messages (also persistent)</li>
+</ul>
+<hr>
+<h1 id="general-description">General Description</h1>
+<p>The special features and setting options of the software are described below. </p>
+<hr>
+<h2 id="system-environment">System Environment</h2>
+<p>The software was written in C&#35; for the .NET Framework 4.0.</p>
+<hr>
+<h2 id="starting-iconmainexe">Starting ICONMain.exe</h2>
+<p>When starting the application, the following splash screen appears:   </p>
+<p><img src="../images/ICON_splashscreen_2_2.png" alt="ICON_splashscreen_2_2.png"></p>
+<p>Once all the information has been read out from the XML file and the system has configured itself, the main window appears.  </p>
+<p>Starting without any existing configuration file or with a configuration file without any essential content or without any information of a configuration (&#60;ICONConfigs&#62;&#60;/ICONConfigs&#62;<br> Or &#60;ICONConfigs&#62;&#60;ICONConfig&#62;&#60;/ICONConfig&#62;&#60;/ICONConfigs&#62;):</p>
+<p><img src="../images/ICON_noconfig_2_2.png" alt="ICON_noconfig_2_2.png"></p>
+<p>An existing configuration file named &quot;ICON.xml&quot; in the application directory is detected and loaded by ICON. If you would like to use other configuration files, you can transfer an argument with the complete directory and file name to ICONMain.exe when starting.</p>
+<p>Starting with a configuration file:   </p>
+<p><img src="../images/config_2_2.png" alt="config_2_2.png"></p>
+<p>When starting, ICON outputs the configuration file from the started XML file to the logger file. In addition, the network connections and network status are logged when starting. This can be helpful for debugging.  </p>
+<p>In the ICON application window, two tabs can be seen as a permanent part of the application.</p>
+<ul>
+<li>Logger - Output of logger messages (partial extract of the last X messages, X is configurable)</li>
+<li>Spooler - collective container for spoolers that do not occupy any explicit tab.</li>
+</ul>
+<p>In the Logger Control below are buttons: <strong>Fatal</strong>, <strong>Error</strong>, <strong>Warn</strong>, <strong>Info</strong> and <strong>Debug</strong>. With these you can filter the messages. Please note that there also is a notice message type which cannot be controlled with the GUI. In addition, the filtering does not only apply to the view in the window but also to the messages in the logger file.</p>
+<hr>
+<h2 id="version-information-of-all-loaded-icon-components">Version Information of all loaded ICON Components</h2>
+<p><img src="../images/config_2_3.png" alt="config_2_3.png"></p>
+<p>To obtain information about all assemblies currently loaded, you can click on the INSITE-LOGO in the upper right corner. By clicking, all information is collected and displayed in a list. The entries of the list can be selected and copied to the clipboard with Copy&amp;Paste. Clicking once again closes this display and the standard interface of ICON is displayed again.</p>
+<hr>
+<h2 id="how-does-icon-work">How does ICON work?</h2>
+<p><a name="howdoesiconwork"></a></p>
+<p>ICON loads modules that have a data interface source, sink or both. Via configuration it performs the application-specific settings of the corresponding module and transports the data (messages) from a source to a sink.  </p>
+<p>The source utilises a Message Dispatcher for dispatching to the sink, which sets the message to the respective status in advance. The Message Dispatcher can be set by any module that is a source via the &quot;DispatchMode&quot; parameter as follows:</p>
+<ul>
+<li><strong>DispatchMode = 0 (IgnoreSequence)</strong><br>No processing sequence guaranteed.</li>
+<li><strong>DispatchMode = 1 (PreserveIncomingSequence)</strong><br>The complete processing sequence is guaranteed. Behaves like &quot;PreserveSequence&quot;, this mode is reserved for future requirements. </li>
+<li><strong>DispatchMode = 2 (PreserveSequence)</strong><br>The complete processing sequence is guaranteed.</li>
+</ul>
+<p>Therefore, the Message-Dispatcher is the active interface between the source and the sink or between the source and the spooler of a sink.  </p>
+<p>The Message-Dispatcher also reports any faults of the sink or spooler to the source.  </p>
+<p>The status of a message can be as follows:   </p>
+<table>
+ <tr><th>Created </th><td> Message was created. </td></tr>
+ <tr><th>Locked </th><td> Message was successfully locked (by the sink) (Reservation) </td></tr>
+ <tr><th>Started </th><td> Message is transmitted to the sink (Start of the transmission) </td></tr>
+ <tr><th>WaitingResponse </th><td> Message waits for a response from the sink/spooler </td></tr>
+ <tr><th>Spooled </th><td> Message was accepted from the spooler  </td></tr>
+ <tr><th>Ready </th><td> Message was transmitted and processed by the sink/spooler. </td></tr>
+ <tr><th>ReadyHardError </th><td> Message goes to error with HardError (error number &#60; 0) </td></tr>
+ <tr><th>ReadySoftError </th><td> Message goes to error with SoftError (error number &#62; 0) </td></tr>
+</table>
+
+
+
+
+<p>&quot;Created&quot; and &quot;Locked&quot; are set by the source, the other statuses will usually be set by the Message-Dispatcher.</p>
+<hr>
+<h1 id="configuration">Configuration</h1>
+<hr>
+<h2 id="configuration-60log4net62">Configuration &#60;log4net&#62;</h2>
+<p>Example of a configuration section in XML:</p>
+<pre><code class="lang-html">&lt;ICONConfig&gt;
+  &lt;log4net&gt;
+    &lt;appender name=&quot;RollingFile&quot; type=&quot;log4net.Appender.RollingFileAppender&quot;&gt;
+        &lt;file value=&quot;ICON.log&quot; /&gt;
+        &lt;appendToFile value=&quot;true&quot; /&gt;
+        &lt;immediateFlush value=&quot;true&quot; /&gt;
+        &lt;maxSizeRollBackups value=&quot;-1&quot; /&gt;
+        &lt;rollingStyle value=&quot;Composite&quot; /&gt;
+        &lt;maximumFileSize value=&quot;100MB&quot; /&gt;
+        &lt;datePattern value=&quot;yyyyMMdd&quot; /&gt;
+        &lt;layout type=&quot;log4net.Layout.PatternLayout&quot;&gt;
+            &lt;conversionPattern value=&quot;%date %-6level [%5thread] %message -
+             %property{methodName} (%file:%line) (%property{modulePath})%newline&quot; /&gt;
+        &lt;/layout&gt;
+    &lt;/appender&gt;
+    &lt;appender name=&quot;PDEMConverter&quot; type=&quot;log4net.Appender.RollingFileAppender&quot;&gt;
+        &lt;file value=&quot;PDEMConverter.log&quot; /&gt;
+        &lt;appendToFile value=&quot;true&quot; /&gt;
+        &lt;immediateFlush value=&quot;true&quot; /&gt;
+        &lt;maxSizeRollBackups value=&quot;-1&quot; /&gt;
+        &lt;rollingStyle value=&quot;Composite&quot; /&gt;
+        &lt;maximumFileSize value=&quot;100MB&quot; /&gt;
+        &lt;datePattern value=&quot;yyyyMMdd&quot; /&gt;
+        &lt;layout type=&quot;log4net.Layout.PatternLayout&quot;&gt;
+            &lt;conversionPattern value=&quot;%date %-6level [%5thread] %message -
+             %property{methodname} (%file:%line)(%property{modulePath\})%newline&quot; /&gt;
+        &lt;/layout&gt;
+    &lt;/appender&gt;
+    &lt;appender name=&quot;MemoryAppender&quot; type=&quot;log4net.Appender.MemoryAppender&quot; &gt;
+        &lt;onlyFixPartialEventData value=&quot;true&quot; /&gt;
+    &lt;/appender&gt; 
+    &lt;root&gt;
+        &lt;level value=&quot;ALL&quot; /&gt;
+        &lt;appender-ref ref=&quot;RollingFile&quot; /&gt;
+    &lt;/root&gt;
+    &lt;logger name=&quot;PDEMConverter&quot;&gt;
+        &lt;level value=&quot;ALL&quot; /&gt;
+        &lt;appender-ref ref=&quot;PDEMConverter&quot; /&gt;
+    &lt;/logger&gt;
+  &lt;/log4net&gt;
+&lt;/ICONConfig&gt;
+</code></pre><p><img src="../images/warning_icon.png" alt="warning_icon.png"></p>
+<ul>
+<li>ICON provides two types of information specifically for the Logger: &quot;methodName&quot; and &quot;modulePath&quot;.</li>
+<li>If a &quot;log4net.Appender.MemoryAppender&quot; is configured, it is essential to ensure that<br>&quot;&#60;onlyFixPartialEventData value = &quot;true&quot; /&#62;&quot; is configured, since this could lead to a memory overflow otherwise.</li>
+</ul>
+<p>For setting options and additional information on this 3rdParty component, please refer to page:  </p>
+<p><a href="http://logging.apache.org/log4net/">http://logging.apache.org/log4net/</a></p>
+<hr>
+<h2 id="configuration-60includes62">Configuration &#60;Includes&#62;</h2>
+<pre><code class="lang-html">&lt;Includes&gt;
+   &lt;Include&gt;D:\Special.xml&lt;/Include&gt;
+   &lt;Include&gt;D:\Ports\*.xml&lt;/Include&gt;
+   &lt;Include&gt;@Special*.xml&lt;/Include&gt;
+&lt;/Includes&gt;
+</code></pre><p>With the &quot;Includes&quot; section, ICON can also manage distributed configurations. For example, you can provide ICON with just a minimum configuration and specify files that can extend this configuration if they are available.   </p>
+<p>An example of this would be an implementation that communicates with the PLC via the SerialSink while you do not use the same scanner (or the same scanner ports) on every computer. In this case, you cannot configure any port at all, instead you can outsource the configuration in other files. The main benefit of this is not always having to customise the config when a port is added or removed, but simply create or remove a file and then restart ICON.  </p>
+<p>The second functionality of the Includes is the handling of special configurations. If the config and Include-Config contain the same configuration parameters, the configuration is overwritten. Therefore, if minor details vary, instead of having to create a completely new configuration, only the different parameters need to be packed into an IncludeFile.   </p>
+<p>The Include-File in turn can also contain Includes. A path name in an Include can also be a search string   </p>
+<p>[Path][Search pattern]  </p>
+<p>The @ can be used to include the path of the loaded config in the IncludePath.  </p>
+<p>i.e. D:\Icon.xml --&gt;   @\Special.xml --&gt; D:\Special.xml </p>
+<p>An Include-File must have the same structure as the ICON.xml   </p>
+<p>The name of ICONConfig must also be the same.  </p>
+<hr>
+<h2 id="configuration-60iconglobals62">Configuration &#60;ICONGlobals&#62;</h2>
+<p><a name="Configuration_ICONGlobals"></a>
+In the Globals section, application-wide settings are performed.</p>
+<pre><code class="lang-html">&lt;ICONGlobals&gt;
+    &lt;ConfigValue name=&quot;LookAndFeel&quot; type=&quot;string&quot;&gt;Tree&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;Tracing&quot; type=&quot;bool&quot;&gt;false&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;Performing&quot; type=&quot;bool&quot;&gt;false&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;LoggerViewShowPanel&quot; type=&quot;bool&quot;&gt;true&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;LoggerViewMaxRows&quot; type=&quot;int&quot;&gt;1024&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;LoggerViewMaxMessageLength&quot; type=&quot;int&quot;&gt;512&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;EncodingDefault&quot; type=&quot;string&quot;&gt;ISO-8859-1&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;ShowProcessNameInTitleBar&quot; type=&quot;bool&quot;&gt;false&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;IconText&quot; type=&quot;string&quot;&gt;&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;NotEnoughMemoryLowWaterMark&quot; type=&quot;int&quot;&gt;100&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;NotEnoughMemoryHighWaterMark&quot; type=&quot;int&quot;&gt;500&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;MaxAveragePLCAccessTime&quot; type=&quot;int&quot;&gt;0&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;MaxSocketLatencyTime&quot; type=&quot;int&quot;&gt;0&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;SocketLatencyMeasurementType&quot; 
+                 type=&quot;string&quot;&gt;Disabled&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;SpoolerFontSize&quot; type=&quot;int&quot;&gt;0&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;UserLevelModule&quot; type=&quot;string&quot;&gt;&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;UnsafeRfc1006Wrapper&quot; type=&quot;bool&quot;&gt;true&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;ResolveIpAddresses&quot; type=&quot;bool&quot;&gt;true&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;UseSocketBasedReceiveThread&quot;
+                 type=&quot;bool&quot;&gt;false&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;SocketDataBufferIncreaseAction&quot;
+                 type=&quot;string&quot;&gt; &lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;SocketTimeout&quot; type=&quot;int&quot;&gt;30000&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;SocketSendBufferSize&quot; type=&quot;int&quot;&gt;8192&lt;/ConfigValue&gt;
+&lt;/ICONGlobals&gt;
+</code></pre><ul>
+<li><strong>LookAndFeel:</strong> Specifies the representation mode of the GUI. The possible values are &quot;Tab&quot; and &quot;Tree&quot;. For more details, see the section <a href="#gui_of_icon">GUI of ICON</a>.</li>
+<li>**Tracing: ** Used to output additional debug messages.  </li>
+</ul>
+<p><img src="../images/warning_icon.png" alt="warning_icon.png">
+The system will slow down considerably when activating tracing due to the huge number of messages logged!</p>
+<ul>
+<li><strong>Performing:</strong> Creates additional output with timing information as debug messages.    In particular, those are access times to a PLC, or cycle times of the send and receive buffer processing. Please note that this may also slow down the system.</li>
+<li><strong>LoggerViewShowPanel:</strong> With the &quot;<em>LoggerViewShowPanel</em>&quot; parameter, the additional functions of the Logger page can be deactivated to only display the log outputs.</li>
+<li><strong>LoggerViewMaxRows:</strong> Defines the maximum number of rows in the Logger window. Do not choose the value too high in order to avoid speed impairments. To view the entire Logger output, please use the Logger file.</li>
+<li><strong>LoggerViewMaxMessageLength:</strong> Works similarly to &quot;<em>MaxRows</em>&quot;, but limits the number of characters per row in the message column.</li>
+<li><strong>EncodingDefault:</strong> Overwrites the encoding that is set by the operating system (under System Control, Region &amp; Language). For German texts use ISO-8859-1 or Latin1. You can find an overview of diverse codepages here:<br><a href="http://msdn.microsoft.com/de-de/library/aa288104(v=VS.71).aspx">http://msdn.microsoft.com/de-de/library/aa288104(v=VS.71).aspx</a></li>
+</ul>
+<p> (&quot;ISO-8859-1&quot; is stored as default value.)</p>
+<ul>
+<li><strong>ShowProcessNameInTitleBar:</strong> Specifies whether or not the name of the process (e.g.: ICONMain) is displayed in the title bar instead of the ICON text. If the name of the exe is changed, e.g. ICON2, the custom name is displayed.</li>
+<li><strong>IconText:</strong> If you enter a text in &quot;IconText&quot;, this text will also be added to the title bar (between ICON and [ConfigPath]). In addition, this text is also added onto the application logo. This allows multiple instances to be distinguished more easily.</li>
+<li><strong>NotEnoughMemoryLowWaterMark:</strong> Specifies the amount of hard disk memory available in MBs when ICON should stop its modules. The default value is 100MB, i.e. when the hard disk memory has less than 100MB, ICON stops all modules.</li>
+<li><strong>NotEnoughMemoryHighWaterMark:</strong> Specifies the amount of hard disk memory available in MBs when ICON should restart its stopped modules. The default value is 500MB, i.e. when the hard disk memory has more than 500MB available again, ICON modules will be restarted.</li>
+<li><strong>MaxAveragePLCAccessTime:</strong> Can be used to activate the performance monitoring of the PLC interface, which is executed every 60000ms (1 minute). This monitoring measures the average reading time from 1000 reads. If the the average time exceeds the set limit, it will be displayed on the logging page of ICON. If the value is 0, this monitoring is deactivated. </li>
+<li><strong>MaxSocketLatencyTime:</strong> Can be used to activate the performance monitoring of any socket. Depending on the setting of &quot;<em>SocketLatencyMeasurementType</em>&quot;, the duration of a specific process in the handling of a message is measured. If the set time is exceeded, information is displayed on the logging page of ICON. If the value is 0, this monitoring is deactivated. This setting is used as a default setting for all sockets and can be overwritten for each socket individually.</li>
+<li><strong>SocketLatencyMeasurementType:</strong> Defines the kind of latency measurement on any socket. The possible values are: &quot;<em>Disabled</em>&quot; (no measurement), &quot;<em>Sent</em>&quot; (measure latency between trigger and sent-state), and &quot;<em>Received</em>&quot; (measure latency or &quot;roundtrip&quot; between sent-state and reception of acknowledge). This setting is used as a default setting for all sockets and can be overwritten for each socket individually. </li>
+<li><strong>SpoolerFontSize:</strong> Modifies the scaling of the spooler grids. The default size is used when this value is 0.</li>
+<li><strong>UserLevelModule:</strong> Can be used to specify a <em>UserLevelModuleWith</em> to prevent someone from closing ICON if they lack the necessary authorisation, for example.</li>
+<li><strong>UnsafeRfc1006Wrapper:</strong> Specifies whether the (unsafe) C++ or the C&#35; Rfc1006 implementation should be used.</li>
+<li><strong>ResolveIpAdresses:</strong> Specifies whether the IP addresses are resolved into the computer name.</li>
+<li><strong>UseSocketBasedReceiveThread:</strong> Specifies whether each socket should have its own receive thread.</li>
+<li><strong>SocketDataBufferIncreaseAction:</strong> Specifies the behavior which is executed when a socket received data but the callback is not called. Valid Values are: &quot;<em>None</em>&quot; (no check), &quot;<em>ReadData</em>&quot; (read and handle data), &quot;<em>ResetConnection</em>&quot; (close socket), &quot;<em>EatData</em>&quot; (skipdata), and &quot;<em>ReadAndReset</em>&quot; (read handle and reset data)</li>
+<li><p><strong>SocketTimeOut:</strong> Specifies the Timeout for the sockets&#39; sending and receiving.<br>also see: <a href="https://msdn.microsoft.com/en-us/library/system.net.sockets.socket.sendtimeout%28v=vs.110%29.aspx">https://msdn.microsoft.com/en-us/library/system.net.sockets.socket.sendtimeout%28v=vs.110%29.aspx</a></p>
+<p>and <a href="https://msdn.microsoft.com/en-us/library/system.net.sockets.socket.receivetimeout%28v=vs.110%29.aspx">https://msdn.microsoft.com/en-us/library/system.net.sockets.socket.receivetimeout%28v=vs.110%29.aspx</a></p>
+</li>
+<li><p><strong>SocketSendBufferSize:</strong> Specifies the buffer size of the sockets for sending. If set to 0, no buffering will take place.<br>also see <a href="https://msdn.microsoft.com/en-us/library/system.net.sockets.socket.sendbuffersize%28v=vs.110%29.aspx">https://msdn.microsoft.com/en-us/library/system.net.sockets.socket.sendbuffersize%28v=vs.110%29.aspx</a></p>
+</li>
+</ul>
+<hr>
+<h2 id="configuration-60iconnetwork62">Configuration &#60;ICONNetwork&#62;</h2>
+<p>Here, you can enter Hosts that apply for ICON as well as Hosts for the operating system defined under &quot;C:\Windows\System32\drivers\etc\hosts&quot;.  </p>
+<p>Example:</p>
+<pre><code class="lang-html">&lt;ICONNetwork&gt;
+    &lt;ICONHosts&gt;
+        &lt;Host IP=&quot;192.168.0.144&quot; Name=&quot;rg&quot; comment=&quot;my local machine&quot; /&gt;
+        &lt;Host IP=&quot;192.168.0.156&quot; Name=&quot;traceability&quot; comment=&quot;database machine&quot; /&gt;
+        &lt;Host IP=&quot;127.0.0.1&quot; Name=&quot;PDEM&quot; comment=&quot;the PDEM host&quot; /&gt;
+        &lt;Host IP=&quot;192.168.0.145&quot; Name=&quot;YMNB7TEST&quot; comment=&quot;localhost&quot; /&gt;        
+    &lt;/ICONHosts&gt;
+&lt;/ICONNetwork&gt;
+</code></pre><p>Before ICON attempts a resolution via DNS, it uses the IP address under &#60;ICONNetwork&#62;.  </p>
+<p>The order would then be as follows:</p>
+<ol>
+<li>Resolution via &#60;ICONNetwork&#62;</li>
+<li>Resolution via C:\Windows\System32\drivers\etc\hosts</li>
+<li>Resolution via DNS</li>
+</ol>
+<hr>
+<h2 id="configuration-60iconplcs62">Configuration &#60;ICONPlcs&#62;</h2>
+<p>Here, any number of PLCs can be configured. Enter a section for each PLC.</p>
+<pre><code class="lang-html">&lt;ICONPlc Name=&quot;MainOPC&quot;&gt;
+   ...
+   &lt;ConfigValue name=&quot;ItemSyntax&quot; type=&quot;string&quot;&gt;SimaticNet&lt;/ConfigValue&gt;
+   &lt;ConfigValue name=&quot;WriteCacheEnabled&quot; type=&quot;bool&quot;&gt;false&lt;/ConfigValue&gt;
+   &lt;ConfigValue name=&quot;WriteCacheItemMaxAge&quot; type=&quot;int&quot;&gt;-1&lt;/ConfigValue&gt;
+&lt;/ICONPlc&gt;
+</code></pre><ul>
+<li><strong>Item Syntax:</strong> Sets the use of different syntaxes (possible values:SimaticNet, Sinumerik, WinAC, INAT)</li>
+<li><strong>WriteCacheEnabled:</strong> If true, each Write is cached. A write operation only takes place when there is a change between real data and cache data. If false, each Write is written!</li>
+<li><strong>WriteCacheItemMaxAge:</strong> Controls the obsolescence of the cache. Only used with &quot;WriteCacheEnabled = true&quot; (To be specified in milliseconds)</li>
+</ul>
+<hr>
+<h3 id="specific-parameters-for-acces-via-opc">Specific Parameters for Acces via OPC</h3>
+<pre><code class="lang-html">&lt;ICONPlc Name=&quot;MainPLC&quot;&gt;
+    &lt;ConfigValue name=&quot;OPCVendor&quot; type=&quot;string&quot;&gt;&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;OPCServerName&quot; type=&quot;string&quot;&gt;OPC.SimaticNet&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;OPCConnectionName&quot; type=&quot;string&quot;&gt;RTX&lt;/ConfigValue&gt;
+    ...
+&lt;/ICONPlc&gt;
+</code></pre><ul>
+<li><strong>OPCVendor:</strong> Specifies the name of the OPCServer vendor (This only has to be specified for Softing OPCServers at present. e.g.: OPCVendor = Softing)</li>
+<li><strong>OPCServerName:</strong> Specifies the name of the OPC Server to be used</li>
+<li><strong>OPCConnectionName:</strong> Specifies the name of the connection to be used for communication</li>
+<li><strong>ConnectAsLeanServer:</strong> If true, <em>BrowseServerAddressSpace</em>, <em>ItemProperties</em> and <em>ConnectionPoints</em> are deactivated (e.g. necessary for WinAC-OPC-Server)</li>
+</ul>
+<hr>
+<h3 id="specific-parameters-for-acces-via-aglink">Specific Parameters for Acces via AGLink</h3>
+<pre><code class="lang-html">&lt;ICONPlc Name=&quot;MainPLC&quot;&gt;
+    &lt;ConfigValue name=&quot;AGLinkDevice&quot; type=&quot;int&quot;&gt;0&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;AGLinkRemoteHost&quot; type=&quot;string&quot;&gt;&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;AGLinkPort&quot; type=&quot;int&quot;&gt;102&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;AGLinkPlcNr&quot; type=&quot;int&quot;&gt;-1&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;AGLinkRackNr&quot; type=&quot;int&quot;&gt;-1&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;AGLinkSlotNr&quot; type=&quot;int&quot;&gt;-1&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;AGLinkTimeout&quot; type=&quot;int&quot;&gt;-1&lt;/ConfigValue&gt;
+    ...
+&lt;/ICONPlc&gt;
+</code></pre><ul>
+<li><strong>AGLinkDevice:</strong> ...</li>
+<li><strong>AGLinkRemoteHost:</strong> Adress of the remote control</li>
+<li><strong>AGLinkPort:</strong> Port of the PLC</li>
+<li><strong>AGLinkPlcNr:</strong> ...</li>
+<li><strong>AGLinkRackNr:</strong> Rack number</li>
+<li><strong>AGLinkSlotNr:</strong> Slot number</li>
+<li><strong>AGLinkTimeout:</strong> Timeout</li>
+</ul>
+<hr>
+<h3 id="specific-parameters-for-access-via-libnodave">Specific Parameters for Access via LibNoDave</h3>
+<pre><code class="lang-html">&lt;ICONPlc Name=&quot;MainPLC&quot;&gt;
+    &lt;ConfigValue name=&quot;LibNoDaveRemoteHost&quot; type=&quot;string&quot;&gt;192.168.0.145
+        &lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;LibNoDavePort&quot; type=&quot;int&quot;&gt;102&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;LibNoDaveRackNr&quot; type=&quot;int&quot;&gt;0&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;LibNoDaveSlotNr&quot; type=&quot;int&quot;&gt;2&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;LibNoDaveTimeout&quot; type=&quot;int&quot;&gt;5000&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;LibNoDaveEnableDebug&quot; type=&quot;int&quot;&gt;1&lt;/ConfigValue&gt;
+    ...
+&lt;/ICONPlc&gt;
+</code></pre><ul>
+<li><strong>LibNoDaveRemoteHost:</strong> Address of the remote control (= local IP)</li>
+<li><strong>LibNoDavePort:</strong> Port of the PLC</li>
+<li><strong>LibNoDaveRackNr:</strong> Rack number</li>
+<li><strong>LibNoDaveSlotNr:</strong> Slot number</li>
+<li><strong>LibNoDaveTimeout:</strong> Timeout</li>
+<li><strong>LibNoDaveEnableDebug:</strong> Debug</li>
+</ul>
+<hr>
+<h3 id="specific-parameters-for-access-via-snap7">Specific Parameters for Access via Snap7</h3>
+<pre><code class="lang-html">&lt;ICONPlc Name=&quot;MainPLC&quot;&gt;
+    &lt;ConfigValue name=&quot;Snap7RemoteHost&quot; type=&quot;string&quot;&gt;192.168.0.145&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;Snap7RackNr&quot; type=&quot;int&quot;&gt;0&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;Snap7SlotNr&quot; type=&quot;int&quot;&gt;2&lt;/ConfigValue&gt;
+    ...
+&lt;/ICONPlc&gt;
+</code></pre><ul>
+<li><strong>Snap7RemoteHost:</strong> Address of the remote control (= local IP)</li>
+<li><strong>Snap7RackNr:</strong> Rack number</li>
+<li><strong>Snap7SlotNr:</strong> Slot number</li>
+</ul>
+<hr>
+<h2 id="configuration-60iconprotocols62">Configuration &#60;ICONProtocols&#62;</h2>
+<p>In this section, the default values for ServerPort and LocalServerPort can be set</p>
+<pre><code class="lang-html">&lt;ConfigValue name=&quot;TCPIPDefaultServerPort&quot; type=&quot;int&quot;&gt;30001&lt;/ConfigValue&gt;
+&lt;ConfigValue name=&quot;TCPIPDefaultLocalServerPort&quot; type=&quot;int&quot;&gt;30002&lt;/ConfigValue&gt;
+</code></pre><hr>
+<h3 id="standard-protocols">Standard Protocols</h3>
+<p>You can activate protocols, for example, by the following entry:</p>
+<pre><code class="lang-html">&lt;ICONStandardProtocol ImplementingClass=&quot;WACC04_ICONMsgFactory&quot; /&gt;
+</code></pre><p>In order to assign other Default Ports to a protocol, the parameters are listed in the respective section.  </p>
+<p>Example:</p>
+<pre><code class="lang-html">&lt;ICONStandardProtocol ImplementingClass = &quot;????ICONMsgFactory&quot;&gt;
+    &lt;ConfigValue name = &quot;TCPIPDefaultServerPort&quot; type = &quot;int&quot;&gt;2000&lt;/ConfigValue&gt;
+    &lt;ConfigValue name = &quot;TCPIPDefaultLocalServerPort&quot; type = &quot;int&quot;&gt;12400
+        &lt;/ConfigValue&gt;
+&lt;/ICONStandardProtocol&gt;
+</code></pre><hr>
+<h3 id="user-defined-protocols">User-defined Protocols</h3>
+<p>Example of a user-defined protocol:</p>
+<pre><code class="lang-html">&lt;ICONUserDefinedProtocol name=&quot;XYZ&quot;&gt;
+   &lt;FormatStrings&gt;
+       &lt;__DATE&gt;dd.MM.yyyy&lt;/__DATE&gt;
+       &lt;__TIME&gt;HH:mm:ss&lt;/__TIME&gt;
+   &lt;/FormatStrings&gt;
+   &lt;RequestParseRule minLength=&quot;56&quot;   maxLength=500 &gt;
+       &lt;Member name=&quot;Quelle&quot; offset=&quot;0&quot; type=&quot;nchar(8)&quot;/&gt;
+       &lt;Member name=&quot;Ziel&quot; offset=&quot;8&quot; type=&quot;nchar(8)&quot;/&gt;
+       &lt;Member name=&quot;Kennung&quot; offset=&quot;16&quot; type=&quot;nchar(4)&quot; value=&quot;&#39;XYZ-&#39;&quot;
+               isIdentifier=&quot;true&quot;/&gt;
+       &lt;Member name=&quot;Type&quot; offset=&quot;20&quot; type=&quot;nchar(4)&quot; /&gt;
+       &lt;Member name=&quot;Version&quot; offset=&quot;24&quot; type=&quot;nchar(2)&quot;  value=&quot;&#39;5 &#39;&quot;
+               isIdentifier=&quot;true&quot;/&gt;
+       &lt;Member name=&quot;Zeichencodierung&quot; offset=&quot;26&quot; type=&quot;nchar(20)&quot;
+               value=&quot;&#39;ISO-8859-1 &#39;&quot; isIdentifier=&quot;true&quot;/&gt;
+       &lt;Member name=&quot;LfdNr&quot; offset=&quot;46&quot; type=&quot;nchar(4)&quot;/&gt;
+       &lt;Member name=&quot;PayloadLength&quot; offset=&quot;50&quot; type=&quot;nchar(6)&quot;
+               markerType = &quot;headerEnd&quot;/&gt;
+       &lt;Member name=&quot;Payload&quot; offset=&quot;56&quot; type=&quot;binary($PayloadLength)&quot;/&gt;
+   &lt;/RequestParseRule&gt;
+   &lt;DefaultResponseBuildRule&gt;
+       &lt;Member name=&quot;QQuelle&quot;  offset=&quot;0&quot;    type=&quot;nchar(8)&quot;  value=&quot;$Ziel&quot;/&gt;
+       &lt;Member name=&quot;QZiel&quot;    offset=&quot;8&quot;    type=&quot;nchar(8)&quot;  value=&quot;$Quelle&quot;/&gt;
+       &lt;Member name=&quot;QKennung&quot; offset=&quot;16&quot;   type=&quot;nchar(4)&quot;  value=&quot;&#39;XYZ-&#39;&quot;/&gt;
+       &lt;Member name=&quot;QType&quot;    offset=&quot;20&quot;   type=&quot;nchar(4)&quot;  value=&quot;&#39;QUIT&#39;&quot;/&gt;
+       &lt;Member name=&quot;QVersion&quot; offset=&quot;24&quot;   type=&quot;nchar(2)&quot;  value=&quot;$Version&quot;/&gt;
+       &lt;Member name=&quot;QZeichencodierung&quot; offset=&quot;26&quot; type=&quot;nchar(20)&quot;
+               value=&quot;$Zeichencodierung&quot;/&gt;
+       &lt;Member name=&quot;QLfdNr&quot;   offset=&quot;46&quot;   type=&quot;nchar(4)&quot;  value=&quot;$LfdNr&quot;/&gt;
+       &lt;Member name=&quot;AckPayloadLength&quot; offset=&quot;50&quot;     type=&quot;numeric(-6)&quot; 
+               value=&quot;&#39;23    &#39;&quot; markerType = &quot;headerEnd&quot;/&gt;/&gt;
+       &lt;Member name=&quot;QStatus&quot; offset=&quot;56&quot;   type=&quot;numeric(-4)&quot; value=&quot;$__ERROR&quot;/&gt;
+       &lt;Member name=&quot;QDatum&quot;  offset=&quot;60&quot;   type=&quot;nchar(10)&quot;  value=&quot;$__DATE&quot;/&gt;
+       &lt;Member name=&quot;QZeit&quot;   offset=&quot;70&quot;   type=&quot;nchar(8)&quot;   value=&quot;$__TIME&quot;/&gt;
+       &lt;Member name=&quot;QPruefsumme&quot;  offset=&quot;78&quot;
+               type=&quot;binary(1)&quot;  value=&quot;$__CHKSUM_1&quot;/&gt;
+   &lt;/DefaultResponseBuildRule&gt;
+   &lt;AckParseRule minLength=&quot;56&quot;&gt;
+       &lt;Member name=&quot;Quelle&quot;  offset=&quot;0&quot;     type=&quot;nchar(8)&quot; value=&quot;$Ziel&quot;/&gt;
+       &lt;Member name=&quot;Ziel&quot;  offset=&quot;8&quot;       type=&quot;nchar(8)&quot; value=&quot;$Quelle&quot;/&gt;
+       &lt;Member name=&quot;Kennung&quot;  offset=&quot;16&quot;   type=&quot;nchar(4)&quot;   value=&quot;&#39;XYZ-&#39;&quot;
+               isIdentifier=&quot;true&quot;/&gt;
+       &lt;Member name=&quot;Type&quot;   offset=&quot;20&quot;     type=&quot;nchar(4)&quot;     value=&quot;&#39;QUIT&#39;&quot;
+               isIdentifier=&quot;true&quot;/&gt;
+       &lt;Member name=&quot;Version&quot; offset=&quot;24&quot;    type=&quot;nchar(2)&quot;    value=&quot;&#39;5 &#39;&quot;
+               isIdentifier=&quot;true&quot;/&gt;
+       &lt;Member name=&quot;Zeichencodierung&quot; offset=&quot;26&quot;   type=&quot;nchar(20)&quot;
+               value=&quot;$Zeichencodierung&quot;/&gt;
+       &lt;Member name=&quot;LfdNr&quot;  offset=&quot;46&quot;     type=&quot;nchar(4)&quot; value=&quot;$LfdNr&quot;/&gt;
+       &lt;Member name=&quot;PayloadLength&quot;  offset=&quot;50&quot;        type=&quot;nchar(6)&quot;
+               value=&quot;&#39;23    &#39;&quot; isIdentifier=&quot;true&quot;/&gt;
+       &lt;Member name=&quot;Status&quot;       offset=&quot;56&quot;        type=&quot;numeric(-4)&quot; /&gt;
+       &lt;Member name=&quot;Datum&quot;        offset=&quot;60&quot;        type=&quot;nchar(10)&quot;/&gt;
+       &lt;Member name=&quot;Uhrzeit&quot;      offset=&quot;70&quot;        type=&quot;nchar(8)&quot;/&gt;
+       &lt;Member name=&quot;Pruefsumme&quot;   offset=&quot;78&quot;        type=&quot;binary(1)&quot;/&gt;
+   &lt;/AckParseRule&gt;
+   &lt;RequestBuildRule&gt;
+       &lt;Member name=&quot;Quelle&quot;  offset=&quot;0&quot;   type=&quot;nchar(8)&quot;/&gt;
+       &lt;Member name=&quot;Ziel&quot;  offset=&quot;8&quot; type=&quot;nchar(8)&quot;/&gt;
+       &lt;Member name=&quot;Kennung&quot; offset=&quot;16&quot; type=&quot;nchar(8)&quot;  value=&quot;&#39;XYZ-DATA&#39;&quot;/&gt;
+       &lt;Member name=&quot;Version&quot; offset=&quot;24&quot; type=&quot;nchar(2)&quot; value=&quot;&#39;5 &#39;&quot;/&gt;
+       &lt;Member name=&quot;Zeichencodierung&quot; offset=&quot;26&quot; type=&quot;nchar(20)&quot; 
+               value=&quot;&#39;US-ASCII            &#39;&quot;/&gt;
+       &lt;Member name=&quot;LfdNr&quot;      offset=&quot;46&quot;  type=&quot;nchar(4)&quot; value=&quot;$__SEQCNT&quot;/&gt;
+       &lt;Member name=&quot;PayloadLength&quot; offset=&quot;50&quot;  type=&quot;numeric(-6)&quot;/&gt;
+       &lt;Member name=&quot;Payload&quot;      offset=&quot;56&quot;     type=&quot;binary($PayloadLength)&quot;/&gt;
+       &lt;Member name=&quot;Pruefsumme&quot;     type=&quot;binary(1)&quot;  value=&quot;$__CHKSUM_1&quot;/&gt;
+   &lt;/RequestBuildRule&gt;
+&lt;/ICONUserDefinedProtocol&gt;
+</code></pre><hr>
+<h4 id="format-strings">Format Strings</h4>
+<p>The format can be defined using the Format Strings as the name suggests. Here is an example of the possible items:</p>
+<pre><code class="lang-html">&lt;FormatStrings&gt;
+    &lt;__NOW&gt; HH:mm:ss_dd.MM.yyyy&lt;/__NOW&gt;
+    &lt;__DATE&gt;dd.MM.yyyy&lt;/__DATE&gt;
+    &lt;__TIME&gt;HH:mm:ss&lt;/__TIME&gt;
+&lt;/FormatStrings&gt;
+</code></pre><hr>
+<h4 id="members">Members</h4>
+<p>A Member is used in each of the following rules and is here described for all of them.  </p>
+<p>Possible attributes of a member are:</p>
+<p><strong>name:</strong>  </p>
+<p>Labels the name of the variable; this is required since the values of a member can also be used for other members.</p>
+<p><strong>offset:</strong>  </p>
+<p>Specifies the offest from the start of the telegram</p>
+<p><strong>value:</strong>  </p>
+<p>There are variuos constants for value here:  </p>
+<p>&#39; &#39;&#32;&#32;&#32;&#32;     -&#62;&#32;&#32;&#32;&#32;   value=&quot;&#39;XYZ-DATA&#39;&quot;  </p>
+<p>Describes a constant, The value between the &#39; is the valid value.  </p>
+<p>$:&#32;&#32;&#32;&#32;             -&#62;&#32;&#32;&#32;&#32;         value=&quot;$source&quot;  </p>
+<p>Denotes a reference. (i.e. there is a member with the name source).   </p>
+<p>Another option is to use the references provided internally by ICON:</p>
+<ul>
+<li>__SEQCNT :  Sequence number of the message</li>
+<li>__CHKSUM_1 :  creates a check sum of the telegram length by adding up the bytes</li>
+<li>__ERROR : Specifies the error of the telegram (used, for example, for creating the standard acknowledgement)</li>
+<li>__NOW : Returns the current timestamp in the format specified in the lower strings</li>
+<li>DATE : Returns the current timestamp in the format specified in the lower strings</li>
+<li>TIME : Returns the current timestamp in the format specified in the lower strings</li>
+</ul>
+<p><strong>function name(??):</strong>  </p>
+<p>The round brackets describe a function call. In the function call, a maximum of one reference can also be used as a parameter. Currently supported functions are:</p>
+<ul>
+<li>INC : Increments the value of the variable, which was transferred as a parameter and returns this value</li>
+<li>LEN : Determines the length of the variable, which was transferred as a parameter</li>
+</ul>
+<p><strong>isIdentifier:</strong>  </p>
+<p>Used for the parse rules, for more details, please refer to the chapter <a href="#RequestParseRule/IncomingParseRule">RequestParseRule</a>.  </p>
+<p><strong>markerType:</strong>  </p>
+<p>Marks limits, possible values are:</p>
+<ul>
+<li>headerEnd: Marks the end of the header</li>
+<li>datagramEnd: Marks the end of the telegram</li>
+</ul>
+<p><strong>type:</strong>  </p>
+<p>There are the following options for type:</p>
+<ul>
+<li>nchar</li>
+<li>varchar</li>
+<li>numeric</li>
+<li>varnumeric</li>
+<li>binary</li>
+<li>varbinary</li>
+</ul>
+<p>The length of the member is determined by these data types and the associated length specifications. Here are some examples:  </p>
+<p>type=&quot;nchar(8)&quot;  </p>
+<p>type=&quot;numeric(-6)&quot;  </p>
+<p>type=&quot;binary($PayloadLength)&quot;  </p>
+<p>There is another special feature for the numerics:  </p>
+<p>Let us assume, for example, that the value is 12:  </p>
+<table>
+ <tr><th>numeric(6): </th><td> This means normal handling. </td><td> &#39;&#32;&#32;&#32;&#32;    12&#39;</td></tr>
+ <tr><th>numeric(-6): </th><td> The - means that the number is left-aligned. </td><td> &#39;12&#32;&#32;&#32;&#32;    &#39;</td></tr>
+ <tr><th>numeric(06): </th><td> The 0 means that left is filled up with zeros. </td><td> &#39;000012&#39;</td></tr>
+</table>
+
+
+<hr>
+<h4 id="requestparseruleincomingparserule">RequestParseRule/IncomingParseRule</h4>
+<p><a name="RequestParseRule/IncomingParseRule"></a></p>
+<p>Used to determine whether it is a telegram of the specified UD protocol. For this purpose, all items marked by the attribute &quot;isIdentifier&quot; are compared with the payload data. If they all are equal, it is the current protocol.</p>
+<p>When sending telegrams from the <a href="#MemBasedMsgSink.dll">MemBasedMsgSink.dll</a>, the reading takes place in 2 steps.   </p>
+<p><em>Step 1:</em> reading the header. The header length is determined from the attribute markerType = &quot;headerEnd&quot;. If the payload length is equal to the header length, all further members are ignored.  </p>
+<p><em>Step 2:</em> reading the entire data, the data length is determined by the header length + the value in the member variable &quot;PayloadLength&quot;.
+\pagebreak  </p>
+<p><strong>minLength:</strong>  </p>
+<p>Is used to determine whether the telegram is precisely this protocol.</p>
+<p><strong>FixDataGramLength:</strong>  </p>
+<p>Used for fixed datagram lengths, also overwrites the minLength attribute.</p>
+<p><strong>maxLength:</strong>  </p>
+<p>Used to determine the PayloadLength; <em>optional</em></p>
+<hr>
+<h4 id="requestbuildrule">RequestBuildRule</h4>
+<p>Used to create a standard acknowledgement.</p>
+<hr>
+<h4 id="defaultresponsebuildrule">DefaultResponseBuildRule</h4>
+<p><a name="DefaultResponseBuildRule"></a></p>
+<p>Used to create a standard query with data content. If an <em>ErrorResponseBuildRule</em> is defined, ICON decides independently which of the two BuildRules is used (depending on whether an error occurs or not).</p>
+<hr>
+<h4 id="errorresponsebuildrule">ErrorResponseBuildRule</h4>
+<p>See <a href="#DefaultResponseBuildRule">DefaultResponseBuildRule</a></p>
+<hr>
+<h4 id="ackparserule">AckParseRule</h4>
+<p>Used to check whether the acknowledgement is for the specified UD protocol.</p>
+<hr>
+<h2 id="configuration-60iconmoduleinstances62">Configuration &#60;ICONModuleInstances&#62;</h2>
+<p>In this section, the modules are defined, which are loaded and started by ICON after its start.  </p>
+<p>Each module must have a unique name and the reference to the assembly to be used.</p>
+<p>Example:</p>
+<pre><code class="lang-html">&lt;ICONModule Name=&quot;SocketManagerTCP&quot; Assembly=&quot;SocketManagement.dll&quot;&gt;
+&lt;/ICONModule&gt;
+</code></pre><p>The configuration of every single module or assembly then is individual and to be taken from the chapter <a href="#Module">Module</a>.</p>
+<hr>
+<h2 id="spooling">Spooling</h2>
+<p><a name="Spooling"></a>
+The spooling can be activated at <a href="#ICONSocket.dll">ICONSockets</a>, AlarmPDEMConverter and at <a href="#MemBasedMsgSink.dll">MemBasedMsgSink.dll</a>, etc. An active spooling accepts the data transfer from the source and forwards this decoupled to the sink. The spooling can be configured in multiple ways. See following chapter.</p>
+<hr>
+<h3 id="configuration-spooler">Configuration Spooler</h3>
+<p>Example:</p>
+<pre><code class="lang-html">&lt;Section Type=&quot;Spooler&quot;&gt;
+    &lt;ConfigValue name=&#39;Mode&#39; type=&#39;int&#39;&gt;1&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&#39;MaxNumberOfItems&#39; type=&#39;int&#39;&gt;3333&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&#39;HighWaterMark&#39; type=&#39;int&#39;&gt;2222&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&#39;LowWaterMark&#39; type=&#39;int&#39;&gt;1111&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&#39;MaxMsgDelayTimeHour&#39; type=&#39;int&#39;&gt;7&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&#39;MaxMsgDelayTimeMinute&#39; type=&#39;int&#39;&gt;7&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&#39;MaxMsgDelayTimeSecond&#39; type=&#39;int&#39;&gt;7&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&#39;SleepTimeBetweenMsgs&#39; type=&#39;int&#39;&gt;0&lt;/ConfigValue&gt;             
+    &lt;ConfigValue name=&quot;AllowMoreThanOnePendingMsg&quot; type=&quot;bool&quot;&gt;true&lt;/ConfigValue&gt;
+&lt;/Section&gt;
+</code></pre><p>The &quot;Mode&quot; parameter specifies how the data source receives a response:  </p>
+<p><strong>0 = BeforeSpoolerPut:</strong>  Always positive acknowledgement. Acknowledge positive immediately without considering the spooler status (&#39;Fire And Forget&#39; from the source view). Negative results can only be seen in the Log.</p>
+<p><strong>1 = AfterSpoolerPut:</strong>  Acknowledge after entry of the datagram in spooler if possible. Negative Response if spooler full (no entry!). Additional error codes in conjunction with &#39;Ready&#39; status for feedback of the spooler status (full with next datagram, Highwatermark reached, etc.)</p>
+<p><strong>2 = AfterSinkPut:</strong>  First acknowledge after processing the datagram. Positive Response if datagram was processed by the sink (i.e. acceptance of spooler in sink). Negative Response only if timeout or spooler full.</p>
+<p>The default value of &quot;Mode&quot; is 0.</p>
+<p>&quot;MaxNumberOfItems&quot; defines the maximum number of items, if 0 no limit. Default value = 0.</p>
+<p><img src="../images/info_icon.png" alt="info_icon.png">
+If persistor is configured, a maximum number of 100,000 applies.</p>
+<p>&quot;HighWaterMark&quot; and &quot;LowWaterMark&quot; trigger events from messages to the source if the number of &quot;HighWaterMark&quot; is reached, or was exceeded and if it reaches &quot;LowWaterMark&quot; again or has fallen below. Default values are 0.</p>
+<p>You define a maximum residence time of the message in the spooler with the three specifications &quot;MaxMsgDelayTimeHour&quot;, &quot;MaxMsgDelayTimeMinute&quot; and &quot;MaxMsgDelayTimeSecond&quot;. If the message cannot be transmitted to the sink successfully within this time, it is removed from the spooler. The time starts to run when the first attempt to transmit the message was made. Here, all default values are 9. </p>
+<p>You can control the cycle rate of the processing sequence by modifying &quot;SleepTimeBetweenMsgs&quot;. The specification is in milliseconds. If you want to make sure that the spooler only pulses every x milliseconds, then you should configure the value to x. Default value = 100.</p>
+<p>If AllowMoreThanOnePendingMsg=true, several messages waiting for a response can exist. The default value here is <em>true</em>!  </p>
+<p><img src="../images/info_icon.png" alt="info_icon.png"></p>
+<p>If, however, several telegrams are waiting for a response, these telegrams are no longer kept persistent in the spooler. This means that if AllowMoreThanOnePendingMsg=true when ICON is terminated hard (e.g. kill process by the Task manager) telegrams could be lost, namely all telegrams that are currently being processed or are waiting for an acknowledgement. In the case of a normal termination of ICON, this does not happen since these pending Msgs are started in a cache file that is reloaded and deleted when restarting.</p>
+<p>By the configuration of a &quot;GUI&quot; section you can make the spooler visible in the application. See <a href="#Spooler_Configuration">Configuration Spooler GUI</a>.</p>
+<p>By the configuration of a &quot;GUI&quot; section the spooler buffers the data in a file. See <a href="#Spooler_Persistor">Spooler Persistor</a>.  </p>
+<p><img src="../images/info_icon.png" alt="info_icon.png"></p>
+<p>If &quot;MaxNumberOfItems&quot; is changed when the persistor is configured, the associated persistor file must then be deleted manually.</p>
+<hr>
+<h3 id="manual-spooler">Manual Spooler</h3>
+<p><a name="Manual_Spooler"></a>
+A manual spooler does not execute its Puts automatically but only when triggered by the module. Such spoolers are only the spoolers from JisReceiveImpl at present.</p>
+<hr>
+<h3 id="spooler-persistor">Spooler Persistor</h3>
+<p><a name="Spooler_Persistor"></a></p>
+<pre><code class="lang-html">&lt;Section Type=&quot;Persistor&quot;&gt;
+    &lt;ConfigValue name=&#39;Filename&#39; type=&#39;string&#39;&gt;SpoolerDatei&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;ReorgFragmentationFactor&quot; type=&quot;int&quot;&gt;0&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;FlushWatchdogTimeout&quot; type=&quot;int&quot;&gt;5000&lt;/ConfigValue&gt;
+&lt;/Section&gt;
+</code></pre><p>Define the name of the file with &quot;filename&quot;.</p>
+<p>&quot;ReorgFragmentationFactor&quot; has to be an integer between 10 and 100, if the value is outside this range, the fragmentation is deactivated. If a spooler file reaches the specified fragmentation (in percent), then the file is defragmented.</p>
+<p><img src="../images/warning_icon.png" alt="warning_icon.png"></p>
+<p>Avoid unfavourable values so that the system is not preoccupied with frequent defragmentations.</p>
+<p>FlushWatchdogTimeout allows you to define the timeout in milliseconds after which the spooler data should be flushed.</p>
+<hr>
+<h2 id="multi-xml-configurations">Multi-XML Configurations</h2>
+<p>You can use the (Root) section &quot;&#60;ICONConfigs&#62;&quot; to keep multiple configurations in a single XML file. Add all your existing configurations to the XML file as follows:</p>
+<pre><code class="lang-html">&lt;ICONConfigs&gt;
+    &lt;ICONConfig Name = &#39;Meine Konfig 1&#39;&gt;
+    &lt;/ICONConfig&gt;
+    &lt;ICONConfig Name = &#39;Meine Konfig 2&#39;&gt;
+    &lt;/ICONConfig&gt;
+    &lt;ICONConfig Name = &#39;Meine Konfig 3&#39;&gt;
+    &lt;/ICONConfig&gt;
+    &lt;ICONConfig Name = &#39;Meine Konfig X&#39;&gt;
+    &lt;/ICONConfig&gt;
+&lt;/ICONConfigs&gt;
+</code></pre><p>ICON will then offer you a selection window when starting, where you can execute the required configuration.</p>
+<p>For example, select a configuration and then click on activate.  </p>
+<p><img src="../images/ICON_Config_Selec_3_9.png" alt="ICON_Config_Selec_3_9.png"></p>
+<p><img src="../images/ICON_Config_Selec2_3_9.png" alt="ICON_Config_Selec2_3_9.png"></p>
+<p>The selected configuration is displayed in the title of the ICON application.</p>
+<p><img src="../images/ICON_Config_Selec3_3_9.png" alt="ICON_Config_Selec3_3_9.png"></p>
+<hr>
+<h1 id="gui-of-icon">GUI of ICON</h1>
+<p><a name="gui_of_icon"></a>
+Here, you will learn about the special features and operability of the application GUIs.  </p>
+<p>ICON supports two styles: </p>
+<ul>
+<li><strong>Navigation with tabs</strong>  </li>
+</ul>
+<p><img src="../images/ICON_tabnavi.png" alt="ICON_tabnavi.png"></p>
+<ul>
+<li><strong>Navigation with trees</strong>  </li>
+</ul>
+<p><img src="../images/ICON_treenavi.png" alt="ICON_treenavi.png"></p>
+<p>For details, see the section <a href="#Configuration_ICONGlobals">Configuration &#60;ICONGlobals&#62;</a></p>
+<h2 id="logger">Logger</h2>
+<p><img src="../images/ICON_GUI_Logger.png" alt="ICON_GUI_Logger.png"></p>
+<p>If you double click on a row in the logger, the cell will be copied to the clipboard.</p>
+<p><img src="../images/ICON_GUI_Logger2.png" alt="ICON_GUI_Logger2.png"></p>
+<p>If you right-click on a row, you can copy all rows to the clipboard via the popup menu.</p>
+<hr>
+<h2 id="connections">Connections</h2>
+<p>&quot;Connections&quot; appears as a second tab page. The connections to the PLCs are displayed here.</p>
+<p><img src="../images/ICON_GUI_Connec.png" alt="ICON_GUI_Connec.png"></p>
+<p><img src="../images/ICON_GUI_Connec2.png" alt="ICON_GUI_Connec2.png"></p>
+<hr>
+<h2 id="spooler">Spooler</h2>
+<p><img src="../images/ICON_GUI_Spooler.png" alt="ICON_GUI_Spooler.png"></p>
+<p><img src="../images/ICON_GUI_Spooler2.png" alt="ICON_GUI_Spooler2.png"></p>
+<p>In the spooler you can see a row entry with the most essential information for each message. In the lower status bar (light blue), the total number of messages in the spooler and the next item to be processed are displayed. You can also find the last action and name (&quot;Label&quot;) of the spooler here.  </p>
+<p>In the area above this, messages that have already been processed and which are waiting for a response are displayed. (If the AllowMoreThanOnePendingMsgs option is set to false, this area is then hidden)  </p>
+<p>If you double click on a row, the cell will be copied to the clipboard.</p>
+<p><img src="../images/ICON_GUI_Spooler3.png" alt="ICON_GUI_Spooler3.png"></p>
+<p>The Listeners (PassiveEndPoint sections) generated in the Socket Manager enter the routing information in the tab/tree node, the label is displayed below.</p>
+<p>If you right-click here, you will see the following popup menu:</p>
+<p><img src="../images/ICON_GUI_Spooler4.png" alt="ICON_GUI_Spooler4.png"></p>
+<p><img src="../images/ICON_GUI_Spooler5.png" alt="ICON_GUI_Spooler5.png"></p>
+<ol>
+<li><strong>Delete IconMessage:</strong> This refers to the selected rows. All selected rows are deleted, but only consecutively from the first. (If the &quot;&#42;&#42;&#42;&quot; row is selected and deleted, all IconMessages from the beginning onwards, as well as all those hidden below &quot;&#42;&#42;&#42;&quot; will be deleted.</li>
+<li><strong>MoveUp, MoveDown:</strong> Both these entries can be activated via the parameterisation. They are used to move messages.</li>
+<li><strong>PutMessage:</strong> This option can also be activated via the parameterisation, it is used to send a message to the sink immediately. (however, this option is only possible for a manual spooler)</li>
+<li><strong>EditMessage:</strong> Also being activated via the parameterisation, this option is used to edit data of a message. (like PutMessage, this option is also only possible for a manual spooler)</li>
+</ol>
+<p><img src="../images/ICON_GUI_Spooler6.png" alt="ICON_GUI_Spooler6.png"></p>
+<p>Above, you can see a spooler with</p>
+<pre><code class="lang-html">&lt;ConfigValue name=&#39;ShowItemsFirst&#39; type=&#39;int&#39;&gt;20&lt;/ConfigValue&gt;
+&lt;ConfigValue name=&#39;ShowItemsLast&#39; type=&#39;int&#39;&gt;30&lt;/ConfigValue&gt;
+</code></pre><p>Therefore, only the first 20 and last 30 items are displayed. Between this there is an empty row with &quot;&#42;&#42;&#42;&quot;.
+As stated above, deleting this &quot;&#42;&#42;&#42;&quot;-row will delete all messages hidden under it (in this case, all messages between the first 20 and the last 30!)</p>
+<hr>
+<h3 id="spooler-configuration">Spooler Configuration</h3>
+<p><a name="Spooler_Configuration"></a></p>
+<pre><code class="lang-html">&lt;Section Type=&quot;GUI&quot;&gt;
+    &lt;ConfigValue name=&quot;UserLevelModule&quot; type=&quot;string&quot;&gt;PLCUserLevel&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;Group&quot; type=&quot;string&quot;&gt;Spooler&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;Label&quot; type=&quot;string&quot;&gt;Mein Spooler&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&#39;ShowItemsFirst&#39; type=&#39;int&#39;&gt;25&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&#39;ShowItemsLast&#39; type=&#39;int&#39;&gt;15&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&#39;AllowSpoolerItemUpDownMove&#39; type=&#39;bool&#39;&gt;false&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&#39;AllowPutFromGUI&#39; type=&#39;bool&#39;&gt;false&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&#39;LastOnTop&#39; type=&#39;bool&#39;&gt;false&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&#39;UserCanEditSpoolerItem&#39; type=&#39;bool&#39;&gt;false&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&#39;EditItemValue&#39; type=&#39;string&#39;&gt;&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;FirstColumnIsRowNumber&quot; type=&quot;bool&quot;&gt;false&lt;/ConfigValue&gt;
+    &lt;Section Type=&quot;Columns&quot;&gt;
+        &lt;Column name=&quot;!1AnzahlTeile&quot; data=&quot;Payload=112,2&quot; /&gt;
+        &lt;Column name=&quot;!2Band&quot; data=&quot;Payload=114,2&quot; /&gt;
+        &lt;Column name=&quot;!3Motornummer&quot; data=&quot;Payload=116,10&quot; /&gt;
+        &lt;Column name=&quot;ZZData&quot; data=&quot;Payload=116&quot; /&gt;
+     &lt;/Section&gt;
+&lt;/Section&gt;
+</code></pre><ul>
+<li><strong>UserLevelModule:</strong> Here, you can specify a UserLevelModule. With this, for example, you can disable moving, forwarding, processing etc.</li>
+<li><strong>Group:</strong> Allows you to specify the tab in which the spooler should appear. The tabs are created and managed automatically. However, the dynamic spoolers of the Socket Manager are always displayed in the fixed &quot;Spooler&quot; tab.</li>
+<li><strong>Label:</strong> Give the spooler a &quot;Label&quot; so that it can be identified clearly within a group.</li>
+<li><strong>ShowItemsFirst</strong> and <strong>ShowItemsLast:</strong> As shown above in 4.4, with these options you determine the amount displayed of the first and last messages.</li>
+<li><strong>AllowSpoolerItemUpDownMove:</strong> Determines whether or not it is possible to move telegrams in the spooler.</li>
+<li><strong>AllowPutFromGui:</strong> Determines whether or not it is possible to put any message into the next sink. However, this option is only relevant for a <a href="#Manual_Spooler">manual spooler</a> </li>
+<li><strong>LastOnTop:</strong> If set to true, the normal order on the display is inverted (i.e. the newest telegram is at the top, the oldest is at the bottom).</li>
+<li><strong>Columns:</strong> Here, you can declare additional columns to be displayed in the spooler. The configuration takes place in exactly the same way as with History Spooler.</li>
+<li><strong>UserCanEditSpoolerItem:</strong> If set to true, items can be edited. For this purpose, an additional DataGrid appears on the spooler page. However, this option also is only relevant for a <a href="#Manual_Spooler">manual spooler</a> </li>
+<li><strong>EditItemValue:</strong> Specifies, which data can be edited using &quot;EditItemValue&quot;. However, this option is also only relevant for a <a href="#Manual_Spooler">manual spooler</a> </li>
+<li><strong>FirstColumnIsRowNumber:</strong>If set to true, the first column is no longer the MsgId but the row number in the GUI instead.</li>
+</ul>
+<p>In <a href="#Configuration_ICONGlobals">ICONGlobals</a>, you can also modify the font size of the spooler rows for all spoolers.</p>
+<hr>
+<h3 id="spooler-with-history">Spooler with History</h3>
+<p>If the History is configured, then an additional DataGrid with data already processed from the spooler appears in the GUI. In other words, the data that was transmitted successfully or deleted, unless they were filtered out.  </p>
+<p><img src="../images/ICON_GUI_SpoolerHistory1.png" alt="ICON_GUI_SpoolerHistory1.png"></p>
+<p><img src="../images/ICON_GUI_SpoolerHistory2.png" alt="ICON_GUI_SpoolerHistory2.png"></p>
+<p>The configuration of the History is created as a subsection in the GUI section of the spooler section:</p>
+<pre><code class="lang-html">&lt;Section Type=&quot;Spooler&quot;&gt;
+    ...
+    &lt;Section Type=&quot;GUI&quot;&gt;
+        ...
+        &lt;Section Type=&quot;History&quot;&gt;
+            ...
+        &lt;/Section&gt;
+    &lt;/Section&gt;
+&lt;/Section&gt;
+</code></pre><p>An example configuration therefore looks like this:</p>
+<pre><code class="lang-html">&lt;Section Type=&quot;History&quot;&gt;
+    &lt;ConfigValue name=&#39;MaxNumberOfItems&#39; type=&#39;int&#39;&gt;500&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&#39;LastOnTop&#39; type=&#39;bool&#39;&gt;false&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&#39;ShowInTabs&#39; type=&#39;bool&#39;&gt;false&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&#39;DefaultTabIsHistory&#39; type=&#39;int&#39;&gt;500&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&#39;AllowSpoolerItemUpDownMove&#39; type=&#39;bool&#39;&gt;false&lt;/ConfigValue&gt;
+    &lt;Section Type=&quot;Persistor&quot;&gt;
+        &lt;ConfigValue name=&#39;Filename&#39; type=&#39;string&#39;&gt;Test.History&lt;/ConfigValue&gt;
+    &lt;/Section&gt;
+    &lt;Section Type=&quot;Filters&quot;&gt;
+        &lt;Section Type=&quot;Filter&quot;&gt;
+            &lt;ConfigValue name=&#39;Filter&#39; type=&#39;string&#39;&gt;$$$CPE=&#39;CSVREAD AB&#39;&lt;/ConfigValue&gt;
+            &lt;Section Type=&quot;Columns&quot;&gt;
+                &lt;Column name=&quot;$$$CPE&quot; data=&quot;Payload,0,10&quot; /&gt;
+                &lt;Column name=&quot;$$$FirstBytes&quot; data=&quot;Payload,0,10&quot; /&gt;
+            &lt;/Section&gt;
+        &lt;/Section&gt;
+        &lt;Section Type=&quot;DisplayFilters&quot; Default=&#39;Filter1&#39;&gt;
+            &lt;DisplayFilter name=&quot;Filter1&quot; filter=&quot;CSVREAD AT&quot; /&gt;
+            &lt;DisplayFilter name=&quot;Filter2&quot; filter=&quot;CSVREAD A2&quot; /&gt;
+            &lt;DisplayFilter name=&quot;Filter3&quot; filter=&quot;SlotSrc = &#39;0&#39;&quot; /&gt;
+            &lt;DisplayFilter name=&quot;Filter4&quot; filter=&quot;SlotSrc = &#39;0&#39; AND
+                           State=&#39;Unknown&#39;&quot; /&gt;
+            &lt;DisplayFilter name=&quot;Filter5&quot; filter=&quot;SlotSrc = &#39;1&quot; /&gt;
+            &lt;DisplayFilter name=&quot;Filter6&quot; filter=&quot;SlotSrc = &#39;1&#39; AND
+                           State=&#39;Unknown&#39;&quot; /&gt;
+            &lt;DisplayFilter name=&quot;Filter7&quot; filter=&quot;((State=&#39;x&#39;) AND (State=&#39;y&#39;)) OR
+                           (State=&#39;z&#39;)&quot; /&gt;
+            &lt;DisplayFilter name=&quot;Filter8&quot; filter=&quot;State=&#39;Unknown&#39; OR
+                           State=&#39;NotUnknown&#39;&quot;/&gt;
+            &lt;DisplayFilter name=&quot;Filter9&quot; filter=&quot;State=&#39;Unknown&#39; AND
+                           $$$CPE=&#39;CSVREAD AB&#39;&quot;&gt;
+                &lt;Columns&gt;
+                    &lt;Column name=&quot;$$$CPE&quot; data=&quot;Payload,0,10&quot; /&gt;
+                    &lt;Column name=&quot;$$$FirstBytes&quot; data=&quot;Payload,0,10&quot; /&gt;
+                &lt;/Columns&gt;
+            &lt;/DisplayFilter&gt;
+        &lt;/Section&gt;
+    &lt;/Section&gt;
+&lt;/Section&gt;
+</code></pre><p>MaxNumberOfItems and Filename are self-explanatory or are explained in chapter <a href="#Spooling">Spooling</a>.</p>
+<ul>
+<li><strong>LastOnTop:</strong> Set to &quot;true&quot; for an inversion of the normal display (i.e. the newest telegram is at the top, the oldest is at the bottom).</li>
+<li><strong>ShowInTabs:</strong> Activate to display spoolers and history in two seperate tabs.</li>
+<li><strong>DefaultTabIsHistory:</strong> Determines whether the History tab is activated first when starting.</li>
+</ul>
+<p>There are two subsections available under the Filters section:</p>
+<ul>
+<li><strong>Filter for Insert (Filter Section):</strong> Configures the condition for inserting into the History list.</li>
+<li><strong>Filter of the GUI (Display Filters section):</strong> Configures various conditions of a filter that can be activated in the grid. If the filter name &#60;none&#62; is selected, no filter is activated. When the combo box is opened, the configured Displayfilters appear for selection. A filter can be preselected via the default attribute.</li>
+</ul>
+<p>Within a filter section, a columns subsection can exist which extracts data from &quot;IconMsg&quot;-attributes. The data parameter contains the attribute name, start, and length of the data. This data can also be used to form conditions. The columns are displayed in the grid.   </p>
+<p>If errors occur when forming columns during the evaluation of conditions, the dataset is always displayed and contains a corresponding text in the &quot;$$$$$ERROR$$$$$&quot; column.  </p>
+<p>If you select one or more rows in the history list, you can again transmit this data to the sink by clicking the right mouse button or via the context menu.</p>
+<hr>
+<h2 id="membasedmsgsource">MemBasedMsgSource</h2>
+<p><a name="MemBasedMsgSource"></a>
+In the upper left corner the configured &quot;Label&quot; is displayed for identification. If some of the slots do not appear, there is a vertical scrollbar to move the display. (However, ICON always tries to use the maximum amount of space available, thus, if the window is enlarged, the viewing area will be enlarged, too)  </p>
+<p><img src="../images/ICON_MemMsgSrc.png" alt="ICON_MemMsgSrc.png"></p>
+<p>To query the last error of a slot or to view the telegram sent with this slot, you click on the corresponding button (e.g. A1). If a slot is selected, it will then turn yellow and the last error and telegram data will be displayed below. It is also possible to perform a reset. This means that the bits return to their initial position.  </p>
+<p><img src="../images/ICON_MemMsgSrc2.png" alt="ICON_MemMsgSrc2.png"></p>
+<p><strong>Arrow Up</strong> and <strong>Arrow Down</strong> in ID:  </p>
+<p>In the ID field you can scroll with the arrow-keys. Usually, there are 3 rows: </p>
+<ol>
+<li>The TelegramID</li>
+<li>The data in HEX</li>
+<li>The data as character string, in which the non-displayable characters in decimal are provided with the start/end markers &quot;&#60;&#35;&quot; and &quot;&#35;&#62;&quot;</li>
+</ol>
+<p>Mouse <strong>double-click</strong> on ID:  </p>
+<p>A tooltip is displayed by double-clicking on ID  </p>
+<p><img src="../images/ICON_MemMsgSrc3.png" alt="ICON_MemMsgSrc3.png"></p>
+<hr>
+<h2 id="membasedmsgsink">MemBasedMsgSink</h2>
+<p>The MemBasedMsgSink GUI behaves in exactly the same way as described in the previous chapter on <a href="#MemBasedMsgSource">MemBasedMsgSource</a>.  </p>
+<p><img src="../images/ICON_MemMsgSink.png" alt="ICON_MemMsgSink.png"></p>
+<hr>
+<h1 id="module">Module</h1>
+<p><a name="Module"></a></p>
+<hr>
+<h2 id="iconsocketdll">ICONSocket.dll</h2>
+<p><a name="ICONSocket.dll"></a>
+An ICON Socket depicts a fix in the configuration parameterised active(client) or passive(server) socket connection. As of now, the TCP and RFC1006 protocol are supported. </p>
+<hr>
+<h3 id="configuration-1">Configuration</h3>
+<pre><code class="lang-html">&lt;ICONModule Name=&quot;MeinSocket&quot; Assembly=&quot;ICONSocket.dll&quot;&gt;
+    &lt;ConfigValue name=&quot;Protocol&quot; type=&quot;string&quot;&gt;Tcp&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;Host&quot; type=&quot;string&quot;&gt;*&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;Port&quot; type=&quot;string&quot;&gt;0&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;LocalTSAP&quot; type=&quot;string&quot;&gt; &lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;RemoteTSAP&quot; type=&quot;string&quot;&gt;&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;MaxConnections&quot; type=&quot;int&quot;&gt;0&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;ProtImpl&quot; type=&quot;string&quot;&gt; &lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;DispatchMode&quot; type=&quot;int&quot;&gt;2&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;Sink&quot; type=&quot;string&quot;&gt; &lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;MaxHandshakeTime&quot; type=&quot;int&quot;&gt;10000&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;MaxIdleTime&quot; type=&quot;int&quot;&gt;60&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;FrameSize&quot; type=&quot;int&quot;&gt;1024&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;KeepAliveTime&quot; type=&quot;int&quot;&gt;0&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;KeepAliveInterval&quot; type=&quot;int&quot;&gt;0&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;MaxSocketLatencyTime&quot; type=&quot;int&quot;&gt;0&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;SocketLatencyMeasurementType&quot; type=&quot;string&quot;&gt;Inherit
+    &lt;/ConfigValue&gt;
+&lt;ConfigValue name=&quot;SpoolAlways&quot; type=&quot;bool&quot;&gt;false&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;ReceiveBehaviour&quot; type=&quot;string&quot;&gt;OnlyProtocolData&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;ForceClientConnect&quot; type=&quot;bool&quot;&gt;false&lt;/ConfigValue&gt;
+        OPTIONAL &lt;Section Type=&quot;Spooler&quot; \&gt;
+&lt;/ICONModule&gt;
+</code></pre><p>Meaning of the individual parameters:</p>
+<ul>
+<li><strong>Protocol:</strong> TCP or RFC1006</li>
+<li><strong>Host:</strong> an IP address or DNS, &quot;&#42;&quot;, &quot;0.0.0.0&quot; or &quot;127.0.0.1&quot; are Listeners (Passive Endpoint).</li>
+<li><strong>Port:</strong> a port</li>
+<li><strong>LocalTSAP:</strong> a TSAP (only needed in conjunction with RFC1006!)</li>
+<li><strong>RemoteTSAP:</strong> a TSAP (only needed in conjunction with RFC1006!)</li>
+<li><strong>MaxConnections:</strong> Number of permited multi-client connections for a Listener, &quot;0&quot; for any number.</li>
+<li><strong>ProtImpl:</strong> ???&#95;ICONMsgFactory (Without a valid specification no reception of data is possible!)</li>
+<li><strong>DispatchMode:</strong> Processing mode of the Message-Dispatcher (2 = PreserveSequence)</li>
+<li><strong>Sink:</strong> Reference to the the data sink (Without a valid specification ICON will trigger an exception)</li>
+<li><strong>MaxHandshakeTime:</strong> Timeout in ms to the source</li>
+<li><strong>MaxIdleTime:</strong> After the time has elapsed in seconds without using the socket, it is terminated.</li>
+<li><strong>FrameSize:</strong> Specifies the TPDU&#95;Size of the RFC1006.</li>
+<li><strong>KeepAliveTime:</strong>  Determines how often TCP KeepAlive telegrams are sent. TCP sends KeepAlive telegrams to check whether an idle connection is still active. TCP KeepAliveTime is used when the remote system is responding, otherwise the interval between the transmissions is determined by the KeepAliveInterval. This value is set to not less than 2 hours by default.</li>
+<li><strong>KeepAliveInterval:</strong> Duration between two successive Keepalive transmissions if the confirmation of the earlier Keepalive transmission was not received.    </li>
+<li><strong>MaxSocketLatencyTime:</strong> Can be used to overwrite the state of the latency monitoring for this socket (default setting is found in <a href="#Configuration_ICONGlobals">ICONGlobals</a>). Depending on the setting of &quot;SocketLatencyMeasurementType&quot;, a duration in the handling of a message is measured. If the set time is exceeded, information is displayed on the logging page of ICON. If the value is 0, this monitoring is deactivated.</li>
+<li><strong>SocketLatencyMeasurementType:</strong> Specifies the type of measurement. Possible Values are: &quot;Inherit&quot; (monitoring type is inherited from <a href="#Configuration_ICONGlobals">ICONGlobals</a>), &quot;Disabled&quot; (no monitoring), &quot;Sent&quot; (measurement from beginning of sending to sent), &quot;Received&quot; (measurement from beginning of sending to received acknowledgement).</li>
+<li><strong>SpoolAlways:</strong> spooling is always done (if a spooler is available) no matter what the setting is.</li>
+<li><p><strong>ReceiveBehaviour:</strong> Specification of the receive behaviour. Possible values:        </p>
+<ul>
+<li><strong>OnlyProtocolData:</strong> Only telegrams that correspond to the specified protocol are forwarded.    </li>
+<li><strong>OnlyRawData:</strong> Only raw data is sent or received on the connection. This means that no parsing, splitting or assembling of the incoming data is performed, each telegram is forwarded. <em>Attention</em>, acknowledgements are not handled then either. This means that a raw data telegram cannot be an acknowledgement.    </li>
+<li><strong>ProtocolAndRawData:</strong> An incoming telegram is parsed, if a telegram is detected after a specified protocol impl, it is forwarded. If residual data remains that does not constitute any valid protocol impl telegram, it is still forwarded. (This option with RFC1006 is default true)     </li>
+</ul>
+</li>
+<li><p><strong>ForceClientConnect:</strong> false or true, if true, connection attempts take place every second</p>
+</li>
+</ul>
+<p><strong>When a TCP socket is initialised, the Keep-Alive-Timeout is set to 2 hours and the Keep-Alive-Interval is set to 1 second.</strong></p>
+<hr>
+<h2 id="socketmanagementdll">Socketmanagement.dll</h2>
+<p>The SocketManager can dynamically create active sockets, if the attributes necessary for this were set by a WACC protocol. Besides the active sockets, passive connections can be parameterised as well. The management of several sockets enables the SocketManager to decide which connection is used to send based on the telegram destination.</p>
+<hr>
+<h3 id="configuration-2">Configuration</h3>
+<pre><code class="lang-html">&lt;ICONModule Name=&quot;Socketmanager&quot; Assembly=&quot;SocketManagement.dll&quot;&gt;
+    &lt;ConfigValue name=&quot;DoAutomaticReconnect&quot; type=&quot;bool&quot;&gt;1&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;ProtImpl&quot; type=&quot;string&quot;&gt; &lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;DispatchMode&quot; type=&quot;int&quot;&gt;2&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;Sink&quot; type=&quot;string&quot;&gt;&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;MaxHandshakeTime&quot; type=&quot;int&quot;&gt;10000&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;MaxIdleTime&quot; type=&quot;int&quot;&gt;60&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;SpoolAlways&quot; type=&quot;bool&quot;&gt;false&lt;/ConfigValue&gt;
+    &lt;Section Type=&quot;Spooler&quot; \&gt;
+    &lt;PassiveEndPoint Name=&quot;Listener&quot; \&gt;
+&lt;/ICONModule&gt;
+</code></pre><p>The DoAutomaticReconnect, ProtImpl, DispatchMode and Sink parameters are transferred to the sockets to be instantiated. The same applies to the spooler section.  </p>
+<p>A &quot;PassiveEndPoint&quot; section must be created for the parameterisation of the passive connections (Listeners). The same parameters must be used as with an ICONSocket. The only parameter that cannot be set is the &quot;Host&quot; parameter, for which there is an additional entry:</p>
+<pre><code class="lang-html">&lt;ConfigValue name=&quot;ImmediatelyAcknowledge&quot; type=&quot;int&quot;&gt;0&lt;/ConfigValue&gt;
+</code></pre><p>Set &quot;ImmediatelyAcknowledge&quot; to 1 to receive immediate acknowledgements before the message is transferred to the Message-Dispatcher.  </p>
+<p><strong>SpoolAlways:</strong> Spooling is always done, no matter what the setting is.  </p>
+<hr>
+<h2 id="iconserialdll">ICONSerial.dll</h2>
+<p>This module opens a Com-Port and acts as an interface between Com-Port and Plc in order to write data from the Port to the Plc and vice versa.
+The serial ports are only started if these also exist when starting ICON. This means that if a COM3 is present in the system, it will also be opened; if no Port 3 is present, no attempt will ever be made to open this either (not even if KeepAliveTime and AutoReconnect was parameterised).</p>
+<hr>
+<h3 id="configuration-3">Configuration</h3>
+<pre><code class="lang-html">&lt;ICONModule Name=&quot;Serial3&quot; Assembly=&quot;ICONSerial.dll&quot;&gt;
+    &lt;ConfigValue name=&quot;PortID&quot; type=&quot;int&quot;&gt;0&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;Sink&quot; type=&quot;string&quot;&gt;SerialSink&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;PortName&quot; type=&quot;string&quot;&gt;COM0&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;BaudRate&quot; type=&quot;int&quot;&gt;9600&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;DataBits&quot; type=&quot;int&quot;&gt;8&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;Handshake&quot; type=&quot;string&quot;&gt;None&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;Parity&quot; type=&quot;string&quot;&gt;None&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;StopBits&quot; type=&quot;string&quot;&gt;One&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;AutoReconnect&quot; type=&quot;bool&quot;&gt;false&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;KeepAliveTime&quot; type=&quot;int&quot;&gt;0&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;ProtImpl&quot; type=&quot;string&quot;&gt; 
+     BeginMarkerAndEndMarkerOrientedProtImpl&lt;/ConfigValue&gt;
+&lt;/ICONModule&gt;
+</code></pre><p><img src="../images/warning_icon.png" alt="warning_icon.png">
+ It is only possible to first open a port without an error with .Net 4.0.  </p>
+<p><img src="../images/warning_icon.png" alt="warning_icon.png">
+ Detecting whether a port is disconnected depends on the respective driver. Some drivers ensure error-free behaviour after reconnecting the device even without Disconnect.  </p>
+<p>Meaning of the individual parameters:  </p>
+<ul>
+<li><strong>PortID:</strong> Unique identification number for the port.</li>
+<li><strong>PortName:</strong> Name of the connection (e.g. COM1 or COM2, ...)</li>
+<li><strong>BaudRate:</strong> Transmission rate</li>
+<li><strong>DataBits:</strong> Default length of data bits per byte</li>
+<li><p><strong>Handshake:</strong> Handshake Protocol:        </p>
+<ul>
+<li><strong>None:</strong> No control item is used for the Handshake.    </li>
+<li><strong>XOnXOff:</strong> The XON/XOFF software control protocol is used. The XOFF control is sent to stop the data transmission. The XON control is sent to resume the transmission. These software controls are used instead of Request to Send (RTS)- and Clear to Send (CTS) hardware controls.    </li>
+<li><strong>RequestToSend:</strong> Request-to-Send (RTS) hardware data flow control is used. RTS signals that data is available for the transmission. If the input buffer is full, the RTS row is set to false. The RTS row is set to true if more space becomes available in the input buffer.    </li>
+<li><strong>RequestToSendXOnXOff:</strong> The Request-to-Send (RTS) hardware control and XON/XOFF software control are used.    </li>
+</ul>
+</li>
+<li><p><strong>Parity:</strong> Parity check protocol        </p>
+<ul>
+<li><strong>None:</strong> No parity check is performed.    </li>
+<li><strong>Odd:</strong> Specifies the parity bit so that the number of set bits is an odd number.    </li>
+<li><strong>Even:</strong> Specifies the parity bit so that the number of set bits is an even number.    </li>
+<li><strong>Mark:</strong> Keeps the specification of the parity bit at 1.    </li>
+<li><strong>Space:</strong> Keeps the specification of the parity bit at 0.    </li>
+</ul>
+</li>
+<li><p><strong>StopBits:</strong> Default number of stop bits per byte        </p>
+<ul>
+<li><strong>One:</strong> A stop bit is used.    </li>
+<li><strong>Two:</strong> Two stop bits are used.    </li>
+<li><strong>OnePointFive:</strong> 1.5 stop bits are used.    </li>
+</ul>
+</li>
+<li><p><strong>ProtImpl:</strong> Here, the protocol used must be specified. (See IconProtocols)</p>
+</li>
+<li><strong>AutoReconnect:</strong> If set to true, another attempt is made to reconnect after detecting the disconnected ComPort.</li>
+<li><strong>KeepAliveTime:</strong> Specifies the time interval, at which it should be checked whether the ComPort still exists.</li>
+</ul>
+<hr>
+<h2 id="membasedmsgsinkdll">MemBasedMsgSink.dll</h2>
+<p><a name="MemBasedMsgSink.dll"></a>
+This module should be used if the Plc should serve as a data sink. Here, a transfer handshake takes place with the Plc.</p>
+<hr>
+<h3 id="configuration-4">Configuration</h3>
+<pre><code class="lang-html">&lt;ICONModule Name=&quot;Datenkonsument&quot; Assembly=&quot;PLCBasedMsgImpl.dll&quot;&gt;
+    &lt;ConfigValue name=&quot;MaxHandshakeTime&quot; type=&quot;int&quot;&gt;10000&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;DoMultiSlotHandshake&quot; type=&quot;bool&quot;&gt;true&lt;/ConfigValue&gt;
+    &lt;Section Type=&quot;Slot&quot;&gt;
+        &lt;ConfigValue name=&quot;Impl&quot; type=&quot;string&quot;&gt;PlcBasedMsgImpl.dll&lt;/ConfigValue&gt;
+        &lt;ConfigValue name=&quot;Name&quot; type=&quot;string&quot;&gt;PDEMSinkPlc&lt;/ConfigValue&gt;
+        &lt;ConfigValue name=&quot;Accessor&quot; type=&quot;string&quot;&gt;MainOPC&lt;/ConfigValue&gt;
+        &lt;ConfigValue name=&quot;ObservedGroupUpdateRate&quot; type=&quot;int&quot;&gt;20&lt;/ConfigValue&gt;
+        &lt;ConfigValue name=&quot;Poll&quot; type=&quot;int&quot;&gt;1&lt;/ConfigValue&gt;
+        &lt;ConfigValue name=&quot;DB&quot; type=&quot;int&quot;&gt;401&lt;/ConfigValue&gt;
+        &lt;ConfigValue name=&quot;Offset&quot; type=&quot;int&quot;&gt;0&lt;/ConfigValue&gt;
+        &lt;ConfigValue name=&quot;MaxDatagramLength&quot; type=&quot;int&quot;&gt;-1&lt;/ConfigValue&gt;
+        &lt;ConfigValue name=&quot;FillUpToDataSizeLimit&quot; type=&quot;bool&quot;&gt;true&lt;/ConfigValue&gt;
+    &lt;/Section&gt;
+
+    OPTIONAL &lt;Section Type=&quot;GUI&quot; \&gt;
+
+    OPTIONAL &lt;Section Type=&quot;Spooler&quot; \&gt;
+
+&lt;/ICONModule&gt;
+</code></pre><p>Meaning of the individual parameters:</p>
+<ul>
+<li><strong>Impl:</strong> Specifies the implementation class, here, for example, PlcBasedMsgImpl.</li>
+<li><strong>Name:</strong> Specifies a group name for the bits to be monitored in the PLC.</li>
+<li><strong>Accessor:</strong> Specifies the PLC Accessor.</li>
+<li><strong>ObservedGroupUpdateRate:</strong> Specifies the cycle rate in milliseconds for monitoring the bits in the pool mode.</li>
+<li><strong>Poll:</strong> The functionality of the PLC monitoring, whether polling=1 or event controlled =0. </li>
+<li><strong>DB:</strong> The data module to be used in the PLC. (If DB is not specified, an attempt is made to read out the &quot;PufferDB&quot; parameter)</li>
+<li><strong>Offset:</strong> Specification of the Offset in the data module. (If Offset is not specified, an attempt is made to read out the &quot;PufferFirstByte&quot; parameter)</li>
+<li><strong>MaxDatagramLength:</strong> If a value greater or equal to zero is entered, then the maximum description is monitored with data on the DB from Offset. If the data then exceeds the maximum permissible length, the data is cut off.</li>
+<li><strong>FillUpToDataSizeLimit:</strong> Fills the data to be written up to MaxDatagramLength with blank. (Is only active if MaxDatagramLength was specified)</li>
+</ul>
+<p>The GUI and Spooler sections are optional and are described in the following chapters.  </p>
+<hr>
+<h4 id="domultislothandshake">DoMultiSlotHandshake</h4>
+<p>The &quot;DoMultiSlotHandshake&quot; parameter is only relevant for operation with a spooler and may only be set to &quot;true&quot; in this case. It changes the interaction between the spooler and MemBasedMsgSink.   </p>
+<p><img src="../images/warning_icon.png" alt="warning_icon.png">
+ If DoMultiSlotHandshake = true, a spooler must be integrated and the &quot;AllowMoreThanOnePendingMsg&quot; parameter must be set to &quot;true&quot; for the integrated spooler.  </p>
+<p>If a MemBasedMsgSink has more than one slot, more than one message can be located in &quot;delivery&quot; at the same time. For example, in the case of 3 empty slots, 3 messages can be taken from the spooler immediately and transferred to the respective slot. However, the strategy for the handshake handling then is different: Since ICON works further on with a thread in this situation, it is not possible to wait &quot;synchronously&quot; for handshake signals (as is the case with &quot;DoMultiSlotHandshake&quot; = false), but instead ICON &quot;scans&quot; all slots in succession for any change in the handshake bit with a Timeout time of 100ms. A connected PLC that processes and acknowledges all slots in a cycle virtually &quot;in parallel&quot;, for example, is thus handled more efficiently. At the same time, the spooler must be able to handle multiple pending messages, because those may only be removed by the PLC after the acknowledgement. Since the program internal equal treatment always resulted in different combinations of problems (the spooler is also used in the interaction with other MessageSinks) it was decided to control this special &quot;operating mode&quot;, which actually only exists with multiple slots for a MemBasedMsgSink, via the configuration and to branch program-internal accordingly.  </p>
+<p>Thus, to summarise, only the following combinations are allowed:  </p>
+<table><tr><th>Spooler is present </th><th> Spooler: </th><th> MemBasedMsgSink:</th></tr>
+<tr><th>   </th><th> AllowMoreThanOnPendingMsg </th><th> DoMultiSlotHandshake</th></tr>
+<tr><td>No </td><td> - </td><td> False</td></tr>
+<tr><td>Yes </td><td> False </td><td> False</td></tr>
+<tr><td>Yes </td><td> True </td><td> False</td></tr>
+<tr><td>Yes </td><td> True </td><td> True</td></tr>
+</table>
+
+
+
+<hr>
+<h3 id="signal-time-diagram-slot-membasedmsgsink">Signal Time Diagram Slot (MemBasedMsgSink)</h3>
+<hr>
+<h3 id="impl">Impl</h3>
+<p><a name="Impl"></a>
+The MemBasedMsgSink can use various implementations, afterwards the variants currently possible are listed.  </p>
+<hr>
+<h4 id="plcbasedmsgimpldll">PlcBasedMsgImpl.dll</h4>
+<hr>
+<h5 id="plc-interface-structure">PLC Interface Structure</h5>
+<table><tr><th>Data type </th><th> Designation </th><th> Access mode</th></tr>
+<tr><td>Byte </td><td> commandWordLB </td><td> Write</td></tr>
+<tr><td>Byte </td><td> commandWordHB </td><td> Write</td></tr>
+<tr><td>Byte </td><td> stateWordLB </td><td> Read</td></tr>
+<tr><td>Byte </td><td> stateWordHB </td><td> Read</td></tr>
+<tr><td>SByte </td><td> ackCode1 </td><td> Read/Write</td></tr>
+<tr><td>SByte </td><td> ackCode2 </td><td> Read/Write</td></tr>
+<tr><td>Byte[] </td><td> data </td><td> Write</td></tr>
+</table>
+
+
+
+
+
+<hr>
+<h5 id="plc-interface-bits">PLC Interface Bits</h5>
+<table><tr><th colspan="3">Structure ICON  --&gt;  PLC Word (commandWord):</th></tr>
+<tr><th>Bit No </th><th> Enum </th><th> Description</th></tr>
+<tr><td>Bit 0 </td><td> DataAvailable </td><td> Data available for processing (this bit is set</td></tr>
+<tr><td>   </td><td>    </td><td> by ICON if the data was saved in the DB) </td></tr>
+<tr><td>Bit 1-15 </td><td> </td><td> &#60;free&#62;</td></tr>
+</table>
+
+
+
+
+
+
+<p><br></p>
+<table><tr><th colspan="3">Structure PLC  --&gt;  ICON Word (stateWord):</th></tr>
+<tr><th>Bit No </th><th> Enum </th><th> Description</th></tr>
+<tr><td>Bit 0 </td><td> DataProcessed </td><td> This bit is set by the PLC if the data was accepted</td></tr>
+<tr><td>Bit 1 </td><td> NoAck </td><td> Bit must be set if no acknowledgement</td></tr>
+<tr><td>   </td><td>    </td><td> should be sent to the telegram</td></tr>
+<tr><td>Bit 2 </td><td> SpecialAck </td><td> If this bit is set, an acknowledgement is</td></tr>
+<tr><td>   </td><td>    </td><td> generated from the data to the slot</td></tr>
+<tr><td>Bit 3 </td><td> NetByteOrder </td><td> If this bit is set, byte swapping is performed with</td></tr>
+<tr><td>   </td><td>    </td><td> the telegram. (Only relevant in conjunction with</td></tr>
+<tr><td>   </td><td>    </td><td> SpecialAck)</td></tr>
+<tr><td>Bit 4-15 </td><td> </td><td> &#60;free&#62;</td></tr>
+</table>
+
+
+
+
+
+
+<p><img src="../images/warning_icon.png" alt="warning_icon.png">
+ SpecialAck is only effective if the spooler mode is set to 2</p>
+<hr>
+<h4 id="plc2comsinkimpldll">PLC2COMSinkImpl.dll</h4>
+<hr>
+<h5 id="plc-interface-structure-1">PLC Interface Structure</h5>
+<table><tr><th>Data type </th><th> Designation </th><th> Access mode</th></tr>
+<tr><td>Byte </td><td> commandWordLB </td><td> Write</td></tr>
+<tr><td>Byte </td><td> commandWordHB </td><td> Write</td></tr>
+<tr><td>Byte </td><td> stateWordLB </td><td> Read</td></tr>
+<tr><td>Byte </td><td> stateWordHB </td><td> Read</td></tr>
+<tr><td>Byte[] </td><td> data </td><td> Write</td></tr>
+</table>
+
+
+
+<hr>
+<h5 id="plc-interface-bits-1">PLC Interface Bits</h5>
+<table><tr><th colspan="3">Structure ICON  --&gt;  PLC Word (commandWord):</th></tr>
+<tr><th>Bit No </th><th> Enum </th><th> Description</th></tr>
+<tr><td>Bit 0 </td><td> DataAvailable </td><td> Data available for processing (this bit is set</td></tr>
+<tr><td>   </td><td>    </td><td> by ICON if the data was saved in the DB)</td></tr>
+<tr><td>Bit 1 </td><td> AlivFlag </td><td> Toggle Flag</td></tr>
+<tr><td>Bit 2-13 </td><td> DataSentOrderX </td><td> Bits 2-13 are acknowledgements to the</td></tr>
+<tr><td>   </td><td>    </td><td> transmission triggers from the control word</td></tr>
+<tr><td>Bit 14 </td><td> RxPortIDLoBit </td><td> Encodes the port ID of the last receipt</td></tr>
+<tr><td>Bit 15 </td><td> RxPortIDHiBit </td><td> Encodes the port ID of the last receipt</td></tr>
+</table>
+
+
+
+
+
+<p><br></p>
+<table><tr><th colspan="3">Structure PLC  --&gt;  ICON Word (stateWord):</th></tr>
+<tr><th>Bit No </th><th> Enum </th><th> Description</th></tr>
+<tr><td>Bit 0 </td><td> DataProcessed </td><td> This bit is set by the PLC if the data was accepted</td></tr>
+<tr><td>Bit 1 </td><td> </td><td> &#60;free&#62;</td></tr>
+<tr><td>Bit 2-13 </td><td> TriggerOrderX </td><td> Bits 2-13 are transmission triggers, ICON</td></tr>
+<tr><td>   </td><td>    </td><td> acknowledges the successful transmission</td></tr>
+<tr><td>   </td><td>    </td><td> process by the DataSentOrderX bits</td></tr>
+<tr><td>Bit 14-15 </td><td> </td><td> &#60;free&#62;</td></tr>
+</table>
+
+
+
+<hr>
+<h5 id="extended-configuration">Extended Configuration</h5>
+<pre><code class="lang-html"> &lt;ICONModule Name=&quot;SerialSink&quot; Assembly=&quot;MemBasedMsgSink.dll&quot;&gt;
+      &lt;Section Type=&quot;Slot&quot;&gt;
+        &lt;ConfigValue name=&quot;Impl&quot; type=&quot;string&quot;&gt;PLC2COMImpl.dll&lt;/ConfigValue&gt;
+                                    ...
+        &lt;ConfigValue name=&quot;IgnoreDoubleInterval&quot; type=&quot;int&quot;&gt;1500&lt;/ConfigValue&gt;
+        &lt;ConfigValue name=&quot;AliveFlagCycle&quot; type=&quot;int&quot;&gt;1000&lt;/ConfigValue&gt;
+
+        &lt;ConfigValue name=&quot;Request1&quot; 
+                     type=&quot;string&quot;&gt;Telnet1:DB402.B0,50&lt;/ConfigValue&gt;
+
+        &lt;ConfigValue name=&quot;Request2&quot; 
+                     type=&quot;string&quot;&gt;Telnet2:Scanner1.txt&lt;/ConfigValue&gt;
+        ...
+        &lt;ConfigValue name=&quot;Request12&quot; 
+                     type=&quot;string&quot;&gt;SPID101:DB402.B0,50&lt;/ConfigValue&gt;
+
+      &lt;/Section&gt;
+    &lt;/ICONModule&gt;
+</code></pre><p>Meaning of the individual parameters:</p>
+<ul>
+<li><strong>Impl:</strong> Specifies the implementation class, here, for example, PlcBasedMsgImpl</li>
+<li><strong>Name:</strong> Generates a group name for the bits to be monitored in the PLC</li>
+<li><strong>Request:</strong> Here, data can be sent to the specified interface from the PLC. Structure of the string: ModulID:Source        <ul>
+<li><em>ModulID:</em> Here, the name of the transmitting module must be specified    </li>
+<li><em>Source:</em> Specifies the source, which is either a PLC or a file:                <ul>
+<li><em>PLCSource:</em> DB[DBNumber].B[ByteOffset],[NumberBytes]        </li>
+<li><em>FileSource:</em> Path and filename        </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="gui-membasedmsgsink">GUI MemBasedMsgSink</h3>
+<p><a name="GUI MemBasedMsgSink"></a>
+The GUI can be configured as follows:</p>
+<pre><code class="lang-html">&lt;Section Type=&quot;GUI&quot;&gt;
+    &lt;ConfigValue name=&quot;Group&quot; type=&quot;string&quot;&gt;File&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;Label&quot; type=&quot;string&quot;&gt;552&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;RefreshInterval&quot; type=&quot;int&quot;&gt;50&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;RefreshOnlyIfVisible&quot; type=&quot;bool&quot;&gt;true&lt;/ConfigValue&gt;
+&lt;/Section&gt;
+</code></pre><p>Meaning of the individual parameters:</p>
+<ul>
+<li><strong>Group:</strong> Can be used to determine the tab</li>
+<li><strong>Label:</strong> Writes the text for identification in the upper left corner of the display</li>
+<li><strong>RefreshInterval:</strong> Specified in milliseconds and should be set to a value the system can handle  </li>
+</ul>
+<p><img src="../images/warning_icon.png" alt="warning_icon.png">
+ If set to 0, the GUI is constantly refreshed which may overload the system</p>
+<ul>
+<li><strong>RefreshOnlyIfVisible:</strong> Determines whether the GUI is only refreshed when it is selected</li>
+</ul>
+<hr>
+<h2 id="membasedmsgsourcedll">MemBasedMsgSource.dll</h2>
+<p>This module should be used if the PLC should serve as a data source. Herem a transfer handshake takes place with the PLC</p>
+<hr>
+<h3 id="configuration-5">Configuration</h3>
+<pre><code class="lang-html">&lt;ICONModule Name=&quot;Datenlieferant&quot; Assembly=&quot;MemBasedMsgSource.dll&quot;&gt;
+    &lt;ConfigValue name=&quot;OnMessageCreated&quot; type=&quot;string&quot;&gt;AModul&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;DispatchMode&quot; type=&quot;int&quot;&gt;2&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;Sink&quot; type=&quot;string&quot;&gt;PDEMPassiveEndPoint&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;Impl&quot; type=&quot;string&quot;&gt;PlcBasedMsgImpl.dll&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;Name&quot; type=&quot;string&quot;&gt;PDEMSourcePlc&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;Accessor&quot; type=&quot;string&quot;&gt;MainOPC&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;ObservedGroupUpdateRate&quot; type=&quot;int&quot;&gt;20&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;Poll&quot; type=&quot;int&quot;&gt;1&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;DB&quot; type=&quot;int&quot;&gt;402&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;Offset&quot; type=&quot;int&quot;&gt;0&lt;/ConfigValue&gt;   
+      &lt;ConfigValue name=&quot;WaitingFallingAckReady&quot; type=&quot;bool&quot;&gt;false&lt;/ConfigValue&gt;    
+        &lt;ConfigValue name=&quot;MaxHandshakeTime&quot; type=&quot;int&quot;&gt;10000&lt;/ConfigValue&gt;
+        &lt;ConfigValue name=&quot;MaxPrefetchByteCount&quot; type=&quot;int&quot;&gt;100&lt;/ConfigValue&gt;
+      &lt;ConfigValue name=&quot;MsgExecutionMode&quot; 
+type=&quot;string&quot;&gt;ThreadBasedExecutor&lt;/ConfigValue&gt;
+
+    OPTIONAL &lt;Section Type=&quot;GUI&quot; \&gt;
+
+&lt;/ICONModule&gt;
+</code></pre><p>Meaning of the individual parameters:</p>
+<ul>
+<li><strong>OnMessageCreated:</strong> If desired or necessary, you can here transfer a message to another source after its creation in order to configure or manipulate it individually further on</li>
+<li><strong>DispatchMode:</strong> Mode of the Dispatcher, see <a href="#howdoesiconwork">other chapter</a> </li>
+<li><strong>Sink:</strong> The sink for the data transmission</li>
+<li><strong>Impl:</strong> specifies the implementation class, here, PlcBasedMsgImpl. For details see <a href="#Impl">Impl</a> </li>
+<li><strong>Name:</strong> Generates a group name for the bits to be monitored in the PLC</li>
+<li><strong>Accessor:</strong> Specifies the PLC Accessor</li>
+<li><strong>ObservedGroupUpdateRate:</strong> Specifies tje cycle rate in milliseconds for monitoring the bits to be monitored in the pool mode</li>
+<li><strong>Poll:</strong> The functionality of the PLC monitoring, whether polling=1 or event controlled=0</li>
+<li><strong>DB:</strong> The data module used in the PLC</li>
+<li><strong>Offset:</strong> Specification of the offset in the data module</li>
+<li><strong>WaitingFallingAckReady:</strong> If set to true, the handshake cycle waits until the ReadyAck falls</li>
+<li><strong>WaitForFallingAck:</strong> like WaitingFallingAckReady</li>
+<li><strong>MaxHandshakeTime:</strong> </li>
+<li><strong>MaxPrefetchByteCount:</strong> Specifies the minimum length of the first bytes when reading from a DB. Default value = 0</li>
+<li><strong>MsgExecutionMode:</strong> Possible Specifications:            <ul>
+<li>AsynchronousExecutionPattern        </li>
+<li>ThreadPoolBasedExecutor        </li>
+<li>ThreadBasedExecutor        </li>
+</ul>
+</li>
+</ul>
+<p><img src="../images/warning_icon.png" alt="warning_icon.png">
+ Please always use &quot;ThreadBasedExecutor&quot;. Only use others after consultation  </p>
+<p>The GUI section is optional and is described in the following chapters.</p>
+<hr>
+<h3 id="signal-time-diagram">Signal Time Diagram</h3>
+<hr>
+<h3 id="impl-1">Impl</h3>
+<p>The MemBasedMsgSource can use various implementations, in the following, the variants currently possible are listed</p>
+<hr>
+<h4 id="simpleplcbasedmsgsourceimpldll">SimplePlcBasedMsgSourceImpl.dll</h4>
+<hr>
+<h5 id="plc-interface-structure-2">PLC Interface Structure</h5>
+<table><tr><th>Data type </th><th> Designation </th><th> Access mode</th></tr>
+<tr><td>Byte </td><td> commandWordLB </td><td> Read</td></tr>
+<tr><td>Byte </td><td> commandWordHB </td><td> Read</td></tr>
+<tr><td>Byte </td><td> stateWordLB </td><td> Write</td></tr>
+<tr><td>Byte </td><td> stateWordHB </td><td> Write</td></tr>
+<tr><td>UShort </td><td> error </td><td> Write</td></tr>
+<tr><td>USHort </td><td> dataLen </td><td> Read</td></tr>
+<tr><td>Byte[] </td><td> data </td><td> Read</td></tr>
+</table>
+
+
+
+<hr>
+<h5 id="plc-interface-bits-2">PLC Interface Bits</h5>
+<table><tr><th colspan="3">Structure PLC  --&gt;  ICON Word (commandWord):</th></tr>
+<tr><th>Bit No </th><th> Enum </th><th> Description</th></tr>
+<tr><td>Bit 0 </td><td> Request </td><td> Data available for processing (This bit is set by</td></tr>
+<tr><td>   </td><td>    </td><td> ICON if the data was saved in the DB.)</td></tr>
+<tr><td>Bit 1 </td><td> RequestToggle </td><td> Toggle Flag</td></tr>
+<tr><td>Bit 2-15 </td><td> </td><td> &#60;free&#62;</td></tr>
+</table>
+
+
+
+
+
+<p><br></p>
+<table><tr><th colspan="3">Structure ICON  --&gt;  PLC Word (stateWord):</th></tr>
+<tr><th>Bit No </th><th> Enum </th><th> Description</th></tr>
+<tr><td>Bit 0 </td><td> Running </td><td> is set when a request is running</td></tr>
+<tr><td>Bit 1-15 </td><td> </td><td> &#60;free&#62;</td></tr>
+</table>
+
+
+
+<hr>
+<h4 id="plcbasedmsgimpldll-1">PLCBasedMsgImpl.dll</h4>
+<hr>
+<h5 id="plc-interface-structure-3">PLC Interface Structure</h5>
+<table><tr><th>Data type </th><th> Designation </th><th> Access mode</th></tr>
+<tr><td>Byte </td><td> commandWordLB </td><td> Read</td></tr>
+<tr><td>Byte </td><td> commandWordHB </td><td> Read</td></tr>
+<tr><td>Byte </td><td> stateWordLB </td><td> Write</td></tr>
+<tr><td>Byte </td><td> stateWordHB </td><td> Write</td></tr>
+<tr><td>UShort </td><td> db </td><td> Read</td></tr>
+<tr><td>UShort </td><td> offset </td><td> Read</td></tr>
+<tr><td>UShort </td><td> error </td><td> Write</td></tr>
+<tr><td>Byte[] </td><td> data </td><td> Read</td></tr>
+</table>
+
+
+
+<hr>
+<h5 id="plc-interface-bits-3">PLC Interface Bits</h5>
+<table><tr><th colspan="3">Structure PLC  --&gt;  ICON Word (commandWord):</th></tr>
+<tr><th>Bit No </th><th> Enum </th><th> Description</th></tr>
+<tr><td>Bit 0 </td><td> Triggered </td><td> Transmission trigger to ICON</td></tr>
+<tr><td>Bit 1 </td><td> ReadyAcked </td><td> Acknowledgement of the &#39;ready without error&#39; bit</td></tr>
+<tr><td>Bit 2 </td><td> HardErrorAcked </td><td> Acknowledgement of the &#39;communcation error&#39; bit</td></tr>
+<tr><td>Bit 3 </td><td> SoftErrorAcked </td><td> Acknowledgement of the &#39;procedure error&#39; bit</td></tr>
+<tr><td>Bit 4 </td><td> ResetAcked </td><td> Acknowledgement of the &#39;reset&#39; bit</td></tr>
+<tr><td>Bit 5-15 </td><td> </td><td> &#60;free&#62;</td></tr>
+</table>
+
+
+
+
+
+<p><br></p>
+<table><tr><th colspan="3">Structure ICON  --&gt;  PLC Word (stateWord):</th></tr>
+<tr><th>Bit No </th><th> Enum </th><th> Description</th></tr>
+<tr><td>Bit 0 </td><td> Running </td><td> Indicates that the transmission procedure is running</td></tr>
+<tr><td>Bit 1 </td><td> Ready </td><td> ICON reports a successful transmission procedure here</td></tr>
+<tr><td>Bit 2 </td><td> HardError </td><td> ICON reports an error</td></tr>
+<tr><td>Bit 3 </td><td> SoftError </td><td> ICON reports an error</td></tr>
+<tr><td>Bit 4 </td><td> Reset </td><td> A reset has been requested from the GUI or ICON has </td></tr>
+<tr><td>   </td><td>    </td><td> requested a reset due to an error</td></tr>
+<tr><td>Bit 5-15 </td><td> </td><td> &#60;free&#62;</td></tr>
+</table>
+
+
+
+
+
+
+<p>Pointer to the telegram:  </p>
+<table><tr><th colspan="3">Structure of data:</th></tr>
+<tr><th>Bit No </th><th> Enum </th><th> Description</th></tr>
+<tr><td>DW 4 </td><td> SourceBlock </td><td> Source db of the telegram</td></tr>
+<tr><td>DW 6 </td><td> Offset </td><td> Offset at the start of a telegram</td></tr>
+<tr><td>DW 8 </td><td> AckCode </td><td> Error code</td></tr>
+</table>
+
+
+
+
+
+<hr>
+<h5 id="extended-configuration-1">Extended Configuration</h5>
+<pre><code class="lang-html">&lt;ICONModule Name=&quot;Datenlieferant&quot; Assembly=&quot;MemBasedMsgSource.dll&quot;&gt;
+...
+    &lt;ConfigValue name=&quot;Slots&quot; type=&quot;int&quot;&gt;10&lt;/ConfigValue&gt;
+...
+&lt;/ICONModule&gt;
+</code></pre><p>Meaning of the individual parameters:</p>
+<ul>
+<li><strong>Slots:</strong> Number of slots used</li>
+</ul>
+<hr>
+<h4 id="plcbasedfncallorientedimpldll">PlcBasedFNCallOrientedImpl.dll</h4>
+<hr>
+<h5 id="plc-interface-structure-4">PLC Interface Structure</h5>
+<table><tr><th>Data type </th><th> Designation </th><th> Access mode</th></tr>
+<tr><td>Byte </td><td> commandWordLB </td><td> Read</td></tr>
+<tr><td>Byte </td><td> commandWordHB </td><td> Read</td></tr>
+<tr><td>UShort </td><td> db </td><td> Read</td></tr>
+<tr><td>UShort </td><td> offset </td><td> Read</td></tr>
+<tr><td>Byte </td><td> stateWordLB </td><td> Write</td></tr>
+<tr><td>Byte </td><td> stateWordHB </td><td> Write</td></tr>
+<tr><td>UShort </td><td> error </td><td> Write</td></tr>
+<tr><td>Byte[] </td><td> data </td><td> Read</td></tr>
+</table>
+
+
+
+<hr>
+<h5 id="plc-interface-bits-4">PLC Interface Bits</h5>
+<table><tr><th colspan="3">Structure PLC  --&gt;  ICON Word (commandWord):</th></tr>
+<tr><th>Bit No </th><th> Enum </th><th> Description</th></tr>
+<tr><td>Bit 0 </td><td> Triggered </td><td> Transmission trigger to ICON</td></tr>
+<tr><td>Bit 1 </td><td> ReadyAcked </td><td> Acknowledgement of the &#39;ready without error&#39; bit</td></tr>
+<tr><td>Bit 2 </td><td> HardErrorAcked </td><td> Acknowledgement of the &#39;communcation error&#39; bit</td></tr>
+<tr><td>Bit 3 </td><td> SoftErrorAcked </td><td> Acknowledgement of the &#39;procedure error&#39; bit</td></tr>
+<tr><td>Bit 4 </td><td> TestRequest </td><td> Testbit</td></tr>
+<tr><td>Bit 5-15 </td><td> </td><td> &#60;free&#62;</td></tr>
+</table>
+
+
+
+
+
+<p><br></p>
+<table><tr><th colspan="3">Structure ICON  --&gt;  PLC Word (stateWord):</th></tr>
+<tr><th>Bit No </th><th> Enum </th><th> Description</th></tr>
+<tr><td>Bit 0 </td><td> Running </td><td> Indicates that the transmission procedure is running</td></tr>
+<tr><td>Bit 1 </td><td> Ready </td><td> ICON reports a successful transmission procedure here</td></tr>
+<tr><td>Bit 2 </td><td> HardError </td><td> ICON reports an error</td></tr>
+<tr><td>Bit 3 </td><td> SoftError </td><td> ICON reports an error</td></tr>
+<tr><td>Bit 4 </td><td> TestResponse </td><td> Testbit</td></tr>
+<tr><td>Bit 5-15 </td><td> </td><td> &#60;free&#62;</td></tr>
+</table>
+
+
+
+
+
+
+<p>Pointer to the telegram:  </p>
+<table><tr><th colspan="3">Structure of data:</th></tr>
+<tr><th>Bit No </th><th> Enum </th><th> Description</th></tr>
+<tr><td>DW 2 </td><td> SourceBlock </td><td> Source db of the telegram</td></tr>
+<tr><td>DW 4 </td><td> Offset </td><td> Offset at the start of a telegram</td></tr>
+<tr><td>DW 8 </td><td> AckCode </td><td> Error code</td></tr>
+</table>
+
+
+
+
+
+<hr>
+<h4 id="jisimpldll">JisImpl.dll</h4>
+<hr>
+<h5 id="plc-interface-structure-5">PLC Interface Structure</h5>
+<table><tr><th>Data type </th><th> Designation </th><th> Access mode</th></tr>
+<tr><td>Byte </td><td> commandWordLB </td><td> Read</td></tr>
+<tr><td>Byte </td><td> commandWordHB </td><td> Read</td></tr>
+<tr><td>Byte </td><td> stateWordLB </td><td> Write</td></tr>
+<tr><td>Byte </td><td> stateWordHB </td><td> Write</td></tr>
+<tr><td>UShort </td><td> error </td><td> Write</td></tr>
+</table>
+
+
+
+
+
+<p>Header:  </p>
+<table><tr><th>Data type </th><th> Designation </th><th> Access mode</th></tr>
+<tr><td>CHAR[2] </td><td> numberOfValues </td><td> Read</td></tr>
+<tr><td>CHAR[2] </td><td> boundBuffer </td><td> Read</td></tr>
+<tr><td>CHAR[10] </td><td> identifier </td><td> Read</td></tr>
+</table>
+
+
+
+
+
+<p>Data:  </p>
+<table><tr><th>Data type </th><th> Designation </th><th> Access mode</th></tr>
+<tr><td>CHAR[&#42;] </td><td> data </td><td> Read</td></tr>
+</table>
+
+
+
+
+
+<hr>
+<h5 id="plc-interface-bits-5">PLC Interface Bits</h5>
+<table><tr><th colspan="3">Structure ICON  --&gt;  PLC Word (commandWord):</th></tr>
+<tr><th>Bit No </th><th> Enum </th><th> Description</th></tr>
+<tr><td>Bit 0 </td><td> DataAvailable </td><td> Transmission trigger to ICON</td></tr>
+<tr><td>Bit 1-5 </td><td> </td><td> &#60;free&#62;</td></tr>
+<tr><td>Bit 6 </td><td> TestRequest </td><td> Testbit</td></tr>
+<tr><td>Bit 7 </td><td> AckHardError </td><td> Acknowledgement for error</td></tr>
+<tr><td>Bit 8-14 </td><td> </td><td> &#60;free&#62;</td></tr>
+<tr><td>Bit 15 </td><td> AliveAck </td><td> Acknowledgement of AliveBit</td></tr>
+</table>
+
+
+
+
+
+<p><br></p>
+<table><tr><th colspan="3">Structure PLC  --&gt;  ICON Word (stateWord):</th></tr>
+<tr><th>Bit No </th><th> Enum </th><th> Description</th></tr>
+<tr><td>Bit 0 </td><td> DataProcessed </td><td> Indicates that the transmission is running</td></tr>
+<tr><td>Bit 1 </td><td> SpoolerWarning </td><td> ICON reports a successful transmission</td></tr>
+<tr><td>   </td><td>    </td><td> procedure here</td></tr>
+<tr><td>Bit 2 </td><td> SpoolerFull </td><td> ICON reports an error</td></tr>
+<tr><td>Bit 3-5 </td><td> SoftError </td><td> &#60;free&#62;</td></tr>
+<tr><td>Bit 6 </td><td> TestResponse </td><td> Testbit</td></tr>
+<tr><td>Bit 7 </td><td> HardError </td><td> ICON reports an error</td></tr>
+<tr><td>Bit 8-14 </td><td> </td><td> &#60;free&#62;</td></tr>
+<tr><td>Bit 15 </td><td> Alive </td><td> Live bit from ICON</td></tr>
+</table>
+
+
+
+<hr>
+<h5 id="extended-configuration-2">Extended Configuration</h5>
+<pre><code class="lang-html">&lt;ICONModule Name=&quot;Datenlieferant&quot; Assembly=&quot;MemBasedMsgSource.dll&quot;&gt;
+...
+&lt;ConfigValue name=&quot;AliveFlagCycle&quot; type=&quot;int&quot;&gt;1000&lt;/ConfigValue&gt;
+      &lt;ConfigValue name=&quot;DataDb&quot; type=&quot;int&quot;&gt;0&lt;/ConfigValue&gt;
+      &lt;ConfigValue name=&quot;DataHeader&quot; type=&quot;bool&quot;&gt;true&lt;/ConfigValue&gt;
+      &lt;ConfigValue name=&quot;DataOffset&quot; type=&quot;int&quot;&gt;6&lt;/ConfigValue&gt;
+      &lt;ConfigValue name=&quot;ValueLength&quot; type=&quot;int&quot;&gt;16&lt;/ConfigValue&gt;
+      &lt;ConfigValue name=&quot;MaxValues&quot; type=&quot;int&quot;&gt;10&lt;/ConfigValue&gt;
+      &lt;ConfigValue name=&quot;ProtImpl&quot; type=&quot;string&quot;&gt;&lt;/ConfigValue&gt;
+
+      &lt;ConfigValue name=&quot;FixedValueCount&quot; type=&quot;int&quot;&gt;0&lt;/ConfigValue&gt;
+      &lt;ConfigValue name=&quot;FixedBufferNumber&quot; type=&quot;int&quot;&gt;-1&lt;/ConfigValue&gt;
+      &lt;ConfigValue name=&quot;FixedIdentifierDataOffset&quot; type=&quot;int&quot;&gt;-1&lt;/ConfigValue&gt;
+      &lt;ConfigValue name=&quot;FixedIdentifierDataLength&quot; type=&quot;int&quot;&gt;-1&lt;/ConfigValue&gt;
+...
+&lt;/ICONModule&gt;
+</code></pre><p>Meaning of the individual parameters:</p>
+<ul>
+<li><strong>AliveFlagCycle:</strong> Cycle in which the AliveFlag should be checked or set</li>
+<li><strong>DataDb:</strong> Db for the data, default is the same as the interface Db</li>
+<li><strong>DataHeader:</strong> If true then the JIS-Header precedes the data, if fals, no JIS header is sent</li>
+<li><strong>DataOffset:</strong> Offset to the data (The data is created exactly according to the bits by default</li>
+<li><strong>ValueLength:</strong> Length of a value (the number of values is specified in the data area</li>
+<li><strong>MaxValues:</strong> Maximum number of values</li>
+<li><strong>ProtImpl:</strong> Here, you specify which protocol should be used for creating the telegram</li>
+<li><strong>FixedValueCount:</strong> Defines a fixed number of values, this field then must not occur in the header anymore</li>
+<li><strong>FixedBufferNumber:</strong> Defines the number of the buffer, this field then also must not occur in the header anymore</li>
+<li><strong>FixedIdentifierDataOffset:</strong> (only valid if the length was also specified) Defines the identifier fixed, the entire header then must no longer be present</li>
+<li><strong>FixedIdentifierDataLength:</strong>  (only valid if the offset was also specified) Defines the identifier fixed, the entire header then must no longer be present</li>
+</ul>
+<hr>
+<h3 id="gui-membasedmsgsource">GUI MemBasedMsgSource</h3>
+<p>The configuration of the GUI corresponds exactly to the the configuration of the <a href="#GUI MemBasedMsgSink">GUI of MemBasedMsgSink</a></p>
+<hr>
+<h2 id="functioncalladapter">FunctionCallAdapter</h2>
+<p>The FunctionCallAdapter uses the &#39;MemBasedMsgSource.dll&#39; as a data source and writes the result in the same DB of the source.  </p>
+<p>It requires 3 parameters:</p>
+<pre><code class="lang-html">    &lt;ConfigValue name=&quot;FunctionIndexIsInBigEndian&quot; type=&quot;bool&quot;&gt;false&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;EnableConcurrentCalls&quot; type=&quot;bool&quot;&gt;true&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;FunctionCallHandler&quot; type=&quot;string&quot;&gt;
+     ICONFileFunctionHandler.dll&lt;/ConfigValue&gt;
+</code></pre><p><strong>Function calls with Return values:</strong>  </p>
+<p>A procedure for data exchange between PLC and PC is considered a function call. As of now, the PLC always is the initiator of a data exchange.For this purpose, it provides the parameters of the function call in a data area abd signals to the PC by a trigger bit that the function is to be processed. The data area for a function call always contains a function number (FunctionID) that enables the PC to detect which function and data structure should be processed. Most functions, in turn, return data to the PLC. This data is attached to the data area of the function parameters by the PC during the processing of the function. In the case of OK, the return values of the function call are valid and can be processed by the PLC.  </p>
+<p>The specified Dll implements the application-specific functionality under &quot;FunctionCallHandler&quot;.  </p>
+<p>Example with &quot;ICONFileFunctionHandler.dll&quot;:</p>
+<pre><code class="lang-html">&lt;ICONModuleInstances&gt;
+    &lt;ICONModule Name=&quot;ICONFileFunctionCallAdapter&quot; Assembly=&quot;FunctionCallAdapter.dll&quot;&gt;
+        &lt;ConfigValue name=&quot;FunctionIndexIsInBigEndian&quot; type=&quot;bool&quot;&gt;false&lt;/ConfigValue&gt;
+        &lt;ConfigValue name=&quot;EnableConcurrentCalls&quot; type=&quot;bool&quot;&gt;true&lt;/ConfigValue&gt;
+        &lt;ConfigValue name=&quot;FunctionCallHandler&quot; 
+                     type=&quot;string&quot;&gt;ICONFileFunctionHandler.dll&lt;/ConfigValue&gt;
+        &lt;Section Type=&quot;Files&quot;&gt;
+            &lt;Section Type=&quot;File&quot;&gt;
+                &lt;ConfigValue name=&quot;Filemoniker&quot; type=&quot;string&quot;&gt;MatrixR&lt;/ConfigValue&gt;
+                &lt;ConfigValue name=&quot;Filemode&quot; type=&quot;string&quot;&gt;MatrixResolver&lt;/ConfigValue&gt;
+                &lt;ConfigValue name=&quot;xFilename&quot; 
+                             type=&quot;string&quot;&gt;Exceltest.xlsx!Tabelle5!_Tab1&lt;/ConfigValue&gt;
+                &lt;ConfigValue name=&quot;Filename&quot; type=&quot;string&quot;&gt;Exceltest.xlsx&lt;/ConfigValue&gt;
+                &lt;ConfigValue name=&quot;KeyColumn&quot; type=&quot;string&quot;&gt;6&lt;/ConfigValue&gt;
+                &lt;ConfigValue name=&quot;LineSize&quot; type=&quot;int&quot;&gt;60&lt;/ConfigValue&gt;
+                &lt;Section Type=&quot;Columns&quot;&gt;
+                    &lt;ConfigValue name=&quot;Separator&quot; type=&quot;string&quot;&gt;7B-7C-7D&lt;/ConfigValue&gt;
+                    &lt;ConfigValue name=&quot;Column&quot; 
+            type=&quot;string&quot;&gt;OtherExceltest.xlsx!Exceltest!Tabelle;7,0,18&lt;/ConfigValue&gt;
+                    &lt;ConfigValue name=&quot;Column&quot; 
+                                 type=&quot;string&quot;&gt;!!_Tab1;2,0,18&lt;/ConfigValue&gt;
+                    &lt;ConfigValue name=&quot;Column&quot; 
+                                 type=&quot;string&quot;&gt;!Test!R30C2:H5W3;3,2,9&lt;/ConfigValue&gt;
+                    &lt;ConfigValue name=&quot;Column&quot; 
+                                 type=&quot;string&quot;&gt;!!_Tab1;4,0,11&lt;/ConfigValue&gt;
+                    &lt;ConfigValue name=&quot;Column&quot; 
+                                 type=&quot;string&quot;&gt;!!R4C5:R&quot;ABC&quot;C&quot;DEF&quot;;0,3,21&lt;/ConfigValue&gt;
+                    &lt;ConfigValue name=&quot;Column&quot; 
+                                 type=&quot;string&quot;&gt;!!R&quot;ABC&quot;C5:H60W10;6,11,12&lt;/ConfigValue&gt;
+                    &lt;ConfigValue name=&quot;Column&quot; 
+                                 type=&quot;string&quot;&gt;!!IDENT;7,0,22&lt;/ConfigValue&gt;
+                &lt;/Section&gt;
+            &lt;/Section&gt;
+            &lt;Section Type=&quot;File&quot;&gt;
+                &lt;ConfigValue name=&quot;Filemoniker&quot; type=&quot;string&quot;&gt;Ex&lt;/ConfigValue&gt;
+                &lt;ConfigValue name=&quot;Filemode&quot; type=&quot;string&quot;&gt;LibXL&lt;/ConfigValue&gt;
+                &lt;ConfigValue name=&quot;Filename&quot; type=&quot;string&quot;&gt;Exceltest.xlsx&lt;/ConfigValue&gt;
+                &lt;ConfigValue name=&quot;KeyColumn&quot; type=&quot;string&quot;&gt;6&lt;/ConfigValue&gt;
+                &lt;ConfigValue name=&quot;LineSize&quot; type=&quot;int&quot;&gt;60&lt;/ConfigValue&gt;
+                &lt;Section Type=&quot;Columns&quot;&gt;
+                    &lt;ConfigValue name=&quot;Column&quot; type=&quot;string&quot;&gt;2,0,18&lt;/ConfigValue&gt;
+                    &lt;ConfigValue name=&quot;Column&quot; type=&quot;string&quot;&gt;3,2,9&lt;/ConfigValue&gt;
+                    &lt;ConfigValue name=&quot;Column&quot; type=&quot;string&quot;&gt;4,0,11&lt;/ConfigValue&gt;
+                    &lt;ConfigValue name=&quot;Column&quot; type=&quot;string&quot;&gt;5,3,21&lt;/ConfigValue&gt;
+                    &lt;ConfigValue name=&quot;Column&quot; type=&quot;string&quot;&gt;6,11,12&lt;/ConfigValue&gt;
+                    &lt;ConfigValue name=&quot;Column&quot; type=&quot;string&quot;&gt;7,0,22&lt;/ConfigValue&gt;
+                &lt;/Section&gt;
+            &lt;/Section&gt;
+            &lt;Section Type=&quot;File&quot;&gt;
+                &lt;ConfigValue name=&quot;Filemoniker&quot; type=&quot;string&quot;&gt;E1&lt;/ConfigValue&gt;
+                &lt;ConfigValue name=&quot;Filename&quot; type=&quot;string&quot;&gt;Exceltest.csv&lt;/ConfigValue&gt;
+                &lt;ConfigValue name=&quot;Separator&quot; type=&quot;string&quot;&gt;;&lt;/ConfigValue&gt;
+                &lt;ConfigValue name=&quot;KeyColumn&quot; type=&quot;string&quot;&gt;6&lt;/ConfigValue&gt;
+                &lt;ConfigValue name=&quot;LineSize&quot; type=&quot;int&quot;&gt;60&lt;/ConfigValue&gt;
+                &lt;Section Type=&quot;Columns&quot;&gt;
+                    &lt;ConfigValue name=&quot;Column&quot; type=&quot;string&quot;&gt;2,0,18&lt;/ConfigValue&gt;
+                    &lt;ConfigValue name=&quot;Column&quot; type=&quot;string&quot;&gt;3,2,9&lt;/ConfigValue&gt;
+                    &lt;ConfigValue name=&quot;Column&quot; type=&quot;string&quot;&gt;4,0,11&lt;/ConfigValue&gt;
+                    &lt;ConfigValue name=&quot;Column&quot; type=&quot;string&quot;&gt;5,3,21&lt;/ConfigValue&gt;
+                    &lt;ConfigValue name=&quot;Column&quot; type=&quot;string&quot;&gt;6,11,12&lt;/ConfigValue&gt;
+                    &lt;ConfigValue name=&quot;Column&quot; type=&quot;string&quot;&gt;7,0,22&lt;/ConfigValue&gt;
+                &lt;/Section&gt;
+            &lt;/Section&gt;
+            &lt;Section Type=&quot;File&quot;&gt;
+                &lt;ConfigValue name=&quot;Filemoniker&quot; type=&quot;string&quot;&gt;AT&lt;/ConfigValue&gt;
+                &lt;ConfigValue name=&quot;Filename&quot; 
+                  type=&quot;string&quot;&gt;C:\ICON\Config\AntFtsSequenz.txt&lt;/ConfigValue&gt;
+                &lt;ConfigValue name=&quot;Separator&quot; type=&quot;string&quot;&gt;|&lt;/ConfigValue&gt;
+                &lt;ConfigValue name=&quot;KeyColumn&quot; type=&quot;string&quot;&gt;7,11&lt;/ConfigValue&gt;
+                &lt;ConfigValue name=&quot;LineSize&quot; type=&quot;int&quot;&gt;60&lt;/ConfigValue&gt;
+                &lt;Section Type=&quot;Columns&quot;&gt;
+                    &lt;ConfigValue name=&quot;Column&quot; type=&quot;string&quot;&gt;3,0,18&lt;/ConfigValue&gt;
+                    &lt;ConfigValue name=&quot;Column&quot; type=&quot;string&quot;&gt;4,2,9&lt;/ConfigValue&gt;
+                    &lt;ConfigValue name=&quot;Column&quot; type=&quot;string&quot;&gt;5,0,11&lt;/ConfigValue&gt;
+                    &lt;ConfigValue name=&quot;Column&quot; type=&quot;string&quot;&gt;6,3,21&lt;/ConfigValue&gt;
+                    &lt;ConfigValue name=&quot;Column&quot; type=&quot;string&quot;&gt;7,11,12&lt;/ConfigValue&gt;
+                    &lt;ConfigValue name=&quot;Column&quot; type=&quot;string&quot;&gt;8,0,22&lt;/ConfigValue&gt;
+                &lt;/Section&gt;
+            &lt;/Section&gt;
+            &lt;Section Type=&quot;File&quot;&gt;
+                &lt;ConfigValue name=&quot;Filemoniker&quot; type=&quot;string&quot;&gt;A2&lt;/ConfigValue&gt;
+                &lt;ConfigValue name=&quot;Filename&quot; 
+                      type=&quot;string&quot;&gt;C:\ICON\Config\AntFtsSequenz2.txt&lt;/ConfigValue&gt;
+                &lt;ConfigValue name=&quot;Separator&quot; type=&quot;string&quot;&gt;|&lt;/ConfigValue&gt;
+                &lt;ConfigValue name=&quot;KeyColumn&quot; type=&quot;string&quot;&gt;5&lt;/ConfigValue&gt;
+                &lt;ConfigValue name=&quot;LineSize&quot; type=&quot;int&quot;&gt;60&lt;/ConfigValue&gt;
+                &lt;Section Type=&quot;Columns&quot;&gt;
+                    &lt;ConfigValue name=&quot;Separator&quot; type=&quot;string&quot;&gt;7C&lt;/ConfigValue&gt;
+                    &lt;ConfigValue name=&quot;Column&quot; type=&quot;string&quot;&gt;3,0,8&lt;/ConfigValue&gt;
+                    &lt;ConfigValue name=&quot;Column&quot; type=&quot;string&quot;&gt;4,6&lt;/ConfigValue&gt;
+                    &lt;ConfigValue name=&quot;Column&quot; type=&quot;string&quot;&gt;5&lt;/ConfigValue&gt;
+                    &lt;ConfigValue name=&quot;Column&quot; type=&quot;string&quot;&gt;6&lt;/ConfigValue&gt;
+                    &lt;ConfigValue name=&quot;Column&quot; type=&quot;string&quot;&gt;7,11,7&lt;/ConfigValue&gt;
+                    &lt;ConfigValue name=&quot;Column&quot; type=&quot;string&quot;&gt;8,0,9&lt;/ConfigValue&gt;
+                &lt;/Section&gt;
+            &lt;/Section&gt;
+            &lt;Section Type=&quot;File&quot;&gt;
+                &lt;ConfigValue name=&quot;Filemoniker&quot; type=&quot;string&quot;&gt;BZ&lt;/ConfigValue&gt;
+                &lt;ConfigValue name=&quot;Filename&quot; 
+                 type=&quot;string&quot;&gt;C:\ICON\Config\FTS_Stationszeiten.txt&lt;/ConfigValue&gt;
+                &lt;ConfigValue name=&quot;Separator&quot; type=&quot;string&quot;&gt;;&lt;/ConfigValue&gt;
+                &lt;ConfigValue name=&quot;KeyColumn&quot; type=&quot;string&quot;&gt;0,0&lt;/ConfigValue&gt;
+                &lt;ConfigValue name=&quot;LineSize&quot; type=&quot;int&quot;&gt;300&lt;/ConfigValue&gt;
+                &lt;Section Type=&quot;Columns&quot;&gt;
+                    &lt;ConfigValue name=&quot;Column&quot; type=&quot;string&quot;&gt;0&lt;/ConfigValue&gt;
+                    &lt;ConfigValue name=&quot;Column&quot; type=&quot;string&quot;&gt;1&lt;/ConfigValue&gt;
+                    &lt;ConfigValue name=&quot;Column&quot; type=&quot;string&quot;&gt;2&lt;/ConfigValue&gt;
+                &lt;/Section&gt;
+            &lt;/Section&gt;
+        &lt;/Section&gt;
+    &lt;/ICONModule&gt;
+    &lt;ICONModule Name=&quot;SourceFileReader&quot; Assembly=&quot;MemBasedMsgSource.dll&quot;&gt;
+        &lt;ConfigValue name=&quot;Sink&quot; 
+                     type=&quot;string&quot;&gt;ICONFileFunctionCallAdapter&lt;/ConfigValue&gt;
+        &lt;ConfigValue name=&quot;Impl&quot; 
+                     type=&quot;string&quot;&gt;PLCBasedFNCallOrientedImpl.dll&lt;/ConfigValue&gt;
+        &lt;ConfigValue name=&quot;Slots&quot; type=&quot;int&quot;&gt;10&lt;/ConfigValue&gt;
+        &lt;ConfigValue name=&quot;Name&quot; type=&quot;string&quot;&gt;SourceFileReader&lt;/ConfigValue&gt;
+        &lt;ConfigValue name=&quot;Accessor&quot; type=&quot;string&quot;&gt;MainOPC&lt;/ConfigValue&gt;
+        &lt;ConfigValue name=&quot;ObservedGroupUpdateRate&quot; type=&quot;int&quot;&gt;20&lt;/ConfigValue&gt;
+        &lt;ConfigValue name=&quot;Poll&quot; type=&quot;int&quot;&gt;0&lt;/ConfigValue&gt;
+        &lt;ConfigValue name=&quot;DB&quot; type=&quot;int&quot;&gt;600&lt;/ConfigValue&gt;
+        &lt;ConfigValue name=&quot;Offset&quot; type=&quot;int&quot;&gt;0&lt;/ConfigValue&gt;
+        &lt;Section Type=&quot;GUI&quot;&gt;
+            &lt;ConfigValue name=&quot;Group&quot; type=&quot;string&quot;&gt;File&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;Label&quot; type=&quot;string&quot;&gt;DB600&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;RefreshInterval&quot; type=&quot;int&quot;&gt;0&lt;/ConfigValue&gt;
+        &lt;/Section&gt;
+    &lt;/ICONModule&gt;
+&lt;/ICONModuleInstances&gt;
+</code></pre><hr>
+<h3 id="function-handler">Function Handler</h3>
+<hr>
+<h4 id="iconfilefunctionhandlerdll">IconFileFunctionHandler.dll</h4>
+<hr>
+<h5 id="data-structure-in">Data Structure In</h5>
+<table><tr><th>Data type </th><th> Designation </th><th> Description</th></tr>
+<tr><td>Byte[8] </td><td> Job name </td><td> </td></tr>
+<tr><td>Byte[8] </td><td> Options </td><td> </td></tr>
+<tr><td>Byte[4] </td><td> Identifier </td><td> </td></tr>
+<tr><td>Byte </td><td> Mode </td><td> </td></tr>
+<tr><td>Byte </td><td> Reserve </td><td> </td></tr>
+<tr><td>UShort </td><td> Number rows </td><td> </td></tr>
+<tr><td>UShort </td><td> Keypos </td><td> </td></tr>
+<tr><td>UShort </td><td> Recno </td><td> </td></tr>
+<tr><td>Data </td><td> Key </td><td> </td></tr>
+</table>
+
+
+
+<hr>
+<h5 id="data-structure-out">Data Structure Out</h5>
+<table><tr><th>Data type </th><th> Designation </th><th> Description</th></tr>
+<tr><td>Byte[8] </td><td> Job name </td><td> </td></tr>
+<tr><td>Byte[8] </td><td> Options </td><td> </td></tr>
+<tr><td>Byte[4] </td><td> Identifier </td><td> </td></tr>
+<tr><td>Byte[2] </td><td> Status </td><td> </td></tr>
+<tr><td>Byte[] </td><td> Data </td><td> </td></tr>
+</table>
+
+
+
+<hr>
+<h2 id="payload-converter-adapter">Payload Converter Adapter</h2>
+<p>The PayloadConverter has many application areas. Possible uses are as a <em>Content Enricher</em>, <em>Content Filter</em> or even as a <em>Message Translator</em>. This module is switched between two other modules. For example, you could attach it between a Membased Source and Passive Endpoint. The PayloadConverterAdapter would then, for example, have to be parameterised as sink for the source, and in the PayloadConverterAdapter the endpoint itself is parameterised as sink. Thus, all messages run via this module and can be changed.  </p>
+<pre><code class="lang-html">&lt;ICONModule Name=&quot;PayloadAdapter&quot; Assembly=&quot;PayloadConverterAdapter.dll&quot;&gt;
+  &lt;ConfigValue name=&quot;DispatchMode&quot; type=&quot;int&quot;&gt;2&lt;/ConfigValue&gt;
+  &lt;ConfigValue name=&quot;Name&quot; type=&quot;string&quot;&gt;PayloadAdapter&lt;/ConfigValue&gt;
+  &lt;ConfigValue name=&quot;Sink&quot; type=&quot;string&quot;&gt;PassiveEndPointIPST&lt;/ConfigValue&gt;
+  &lt;ConfigValue name=&quot;PayloadConverterHandler&quot; 
+               type=&quot;string&quot;&gt;ScriptExecutor.dll&lt;/ConfigValue&gt;
+  &lt;Section Type=&quot;Spooler&quot;&gt;
+
+  &lt;/Section&gt;
+&lt;/ICONModule&gt;
+</code></pre><p>Meaning of the individual parameters:</p>
+<ul>
+<li><strong>Sink:</strong> Here, the sink is the next station of the message, as with all other modules. Therefore, this module is entered as sink with the previous station, too.</li>
+<li><strong>PayloadConverterHandler:</strong> Through this parameter various implementations can now be made available to the adapter</li>
+</ul>
+<hr>
+<h3 id="script-executor">Script Executor</h3>
+<p>This assembly is a PayloadConverterHandler that can modify the Payload with the aid of external scripts. If this handler is used, the parameterisation of the adapter must be extended by the following entries:  </p>
+<pre><code class="lang-html">&lt;ICONModule Name=&quot;PayloadAdapter&quot; Assembly=&quot;PayloadConverterAdapter.dll&quot;&gt;
+    &lt;ConfigValue name=&quot;DispatchMode&quot; type=&quot;int&quot;&gt;2&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;Name&quot; type=&quot;string&quot;&gt;PayloadAdapter&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;Sink&quot; type=&quot;string&quot;&gt;PassiveEndPointIPST&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;PayloadConverterHandler&quot;
+                 type=&quot;string&quot;&gt;ScriptExecutor.dll&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;ScriptPath&quot;
+                 type=&quot;string&quot;&gt;D:\IPSTPayloadConverter.cs&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;Language&quot; type=&quot;string&quot;&gt;CS&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;InterfaceName&quot; 
+                   type=&quot;string&quot;&gt;IPayloadConverterScriptingInterface&lt;/ConfigValue&gt;
+    &lt;Section Type=&quot;Assemblies&quot;&gt;
+        &lt;Assembly Name=&quot;PayloadConverterHandlerInterface.dll&quot; Path=&quot;.&quot; &gt;&lt;/Assembly&gt;
+    &lt;/Section&gt;
+    &lt;Section Type=&quot;Spooler&quot;&gt;
+.
+    &lt;/Section&gt;
+&lt;/ICONModule&gt;
+</code></pre><p>The language parameter has the following options:</p>
+<ul>
+<li>CS = C&#35;</li>
+<li>VB = Virtual Basic .Net</li>
+</ul>
+<p>For the script it is necessary to specify the interface and its assembly which uses it. This is firstly achieved by the InterfaceName parameter, and secondly by the assembly entry in the &quot;Assemblies&quot; section. Furhtermore, each additional assembly which can the be used in the script can be entered here. For example, third party dlls can then also be used in the scripts.  </p>
+<p>Interfaces currently supported:</p>
+<pre><code class="lang-javascript">riptingInterface -&gt; PayloadConverterHandlerInterface.dll
+</code></pre><p>Interface:</p>
+<pre><code class="lang-javascript">unication.Modules.Adapters.Interfaces
+{
+    public interface IPayloadConverterScriptingInterface
+    {
+        int RunScript(ILog aLog, byte[] aDataIn, out byte[] aDataOut);
+    }
+}
+</code></pre><p>Example Script:</p>
+<pre><code class="lang-javascript">tions.Generic;
+using System.Text;
+using ICON.Communication.Modules.Adapters.Interfaces;
+using log4net;
+using System.Globalization;
+using ICON.Common.Helpers;
+
+namespace ICON.Communication.Modules.Adapters
+{
+    public class Script : IPayloadConverterScriptingInterface
+    {
+        public int RunScript(ILog aLog, byte[] aDataIn, out byte[] aDataOut)
+        {
+                            aLog.Debug(&quot;Script Called!&quot;);
+
+                            aDataOut = new List&lt;byte&gt;(aDataIn);
+                            return 0;
+        }
+    }
+}
+</code></pre><hr>
+<h2 id="router">Router</h2>
+<p>A router can be switched between any modules and is used to distribute messages to various sinks.</p>
+<hr>
+<h3 id="databasedmsgrouter">DataBasedMsgRouter</h3>
+<p>This router decides which sink a message is to be forwarded to based on the message data (date of the attribute or payload, ...)</p>
+<pre><code class="lang-html">&lt;ICONModule Name=&quot;BandRooter&quot; Assembly=&quot;DataBasedMsgRouter.dll&quot;&gt;
+    &lt;ConfigValue name=&quot;DispatchMode&quot; type=&quot;int&quot;&gt;2&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;Name&quot; type=&quot;string&quot;&gt;BandRooter&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;Sink&quot; type=&quot;string&quot;&gt;&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;DeleteNonRoutableMsg&quot; type=&quot;bool&quot;&gt;false&lt;/ConfigValue&gt;
+    &lt;Section Type=&quot;Sinks&quot; Data=&quot;Payload=114,2&quot;&gt;
+        &lt;Sink name=&quot;Band1&quot; &gt;&#39;01&#39;&lt;/Sink&gt;
+        &lt;Sink name=&quot;Band2&quot; &gt;&#39;02&#39;&lt;/Sink&gt;
+    &lt;/Section&gt;
+    &lt;Section Type=&quot;Spooler&quot;&gt;
+     .
+    &lt;/Section&gt;
+&lt;/ICONModule&gt;
+</code></pre><p>Meaning of the individual parameters:</p>
+<ul>
+<li><strong>Sink:</strong> A default sink can be specified here, so if none of the sinks defined in &quot;Sinks&quot; apply, the the telegram will be forwarded to the default sink</li>
+<li><strong>DeleteNonRoutableMsg:</strong> Suppresses the error which occurs if no default sink is specified and no sink can be determined</li>
+</ul>
+<p><img src="../images/warning_icon.png" alt="warning_icon.png">
+ The telegrams which do not find any sinks are then deleted.</p>
+<hr>
+<h4 id="sinks">Sinks</h4>
+<pre><code class="lang-html">&lt;Section Type=&quot;Sinks&quot; Data=&quot;Payload=114,2&quot;&gt;
+    &lt;Sink name=&quot;Band1&quot; &gt;&#39;01&#39;&lt;/Sink&gt;
+    &lt;Sink name=&quot;Band2&quot; &gt;&#39;02&#39;&lt;/Sink&gt;
+&lt;/Section&gt;
+</code></pre><p>Meaning of the individual parameters:</p>
+<ul>
+<li><strong>Data:</strong> Used to specify the Attribute, Offset and Length of the data to be compared. Each attribute (almost all of the columns which are also displayed in the spooler) of the Msg can be used</li>
+<li><strong>Sink:</strong> The individual sinks are declared here with name and comparison data.        <ul>
+<li><strong>Name:</strong> Band1  --&gt;  this sink must be declared    </li>
+<li><strong>Value:</strong> &#39;01&#39;  --&gt;  i.e. in the attribute Payload at Offset 114 Length 2 there must be 01.    </li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="jisimpldll-1">JisImpl.dll</h2>
+<p>The JisImpl handles the functionality of JISReceive as a seperate module here.</p>
+<hr>
+<h3 id="configuration-6">Configuration</h3>
+<pre><code class="lang-html">&lt;ICONModule Name=&quot;Band1&quot; Assembly=&quot;JisImpl.dll&quot;&gt;
+    &lt;ConfigValue name=&quot;MaxHandshakeTime&quot; type=&quot;int&quot;&gt;3000&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;Name&quot; type=&quot;string&quot;&gt;Band1&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;Accessor&quot; type=&quot;string&quot;&gt;MainOPC&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;ObservedGroupUpdateRate&quot; type=&quot;int&quot;&gt;20&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;Poll&quot; type=&quot;int&quot;&gt;0&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;DB&quot; type=&quot;int&quot;&gt;401&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;Offset&quot; type=&quot;int&quot;&gt;0&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;AliveFlagCycle&quot; type=&quot;int&quot;&gt;1000&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;ValueLength&quot; type=&quot;int&quot;&gt;16&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;MaxValues&quot; type=&quot;int&quot;&gt;10&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;DBMirrorLay&quot; type=&quot;int&quot;&gt;0&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;OffsetMirrorLay&quot; type=&quot;int&quot;&gt;0&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;MirrorSizeLay&quot; type=&quot;int&quot;&gt;10&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;DBMirrorBand&quot; type=&quot;int&quot;&gt;0&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;OffsetMirrorBand&quot; type=&quot;int&quot;&gt;0&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;MirrorSizeBand&quot; type=&quot;int&quot;&gt;10&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;BandRemoveIdentifier&quot; type=&quot;string&quot;&gt;&lt;/ConfigValue&gt;
+    &lt;Section Type=&quot;MirrorData&quot;&gt;
+        &lt;Attribute name=&quot;Payload&quot; type=&quot;string&quot;&gt;114&lt;/Attribute&gt;
+    &lt;/Section&gt;
+
+    &lt;Section Type=&quot;LaySpooler&quot;&gt;
+...
+    &lt;/Section&gt;
+    &lt;Section Type=&quot;BandSpooler&quot;&gt;
+...
+    &lt;/Section&gt;
+&lt;/ICONModule&gt;
+</code></pre><p>Meaning of the individual parameters:</p>
+<ul>
+<li><strong>DB:</strong> Specifies the data module, in which the communication interface is located</li>
+<li><strong>Offset:</strong> Offset for the communication interface</li>
+<li><strong>AliveFlagCycle:</strong> Cycle in milliseconds in which the AliveFlag toggles</li>
+<li><strong>ValueLength:</strong> Length of a value in bytes</li>
+<li><strong>MaxValues:</strong> Maximum number of values per entry</li>
+<li><strong>DBMirrorLay:</strong> DB in which the data of the lay buffer is mirrored</li>
+<li><strong>OffsetMirrorLay:</strong> Offset to the lay buffer mirror</li>
+<li><strong>MirrorSizeLay:</strong> Maximum number of entries in the lay mirror. The total size of the PLC memory available is then determined by means of the three parameters MaxValues, ValueLength and MirrorSizeLay</li>
+<li><strong>DBMirrorBand:</strong> DB in which the data of the band buffer is mirrored</li>
+<li><strong>OffsetMirrorBand:</strong> Offset to the Band buffer mirror</li>
+<li><strong>MirrorSizeBand:</strong> Maximum number of entries in the Band Mirror. The total size of the PLC memory available is then determined by means of the three parameters MaxValues, ValueLength and MirrorSizeBand</li>
+<li><strong>BandRemoveIdentifier:</strong> This parameter can be specified so that not only the first entry of the band buffer always is unsubscribed, but all entries up to and including the entry, in which the BandRemoveIdentifier matches the identifier of the interface. If, for example, &quot;Payload,116,10&quot; is specified, then the identifier (char[10]) is compared with the data in the Payload at Offset 116, Length 10</li>
+<li><strong>Mirror Data Section:</strong> This section is used to specify which data is written into the PLC. Here, it is possible to use several attributes successively which then result in the entry in the PLC</li>
+<li><strong>LaySpooler Section:</strong> Here, the spooler is configured for the lay band</li>
+<li><strong>BandSpooler Section:</strong> Here, the spooler is configured for the band</li>
+</ul>
+<hr>
+<h3 id="plc-interface-structure-6">PLC Interface Structure</h3>
+<table><tr><th>Data type </th><th> Designation </th><th> Access mode</th></tr>
+<tr><td>Byte </td><td> commandWordLB </td><td> Write</td></tr>
+<tr><td>Byte </td><td> commandWordHB </td><td> Write</td></tr>
+<tr><td>UShort </td><td> numberOfValues </td><td> Write</td></tr>
+<tr><td>Byte </td><td> stateWordLB </td><td> Read</td></tr>
+<tr><td>Byte </td><td> stateWordHB </td><td> Read</td></tr>
+<tr><td>CHAR[10] </td><td> identifier </td><td> Read</td></tr>
+</table>
+
+
+
+<hr>
+<h3 id="plc-interface-bits-6">PLC Interface Bits</h3>
+<p>As of now, the following bits are defined:  </p>
+<table><tr><th colspan="3">Structure ICON --&gt; PLC Word(commandWord)</th></tr>
+<tr><th>Bit No </th><th> Enum </th><th> Description</th></tr>
+<tr><td>Bit 0 </td><td> DataTransferredToBand </td><td> Data was transferred to the band</td></tr>
+<tr><td>Bit 1 </td><td> DataUnsubscribedFromBand </td><td> Data was unsubscribed from the band</td></tr>
+<tr><td>Bit 2 </td><td> SpoolerFull </td><td> Spooler is full</td></tr>
+<tr><td>Bit 3 </td><td> LayDataAvailable </td><td> Lay data is available</td></tr>
+<tr><td>Bit 4 </td><td> BandDataAvailable </td><td> Data is available on the band</td></tr>
+<tr><td>Bit 5-6 </td><td> </td><td> &#60;free&#62;</td></tr>
+<tr><td>Bit 7 </td><td> HardError </td><td> Error has occurred</td></tr>
+<tr><td>Bit 8-14 </td><td> </td><td> &#60;free&#62;</td></tr>
+<tr><td>Bit 15 </td><td> AliveFlag </td><td> This flag toggles in the set cycle</td></tr>
+</table>
+
+
+
+
+
+
+<p><br></p>
+<table><tr><th colspan="3">Structure PLC --&gt; ICON Word (commandWord)</th></tr>
+<tr><th>Bit No </th><th> Enum </th><th> Description</th></tr>
+<tr><td>Bit 0 </td><td> TransfereDataToBand </td><td> Data is transferred from lay buffer</td></tr>
+<tr><td>   </td><td>    </td><td> to the band buffer</td></tr>
+<tr><td>Bit 1 </td><td> UnsubscribeDataFromBand </td><td> Data unsubscribed from the band puffer</td></tr>
+<tr><td>Bit 2-6 </td><td> </td><td> &#60;free&#62;</td></tr>
+<tr><td>Bit 7 </td><td> AckHardError </td><td> Acknowledge error</td></tr>
+<tr><td>Bit 8-14 </td><td> </td><td> &#60;free&#62;</td></tr>
+<tr><td>Bit 15 </td><td> AliveFlag </td><td> This bit is used by the PLC, but is not</td></tr>
+<tr><td>   </td><td>    </td><td> polled in ICON</td></tr>
+</table>
+
+
+
+
+
+<hr>
+<h2 id="plcuserleveldll">PLCUserLevel.dll</h2>
+<p>This module can be used to read out user levels from the PLC. These levels then control the use of some control elements or the closing of ICON. The current state is displayed in the lower right corner in the status bar  </p>
+<p><img src="../images/ICON_PLCUserLeveldll.png" alt="ICON_PLCUserLeveldll.png"></p>
+<hr>
+<h3 id="configuration-7">Configuration</h3>
+<pre><code class="lang-html">&lt;ICONModule Name=&quot;PLCUserLevel&quot; Assembly=&quot;PLCUserLevel.dll&quot;&gt;
+    &lt;ConfigValue name=&quot;Accessor&quot; type=&quot;string&quot;&gt;MainOPC&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;ObservedGroupUpdateRate&quot; type=&quot;int&quot;&gt;1000&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;DB&quot; type=&quot;int&quot;&gt;250&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;Offset&quot; type=&quot;int&quot;&gt;188&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;ValueType&quot; type=&quot;string&quot;&gt;Int&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;ValueLength&quot; type=&quot;int&quot;&gt;2&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;AllRights&quot; type=&quot;string&quot;&gt;&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;NormalRights&quot; type=&quot;string&quot;&gt;&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;NoRights&quot; type=&quot;string&quot;&gt;&lt;/ConfigValue&gt;
+&lt;/ICONModule&gt;
+</code></pre><p>Meaning of the individual parameters:  </p>
+<ul>
+<li><strong>DB:</strong> Specifies the data module in which the user-level to be read out is located</li>
+<li><strong>Offset:</strong> Offset to the user-level</li>
+<li><strong>ValueType:</strong> Specifies what type of data it is (e.g. Int or String)</li>
+<li><strong>ValueLength:</strong> Specifies how long this variable is. (for int it is 2, for String any number is allowed)</li>
+<li><strong>AllRights:</strong> Specifies the values for which all rights apply, seperated by a semicolon. (e.g. 5;6;7;8; or IH;technician;...), this is also the initial value if no value applies</li>
+<li><strong>NormalRights:</strong> Specifies the values for which normal rights apply, the same syntax as in AllRights is used</li>
+<li><strong>NoRights:</strong> Specifies the values for which no rights apply, the same syntax as in AllRights is used</li>
+</ul>
+<hr>
+<h2 id="moduleinstancemanager">ModuleInstanceManager</h2>
+<p>An Instance Manage Module can change the parameters during runtime. This means that modules can be parameterised based on a template and provided with placeholders. On request, these templates are then retrieved and also terminated again.</p>
+<hr>
+<h3 id="databasedmoduelinstancemanager">DataBasedModuelInstanceManager</h3>
+<hr>
+<h4 id="configuration-8">Configuration</h4>
+<pre><code class="lang-html">&lt;ICONModule Name=&quot;ModuleInstanceManager&quot; Assembly=&quot;DataBasedModuleInstanceManager.dll&quot;&gt;
+    &lt;ConfigValue name=&quot;DispatchMode&quot; type=&quot;int&quot;&gt;2&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;Name&quot; type=&quot;string&quot;&gt;ModuleInstanceManager&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;Sink&quot; type=&quot;string&quot;&gt;TCPSinkPlc&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;Router&quot; type=&quot;string&quot;&gt;MsgRooter&lt;/ConfigValue&gt;
+    &lt;Section Type=&quot;Instances&quot; StartStopShutdown=&quot;Payload=114,2:&#39;01&#39;:&#39;02&#39;:&#39;03&#39;&quot; &gt;
+        &lt;Parameter name=&quot;id&quot;&gt;Payload=116,2&lt;/Parameter&gt;
+        &lt;Parameter name=&quot;offset&quot;&gt;Payload=117,1&lt;/Parameter&gt;
+        &lt;Parameter name=&quot;ipAddress&quot;&gt;Payload=118&lt;/Parameter&gt;
+        &lt;Templates&gt;
+            &lt;RouterEntryTemplate 
+                name=&quot;TCPSinkPlc{id}&quot;&gt;{ipAddress}&lt;/RouterEntryTemplate&gt;
+            &lt;ICONPlcTemplate Name=&quot;MainPLC{id}&quot;&gt;
+                &lt;ConfigValue name=&quot;Snap7RemoteHost&quot; 
+                             type=&quot;string&quot;&gt;{ipAddress}&lt;/ConfigValue&gt;
+                &lt;ConfigValue name=&quot;Snap7RackNr&quot; type=&quot;int&quot;&gt;0&lt;/ConfigValue&gt;
+                &lt;ConfigValue name=&quot;Snap7SlotNr&quot; type=&quot;int&quot;&gt;2&lt;/ConfigValue&gt;
+                &lt;ConfigValue name=&quot;Snap7Timeout&quot; type=&quot;int&quot;&gt;5000&lt;/ConfigValue&gt;
+                &lt;ConfigValue name=&quot;ItemSyntax&quot; type=&quot;string&quot;&gt;SimaticNet&lt;/ConfigValue&gt;
+                &lt;ConfigValue name=&quot;WriteCacheEnabled&quot; type=&quot;bool&quot;&gt;False&lt;/ConfigValue&gt;
+                &lt;ConfigValue name=&quot;WriteCacheItemMaxAge&quot; type=&quot;int&quot;&gt;-1&lt;/ConfigValue&gt;
+            &lt;/ICONPlcTemplate&gt;
+            &lt;ICONModuleTemplate Name=&quot;TCPSourcePLC{id}&quot; 
+                                Assembly=&quot;MemBasedMsgSource.dll&quot;&gt;
+                &lt;ConfigValue name=&quot;MsgExecutionMode&quot; 
+                             type=&quot;string&quot;&gt;ThreadBasedExecutor&lt;/ConfigValue&gt;
+                &lt;ConfigValue name=&quot;DispatchMode&quot; type=&quot;int&quot;&gt;2&lt;/ConfigValue&gt;
+                &lt;ConfigValue name=&quot;Slots&quot; type=&quot;int&quot;&gt;1&lt;/ConfigValue&gt;
+                &lt;ConfigValue name=&quot;Sink&quot; 
+                             type=&quot;string&quot;&gt;SocketManagerTCP&lt;/ConfigValue&gt;
+                &lt;ConfigValue name=&quot;Impl&quot; 
+                             type=&quot;string&quot;&gt;PlcBasedMsgImpl.dll&lt;/ConfigValue&gt;
+                &lt;ConfigValue name=&quot;MaxHandshakeTime&quot; 
+                             type=&quot;int&quot;&gt;6000&lt;/ConfigValue&gt;
+                &lt;ConfigValue name=&quot;Name&quot; type=&quot;string&quot;&gt;TCPSourcePLC{id}&lt;/ConfigValue&gt;
+                &lt;ConfigValue name=&quot;Accessor&quot; type=&quot;string&quot;&gt;MainPLC{id}&lt;/ConfigValue&gt;
+                &lt;ConfigValue name=&quot;DB&quot; type=&quot;int&quot;&gt;202&lt;/ConfigValue&gt;
+                &lt;ConfigValue name=&quot;Offset&quot; type=&quot;int&quot;&gt;{offset}0&lt;/ConfigValue&gt;
+                &lt;ConfigValue name=&quot;ObservedGroupUpdateRate&quot; 
+                             type=&quot;int&quot;&gt;100&lt;/ConfigValue&gt;
+                &lt;ConfigValue name=&quot;Poll&quot; type=&quot;int&quot;&gt;1&lt;/ConfigValue&gt;
+                &lt;Section Type=&quot;GUI&quot;&gt;
+                  &lt;ConfigValue name=&quot;Group&quot; type=&quot;string&quot;&gt;DiagnoseTCP{id}&lt;/ConfigValue&gt;
+                  &lt;ConfigValue name=&quot;Label&quot; type=&quot;string&quot;&gt;DB202&lt;/ConfigValue&gt;
+                  &lt;ConfigValue name=&quot;RefreshInterval&quot; type=&quot;int&quot;&gt;500&lt;/ConfigValue&gt;
+                &lt;/Section&gt;
+            &lt;/ICONModuleTemplate&gt;
+        &lt;/Templates&gt;
+    &lt;/Section&gt;
+&lt;/ICONModule&gt;
+</code></pre><p>Meaning of the individual parameters:</p>
+<ul>
+<li><strong>Router:</strong> A router is specified here which can forward telegrams to various modules and also ensure that telegrams are forwarded to the template. (This is necessary, for example, if telegrams can also be sent to a template connection.)</li>
+<li><strong>Instances:</strong> In this section, the actual parameterisation is specified        <ul>
+<li><strong>StartStopShutdown:</strong> This attribute specifies which values should start, stop or shut down an instance. At the same time, attributes of the ICON message are evaluated.<br><em>[AttributeName]=</em><br><em>[Offset],[Length]:[ValueStart]:[ValueStop]:[ValueShutdown]</em><br>(e.g. the entry Payload=114,2:&#39;01&#39;:&#39;01&#39;:&#39;03&#39; means that in the payload to offset 114, 2 characters are compared with the specified values.)    </li>
+<li><strong>Parameter:</strong> Parameters have the function of variables that can then be used in other templates.<br>  <em>[AttributeName]=[Offset],[Length]</em>    </li>
+<li><strong>Templates</strong>                <ul>
+<li><strong>RouterEntryTemplate:</strong> If this entry is specified, an entry is added to the router used when starting the instance. This is also mostly necessary for the use of a router, since otherwise the routes would already have to be declared directly in the router        </li>
+<li><strong>ICONPlcTemplate:</strong> Template for an ICONPlc section. (e.g. if a connection can be declared here via Snap7 and in the item Snap7RemoteHost, a variable is entered) Thus the dynamic starting of PLC connections is possible        </li>
+<li><strong>ICONModuleTemplate:</strong> Template for an ICON module. Here, also an entire module can be added and the modifiable parameters are later filled with these variables        </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="event-distributor">Event Distributor</h2>
+<p>An EventDistributor can distribute various events (currently Start, Stop, Restart and Shutdown).</p>
+<hr>
+<h3 id="tcpeventdistributor">TcpEventDistributor</h3>
+<p>This EventDistributor distributes the events in the form of telegrams. Thus, for example, a telegram can be sent, that ICON was now started or stopped.</p>
+<hr>
+<h4 id="configuration-9">Configuration</h4>
+<pre><code class="lang-html">&lt;ICONModule Name=&quot;EventDistributor&quot;  Assembly=&quot;TcpEventDistributor.dll&quot;&gt;
+    &lt;ConfigValue name=&quot;DispatchMode&quot; type=&quot;int&quot;&gt;2&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;Name&quot; type=&quot;string&quot;&gt;EventDistributor&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;Sink&quot; type=&quot;string&quot;&gt;MsgRooter&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;ProtImpl&quot; type=&quot;string&quot;&gt;&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;Start&quot; 
+                 type=&quot;string&quot;&gt;Icon|Ziel=&#39;HEAD   &#39;|Payload=&#39;UP&#39;;&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;Restart&quot; 
+                 type=&quot;string&quot;&gt;Icon|Ziel=&#39;HEAD   &#39;|Payload=&#39;RS&#39;;&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;Stop&quot; 
+                 type=&quot;string&quot;&gt;Icon|Ziel=&#39;HEAD   &#39;|Payload=&#39;DO&#39;;&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;Shutdown&quot; 
+                 type=&quot;string&quot;&gt;Icon|Ziel=&#39;HEAD   &#39;|Payload=&#39;SD&#39;;&lt;/ConfigValue&gt;
+&lt;/ICONModule&gt;
+</code></pre><p>Meaning of the individual parameters:</p>
+<ul>
+<li><strong>ProtImpl:</strong> Here, the UserDefined Protocol must be specified which has the BuildRule necessary for starting the telegram.</li>
+<li><strong>Start:</strong> Parameterisation of the telegram that is sent when starting ICON</li>
+<li><strong>Restart:</strong> Parameterisation of the telegram that is sent when ICON restarts the module after a stop</li>
+<li><strong>Stop:</strong> Parameterisation of the telegram that is sent when ICON stops the module (this also occurs at shutdown).</li>
+<li><strong>Shutdown:</strong> Parameterisation of the telegram that is sent when ICON is shut down</li>
+</ul>
+<p>Parameterisation of the telegrams:  </p>
+<p>{[BuildRuleName]{|[AttributeName=AttributeValue]};}</p>
+<hr>
+<h1 id="example-configurations">Example Configurations</h1>
+<hr>
+<h2 id="gateway-with-two-passive-endpoints-under-rfc1006-with-raw-data">Gateway with two passive endpoints under RFC1006 with raw data</h2>
+<pre><code class="lang-html">&lt;ICONConfig&gt;
+    &lt;ICONModuleInstances&gt;
+        &lt;ICONModule Name=&quot;EndPoint1&quot; Assembly=&quot;ICONSocket.dll&quot;&gt;
+            &lt;ConfigValue name=&quot;Sink&quot; type=&quot;string&quot;&gt;EndPoint2&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;Protocol&quot; type=&quot;string&quot;&gt;Rfc1006&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;Port&quot; type=&quot;string&quot;&gt;10061&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;LocalTSAP&quot; type=&quot;string&quot;&gt;LTSAP1&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;RemoteTSAP&quot; type=&quot;string&quot;&gt;RTSAP1&lt;/ConfigValue&gt;
+        &lt;/ICONModule&gt;       
+        &lt;ICONModule Name=&quot;EndPoint2&quot; Assembly=&quot;ICONSocket.dll&quot;&gt;
+            &lt;ConfigValue name=&quot;Sink&quot; type=&quot;string&quot;&gt;EndPoint1&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;Protocol&quot; type=&quot;string&quot;&gt;Rfc1006&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;Port&quot; type=&quot;string&quot;&gt;10062&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;LocalTSAP&quot; type=&quot;string&quot;&gt;LTSAP2&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;RemoteTSAP&quot; type=&quot;string&quot;&gt;RTSAP2&lt;/ConfigValue&gt;
+        &lt;/ICONModule&gt;
+    &lt;/ICONModuleInstances&gt;
+&lt;/ICONConfig&gt;
+</code></pre><p>This configuration insantiates two Rfc1006 passive endpoints and forwards the raw data from one to the other, provided that a partner is connected on both endpoints &quot;EndPoint1&quot; and &quot;EndPoint2&quot;. The &quot;Sink&quot; parameter determines who the respective data of an instance should reach. This means that the &quot;Sink&quot; from &quot;EndPoint1&quot; is &quot;EndPoint2&quot; and from &quot;EndPoint2&quot; is &quot;EndPoint1&quot;.</p>
+<hr>
+<h2 id="gateway-with-passive-and-active-endpoint-under-rfc1006-with-raw-data">Gateway with passive and active endpoint under RFC1006 with raw data</h2>
+<pre><code class="lang-html">&lt;ICONConfig&gt;
+    &lt;ICONModuleInstances&gt;
+        &lt;ICONModule Name=&quot;EndPoint1&quot; Assembly=&quot;ICONSocket.dll&quot;&gt;
+            &lt;ConfigValue name=&quot;Sink&quot; type=&quot;string&quot;&gt;EndPoint2&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;Protocol&quot; type=&quot;string&quot;&gt;Rfc1006&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;Port&quot; type=&quot;string&quot;&gt;10061&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;LocalTSAP&quot; type=&quot;string&quot;&gt;LTSAP1&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;RemoteTSAP&quot; type=&quot;string&quot;&gt;RTSAP1&lt;/ConfigValue&gt;
+        &lt;/ICONModule&gt;       
+        &lt;ICONModule Name=&quot;EndPoint2&quot; Assembly=&quot;ICONSocket.dll&quot;&gt;
+            &lt;ConfigValue name=&quot;Sink&quot; type=&quot;string&quot;&gt;EndPoint1&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;Protocol&quot; type=&quot;string&quot;&gt;Rfc1006&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;Host&quot; type=&quot;string&quot;&gt;192.168.0.144&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;Port&quot; type=&quot;string&quot;&gt;10062&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;LocalTSAP&quot; type=&quot;string&quot;&gt;LTSAP2&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;RemoteTSAP&quot; type=&quot;string&quot;&gt;RTSAP2&lt;/ConfigValue&gt;
+        &lt;/ICONModule&gt;
+    &lt;/ICONModuleInstances&gt;
+&lt;/ICONConfig&gt;
+</code></pre><p>This configuration instantiates two Rfc1006 passive endpoints, one as a passive and one as active, and forwards the raw data from one to the other, provided that a partner is connected on both endpoints &quot;EndPoint1&quot; and &quot;EndPoint2&quot;.  </p>
+<p>You specify the connection partner using the &quot;Host&quot; parameter. If &quot;Host&quot; is not specified or is allocated with &quot;localhost&quot;, &quot;127.0.0.1&quot; or &quot;0.0.0.0&quot;, then the socket is instantiated as a Passive Endpoint. If an explicit IP address or resolvable DNS (Domain Name System) is specified, then an Active-Endpoint is instantiated. An active endpoint will usually try to connect to the remote host in a secondly cycle, which then has to be a passive remote host.</p>
+<hr>
+<h2 id="passive-endpoint-under-rfc1006-with-receipt-of-raw-data-for-forwarding-to-a-plc">Passive endpoint under RFC1006 with receipt of raw data for forwarding to a PLC</h2>
+<pre><code class="lang-html">&lt;ICONConfig&gt;
+    &lt;ICONPlcs&gt;
+        &lt;ICONPlc Name=&quot;MainOPC&quot;&gt;
+            &lt;ConfigValue name=&quot;OPCServerName&quot; 
+                         type=&quot;string&quot;&gt;OPC.SimaticNet&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;ItemSyntax&quot; type=&quot;string&quot;&gt;SimaticNet&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;OPCConnectionName&quot; type=&quot;string&quot;&gt;P2T&lt;/ConfigValue&gt;
+        &lt;/ICONPlc&gt;
+    &lt;/ICONPlcs&gt;
+    &lt;ICONModuleInstances&gt;
+        &lt;ICONModule Name=&quot;EndPoint1&quot; Assembly=&quot;ICONSocket.dll&quot;&gt;
+            &lt;ConfigValue name=&quot;Sink&quot; type=&quot;string&quot;&gt;Plc&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;Protocol&quot; type=&quot;string&quot;&gt;Rfc1006&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;Port&quot; type=&quot;string&quot;&gt;10061&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;LocalTSAP&quot; type=&quot;string&quot;&gt;LTSAP1&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;RemoteTSAP&quot; type=&quot;string&quot;&gt;RTSAP1&lt;/ConfigValue&gt;
+        &lt;/ICONModule&gt;       
+        &lt;ICONModule Name=&quot;Plc&quot; Assembly=&quot;MemBasedMsgSink.dll&quot;&gt;
+            &lt;Section Type=&quot;Slot&quot;&gt;
+                &lt;ConfigValue name=&quot;Impl&quot; 
+                             type=&quot;string&quot;&gt;PlcBasedMsgImpl.dll&lt;/ConfigValue&gt;
+                &lt;ConfigValue name=&quot;Accessor&quot; type=&quot;string&quot;&gt;MainOPC&lt;/ConfigValue&gt;
+                &lt;ConfigValue name=&quot;Poll&quot; type=&quot;int&quot;&gt;1&lt;/ConfigValue&gt;      
+                &lt;ConfigValue name=&quot;DB&quot; type=&quot;int&quot;&gt;401&lt;/ConfigValue&gt;
+                &lt;ConfigValue name=&quot;Offset&quot; type=&quot;int&quot;&gt;0&lt;/ConfigValue&gt;
+            &lt;/Section&gt;
+        &lt;/ICONModule&gt;
+    &lt;/ICONModuleInstances&gt;
+&lt;/ICONConfig&gt;
+</code></pre><p>To get access to a PLC (Programmable Logic Controller) e.g. via OPC (OLE for Process Control), it is necessary to configure a PLC Accessor. See section &quot;ICONPlcs&quot; that can include any number of accessors. An implemented module then gains access via the assigned configuration name, e.g. MainOPC here.</p>
+<hr>
+<h2 id="gateway-with-two-passive-endpoints-under-rfc1006-with-structured-data-protocol-implementation">Gateway with two passive endpoints under RFC1006 with structured data (protocol implementation)</h2>
+<pre><code class="lang-html">&lt;ICONConfig&gt;
+    &lt;ICONProtocols&gt;
+        &lt;ICONStandardProtocol ImplementingClass=&quot;???_ICONMsgFactory&quot; /&gt;
+    &lt;/ICONProtocols&gt;
+    &lt;ICONModuleInstances&gt;
+        &lt;ICONModule Name=&quot;EndPoint1&quot; Assembly=&quot;ICONSocket.dll&quot;&gt;
+            &lt;ConfigValue name=&quot;Sink&quot; type=&quot;string&quot;&gt;EndPoint2&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;Protocol&quot; type=&quot;string&quot;&gt;Rfc1006&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;Port&quot; type=&quot;string&quot;&gt;10061&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;LocalTSAP&quot; type=&quot;string&quot;&gt;LTSAP1&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;RemoteTSAP&quot; type=&quot;string&quot;&gt;RTSAP1&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;ProtImpl&quot; type=&quot;string&quot;&gt;???_ICONMsgFactory&lt;/ConfigValue&gt;
+        &lt;/ICONModule&gt;       
+        &lt;ICONModule Name=&quot;EndPoint2&quot; Assembly=&quot;ICONSocket.dll&quot;&gt;
+            &lt;ConfigValue name=&quot;Sink&quot; type=&quot;string&quot;&gt;EndPoint1&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;Protocol&quot; type=&quot;string&quot;&gt;Rfc1006&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;Port&quot; type=&quot;string&quot;&gt;10062&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;LocalTSAP&quot; type=&quot;string&quot;&gt;LTSAP2&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;RemoteTSAP&quot; type=&quot;string&quot;&gt;RTSAP2&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;ProtImpl&quot; type=&quot;string&quot;&gt;???_ICONMsgFactory&lt;/ConfigValue&gt;
+        &lt;/ICONModule&gt;
+    &lt;/ICONModuleInstances&gt;
+&lt;/ICONConfig&gt;
+</code></pre><p>If a protocol is used for transmission of the data, then the protocols in the &quot;ICONProtocols&quot; section must be specified. The reference to these is then set in the modules via the &quot;ProtImpl&quot; parameter. The received data stream is not monitored at Rfc1006. This means that the data must be sent correctly en bloc. This is not the case with a classic TCP connection.</p>
+<hr>
+<h2 id="tcp-passive-endpoint-with-receipt-of-structured-data-protocol-implementation-for-forwarding-to-a-plc">TCP passive endpoint with receipt of structured data (protocol implementation) for forwarding to a PLC</h2>
+<pre><code class="lang-html">&lt;ICONConfig&gt;
+    &lt;ICONPlcs&gt;
+        &lt;ICONPlc Name=&quot;MainOPC&quot;&gt;
+            &lt;ConfigValue name=&quot;OPCServerName&quot; 
+                         type=&quot;string&quot;&gt;OPC.SimaticNet&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;ItemSyntax&quot; type=&quot;string&quot;&gt;SimaticNet&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;OPCConnectionName&quot; type=&quot;string&quot;&gt;P2T&lt;/ConfigValue&gt;
+        &lt;/ICONPlc&gt;
+    &lt;/ICONPlcs&gt;
+    &lt;ICONProtocols&gt;
+        &lt;ICONStandardProtocol ImplementingClass=&quot;???_ICONMsgFactory&quot; /&gt;
+    &lt;/ICONProtocols&gt;
+    &lt;ICONModuleInstances&gt;
+        &lt;ICONModule Name=&quot;EndPoint1&quot; Assembly=&quot;ICONSocket.dll&quot;&gt;
+            &lt;ConfigValue name=&quot;Sink&quot; type=&quot;string&quot;&gt;Plc&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;Protocol&quot; type=&quot;string&quot;&gt;Tcp&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;Port&quot; type=&quot;string&quot;&gt;1101&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;ProtImpl&quot; type=&quot;string&quot;&gt;???_ICONMsgFactory&lt;/ConfigValue&gt;
+        &lt;/ICONModule&gt;       
+        &lt;ICONModule Name=&quot;Plc&quot; Assembly=&quot;MemBasedMsgSink.dll&quot;&gt;
+            &lt;Section Type=&quot;Slot&quot;&gt;
+                &lt;ConfigValue name=&quot;Impl&quot; 
+                             type=&quot;string&quot;&gt;PlcBasedMsgImpl.dll&lt;/ConfigValue&gt;
+                &lt;ConfigValue name=&quot;Accessor&quot; type=&quot;string&quot;&gt;MainOPC&lt;/ConfigValue&gt;
+                &lt;ConfigValue name=&quot;Poll&quot; type=&quot;int&quot;&gt;1&lt;/ConfigValue&gt;      
+                &lt;ConfigValue name=&quot;DB&quot; type=&quot;int&quot;&gt;401&lt;/ConfigValue&gt;
+                &lt;ConfigValue name=&quot;Offset&quot; type=&quot;int&quot;&gt;0&lt;/ConfigValue&gt;
+            &lt;/Section&gt;
+        &lt;/ICONModule&gt;
+    &lt;/ICONModuleInstances&gt;
+&lt;/ICONConfig&gt;
+</code></pre><p>With TCP, a protocol implementer must be specified. the processing of raw data is not possible here. If, in this example, data is received via TCP and it cannot be forwarded to the sink because the PLC has not yet processed previous data, then a negative acknowledgement is generated. If, however, no disruptions occur, then a positive acknowledgement is sent.</p>
+<hr>
+<h2 id="decoupling-data-forwarding-by-means-of-spooling">Decoupling data forwarding by means of spooling</h2>
+<p>If a sink is not yet ready to accept data or the connection channel to the sink is disturbed or interrupted, then data acceptance can be guaranteed via spooling. The spooler accepts the data of a source and then delivers it independently to the sink. Consequently, the source can still keep sending without going into a fault condition or having to react to this.</p>
+<pre><code class="lang-html">&lt;ICONConfig&gt;
+    &lt;ICONPlcs&gt;
+        &lt;ICONPlc Name=&quot;MainOPC&quot;&gt;
+            &lt;ConfigValue name=&quot;OPCServerName&quot; 
+                         type=&quot;string&quot;&gt;OPC.SimaticNet&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;ItemSyntax&quot; type=&quot;string&quot;&gt;SimaticNet&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;OPCConnectionName&quot; type=&quot;string&quot;&gt;P2T&lt;/ConfigValue&gt;
+        &lt;/ICONPlc&gt;
+    &lt;/ICONPlcs&gt;
+    &lt;ICONProtocols&gt;
+        &lt;ICONStandardProtocol ImplementingClass=&quot;???_ICONMsgFactory&quot; /&gt;
+    &lt;/ICONProtocols&gt;
+    &lt;ICONModuleInstances&gt;
+        &lt;ICONModule Name=&quot;EndPoint1&quot; Assembly=&quot;ICONSocket.dll&quot;&gt;
+            &lt;ConfigValue name=&quot;Sink&quot; type=&quot;string&quot;&gt;Plc&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;Protocol&quot; type=&quot;string&quot;&gt;Tcp&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;Port&quot; type=&quot;string&quot;&gt;1101&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;ProtImpl&quot; type=&quot;string&quot;&gt;???_ICONMsgFactory&lt;/ConfigValue&gt;
+        &lt;/ICONModule&gt;       
+        &lt;ICONModule Name=&quot;Plc&quot; Assembly=&quot;MemBasedMsgSink.dll&quot;&gt;
+            &lt;Section Type=&quot;Slot&quot;&gt;
+                &lt;ConfigValue name=&quot;Impl&quot; 
+                             type=&quot;string&quot;&gt;PlcBasedMsgImpl.dll&lt;/ConfigValue&gt;
+                &lt;ConfigValue name=&quot;Accessor&quot; type=&quot;string&quot;&gt;MainOPC&lt;/ConfigValue&gt;
+                &lt;ConfigValue name=&quot;Poll&quot; type=&quot;int&quot;&gt;1&lt;/ConfigValue&gt;      
+                &lt;ConfigValue name=&quot;DB&quot; type=&quot;int&quot;&gt;401&lt;/ConfigValue&gt;
+                &lt;ConfigValue name=&quot;Offset&quot; type=&quot;int&quot;&gt;0&lt;/ConfigValue&gt;
+            &lt;/Section&gt;
+            &lt;Section Type=&quot;Spooler&quot; \&gt;
+        &lt;/ICONModule&gt;
+    &lt;/ICONModuleInstances&gt;
+&lt;/ICONConfig&gt;
+</code></pre><p>The data is spooled by specifying the section type spooler. The spooler can be configured by additional setting options. If the section is empty, you have a standard spooler that is set as follows:</p>
+<ul>
+<li>A positive acknowledgement is sent when the data reaches the spooler</li>
+<li>There is no upper limit regarding the amount of data</li>
+<li>There is no signalling of High or Low WaterMark</li>
+<li>The data is valid for 10 hours. This applies in the following case: If a sink is free to receive data but the data cannot be transmitted, then it is removed from the spooler after 10 hours with an error message</li>
+<li>The spooler has no GUI</li>
+<li>The spooler has no persistor</li>
+<li>The cycle rate for processing the spooler is set to 100ms</li>
+</ul>
+<p>A complete configuration overview can be found in the chapter on <a href="#Spooling">&quot;Spooling&quot;</a></p>
+<hr>
+<h2 id="plc-as-data-source-send-compartment-and-data-sink-slot">PLC as data source (send compartment) and data sink (slot)</h2>
+<p>A minimum configuration could be as follows:</p>
+<pre><code class="lang-html">&lt;ICONConfig&gt;
+    &lt;ICONPlcs&gt;
+        &lt;ICONPlc Name=&quot;MainOPC&quot;&gt;
+            &lt;ConfigValue name=&quot;OPCServerName&quot; 
+                         type=&quot;string&quot;&gt;OPC.SimaticNet&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;ItemSyntax&quot; type=&quot;string&quot;&gt;SimaticNet&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;OPCConnectionName&quot; type=&quot;string&quot;&gt;P2T&lt;/ConfigValue&gt;
+        &lt;/ICONPlc&gt;
+    &lt;/ICONPlcs&gt;
+    &lt;ICONProtocols&gt;
+        &lt;ICONStandardProtocol ImplementingClass=&quot;ISIT01_ICONMsgFactory&quot; /&gt;
+    &lt;/ICONProtocols&gt;
+    &lt;ICONModuleInstances&gt;
+        &lt;ICONModule Name=&quot;PlcQuelle&quot; Assembly=&quot;MemBasedMsgSource.dll&quot;&gt;
+            &lt;ConfigValue name=&quot;Sink&quot; type=&quot;string&quot;&gt;PlcSenke&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;Slots&quot; type=&quot;int&quot;&gt;1&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;Impl&quot; type=&quot;string&quot;&gt;PlcBasedMsgImpl.dll&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;Accessor&quot; type=&quot;string&quot;&gt;MainOPC&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;Poll&quot; type=&quot;int&quot;&gt;1&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;DB&quot; type=&quot;int&quot;&gt;402&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;Offset&quot; type=&quot;int&quot;&gt;0&lt;/ConfigValue&gt;   
+        &lt;/ICONModule&gt;
+        &lt;ICONModule Name=&quot;PlcSenke&quot; Assembly=&quot;MemBasedMsgSink.dll&quot;&gt;
+            &lt;Section Type=&quot;Slot&quot;&gt;
+                &lt;ConfigValue name=&quot;Impl&quot; 
+                             type=&quot;string&quot;&gt;PlcBasedMsgImpl.dll&lt;/ConfigValue&gt;
+                &lt;ConfigValue name=&quot;Accessor&quot; type=&quot;string&quot;&gt;MainOPC&lt;/ConfigValue&gt;
+                &lt;ConfigValue name=&quot;Poll&quot; type=&quot;int&quot;&gt;1&lt;/ConfigValue&gt;      
+                &lt;ConfigValue name=&quot;DB&quot; type=&quot;int&quot;&gt;401&lt;/ConfigValue&gt;
+                &lt;ConfigValue name=&quot;Offset&quot; type=&quot;int&quot;&gt;0&lt;/ConfigValue&gt;
+            &lt;/Section&gt;
+            &lt;Section Type=&quot;Spooler&quot;&gt;
+            &lt;/Section&gt;
+        &lt;/ICONModule&gt;
+    &lt;/ICONModuleInstances&gt;
+&lt;/ICONConfig&gt;
+</code></pre><hr>
+<h2 id="plc-as-data-source-with-an-ip-connection-as-recipient">PLC as data source with an IP connection as recipient</h2>
+<pre><code class="lang-html">&lt;ICONConfig&gt;
+    &lt;ICONPlcs&gt;
+        &lt;ICONPlc Name=&quot;MainOPC&quot;&gt;
+            &lt;ConfigValue name=&quot;OPCServerName&quot; 
+                         type=&quot;string&quot;&gt;OPC.SimaticNet&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;ItemSyntax&quot; type=&quot;string&quot;&gt;SimaticNet&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;OPCConnectionName&quot; type=&quot;string&quot;&gt;P2T&lt;/ConfigValue&gt;
+        &lt;/ICONPlc&gt;
+    &lt;/ICONPlcs&gt;
+    &lt;ICONProtocols&gt;
+        &lt;ICONStandardProtocol ImplementingClass=&quot;???_ICONMsgFactory&quot; /&gt;
+        &lt;ICONStandardProtocol ImplementingClass=&quot;WACC04_ICONMsgFactory&quot; /&gt;
+    &lt;/ICONProtocols&gt;
+    &lt;ICONModuleInstances&gt;
+        &lt;ICONModule Name=&quot;PlcQuelle&quot; Assembly=&quot;MemBasedMsgSource.dll&quot;&gt;
+            &lt;ConfigValue name=&quot;Sink&quot; type=&quot;string&quot;&gt;TcpSenke&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;Slots&quot; type=&quot;int&quot;&gt;1&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;Impl&quot; type=&quot;string&quot;&gt;PlcBasedMsgImpl.dll&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;Accessor&quot; type=&quot;string&quot;&gt;MainOPC&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;Poll&quot; type=&quot;int&quot;&gt;1&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;DB&quot; type=&quot;int&quot;&gt;402&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;Offset&quot; type=&quot;int&quot;&gt;0&lt;/ConfigValue&gt;   
+        &lt;/ICONModule&gt;
+        &lt;ICONModule Name=&quot;TcpSenke&quot; Assembly=&quot;ICONSocket.dll&quot;&gt;
+            &lt;ConfigValue name=&quot;Protocol&quot; type=&quot;string&quot;&gt;Tcp&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;Host&quot; type=&quot;string&quot;&gt;192.168.0.144&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;Port&quot; type=&quot;string&quot;&gt;1001&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;ProtImpl&quot; type=&quot;string&quot;&gt;???_ICONMsgFactory&lt;/ConfigValue&gt;
+            &lt;Section Type=&quot;Spooler&quot; \&gt;
+        &lt;/ICONModule&gt;       
+    &lt;/ICONModuleInstances&gt;
+&lt;/ICONConfig&gt;
+</code></pre><p>If a spooler is configured to a module of an &quot;ICONSocket.dll&quot;, then the data must be marked with the spool flag. This is usually done by prefixing with the WACC04-Header.</p>
+<hr>
+<h2 id="example-configuration-with-a-socketmanager">Example configuration with a SocketManager</h2>
+<p>The SocketManager independently instantiates and manages ICONSockets dynamically.</p>
+<pre><code class="lang-html">&lt;ICONConfig&gt;
+    &lt;ICONPlcs&gt;
+        &lt;ICONPlc Name=&quot;MainOPC&quot;&gt;
+            &lt;ConfigValue name=&quot;OPCServerName&quot; 
+                         type=&quot;string&quot;&gt;insite.opc.simu&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;ItemSyntax&quot; type=&quot;string&quot;&gt;SimaticNet&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;OPCConnectionName&quot; type=&quot;string&quot;&gt;P2T&lt;/ConfigValue&gt;
+        &lt;/ICONPlc&gt;
+    &lt;/ICONPlcs&gt;
+    &lt;ICONProtocols&gt;
+        &lt;ICONStandardProtocol ImplementingClass=&quot;???_ICONMsgFactory&quot; /&gt;
+        &lt;ICONStandardProtocol ImplementingClass=&quot;WACC04_ICONMsgFactory&quot; /&gt;
+    &lt;/ICONProtocols&gt;
+    &lt;ICONModuleInstances&gt;
+        &lt;ICONModule Name=&quot;PlcQuelle&quot; Assembly=&quot;MemBasedMsgSource.dll&quot;&gt;
+            &lt;ConfigValue name=&quot;Sink&quot; type=&quot;string&quot;&gt;SocketManager&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;Slots&quot; type=&quot;int&quot;&gt;1&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;Impl&quot; type=&quot;string&quot;&gt;PlcBasedMsgImpl.dll&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;Accessor&quot; type=&quot;string&quot;&gt;MainOPC&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;Poll&quot; type=&quot;int&quot;&gt;1&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;DB&quot; type=&quot;int&quot;&gt;412&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;Offset&quot; type=&quot;int&quot;&gt;0&lt;/ConfigValue&gt;   
+        &lt;/ICONModule&gt;
+        &lt;ICONModule Name=&quot;SocketManager&quot; Assembly=&quot;SocketManagement.dll&quot;&gt;
+        &lt;/ICONModule&gt;
+    &lt;/ICONModuleInstances&gt;
+&lt;/ICONConfig&gt;
+</code></pre><p>If, for example, a passive endpoint is instantiated, an active partner will certainly not be connected to it immediately. To ensure that this occurs smoothly, The SocketManager should be provided with a spooler in this case.</p>
+<pre><code class="lang-html">&lt;ICONModule Name=&quot;SocketManager&quot; Assembly=&quot;SocketManagement.dll&quot;&gt;
+    &lt;Section Type=&quot;Spooler&quot; \&gt;
+&lt;/ICONModule&gt;
+</code></pre><hr>
+<h1 id="a-data-transport-sequence-in-icon">A Data Transport Sequence in ICON</h1>
+<hr>
+<h1 id="installation">Installation</h1>
+<p>The installation requires</p>
+<ol>
+<li>Microsoft .NET Framework 3.5 Servicepack 1</li>
+<li>Microsoft Visual C++ 2008 Redistributable Package</li>
+<li>Microsoft Visual C++ 2010 Redistributable Package</li>
+</ol>
+<p>to be installed and available on the destination under Windows.  </p>
+<p>The ICON files can be copied to any directory and ICONMain.exe can then be started from there.</p>
+<hr>
+<h2 id="files-generated-during-runtime">Files generated during runtime</h2>
+<p>ICON generates files independently. Here are the meanings:</p>
+<ul>
+<li><strong>Logfiles:</strong> Files configured for Log4net</li>
+<li><strong>Spooler files:</strong> A file is created with the ending SPO for each persistent spooler. TheSocketManager will create spooler files independently that could , for example, look like this: &quot;SpoolerFile-Tcp$127~0~0~1§1001$&#35;.spo&quot;</li>
+<li>When ICON triggers an exception, which is not intercepted, then a message is displayed and written to the file ICON.trc. ICON shuts down after that.</li>
+<li><strong>Cache files:</strong> Some modules as well as the other spooler generate cache files for caching states</li>
+</ul>
+<p>Application specific modules also generate files when necessary, such as the &quot;AlarmManager.cch&quot; and &quot;SequenceNumber.cnt&quot;.</p>
+<hr>
+<h2 id="addons">AddOns</h2>
+<p>Under the &quot;AddOns&quot; folder in the application directory, the following dlls can be provided in order to use additional functions. Only one AddOn can be activated at present.</p>
+<ol>
+<li>RedGate.MemoryProfiler.Snapshot.dll</li>
+</ol>
+<p>If &quot;RedGate.MemoryProfiler.Snapshot.dll&quot; in the &quot;AddOns&quot; folder is provided, ICON will request a snapshot every 60 seconds.</p>
+<hr>
+<h1 id="appendix-a">Appendix A</h1>
+<hr>
+<h2 id="umlauts-in-the-configuration-file">Umlaut&#39;s in the configuration file</h2>
+<p>In order to also work with umlauts in the configuration file, some configuration items (not all of them) also support the replacing of the following character strings in the character declared for this purpose. (it is also partially necessary to convert &amp; to <code>&amp;amp;</code>) --&gt; e.g.: Ä = <code>&amp;amp;</code>Auml;</p>
+<table><tr><th>Character </th><th> Character </th><th> Character </th><th> Character </th><th> Character </th><th> Character</th></tr>
+<tr><th>   </th><th> string </th><th>    </th><th> string </th><th>    </th><th> string</th></tr>
+<tr><td>&amp; </td><td> <code>&amp;amp;</code> </td><td> À </td><td> <code>&amp;Agrave;</code> </td><td> í </td><td> <code>&amp;iacute;</code></td></tr>
+<tr><td>&#39; </td><td> <code>&amp;quot;</code> </td><td> Á </td><td> <code>&amp;Aacute;</code> </td><td> î </td><td> <code>&amp;icirc;</code></td></tr>
+<tr><td>&#62; </td><td> <code>&amp;gt;</code> </td><td> Â </td><td> <code>&amp;Acirc;</code> </td><td> ï </td><td> <code>&amp;iuml;</code></td></tr>
+<tr><td>&#60; </td><td> <code>&amp;lt;</code> </td><td> Ã </td><td> <code>&amp;Atilde;</code> </td><td> ð </td><td> <code>&amp;eth;</code></td></tr>
+<tr><td>¡ </td><td> <code>&amp;iexcl;</code> </td><td> Ä </td><td> <code>&amp;Auml;</code> </td><td> ñ </td><td> <code>&amp;ntilde;</code></td></tr>
+<tr><td>¢ </td><td> <code>&amp;cent;</code> </td><td> Å </td><td> <code>&amp;Aring;</code> </td><td> ò </td><td> <code>&amp;ograve;</code></td></tr>
+<tr><td>£ </td><td> <code>&amp;pound;</code> </td><td> Æ </td><td> <code>&amp;AElig;</code> </td><td> ó </td><td> <code>&amp;oacute;</code></td></tr>
+<tr><td>¤ </td><td> <code>&amp;curren;</code> </td><td> Ç </td><td> <code>&amp;Ccedil;</code> </td><td> ô </td><td> <code>&amp;ocirc;</code></td></tr>
+<tr><td>¥ </td><td> <code>&amp;yen;</code> </td><td> È </td><td> <code>&amp;Egrave;</code> </td><td> õ </td><td> <code>&amp;otilde;</code></td></tr>
+<tr><td>¦ </td><td> <code>&amp;brvbar;</code> </td><td> É </td><td> <code>&amp;Eacute;</code> </td><td> ö </td><td> <code>&amp;ouml;</code></td></tr>
+<tr><td>§ </td><td> <code>&amp;sect;</code> </td><td> Ê </td><td> <code>&amp;Ecirc;</code> </td><td> ÷ </td><td> <code>&amp;divide;</code></td></tr>
+<tr><td>¨ </td><td> <code>&amp;uml;</code> </td><td> Ë </td><td> <code>&amp;Euml;</code> </td><td> ø </td><td> <code>&amp;oslash;</code></td></tr>
+<tr><td>© </td><td> <code>&amp;copy;</code> </td><td> Ì </td><td> <code>&amp;Igrave;</code> </td><td> ù </td><td> <code>&amp;ugrave;</code></td></tr>
+<tr><td>ª </td><td> <code>&amp;ordf;</code> </td><td> Í </td><td> <code>&amp;Iacute;</code> </td><td> ú </td><td> <code>&amp;uacute;</code></td></tr>
+<tr><td>« </td><td> <code>&amp;laquo;</code> </td><td> Î </td><td> <code>&amp;Icirc;</code> </td><td> û </td><td> <code>&amp;ucirc;</code></td></tr>
+<tr><td>¬ </td><td> <code>&amp;not;</code> </td><td> Ï </td><td> <code>&amp;Iuml;</code> </td><td> ü </td><td> <code>&amp;uuml;</code></td></tr>
+<tr><td>  </td><td> <code>&amp;shy;</code> </td><td> Ð </td><td> <code>&amp;ETH;</code> </td><td> ý </td><td> <code>&amp;yacute;</code></td></tr>
+<tr><td>® </td><td> <code>&amp;reg;</code> </td><td> Ñ </td><td> <code>&amp;Ntilde;</code> </td><td> þ </td><td> <code>&amp;thorn;</code></td></tr>
+<tr><td>¯ </td><td> <code>&amp;macr;</code> </td><td> Ò </td><td> <code>&amp;Ograve;</code> </td><td> ÿ </td><td> <code>&amp;yuml;</code></td></tr>
+<tr><td>° </td><td> <code>&amp;deg;</code> </td><td> Ó </td><td> <code>&amp;Oacute;</code> </td><td>   </td><td>  </td></tr>
+<tr><td>± </td><td> <code>&amp;plusmn;</code> </td><td> Ô </td><td> <code>&amp;Ocirc;</code> </td><td>   </td><td>  </td></tr>
+<tr><td>² </td><td> <code>&amp;sup2;</code> </td><td> Õ </td><td> <code>&amp;Otilde;</code> </td><td>   </td><td>  </td></tr>
+<tr><td>³ </td><td> <code>&amp;sup3;</code> </td><td> Ö </td><td> <code>&amp;Ouml;</code> </td><td>   </td><td>  </td></tr>
+<tr><td>´ </td><td> <code>&amp;acute;</code> </td><td> × </td><td> <code>&amp;times;</code> </td><td>   </td><td>  </td></tr>
+<tr><td>µ </td><td> <code>&amp;micro;</code> </td><td> Ø </td><td> <code>&amp;Oslash;</code> </td><td>   </td><td>  </td></tr>
+<tr><td>¶ </td><td> <code>&amp;para;</code> </td><td> Ù </td><td> <code>&amp;Ugrave;</code> </td><td>   </td><td>  </td></tr>
+<tr><td>· </td><td> <code>&amp;middot;</code> </td><td> Ú </td><td> <code>&amp;Uacute;</code> </td><td>   </td><td>  </td></tr>
+<tr><td>¸ </td><td> <code>&amp;cedil;</code> </td><td> Û </td><td> <code>&amp;Ucirc;</code> </td><td>   </td><td>  </td></tr>
+<tr><td>¹ </td><td> <code>&amp;sup1;</code> </td><td> Ü </td><td> <code>&amp;Uuml;</code> </td><td>   </td><td>  </td></tr>
+<tr><td>º </td><td> <code>&amp;ordm;</code> </td><td> Ý </td><td> <code>&amp;Yacute;</code> </td><td>   </td><td>  </td></tr>
+<tr><td>» </td><td> <code>&amp;raquo;</code> </td><td> Þ </td><td> <code>&amp;THORN;</code> </td><td>   </td><td>  </td></tr>
+<tr><td>¼ </td><td> <code>&amp;frac14;</code> </td><td> ß </td><td> <code>&amp;szlig;</code> </td><td>   </td><td>  </td></tr>
+<tr><td>½ </td><td> <code>&amp;frac12;</code> </td><td> à </td><td> <code>&amp;agrave;</code> </td><td>   </td><td>  </td></tr>
+<tr><td>¾ </td><td> <code>&amp;frac34;</code> </td><td> á </td><td> <code>&amp;aacute;</code> </td><td>   </td><td>  </td></tr>
+<tr><td>¿ </td><td> <code>&amp;iquest;</code> </td><td> â </td><td> <code>&amp;acirc;</code> </td><td>   </td><td>  </td></tr>
+</table>
+
+
+
+
+
+<hr>
+<h1 id="change-directory">Change Directory</h1>
+<table><tr><th>Benjamin Prömmer </th><th> 2014-07-21 </th><th> New creation</th></tr>
+<tr><td>Benjamin Prömmer </td><td> 2014-07-29 </td><td> Screenshots updated</td></tr>
+<tr><td>Benjamin Prömmer </td><td> 2014-07-31 </td><td> New SpoolerGUI parameter updated and screenshot</td></tr>
+<tr><td>   </td><td>    </td><td> added to PlcUserLevel.</td></tr>
+<tr><td>Benjamin Prömmer </td><td> 2014-08-04 </td><td> Description added to Includes</td></tr>
+<tr><td>Benjamin Prömmer </td><td> 2014-08-11 </td><td> ICONSocket ReceiveBehaviours</td></tr>
+<tr><td>Benjamin Prömmer </td><td> 2014-11-10 </td><td> Update JIS</td></tr>
+<tr><td>Benjamin Prömmer </td><td> 2014-12-12 </td><td> ModuleInstanceManager</td></tr>
+<tr><td>Benjamin Prömmer </td><td> 2015-03-26 </td><td> Configuration of ReceiveOnlyRawData supplemented</td></tr>
+<tr><td>Benjamin Prömmer </td><td> 2015-04-09 </td><td> UseSocketBasedReceiveThread in</td></tr>
+<tr><td>   </td><td>    </td><td> ICONGlobals updated</td></tr>
+<tr><td>Karsten Gorkow </td><td> 2015-09-17 </td><td> Added socket latency measurement</td></tr>
+<tr><td>   </td><td>    </td><td> (globals and socket).</td></tr>
+<tr><td>Benjamin Prömmer </td><td> 2015-09-18 </td><td> SocketDataBufferIncreaseAction</td></tr>
+</table>
+
+
+            </article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/insite-gmbh/iDoc/blob/master/articles/ICON_Base.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a class="back-to-top" href="#top">Back to top</a>
+            </span>
+            
+            <span>Copyright © 2016 insite Ingenieurgesellschaft für Steuerungs- und Informationstechnik mbH
+          </span></div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

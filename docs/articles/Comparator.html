@@ -1,0 +1,249 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Software Specification </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Software Specification ">
+    <meta name="generator" content="docfx 2.8.2.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="text/javascript" href="../styles/encrypter.js">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        <a href="http://www.insite-gmbh.de" class="link-to-homepage" target="_blank" title="opens the website of insite in a new tab">
+            <img src="../images/whitefontlogo.png">
+        </a>        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+              <h1>Software Specification</h1>
+                
+
+<h1>Comparator</h1>
+
+
+
+<p><strong>insite GmbH</strong></p>
+<hr>
+<h1 id="introduction">Introduction</h1>
+<p>The Comparator is a software application which is part of the <strong>IDAT</strong> system and used for comparing data.</p>
+<hr>
+<h2 id="purpose-and-objective">Purpose and Objective</h2>
+<p>A Comparator is an interchangeable component. The data read from a PLC is checked for changes. These components can be interchanged depending on what the comparison and feedback should be like.</p>
+<hr>
+<h2 id="definitions-acronyms-abbreviations">Definitions, Acronyms, Abbreviations</h2>
+<ul>
+<li><strong>PLC:</strong> Programmable Logic Controller</li>
+<li><strong>SPS:</strong> Speicher Programmierbare Steuerung (German for PLC)</li>
+<li><strong>LibNoDave:</strong> A free library for the communication with a PLC</li>
+<li><strong>Data definition:</strong> A file which describes the structure and mapping of the data</li>
+<li><strong>Mapping:</strong> A variable is mapped to a defined data area</li>
+</ul>
+<hr>
+<h1 id="general-description">General Description</h1>
+<p>The special features and setting options of the software are described below.</p>
+<hr>
+<h2 id="system-environment">System Environment</h2>
+<p>The software is written with C&#35; Visual Studio 2010 for the Target framework .NET 4.0.</p>
+<p><img src="../images/warning_icon.png" alt="warning_icon.png">
+ .NET 4.5 is not used since it does not guarantee any compatibility with XP.</p>
+<hr>
+<h2 id="framework">Framework</h2>
+<p>The Comparators are a part of IDAT, and are also configured using the IoC components of IDAT. (For more details, please refer to the chapter Configuration)</p>
+<hr>
+<h2 id="test-and-standalone-program">Test and Standalone Program</h2>
+<hr>
+<h3 id="comparatortestexe">ComparatorTest.exe</h3>
+<p>This software tool is used to test the Comparator.</p>
+<hr>
+<h3 id="comparatorcmdlinehostexe">ComparatorCmdLineHost.exe</h3>
+<p>The ComparatorCmdLineHost.exe is started as follows:</p>
+<p>Usage: ComparatorCmdLineHost.exe -d&#60;datadeffile&#62; [-c&#60;configfile&#62;] [-o&#60;outputfile&#62;]</p>
+<p>The data of the file is mandatory here for the data definition. The config file is &quot;execconf.xml&quot; by default if you do not specify any other. However, a config file must be available. The output file, in which the written data is output in Hex format, is optional.</p>
+<hr>
+<h1 id="comparators">Comparators</h1>
+<p>The following section examines the currently existing Comparators and points out the options and configurations.</p>
+<p>All Comparators are linked to the application of the following interface:</p>
+<pre><code class="lang-javascript">.Interfaces
+{
+    public interface ResultSink
+    {
+        void ProcessComparisonResult(string text);
+    }
+    public interface Comparator
+    {
+        Resolver Resolver { get; set; }
+        Converter Converter { get; set; }
+        ResultSink ResultSink { get; set; }
+        void Configure(XElement xmlSetup);
+        bool RunOnce(string dataDefA = &quot;&quot;, string dataDefB = &quot;&quot;);
+        void Start();
+        void Stop();
+    }
+}
+</code></pre><p>The RunOnce method additionally returns true in the case of OK.</p>
+<hr>
+<h2 id="comparatoruc">ComparatorUC</h2>
+<p>This Comparator is used e.g. for the PLCDataManager application.</p>
+<p>It compares the transferred data definitions and returns the negative comparison result via the ResultSink.</p>
+<p>Possible events are:</p>
+<pre><code class="lang-javascript">    {
+            A_And_B_Uncomparable,
+            A_DoesNotExist,
+            B_DoesNotExist,
+            A_And_B_DoesNotExist,
+            A_Equal_B,
+            A_Unequal_B
+        }
+</code></pre><p>The results are transferred to the ResultSink as a string in the following format:</p>
+<p>[EventDef]&#60;[Mapping]-[VarName]&#62;[{INDEX]}</p>
+<p><strong>Examples:</strong>  </p>
+<p>A&#95;Unequal&#95;B&#60;AnAbWahl:1005.0.BSTAnAbWahl-BSTAnAbWahl.Bearbeiten[1].Origin&#62;  </p>
+<p>A&#95;Unequal&#95;B&#60;AnAbWahl:1005.0.BSTAnAbWahl-BSTAnAbWahl.Bearbeiten[1].Destination&#62;  </p>
+<p>A&#95;Unequal&#95;B&#60;BSTOrg:1000.0.Org-Org.UDT&#95;Organisation&#95;BST.ZP&#95;name&#62;{16}  </p>
+<hr>
+<h2 id="comparatorxladapter">ComparatorXLAdapter</h2>
+<p>This Comparator, as the name implies, is used for the XLAdapter.</p>
+<p>With this Comparator an additional configuration file must be created in order to declare the variables and events to be compared.</p>
+<p>Here is an example:</p>
+<pre><code class="lang-html">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;Comparators&gt;
+    &lt;Comparator&gt;
+        &lt;XmlOutA&gt;..\Dat\ExecutorCmdLineHostOutput1.xml&lt;/XmlOutA&gt;
+        &lt;XmlOutB&gt;..\Dat\ExecutorCmdLineHostOutput2.xml&lt;/XmlOutB&gt;
+        &lt;Events&gt;
+            &lt;Event name=&quot;A_And_B_Uncomparable&quot;&gt;
+{{Die Datenstrukturen sind nicht vergleichbar}}
+&lt;/Event&gt;
+            &lt;Event name=&quot;A_DoesNotExist&quot;&gt;{{A ist nicht vorhanden}}&lt;/Event&gt;
+            &lt;Event name=&quot;B_DoesNotExist&quot;&gt;{{B ist nicht vorhanden}}&lt;/Event&gt;
+            &lt;Event name=&quot;A_And_B_DoesNotExist&quot;&gt;{{A und B sind nicht vorhanden}}&lt;/Event&gt;
+            &lt;Event name=&quot;A_Equal_B&quot;&gt;&lt;![CDATA[{{A == B}}]]&gt;&lt;/Event&gt;
+            &lt;Event name=&quot;A_Unequal_B&quot;&gt;&lt;![CDATA[{{A &lt;&gt; B}}]]&gt;&lt;/Event&gt;
+        &lt;/Events&gt;
+        &lt;Vars&gt;
+            &lt;Var name=&quot;MyDBSchraub.Konfig[3].KanalNr&quot;&gt;
+                &lt;Event name=&quot;A_DoesNotExist&quot;&gt;{{AAAA ist nicht vorhanden}}&lt;/Event&gt;
+                &lt;Event name=&quot;B_DoesNotExist&quot;&gt;{{BBBB ist nicht vorhanden}}&lt;/Event&gt;
+                &lt;Event name=&quot;A_And_B_DoesNotExist&quot;&gt;
+                    {{AAAA und BBBB sind nicht vorhanden}}
+                &lt;/Event&gt;
+                &lt;Event name=&quot;A_Equal_B&quot;&gt;&lt;!-- Fire the global event --&gt;&lt;/Event&gt;
+                &lt;Event name=&quot;A_Unequal_B&quot;&gt;&lt;!-- Fire the global event --&gt;&lt;/Event&gt;
+            &lt;/Var&gt;
+        &lt;/Vars&gt;
+    &lt;/Comparator&gt;
+&lt;/Comparators&gt;
+</code></pre><hr>
+<h1 id="installation">Installation</h1>
+<p>This requires that</p>
+<ol>
+<li>Microsoft .NET Framework 4.0 Servicepack 1 and</li>
+<li>Microsoft Visual C++ 2010 Redistributable Package</li>
+</ol>
+<p>are installed and available on the destination system under Windows.</p>
+<hr>
+<h2 id="files-generated-during-runtime">Files generated during runtime</h2>
+<p>XLAdapterExecutor.exe or ExecutorCmdLineHost.exe generate files independently.</p>
+<p>Here are the meanings:</p>
+<ol>
+<li><strong>Log files:</strong> Files configured for Log4net</li>
+</ol>
+<hr>
+<h1 id="change-directory">Change directory</h1>
+<table><tr><th>Author </th><th> Date </th><th> Remarks</th></tr>
+<tr><td>Ralf Gedrat </td><td> September 2012 </td><td> Creation</td></tr>
+<tr><td>Benjamin Prömmer </td><td> January 2013 </td><td> Extension to several Comparators</td></tr>
+<tr><td>Ralf Gedrat </td><td> January 2013 </td><td> Brief editing</td></tr>
+</table>
+            </article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/insite-gmbh/iDoc/blob/master/articles/Comparator.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a class="back-to-top" href="#top">Back to top</a>
+            </span>
+            
+            <span>Copyright © 2016 insite Ingenieurgesellschaft für Steuerungs- und Informationstechnik mbH
+          </span></div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,363 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Software Specification </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Software Specification ">
+    <meta name="generator" content="docfx 2.8.2.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="text/javascript" href="../styles/encrypter.js">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        <a href="http://www.insite-gmbh.de" class="link-to-homepage" target="_blank" title="opens the website of insite in a new tab">
+            <img src="../images/whitefontlogo.png">
+        </a>        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+              <h1>Software Specification</h1>
+                
+
+<h1>BilderArchivieren (ArchiveImages)</h1>
+
+
+
+<p><strong>insite GmbH</strong></p>
+<hr>
+<h1 id="introduction">Introduction</h1>
+<p>The Archive Images program is used to move images (e.g. from V60) to an archive server. In the course of this, all special characters are also replaced by permitted characters (see <a href="#appendix_c">Appendix C</a>).</p>
+<hr>
+<h1 id="interface">Interface</h1>
+<p><img src="../images/BilderArchivieren_Interface.png" alt="BilderArchivieren_Interface.png"></p>
+<ol>
+<li>Starts the monitoring (Auto archiving) (see <a href="#functional_description">Functional description</a>)</li>
+<li>Stops all actions</li>
+<li>Starts the archiving (when all images have been archived, this function is terminated)</li>
+<li>Displays the current program status (see <a href="#status_display">Status display</a>)</li>
+<li>Displays the number of locally stored files</li>
+<li>Displays the progress when moving the files</li>
+<li>Log output</li>
+</ol>
+<hr>
+<h2 id="status-display">Status display</h2>
+<p><a name="status_display"></a></p>
+<p><img src="../images/BilderArchivieren_Status_notrunning.png" alt="BilderArchivieren_Status_notrunning.png">
+ No action is running. (Program is in stop mode)  </p>
+<p><img src="../images/BilderArchivieren_Status_active_a.png" alt="BilderArchivieren_Status_active_a.png">
+ Auto archiving is active  </p>
+<p><img src="../images/BilderArchivieren_Status_active_m.png" alt="BilderArchivieren_Status_active_m.png">
+ Manual archiving is active  </p>
+<hr>
+<h1 id="functional-description">Functional description</h1>
+<p><a name="functional_description"></a>
+The V60 program saves the evaluated images locally in a directory.</p>
+<p>The ArchiveImages program is informed via FileSystemEvents when a file has been created or deleted using a filter that must be set (e.g. &#42;.jpg). Once the set bulk number of the files has been reached, this bulk is moved to the Archive Server. The directory structure of the Archive Server can be defined by means of format options in the configuration file.</p>
+<p>From version 1.0.0.8 it is now possible to also specify multiple sources. The number of files of the source can then be calculated from the total files in all sources.</p>
+<hr>
+<h1 id="configuration-file">Configuration file</h1>
+<hr>
+<h2 id="path">Path</h2>
+<p>The path for the configuration files is searched in the following order:</p>
+<ol>
+<li>HKEY&#95;CURRENT&#95;USER\Software\Insite Gmbh\BilderArchivieren (Character string: config)</li>
+<li>HKEY&#95;LOCAL&#95;MACHINE\Software\Insite Gmbh\BilderArchivieren (Character string: config)</li>
+<li>Start path + \BilderArchivieren.xml</li>
+</ol>
+<p>If the file is not found in any of the defined paths, the application is terminated.</p>
+<hr>
+<h2 id="settings-in-the-configuration-file-xml-format">Settings in the configuration file (XML format)</h2>
+<pre><code class="lang-html">&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;!-- Konfigurations-Datei fuer BilderArchivieren. --&gt;
+&lt;config name=&quot;BilderArchivieren&quot;&gt;
+  &lt;settings&gt;
+    &lt;common autoscan=&quot;true&quot; autoscroll=&quot;true&quot; maxlogrows=&quot;1000&quot; 
+            copyerrorrecalltime=&quot;60000&quot; bulk=&quot;10&quot; maxwaittimeforbulk=&quot;360000&quot;/&gt;
+    &lt;performance bulk=&quot;0&quot; processpriority=&quot;belownormal&quot; sleeptimeinms=&quot;1000&quot;
+                 maxcpuusageinpercent=&quot;20&quot; optimizememusage=&quot;false&quot;/&gt;
+    &lt;filter extensions=&quot;*.jpg&quot; converttojpeg=&quot;false&quot; deleteafterconvert=&quot;false&quot;
+            quality=&quot;30&quot;/&gt;
+    &lt;source path=&quot;G:\V60_Bilder_Puffer&quot;/&gt;
+    &lt;dest path=&quot;N:\Bilder\Band7&quot; format=&quot;\%HOSTNAME~3,6%\%FT=yyyy%\%FT=MM%\%FT=dd%&quot; 
+          adoptSubFolders=&quot;false&quot;/&gt;
+    &lt;log path=&quot;BilderArchivieren.log&quot; daystokeeplog=&quot;1&quot; bulk=&quot;20&quot;/&gt;
+  &lt;/settings&gt;
+&lt;/config&gt;
+</code></pre><hr>
+<h3 id="common">common</h3>
+<p><strong>autoscan:</strong>  </p>
+<table>
+ <tr><th>Data type </th><td> BOOL</td></tr>
+ <tr><th>Description </th><td> Specifies whether the monitoring should be activated</td></tr>
+ <tr><th>   </th><td> immediately at the start of the program.</td></tr>
+ <tr><th>Default value </th><td> false</td></tr>
+</table>
+
+
+
+<p><strong>autoscroll:</strong>  </p>
+<table>
+ <tr><th>Data type </th><td> BOOL</td></tr>
+ <tr><th>Description </th><td> Specifies whether the current entry should always be scrolled</td></tr>
+ <tr><th>   </th><td> to in the Log window.</td></tr>
+ <tr><th>Default value </th><td> true</td></tr>
+</table>
+
+
+
+<p><strong>maxlogrows:</strong>  </p>
+<table>
+ <tr><th>Data type </th><td> INTEGER</td></tr>
+ <tr><th>Description </th><td> Specifies the number of log files kept in the Log window.</td></tr>
+ <tr><th>Default value </th><td> 1000</td></tr>
+</table>
+
+
+
+<p><strong>copyerrorrecalltime:</strong>  </p>
+<table>
+ <tr><th>Data type </th><td> INTEGER</td></tr>
+ <tr><th>Description </th><td> Specifies the waiting time in milliseconds until a copy</td></tr>
+ <tr><th>   </th><td> attempt should be restarted.</td></tr>
+ <tr><th>Default value </th><td> 60000</td></tr>
+</table>
+
+
+
+<p><strong>bulk:</strong>  </p>
+<table>
+ <tr><th>Data type </th><td> INTEGER</td></tr>
+ <tr><th>Description </th><td> Specifies the number of files the archiving procedure is</td></tr>
+ <tr><th>   </th><td> started from.</td></tr>
+ <tr><th>Default value </th><td> 10</td></tr>
+</table>
+
+
+
+<p><strong>maxwaittimeforbulk:</strong>  </p>
+<table>
+ <tr><th>Data type </th><td> INTEGER</td></tr>
+ <tr><th>Description </th><td> Specifies the maximum waiting time that the program waits</td></tr>
+ <tr><th>   </th><td> until the buffer is full. If the time elapses before the buffer is</td></tr>
+ <tr><th>   </th><td> full, the files currently available are moved. If the value 0 is</td></tr>
+ <tr><th>   </th><td> used, this waiting time is deactivated and the files are then</td></tr>
+ <tr><th>   </th><td> first moved once the buffer is full.</td></tr>
+ <tr><th>Default value </th><td> 0</td></tr>
+</table>
+
+
+
+<hr>
+<h3 id="performance">performance</h3>
+<p><strong>processpriority:</strong>  </p>
+<table>
+ <tr><th>Data type </th><td> STRING</td></tr>
+ <tr><th>Description </th><td> Specifies the process priority that the program should have</td></tr>
+ <tr><th>   </th><td> (for adjustable values see Appendix A).</td></tr>
+ <tr><th>Default value </th><td> NORMAL</td></tr>
+</table>
+
+
+
+<p><strong>bulk:</strong>  </p>
+<table>
+ <tr><th>Data type </th><td> INTEGER</td></tr>
+ <tr><th>Description </th><td> Specifies the maximum number of files moved without pause.</td></tr>
+ <tr><th>   </th><td> (only active if a value &#62; 0 is in sleeptimeinms)</td></tr>
+ <tr><th>Default value </th><td> 10</td></tr>
+</table>
+
+
+
+<p><strong>sleeptimems:</strong>  </p>
+<table>
+ <tr><th>Data type </th><td> INTEGER</td></tr>
+ <tr><th>Description </th><td> Specifies the waiting time in milliseconds until the next bulk</td></tr>
+ <tr><th>   </th><td> should be copied. (only active if a value &#62; 0 is in bulk).</td></tr>
+ <tr><th>Default value </th><td> 1000</td></tr>
+</table>
+
+
+
+<p><strong>maxcpuusageinpercent:</strong>  </p>
+<table>
+ <tr><th>Data type </th><td> INTEGER</td></tr>
+ <tr><th>Description </th><td> Specifies the maximum CPU load in percent. If this is</td></tr>
+ <tr><th>   </th><td> exceeded, a pause occurs</td></tr>
+ <tr><th>   </th><td> (only active if a value &#62; 0 is in sleeptimeinms)</td></tr>
+ <tr><th>Default value </th><td> 30</td></tr>
+</table>
+
+
+
+<p><strong>optimizecpuusage:</strong>  </p>
+<table>
+ <tr><th>Data type </th><td> BOOL</td></tr>
+ <tr><th>Description </th><td> Specifies whether the memory manages itself or is managed</td></tr>
+ <tr><th>   </th><td> by the .Net Framework. (If it manages itself, the work involved</td></tr>
+ <tr><th>   </th><td> for the CPU is greater, since the memory must also be released</td></tr>
+ <tr><th>   </th><td> after each archiving procedure. If the Framework performs the</td></tr>
+ <tr><th>   </th><td> management, the memory is then released when needed.)</td></tr>
+ <tr><th>Default value </th><td> FALSE</td></tr>
+</table>
+
+
+
+<p><strong>optimizeforoverwrite:</strong>  </p>
+<table>
+ <tr><th>Data type </th><td> BOOL</td></tr>
+ <tr><th>Description </th><td> Specifies whether or not most of the files that are moved</td></tr>
+ <tr><th>   </th><td> already exist at the target location. (in the case of backups</td></tr>
+ <tr><th>   </th><td> that should be stored in the same path, the option should</td></tr>
+ <tr><th>   </th><td> be set to TRUE)</td></tr>
+ <tr><th>Default value </th><td> FALSE</td></tr>
+</table>
+
+
+<hr>
+<h3 id="filter">filter</h3>
+<p><strong>extension:</strong>  </p>
+<table>
+ <tr><th>Data type </th><td> STRING</td></tr>
+ <tr><th>Description </th><td> Specifies the filter for the files to be monitored and copied.</td></tr>
+ <tr><th>Default value </th><td> NORMAL</td></tr>
+</table>
+
+
+
+<p><strong>converttojpg:</strong>  </p>
+<table>
+ <tr><th>Data type </th><td> BOOL</td></tr>
+ <tr><th>Description </th><td> If the filter value is != jpg, the image is converted to</td></tr>
+ <tr><th>   </th><td> jpg format and then moved.</td></tr>
+ <tr><th>Default value </th><td> FALSE</td></tr>
+</table>
+
+
+
+<p><strong>deleteafterconvert:</strong>  </p>
+<table>
+ <tr><th>Data type </th><td> BOOL</td></tr>
+ <tr><th>Description </th><td> If this value is True, the originals of the moved files are</td></tr>
+ <tr><th>   </th><td> deleted. (only active if converttojpg is TRUE)</td></tr>
+ <tr><th>Default value </th><td> FALSE</td></tr>
+</table>
+
+
+
+<p><strong>quality:</strong>  </p>
+<table>
+ <tr><th>Data type </th><td> INTEGER</td></tr>
+ <tr><th>Description </th><td> Quality of the jpg in percent</td></tr>
+ <tr><th>Default value </th><td> 30</td></tr>
+</table>
+
+
+
+<hr>
+<h3 id="source">source</h3>
+<hr>
+<h3 id="dest">dest</h3>
+<hr>
+<h3 id="log">log</h3>
+<hr>
+<h1 id="appendix-a">Appendix A</h1>
+<hr>
+<h1 id="appendix-b">Appendix B</h1>
+<hr>
+<h1 id="appendix-c">Appendix C</h1>
+<p><a name="appendix_c"></a></p>
+<hr>
+<h1 id="document-history">Document History</h1>
+
+            </article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/insite-gmbh/iDoc/blob/master/articles/BilderArchivieren.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a class="back-to-top" href="#top">Back to top</a>
+            </span>
+            
+            <span>Copyright © 2016 insite Ingenieurgesellschaft für Steuerungs- und Informationstechnik mbH
+          </span></div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

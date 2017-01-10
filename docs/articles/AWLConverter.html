@@ -1,0 +1,191 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Software Specification </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Software Specification ">
+    <meta name="generator" content="docfx 2.8.2.0">
+    
+    <link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="text/javascript" href="../styles/encrypter.js">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        <a href="http://www.insite-gmbh.de" class="link-to-homepage" target="_blank" title="opens the website of insite in a new tab">
+            <img src="../images/whitefontlogo.png">
+        </a>        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+              <h1>Software Specification</h1>
+                
+
+<h1>AWLConverter</h1>
+
+
+
+<p><strong>insite GmbH</strong></p>
+<hr>
+<h1 id="introduction">Introduction</h1>
+<p>The AWLConverter is a software application that converts the data definitions in a Siemens S7 project to XML- or C&#35;-source-files. The conversion to XML format generates data definition files (DDFs) that can be used in different tools of the IDAT family. The conversion to C&#35;-source-files generates files for INAX (<strong>IN</strong>site <strong>A</strong>utomation framewor<strong>X</strong>).</p>
+<hr>
+<h2 id="purpose-and-objective">Purpose and Objective</h2>
+<p>Easy creation of files that map PLC/S7 data structures.</p>
+<hr>
+<h2 id="definitions-acronyms-abbreviations">Definitions, Acronyms, Abbreviations</h2>
+<ul>
+<li><strong>Data Definition File (DDF):</strong> A file which describes the structure of single or combined variables and defines the mapping of these variables.</li>
+<li><strong>Mapping:</strong> Variables are mapped to a defined data or memory area. </li>
+</ul>
+<hr>
+<h1 id="general-description">General Description</h1>
+<p>The special features and setting options of the software are described below. </p>
+<hr>
+<h2 id="system-environment">System Environment</h2>
+<p>The software is written in C&#35; with Visual Studio 2013 for the .NET framework 4.5.2.</p>
+<hr>
+<h1 id="user-interface">User Interface</h1>
+<p>The application is dialog-based. The usage is straightforward, though some features need a bit of explanation.</p>
+<hr>
+<h2 id="mainwindow-controls">MainWindow Controls</h2>
+<p>The application features tool tips for all controls. Here, you see a more detailed explanation of the function behind each control:</p>
+<p><img src="../images/AWLConverter_main_window_controls.png" alt="AWLConverter_main_window_controls.png"></p>
+<p><strong>Common symbols:</strong>  </p>
+<p>... browse for file/directory  </p>
+<p>$&#32;&#32;$ clear file/directory selection or text filter  </p>
+<ol>
+<li>Select the format of the created files. Currently &quot;IDatTemplate&quot; (DDF in XML-format) and &quot;InaxTemplate&quot; (C&#35;-source) are supported. If you select &quot;InaxTemplate&quot;, there will be a further tab allowing you to work on the PLC symbols, which is not possible and not needed for DDFs.</li>
+<li>Sets the S7-project from which the data structures are extracted. You can enter the filename manually, browse for it or clear the current selection.</li>
+<li>Sets the output directory for the created files. You can enter the directory manually, browse for it, open the directory with the explorer or clear the current selection.</li>
+<li>Creates, saves or loads a pattern file. A pattern file can save your selections and apply them again to a different or changed S7-project. See below for more details. You can enter the filename manually, create a new one, open it, save it or clear the current selection.</li>
+<li>Enter a text pattern that is matched against the contents of the item list. </li>
+<li>The list of all data blocks in the PLC-project. If you select &quot;InaxTemplate&quot; there&#39;s a further tab that allows you to switch to the &quot;symbols&quot;-view. Beside the symbolic name, the absolute name, the DB number and information regarding your item selection is displayed. You’ll find more on item selection below. If you double click on a grid line, the FilterEditor opens and allows you to select/deselect certain items from a data block for backup/restore.</li>
+<li>Used to check/uncheck all items at once.</li>
+<li>Start creation of output files. </li>
+<li>Status line. </li>
+</ol>
+<hr>
+<h2 id="filtereditor-controls">FilterEditor Controls</h2>
+<p>By clicking on a grid line (a PLC data block) in the main window, the FilterEditor opens. It allows you to select/deselect certain items from a data block for backup/restore.\</p>
+<p><img src="../images/AWLConverter_filter_editor_controls.png" alt="AWLConverter_filter_editor_controls.png"></p>
+<ol>
+<li>Enter a text pattern that is matched against the contents of the item list.</li>
+<li>Tab to select the view that allows you to exclude certain items from a restore operation. In other words, the selected items are &quot;read-only&quot; in respect to the PLC data content.</li>
+<li>Tab to select the view that allows you to narrow down the backed-up items to one or more subsets of the data block. <em>If there is no subset defined, all items are backed up!</em> Be aware, that the subset selection has no impact to the available items shown in other parts of the UI due to internal reasons. See below for details.</li>
+<li>List with all available items. A double click on an item moves it to the section list below.</li>
+<li>List with the currently selected items. A double click on an item removes it from the list. </li>
+</ol>
+<hr>
+<h1 id="using-the-filtereditor">Using the FilterEditor</h1>
+<hr>
+<h2 id="unrestored-items">Unrestored Items</h2>
+<p>The terminology in certain controls of the AWLConverter is derived from it&#39;s use to create files for the PLCDataManager. At least &quot;unrestored items&quot; are items that will be excluded from write operations to the PLC. So normally all items inside a data block are read from the PLC but the &quot;unrestored&quot; items will not be written back on a restore operation. Imagine a data block, where a single item could be a production counter, others could be a set of configuration values that you just entered to optimize the machine&#39;s performance. Though you want to back-up your settings and maybe restore them at a later time, you don&#39;t want to override the production counter on a restore! In this case you would declare the production counter to be an &quot;unrestored item&quot;.</p>
+<hr>
+<h2 id="subsets-of-items-for-back-up">Subsets of Items for Back-up</h2>
+<p>Per default, the entire data block is read from the PLC and – in the case of the PLCDataManager - saved in a file. You can narrow down the saved items, by picking only the items you really need to save. This can decrease the memory usage on the disk and increase performance.</p>
+<hr>
+<h1 id="using-pattern-files">Using Pattern Files</h1>
+<p>All the selections you make on the main window and in the FilterEditor can be saved in a pattern file. If you later open the same or a different PLC project and reload the saved pattern file, the AWLConverter will (try to) match the selections you made to the new symbolic content of the selected S7-project.</p>
+<hr>
+<h1 id="installation">Installation</h1>
+<p>This requires the &quot;Microsoft .NET Framework 4.5.2&quot; to be installed and available on the destination system under Windows.</p>
+<p>The application files can be copied to any directory. The application can be started directly from this directory.</p>
+<hr>
+<h1 id="document-history">Document History</h1>
+<table><tr><th>Author </th><th> Date </th><th> Remarks</th></tr>
+<tr><td>Benjamin Prömmer </td><td> 2014-12-01 </td><td> Creation</td></tr>
+<tr><td>Karsten Gorkow </td><td> 2014-12-02 </td><td> Various corrections</td></tr>
+<tr><td>Karsten Gorkow </td><td> 2016-01-13 </td><td> Completely revised for the new AWL CONVERTER.</td></tr>
+</table>
+
+
+            </article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/insite-gmbh/iDoc/blob/master/articles/AWLConverter.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a class="back-to-top" href="#top">Back to top</a>
+            </span>
+            
+            <span>Copyright © 2016 insite Ingenieurgesellschaft für Steuerungs- und Informationstechnik mbH
+          </span></div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

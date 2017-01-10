@@ -62,6 +62,11 @@
     items: 
     - name: Release Notes
       href: release_notes/XLAdapter.release_notes.md
+- name: InacS7
+  href: InacS7.md
+  items:
+  - name: API Documentation
+    href: https://insite-gmbh.github.io/InacS7Doc/api/
 - name: IPOT
   href: IPOT.md
   items: 

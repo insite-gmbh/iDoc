@@ -1,4 +1,6 @@
 # Get Involved!
+iDoc is hosted on [GitHub](https://github.com/). If you don't have one yet, please [create a free account](https://github.com/join) to be able to contribute.  
+
 If you have an idea to improve iDoc, the best way to go is to [fork our repository](https://github.com/insite-gmbh/iDoc/fork)
 and [create a pull request](https://github.com/insite-gmbh/iDoc/compare) with your changes to let us review your suggestions.  
 Please also make sure to include a short description of your idea.  

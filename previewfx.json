@@ -65,6 +65,14 @@
       }
     ],
     "dest": "_site",
+    "globalMetadata": {
+      "_gitContribute": {
+        "repo": "https://github.com/insite-gmbh/iDoc.git",
+        "branch": "master",
+        "path": ""
+      },
+      "_disableContribution": false
+    },
     "globalMetadataFiles": [],
     "fileMetadataFiles": [],
     "template": [

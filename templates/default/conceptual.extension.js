@@ -4,6 +4,10 @@
  * This method will be called at the start of exports.transform in conceptual.html.primary.js
  */
 exports.preTransform = function (model) {
+  model.source = {};
+  model.source.remote = {};
+  model.source.startLine = 0;
+  model.source.remote.path = model._path.substring(0,model._path.length -4) + 'md';
   return model;
 }
 

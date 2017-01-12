@@ -66,7 +66,7 @@ var gitUrlPatternItems = {
         'testRegex': /^(https?:\/\/)?(\S+\@)?(\S+\.)?github\.com(\/|:).*/i,
         'generateUrl': function(repo, branch, path, startLine) {
             var url = normalizeGitUrlToHttps(repo);
-            url += '/blob' + '/' + branch + '/' + path;
+            url += '/edit' + '/' + branch + '/' + path;
             if (startLine && startLine > 0) {
                 url += '/#L' + startLine;
             }

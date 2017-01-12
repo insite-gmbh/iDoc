@@ -1,13 +1,14 @@
 # iDoc - Documentation of insite tools
+This is the public documentation all of the projects by insite GmbH such as [ICON](articles/ICON.md), [IPOT](articles/IPOT.md), [PLCDataManager](articles/PLCDataManager.md) and many more.
 
-Here, you can find the documentation to all of the projects and programs by insite GmbH.  
+##### On this page, you can find:
 
 ### [Projects](articles/index.md) 
-Complete documentation and user guide to our projects such as ICON, IPOT, PLCDataManager etc.
+View the complete documentations and user guides!
 
 ### [Get Involved](public/index.md)
-Learn how to contribute to iDoc.
+Learn how to contribute to iDoc!
 
 ### [About](about/insite.md)
-About insite GmbH
+Learn more about insite GmbH!
 

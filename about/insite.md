@@ -1,4 +1,4 @@
-# insite Gmbh
+# insite GmbH
 
 ## Competence and experience in automation and control technology
 Since 1996, insite provides solutions to software development tasks in automation, automobile and measurement technology.

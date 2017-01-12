@@ -746,8 +746,54 @@ footer {
   background-color: #1562d9;
   color: #fff;
 }
-.contact-us {
+
+.triple-tile {
+  position: absolute;
+  bottom: -400px;
+}
+.triple-tile > .tile {
   display: inline-block;
+  width: 300px;
+  height: 150px;
+  box-shadow: 2px 2px 2px 0px #888;
+  transition: 0.15s;
+  position: absolute;
+  top: 0px;
+}
+.triple-tile > .tile:hover {
+  box-shadow: 5px 5px 2px 0px #888;
+  transition: 0.15s;
+}
+.contact-us {
+  background-color: #e8e8e8;
+  left: 0px;
+  padding: 15px;
+}
+.contact-us > .contact-header {
+  font-size: 20pt;
+}
+.homepage-logo-tile {
+  left: 650px;
+}
+.github-ref-tile {
+  left: 325px;
+  background-color: #1973ff;
+  color: #fff;
+}
+.github-ref-tile > div.tile-container {
+  vertical-align: middle;
+  text-align: center;
+  height: 150px;
+  padding: 15px;
+}
+.github-ref-tile:hover {
+  color: #fff;
+}
+.github-ref-tile > div.tile-container > div,  .github-ref-tile > div.tile-container > img {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0px 5px;
+  font-size: 20pt;
 }
 
 @media (min-width: 768px) {

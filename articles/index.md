@@ -29,6 +29,9 @@
   - [XLAdapter](XLAdapter.md)
     - [Release Notes](release_notes/XLAdapter.release_notes.md)
 
+- [InacS7 - Insite access S7](InacS7.md)
+    - [Release Notes](release_notes/InacS7.release_notes.md)
+    
 - [Matrix](Matrix.md)
   - [Release Notes](release_notes/Matrix.release_notes.md)
 

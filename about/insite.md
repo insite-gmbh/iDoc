@@ -18,17 +18,17 @@ Measurement- and Control-systems and industrial communication, we enjoy the conf
         info(at)insite-gmbh.de
         </a>
         <br />
-        <a target="_blank" href="http://www.insite-gmbh.de/kontakt.html" title="Opens contact form in new tab">Contact form</a>
+        <a href="http://www.insite-gmbh.de/kontakt.html" title="Opens a contact form">Contact form</a>
     </p>
 </div>
-<a class="github-ref-tile tile" target="_blank" href="https://github.com/insite-gmbh" title="Visit insite GmbH on GitHub! (opens a new tab)">
+<a class="github-ref-tile tile" href="https://github.com/insite-gmbh" title="Visit insite GmbH on GitHub!">
     <div class="tile-container">
         <img src="../images/GitHubWhite120px.png" />
         <div>Visit<br/>us on<br/>GitHub!</div>
     </div>
 </a>
 <div class="homepage-logo-tile tile">
-    <a href="http://www.insite-gmbh.de" target="_blank" title="Visit insite-gmbh.de (opens a new tab)">
+    <a href="http://www.insite-gmbh.de" title="Visit our website insite-gmbh.de">
         <img src="../images/websiteLogoTile.png"/>
     </a>
 </div> 

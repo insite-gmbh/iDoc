@@ -62,6 +62,11 @@
     items: 
     - name: Release Notes
       href: release_notes/XLAdapter.release_notes.md
+- name: ILM
+  href: ILM.md
+  items:
+  - name: Release Notes
+    href: release_notes/ILM.release_notes.md
 - name: InacS7
   href: InacS7.md
   items:

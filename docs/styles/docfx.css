@@ -286,6 +286,13 @@ header .link-to-homepage {
   top: 8px;
   right: 8px;
 }
+@media (max-width: 768px) {
+  header .link-to-homepage {
+    position: absolute;
+    top: 8px;
+    right: 100px;
+  }
+}
 
 .collapse.in,
 .collapsing {
@@ -748,8 +755,8 @@ footer {
 }
 
 .triple-tile {
-  position: absolute;
-  bottom: -400px;
+  width: 950px;
+  height: 500px;
 }
 .triple-tile > .tile {
   display: inline-block;
@@ -758,7 +765,7 @@ footer {
   box-shadow: 2px 2px 2px 0px #888;
   transition: 0.15s;
   position: absolute;
-  top: 0px;
+  bottom: 0px;
 }
 .triple-tile > .tile:hover {
   box-shadow: 5px 5px 2px 0px #888;
@@ -766,17 +773,17 @@ footer {
 }
 .contact-us {
   background-color: #e8e8e8;
-  left: 0px;
+  left: 25px;
   padding: 15px;
 }
 .contact-us > .contact-header {
   font-size: 20pt;
 }
 .homepage-logo-tile {
-  left: 650px;
+  left: 675px;
 }
 .github-ref-tile {
-  left: 325px;
+  left: 350px;
   background-color: #1973ff;
   color: #fff;
 }
@@ -794,6 +801,42 @@ footer {
   vertical-align: middle;
   margin: 0px 5px;
   font-size: 20pt;
+}
+/* scale vertical tile placement with screen height */
+@media (max-height: 936px) {
+  .triple-tile {
+    height: 450px;
+  }
+}
+@media (max-height: 886px) {
+  .triple-tile {
+    height: 400px;
+  }
+}
+@media (max-height: 836px) {
+  .triple-tile {
+    height: 350px;
+  }
+}
+@media (max-height: 786px) {
+  .triple-tile {
+    height: 300px;
+  }
+}
+@media (max-height: 736px) {
+  .triple-tile {
+    height: 250px;
+  }
+}
+@media (max-height: 686px) {
+  .triple-tile {
+    height: 200px;
+  }
+}
+@media (max-width: 991px) {
+  .homepage-logo-tile, .github-ref-tile {
+    display: none !important;
+  }
 }
 
 @media (min-width: 768px) {

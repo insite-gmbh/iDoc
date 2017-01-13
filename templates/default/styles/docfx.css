@@ -286,6 +286,13 @@ header .link-to-homepage {
   top: 8px;
   right: 8px;
 }
+@media (max-width: 768px) {
+  header .link-to-homepage {
+    position: absolute;
+    top: 8px;
+    right: 100px;
+  }
+}
 
 .collapse.in,
 .collapsing {

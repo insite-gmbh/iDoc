@@ -2,8 +2,6 @@
 
 INACS7 is a library which was developed completely in C# and is used to connect to a SIEMENS PLC by using the RFC1006 protocol to perform operations.
 
-[Click here to view the complete 
-
 
 ### Contents:
 #### [INACS7](https://insite-gmbh.github.io/InacS7/index.html)  

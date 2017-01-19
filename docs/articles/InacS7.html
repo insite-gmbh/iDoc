@@ -71,108 +71,12 @@
               <h1 id="inacs7">INACS7</h1>
               
 <p>INACS7 is a library which was developed completely in C# and is used to connect to a SIEMENS PLC by using the RFC1006 protocol to perform operations.</p>
-<p><a href="https://insite-gmbh.github.io/InacS7/api/">Click here to view the complete API-Documentation</a></p>
-<h1 id="sample-code">Sample-Code</h1>
-<h2 id="principal-usage">Principal Usage:</h2>
-<pre><code class="lang-cs">var connectionString = &quot;Data Source=128.0.0.1:102,0,2&quot;;
-var client = new Inacs7Client();
+<p>[Click here to view the complete </p>
+<h3 id="contents">Contents:</h3>
+<h4 id="inacs7httpsinsite-gmbhgithubioinacs7indexhtml"><a href="https://insite-gmbh.github.io/InacS7/index.html">INACS7</a></h4>
+<h4 id="api-documentationhttpsinsite-gmbhgithubioinacs7api"><a href="https://insite-gmbh.github.io/InacS7/api/">API-Documentation</a></h4>
+<h4 id="release-noteshttpsinsite-gmbhgithubioinacs7releasenoteshtml"><a href="https://insite-gmbh.github.io/InacS7/release_notes.html">Release Notes</a></h4>
 
-client.Connect(connectionString);
-
-var length = 500;
-var testData = new byte[length];
-var offset = 10;
-var dbNumber = 560;
-
-//the offset is in bytes
-_client.WriteAny(PlcArea.DB, offset, testData, new[] { length, dbNumber });
-var readResult = _client.ReadAny(PlcArea.DB, offset, typeof(byte), new[] { length, dbNumber });
-
-
-//for writing bits like here the offset is in bits  (byteoffset * 8 + bitnumber)
-client.WriteAny(PlcArea.DB, offset*8, true, new int[] { 1, dbNumber });
-var state = client.ReadAny(PlcArea.DB, offset*8, typeof(bool), new int[] { 1, dbNumber });
-
-client.Disconnect();
-</code></pre><h2 id="generic-sample">Generic Sample:</h2>
-<pre><code class="lang-cs">public static void Sample()
-{
-    client.WriteAny&lt;bool&gt;(TestDbNr, TestBitOffset, true);
-    var boolRes = client.ReadAny&lt;bool&gt;(TestDbNr, TestBitOffset);
-
-    client.WriteAny&lt;bool&gt;(TestDbNr, TestBitOffset, false);
-    boolRes = client.ReadAny&lt;bool&gt;(TestDbNr, TestBitOffset);
-
-    client.WriteAny(TestDbNr, TestByteOffset, (short)1);
-    var shortRes = client.ReadAny&lt;short&gt;(TestDbNr, TestByteOffset);
-
-    client.WriteAny(TestDbNr, TestByteOffset, (short)0);
-    shortRes = client.ReadAny&lt;short&gt;(TestDbNr, TestByteOffset);
-
-    client.WriteAny(TestDbNr, TestByteOffset, &quot;TEST&quot;);
-    var stringRes = client.ReadAny&lt;string&gt;(TestDbNr, TestByteOffset,4);
-
-    client.WriteAny(TestDbNr, TestByteOffset, &quot;    &quot;);
-    stringRes = client.ReadAny&lt;string&gt;(TestDbNr, TestByteOffset, 4);
-
-    client.WriteAny(TestDbNr, TestByteOffset, &quot;TEST&quot;.ToArray());
-    var charRes = client.ReadAny&lt;char&gt;(TestDbNr, TestByteOffset, 4);
-
-    client.WriteAny(TestDbNr, TestByteOffset, &quot;    &quot;.ToArray());
-    charRes = client.ReadAny&lt;char&gt;(TestDbNr, TestByteOffset, 4);
-
-    var writeVal = new bool[] { true, true };
-    client.WriteAny(TestDbNr, TestBitOffset, writeVal);
-    var boolarrayRes = client.ReadAny&lt;bool&gt;(TestDbNr, TestBitOffset, 2);
-
-}
-</code></pre><h2 id="readwrite-multiple-variables-in-one-call">Read/Write multiple variables in one call:</h2>
-<pre><code class="lang-cs">public static void Sample()
-{
-    var operations = new List&lt;ReadOperationParameter&gt;
-    {
-        new ReadOperationParameter{Area = PlcArea.DB, Offset= TestByteOffset, 
-                                   Type=typeof(byte), Args = new int[]{1, TestDbNr}},
-        new ReadOperationParameter{Area = PlcArea.DB, Offset= TestBitOffset, 
-                                  Type=typeof(bool), Args = new int[]{1, TestDbNr}}
-    };
-
-    var result = _client.ReadAny(operations); //result is IEnumerable&lt;object&gt;
-
-    var writeOperations = new List&lt;WriteOperationParameter&gt;
-    {
-        new WriteOperationParameter{Area = PlcArea.DB, Offset= TestByteOffset, 
-                                    Type=typeof(byte), Args = new int[]{1, TestDbNr}, Data = (byte)0x05},
-        new WriteOperationParameter{Area = PlcArea.DB, Offset= TestBitOffset, 
-                                    Type=typeof(bool), Args = new int[]{1, TestDbNr}, Data = true}
-    };
-
-    _client.WriteAny(writeOperations);
-
-}
-</code></pre><h2 id="readwrite-multiple-variables-simplified-in-one-call">Read/Write multiple variables simplified in one call:</h2>
-<pre><code class="lang-cs">public static void Sample()
-{
-    client.WriteAny(new List&lt;WriteOperationParameter&gt;
-    {
-        WriteOperationParameter.Create(TestDbNr,TestByteOffset,(byte)0x05),
-        WriteOperationParameter.Create(TestDbNr,TestBitOffset,true),
-        WriteOperationParameter.Create(TestDbNr,TestByteOffset+100,&quot;TEST&quot;)
-    });
-
-    result = client.ReadAny(new List&lt;ReadOperationParameter&gt;
-    {
-        ReadOperationParameter.Create&lt;byte&gt;(TestDbNr,TestByteOffset),
-        ReadOperationParameter.Create&lt;bool&gt;(TestDbNr,TestBitOffset),
-        ReadOperationParameter.Create&lt;string&gt;(TestDbNr, TestByteOffset+100, 4)
-    }).ToArray();
-
-    Assert.AreEqual((byte)0x05, result[0]);
-    Assert.AreEqual(true, result[1]);
-    Assert.AreEqual(&quot;TEST&quot;, result[2]);
-
-}
-</code></pre>
             </article>
           </div>
           

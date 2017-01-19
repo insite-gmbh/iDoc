@@ -22,35 +22,45 @@ a.disable:hover {
   cursor: default;
   color: #000000;
 }
-/* wrap long links and list elements in md documents */
-#_content p, #_content ul li, #_content ol li {
-  white-space: pre;           /* CSS 2.0 */
-	white-space: pre-wrap;      /* CSS 2.1 */
-	white-space: pre-line;      /* CSS 3.0 */
-	white-space: -pre-wrap;     /* Opera 4-6 */
-	white-space: -o-pre-wrap;   /* Opera 7 */
-	white-space: -moz-pre-wrap; /* Mozilla */
-	white-space: -hp-pre-wrap;  /* HP Printers */
-	word-wrap: break-word;      /* IE 5+ */
+/* wrap long links and list elements in md documents (small screens) */
+@media (max-width: 530px){
+  #_content p, #_content ul li, #_content ol li {
+    white-space: pre;           /* CSS 2.0 */
+    white-space: pre-wrap;      /* CSS 2.1 */
+    white-space: pre-line;      /* CSS 3.0 */
+    white-space: -pre-wrap;     /* Opera 4-6 */
+    white-space: -o-pre-wrap;   /* Opera 7 */
+    white-space: -moz-pre-wrap; /* Mozilla */
+    white-space: -hp-pre-wrap;  /* HP Printers */
+    word-wrap: break-word;      /* IE 5+ */
+  }
+  /* don't wrap content overview in articles/index */
+  #project-overview-helper ~ ul li {
+    white-space: initial !important;
+    word-wrap: normal !important;
+  }
+  /* wrap long strings in table cells in md docs */
+  .idoc-table tbody tr th, .idoc-table tbody tr td {
+    white-space: pre;           /* CSS 2.0 */
+    white-space: pre-wrap;      /* CSS 2.1 */
+    white-space: pre-line;      /* CSS 3.0 */
+    white-space: -pre-wrap;     /* Opera 4-6 */
+    white-space: -o-pre-wrap;   /* Opera 7 */
+    white-space: -moz-pre-wrap; /* Mozilla */
+    white-space: -hp-pre-wrap;  /* HP Printers */
+    word-wrap: break-word;      /* IE 5+ */
+  }
+  .idoc-table {
+    table-layout: fixed;
+  }
+  li {
+    width: auto;
+  }
+  .triple-tile p {
+    white-space: nowrap !important;
+    word-wrap: normal !important;
+  }
 }
-/* wrap long strings in table cells in md docs */
-.idoc-table tbody tr th, .idoc-table tbody tr td {
-  white-space: pre;           /* CSS 2.0 */
-	white-space: pre-wrap;      /* CSS 2.1 */
-	white-space: pre-line;      /* CSS 3.0 */
-	white-space: -pre-wrap;     /* Opera 4-6 */
-	white-space: -o-pre-wrap;   /* Opera 7 */
-	white-space: -moz-pre-wrap; /* Mozilla */
-	white-space: -hp-pre-wrap;  /* HP Printers */
-	word-wrap: break-word;      /* IE 5+ */
-}
-.idoc-table {
-  table-layout: fixed;
-}
-li {
-  width: auto;
-}
-
 
 /* workaround for leave space for fixed navbar with # anchor url*/
 
@@ -829,6 +839,11 @@ footer {
   vertical-align: middle;
   margin: 0px 5px;
   font-size: 20pt;
+}
+@media (max-width: 420px) {
+  .contact-us {
+    width: 230px !important;
+  }
 }
 /* scale vertical tile placement with screen height */
 @media (max-height: 936px) {

@@ -73,7 +73,7 @@
   - name: API Documentation
     href: https://insite-gmbh.github.io/InacS7/api/
   - name: Release Notes
-    href: release_notes/InacS7.release_notes.md
+    href: https://insite-gmbh.github.io/InacS7/release_notes.html
 - name: IPOT
   href: IPOT.md
   items: 

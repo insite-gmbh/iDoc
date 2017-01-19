@@ -22,6 +22,35 @@ a.disable:hover {
   cursor: default;
   color: #000000;
 }
+/* wrap long links and list elements in md documents */
+#_content p, #_content ul li, #_content ol li {
+  white-space: pre;           /* CSS 2.0 */
+	white-space: pre-wrap;      /* CSS 2.1 */
+	white-space: pre-line;      /* CSS 3.0 */
+	white-space: -pre-wrap;     /* Opera 4-6 */
+	white-space: -o-pre-wrap;   /* Opera 7 */
+	white-space: -moz-pre-wrap; /* Mozilla */
+	white-space: -hp-pre-wrap;  /* HP Printers */
+	word-wrap: break-word;      /* IE 5+ */
+}
+/* wrap long strings in table cells in md docs */
+.idoc-table tbody tr th, .idoc-table tbody tr td {
+  white-space: pre;           /* CSS 2.0 */
+	white-space: pre-wrap;      /* CSS 2.1 */
+	white-space: pre-line;      /* CSS 3.0 */
+	white-space: -pre-wrap;     /* Opera 4-6 */
+	white-space: -o-pre-wrap;   /* Opera 7 */
+	white-space: -moz-pre-wrap; /* Mozilla */
+	white-space: -hp-pre-wrap;  /* HP Printers */
+	word-wrap: break-word;      /* IE 5+ */
+}
+.idoc-table {
+  table-layout: fixed;
+}
+li {
+  width: auto;
+}
+
 
 /* workaround for leave space for fixed navbar with # anchor url*/
 

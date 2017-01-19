@@ -10,7 +10,7 @@ $(function () {
   // Styling for tables in conceptual documents using Bootstrap.
   // See http://getbootstrap.com/css/#tables
   (function () {
-    $('table').addClass('table table-bordered table-striped table-condensed');
+    $('table').addClass('table table-bordered table-striped table-condensed idoc-table');
   })();
 
   // Styling for alerts.

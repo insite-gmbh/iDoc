@@ -117,6 +117,11 @@ Apart from the normal control elements, the user interface includes the IDATUC t
 ---  
 ##Control Elements##
 
+
+![PLCDataManager_control_overview.png](../images/PLCDataManager_control_overview.png)
+
+  
+
 <table>
  <tr><th>[1] </th><td colspan="2">Select and deselect</td></tr>
  <tr><th>[2] </th><td colspan="2">Set the zoom factor for the entire application</td></tr>

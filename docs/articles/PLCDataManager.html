@@ -495,6 +495,18 @@ In this section, the paths and commands of the application are declared.</p>
 
 
 
+<p><strong>Status Bits:</strong></p>
+<table>
+ <tr><th>SaveFinished </th><td> Backup request executed by PLC. (This bit is reset by</td></tr>
+ <tr><th>   </th><td> PLCDataManager once the SaveCommand bit has been</td></tr>
+ <tr><th>   </th><td> reset by the PLC.)</td></tr>
+ <tr><th>CompareState </th><td> If set, then the last comparison failed.</td></tr>
+ <tr><th>BatchJobCancelled </th><td> If set, then there was an error code returned from the</td></tr>
+ <tr><th></th><td> batch job or a timeout occurred.</td></tr>
+</table>
+
+
+
 
 <p>Example of a file definition for the PLC interfacec:  </p>
 <pre><code class="lang-html">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
@@ -611,13 +623,6 @@ In this section, the paths and commands of the application are declared.</p>
 <tr><td>Karsten Gorkow </td><td> 2016-01-11 </td><td> Changed some misleading information</td></tr>
 <tr><td>Karsten Gorkow </td><td> 2016-01-12 </td><td> Removed errors and unnecessary details</td></tr>
 <tr><td>Karsten Gorkow </td><td> 2016-01-14 </td><td> Minor changes and additions</td></tr>
-</table>
-
-
-
-
-<table>
- <tr><th></th></tr>
 </table>
             </article>
           </div>

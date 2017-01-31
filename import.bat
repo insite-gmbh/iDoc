@@ -1,0 +1,1 @@
+xcopy /S /E /I /H /Y "%INSITE_DOC_ROOT%/dist"

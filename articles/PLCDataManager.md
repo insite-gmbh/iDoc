@@ -558,6 +558,20 @@ The data modules that can be backed-up by a PLC-trigger-bit must be parametrized
 
   
 
+**Status Bits:**
+  
+
+<table>
+ <tr><th>SaveFinished </th><td> Backup request executed by PLC. (This bit is reset by</td></tr>
+ <tr><th>   </th><td> PLCDataManager once the SaveCommand bit has been</td></tr>
+ <tr><th>   </th><td> reset by the PLC.)</td></tr>
+ <tr><th>CompareState </th><td> If set, then the last comparison failed.</td></tr>
+ <tr><th>BatchJobCancelled </th><td> If set, then there was an error code returned from the</td></tr>
+ <tr><th></th><td> batch job or a timeout occurred.</td></tr>
+</table>
+
+  
+
 
 Example of a file definition for the PLC interfacec:  
 
@@ -703,11 +717,4 @@ This application generates files independently. Here are the meanings:
 <tr><td>Karsten Gorkow </td><td> 2016-01-11 </td><td> Changed some misleading information</td></tr>
 <tr><td>Karsten Gorkow </td><td> 2016-01-12 </td><td> Removed errors and unnecessary details</td></tr>
 <tr><td>Karsten Gorkow </td><td> 2016-01-14 </td><td> Minor changes and additions</td></tr>
-</table>
-
-
-
-
-<table>
- <tr><th></td></tr>
 </table>

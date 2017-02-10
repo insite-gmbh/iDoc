@@ -78,14 +78,19 @@ This will take a few seconds since it is installing all of the necessary npm pac
 <pre><code>$ cd my-app
 $ ng serve
 </code></pre><p>which will compile the project and host a server on <a href="http://localhost:4200/"><a href="http://localhost:4200/">http://localhost:4200/</a></a>.
-The <code>ng serve</code> command will also watch your project&#39;s files and rebuild the app whenever you save a change to one of the files.<br>In a new project, the site should show you the message:<br><img src="images/app-works.png" alt="">  </p>
+The <code>ng serve</code> command will also watch your project&#39;s files and rebuild the app whenever you save a change to one of the files.<br>In a new project, the site should show you the message:<br><img src="images/setup/app-works.png" alt="default message of angular CLI in a new project">  </p>
 <h2 id="inax">INAX</h2>
 <p>To add INAX to the project, run</p>
 <pre><code>$ npm install @inax/common --save
 </code></pre><p>This will install the &#39;common&#39; package which is required by all other packages.<br>Then, run the same command for the packages you want to include (package names on npm are lowercase only). If an installed package depends on another one that has not been installed yet, you will receive a warning:  </p>
-<p><img src="images/peerDependencyError.png" alt="">  </p>
+<p><img src="images/setup/peerDependencyError.png" alt="Screenshot of peerDependency Error">  </p>
 <p>When this happens, just install the listed packages with the <code>npm install --save</code> command.
 The other warnings (with the purple keywords) can be ignored, as they refer to <code>fsevents</code>, which is only needed on OS-X and therefore not installed on other operating systems.</p>
+<h2 id="creating-a-component">Creating a component</h2>
+<p>To create a new component, go to <code>src/app/</code> and create a folder <code>components</code>. Here, create a folder for the new component - in this example, we will use <code>mySandbox</code>.<br>We recommend to use the same rules for names as in this example, if you wish to take a look at a more complete overview on file naming,
+visit <a href="https://angular.io/docs/ts/latest/guide/style-guide.html#!#02-03">Angular&#39;s official style guide</a>. There, you can also find more guidelines on Coding with
+Angular2 and Typescript in general.  </p>
+<p>In our new directory, we then create the file <code>my-sandbox.component.ts</code>. Our project structure should now look like this:<br><img src="images/setup/sandbox_created_filestruct.png" alt="Screenshot of file tree: src &gt; app &gt; components &gt; mySandbox &gt; my-sandbox.component.ts">  </p>
 <!--
 TODO:
 - guide to create components, modules, add providers, include stylesheets, tests etc...

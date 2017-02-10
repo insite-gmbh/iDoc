@@ -26,7 +26,7 @@ $ ng serve
 which will compile the project and host a server on [http://localhost:4200/](http://localhost:4200/).
 The `ng serve` command will also watch your project's files and rebuild the app whenever you save a change to one of the files.  
 In a new project, the site should show you the message:  
-![](images/app-works.png)  
+![default message of angular CLI in a new project](images/setup/app-works.png)  
 
 ## INAX
 To add INAX to the project, run
@@ -37,10 +37,19 @@ This will install the 'common' package which is required by all other packages.
 Then, run the same command for the packages you want to include (package names on npm are lowercase only). If an installed package depends on another one that has not been installed yet, you will receive a warning:  
 
 
-![](images/peerDependencyError.png)  
+![Screenshot of peerDependency Error](images/setup/peerDependencyError.png)  
 
 When this happens, just install the listed packages with the `npm install --save` command.
 The other warnings (with the purple keywords) can be ignored, as they refer to `fsevents`, which is only needed on OS-X and therefore not installed on other operating systems.
+
+## Creating a component 
+To create a new component, go to `src/app/` and create a folder `components`. Here, create a folder for the new component - in this example, we will use `mySandbox`.  
+We recommend to use the same rules for names as in this example, if you wish to take a look at a more complete overview on file naming,
+visit [Angular's official style guide](https://angular.io/docs/ts/latest/guide/style-guide.html#!#02-03). There, you can also find more guidelines on Coding with
+Angular2 and Typescript in general.  
+
+In our new directory, we then create the file `my-sandbox.component.ts`. Our project structure should now look like this:  
+![Screenshot of file tree: src > app > components > mySandbox > my-sandbox.component.ts](images/setup/sandbox_created_filestruct.png)  
 
 
 

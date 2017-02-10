@@ -34,7 +34,7 @@ To add INAX to the project, run
 $ npm install @inax/common --save
 ```
 This will install the 'common' package which is required by all other packages.  
-Then, run the same command for the packages you want to include. If an installed package depends on another one that has not been installed yet, you will receive a warning:  
+Then, run the same command for the packages you want to include (package names on npm are lowercase only). If an installed package depends on another one that has not been installed yet, you will receive a warning:  
 
 
 ![](images/peerDependencyError.png)  

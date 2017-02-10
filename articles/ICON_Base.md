@@ -1479,6 +1479,10 @@ Thus, to summarise, only the following combinations are allowed:
 ---  
 ###Signal Time Diagram Slot (MemBasedMsgSink)###
 
+
+![ICON_SignalTimeDiagramSlot.png](../images/ICON_SignalTimeDiagramSlot.png)
+  
+
 ---  
 ###Impl###
 
@@ -1736,6 +1740,9 @@ The GUI section is optional and is described in the following chapters.
 ---  
 ###Signal Time Diagram###
 
+
+![ICON_SignalTimeDiagram.png](../images/ICON_SignalTimeDiagram.png)
+  
 
 ---  
 ###Impl###

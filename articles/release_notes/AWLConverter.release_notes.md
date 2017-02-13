@@ -1,6 +1,7 @@
 # AWLConverter - Release Notes
 |date      | change description |
 |----------|:-------------|
+|07.12.2016|Change data type of TimeOfDay to Span instead of DateTime and update InacSM reference to newer version.|
 |30.12.2016|Optimized filter add, remove (always insert at correct position); Use filter dialog also if no ReaderWriter was selected; Add some info messages.|
 |07.12.2016|Bugfix in calculation of multidimensional arrays and UDT calculation.|
 |30.11.2016|Bugfix in calculation of multidimensional arrays.|

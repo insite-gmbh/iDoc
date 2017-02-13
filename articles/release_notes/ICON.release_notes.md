@@ -1,7 +1,8 @@
 # ICON Base Release Notes
 |date      | change description |
 |----------|:-------------|
-|03.01.2016| Some changes to allow payloadconverter to handle multiple messages at the same time. |
+|10.02.2017| Fixed a bug in BMW01 protocol implementation. (In some messages the byteorder was not correct.) |
+|03.01.2017| Some changes to allow payloadconverter to handle multiple messages at the same time. |
 |20.12.2016| Add GlobalSetting to setup ProcessPriority. |
 |07.12.2016| Moved background task to own thread. |
 |21.11.2016| Small fixes on ForceLastConnection. |
@@ -9,15 +10,15 @@
 |12.10.2016| Remove lock in message dispatcher because we get messages from both sides. Update to new InacS7 version.|
 |11.10.2016| Update alarmhandling for PDEM to set the correct alarmcount in all cases.|
 |13.09.2016| change unlocking mechanism of middle module (e.g. Payloadconverter).|
-|12.08.2016| fix bug in edit spooler item (JIS Receive).|
+|12.08.2016| Fixed bug in edit spooler item (JIS Receive).|
 |02.08.2016| add config property AddIdentifierToMirror for JIS Receive, to add the identifier length to the mirror entry length.|
 |13.07.2016| remove locking from Payloadconverter, because of incompatibility to older configurations.|
-|21.06.2016| fix culture in alamserver interface to de-DE, becuase winccAlarmserver use allways this format.|
+|21.06.2016| Fix culture in alamserver interface to de-DE, becuase winccAlarmserver use allways this format.|
 |09.06.2016| add receive puffer to serial module, to handle more than one receive to detect data|
 |09.05.2016| Refactoring, Handling of Socket Send-Timout ....|
 |13.04.2016| Refactoring, Log improving, Array Usage optimization in protocol detector, ....|
-|12.04.2016| reimplement singleton timer to use tasks instead of threads, do much resource cleaning to avoid increasing memory with ModuleInstanceManager, update of inacS7 and fix a bug in the InacS7Accessor |
-|06.04.2016| bug fix Payloadconverter, improve logging, add SocketSendBufferSize as global configuration value|
+|12.04.2016| Reimplemented singleton timer to use tasks instead of threads, do much resource cleaning to avoid increasing memory with ModuleInstanceManager, update of inacS7 and fix a bug in the InacS7Accessor |
+|06.04.2016| Fixed a bug in Payloadconverter, improve logging, add SocketSendBufferSize as global configuration value|
 |30.03.2016| optimize logging, use dispatcher for EventDistributor, bug fix in ModuleManager|
 |25.03.2016| more locking changes and spooler bit delegation for JIS|
 |18.03.2016| fix message locking after error problem|

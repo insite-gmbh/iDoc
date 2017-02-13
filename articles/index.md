@@ -30,7 +30,7 @@
     - [Release Notes](release_notes/XLAdapter.release_notes.md)
 
 - [InacS7 - Insite access S7](InacS7.md)
-  - [Release Notes](release_notes/InacS7.release_notes.md)
+  - [Release Notes](https://insite-gmbh.github.io/InacS7/release_notes.html)
     
 - [Matrix](Matrix.md)
   - [Release Notes](release_notes/Matrix.release_notes.md)

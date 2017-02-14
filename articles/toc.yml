@@ -10,6 +10,11 @@
   items: 
   - name: Release Notes
     href: release_notes/BilderArchivieren.release_notes.md
+- name: iAuth
+  href: iAuth.md
+  items: 
+  - name: Release Notes
+    href: release_notes/iAuth.release_notes.md
 - name: ICON
   href: ICON.md
   items:

@@ -65,6 +65,7 @@ $&#32;&#32;$ clear file/directory selection or text filter
   7.   Used to check/uncheck all items at once.
   8.   Start creation of output files. 
   9.   Status line. 
+  10.  Pattern reader writer. (This are reader writer modules to save and restore patterns in different formats)
 
 
 ---  
@@ -81,7 +82,8 @@ By clicking on a grid line (a PLC data block) in the main window, the FilterEdit
   2.   Tab to select the view that allows you to exclude certain items from a restore operation. In other words, the selected items are "read-only" in respect to the PLC data content.
   3.   Tab to select the view that allows you to narrow down the backed-up items to one or more subsets of the data block. *If there is no subset defined, all items are backed up!* Be aware, that the subset selection has no impact to the available items shown in other parts of the UI due to internal reasons. See below for details.
   4.   List with all available items. A double click on an item moves it to the section list below.
-  5.   List with the currently selected items. A double click on an item removes it from the list. 
+  5.   List with the currently selected items. A double click on an item removes it from the list.
+  6.   Apply the changes. 
 
 ---  
 #Using the FilterEditor#
@@ -101,6 +103,9 @@ Per default, the entire data block is read from the PLC and – in the case of t
 
 All the selections you make on the main window and in the FilterEditor can be saved in a pattern file. If you later open the same or a different PLC project and reload the saved pattern file, the AWLConverter will (try to) match the selections you made to the new symbolic content of the selected S7-project.
 
+We support different formats of such a pattern file. The `XMLPatternReaderWriter` is to save and restore the data like described above. The `ParasaveReaderWriter` can be used to apply the conviguration from a
+given Parasave.ini, but you can not write any changes back to the ini.
+
 ---  
 #Installation#
 
@@ -109,14 +114,3 @@ This requires the "Microsoft .NET Framework 4.5.2" to be installed and available
 
 The application files can be copied to any directory. The application can be started directly from this directory.
 
----  
-#Document History#
-
-
-<table><tr><th>Author </th><th> Date </th><th> Remarks</th></tr>
-<tr><td>Benjamin Prömmer </td><td> 2014-12-01 </td><td> Creation</td></tr>
-<tr><td>Karsten Gorkow </td><td> 2014-12-02 </td><td> Various corrections</td></tr>
-<tr><td>Karsten Gorkow </td><td> 2016-01-13 </td><td> Completely revised for the new AWL CONVERTER.</td></tr>
-</table>
-
-  

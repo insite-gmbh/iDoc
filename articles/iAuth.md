@@ -237,13 +237,14 @@ Logging can be specified one in the Logging section of the appsettings.json and 
 Copyright (c) insite-gmbh 2017");
 
 iAuth is intended to be run as windows service. Use one of the following options:");
-  --register-service        Registers and starts this program as a windows service named \"" + ServiceDisplayName + "\"");
+  --register-service                      Registers and starts this program as a windows service named \"" + ServiceDisplayName + "\"");
 							All additional arguments will be passed to ASP.NET Core's WebHostBuilder.");   
-  --unregister-service      Removes the windows service creatd by --register-service.");
-  --interactive             Runs the underlying asp.net core app.");
+  --unregister-service                    Removes the windows service creatd by --register-service.");
+  --interactive                           Runs the underlying asp.net core app.");
 
-  --config                  Specifies the path to the config file.");
-  --appsettings             Set the name of the config file [default=appsettings].");
+  --config                                Specifies the path to the config file.");
+  --appsettings                           Set the name of the config file [default=appsettings].");
+  --urls="http://localhost:10000/"        Application bounded url
 e.g. :");
 iAuth --register-service  --config=\"C:\\Path\\To\\Configs\" --appsettings=\"appsettings\"");
 ```

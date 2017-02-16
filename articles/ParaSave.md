@@ -79,10 +79,10 @@ The PLC must reset bit 0 after the NOK case has been detected.
 ---  
 ##Registry Entries##
 
-<table><tr><th>Key: </th><th> HKEY_LOCAL_MACHINE\Software\insite GmbH\ParaSave\Setting</th></tr>
+<table><tr><th>Key: </th><th> `HKEY_LOCAL_MACHINE\Software\insite GmbH\ParaSave\Setting`</th></tr>
 <tr><td>Character string: </td><td> ConfigFile</td></tr>
 <tr><td>Values:	 </td><td> Name of the configuration file. The default value is </td></tr>
-<tr><td>   </td><td> F:\DH\INSITE\ParaSave.INI.</td></tr>
+<tr><td>   </td><td> `F:\DH\INSITE\ParaSave.INI.`</td></tr>
 </table>
 
 
@@ -170,11 +170,8 @@ The PLC must reset bit 0 after the NOK case has been detected.
 This section contains the definition of the data areas. The following structure applies here:
   
 
-*  &#35;&#60;Name in the data areas list&#62;;&#60;filename&#62;;&#60;BackupByPLC&#62;
-*  &&#35;42;&#60;DB&#62;,&#60;Offset&#62;,&#60;Length&#62;[&#60;Filter&#62;[&#60;Filter&#62;[...]]]
-*  [&&#35;42;&#60;DB&#62;,&#60;Offset&#62;,&#60;Length&#62;[&#60;Filter&#62;[&#60;Filter&#62;[...]]]]
-*  [...]
-*  ...
+*  `[...]`
+*  `...`
 
 A backup of the data block by the PLC is possible (control word, bit 1) by the flag &#60;BackupByPLC&#62; (default false‚ true if "1").
 The filter expressions are optional. More on filter definition below.
@@ -183,17 +180,17 @@ The filter expressions are optional. More on filter definition below.
 Example of the dialogue shown above:
 
 *  **[BLOCKS]**
-*  &#35;Hand scanner crankcase;C:\Temp\Backup1.txt;1		
+*  `#Hand scanner crankcase;C:\Temp\Backup1.txt;1`		
   *  &#42;100,10,3	
   *  &#42;100,20,10	
   *  &#42;100,24,3	
 
-*  &#35;Options DB99;C:\Temp\Backup2.txt		
+*  `#Options DB99;C:\Temp\Backup2.txt`		
   *  &#42;99,10,10	
   *  &#42;99,20,10	
   *  &#42;99,24,3	
 
-*  &#35;Other;C:\Temp\Backup3.txt;1		
+*  `#Other;C:\Temp\Backup3.txt;1`		
   *  &#42;99,8,4	
   *  &#42;99,20,10	
   *  &#42;99,16,5	
@@ -210,7 +207,6 @@ One or more filter expressions can be attached to a data area definition (see [S
 The syntax for a filter expression is as follows:
   
 
-;&#60;Offset&#62;[:&#60;Length&#62;]=&#60;Filter value&#62;
   
 
 with:
@@ -231,9 +227,9 @@ The filter value always covers just 2 bytes (word length) which are applied repe
 Imagine a data block defined like this: 
   
 
-[BLOCKS]  
+`[BLOCKS]`  
 
-&#35;Hand scanner crankcase;C:\Temp\Backup1.txt;1  
+&#35;Hand scanner crankcase;`C:\Temp\Backup1.txt;1`  
 
 &#42;100,20,10;2:2=0xF1F0;6:4=0
   
@@ -295,9 +291,9 @@ NEWPLCDATA = (PLCDATA AND NOT FILTER) OR (FILEDATA AND FILTER)
 Imagine the same data block and the same filters as in the previous example
   
 
-[BLOCKS]  
+`[BLOCKS]`  
 
-&#35;Hand scanner crankcase;C:\Temp\Backup1.txt;1  
+&#35;Hand scanner crankcase;`C:\Temp\Backup1.txt;1`  
 
 &#42;100,20,10;2:2=0xF1F0;6:4=0
   

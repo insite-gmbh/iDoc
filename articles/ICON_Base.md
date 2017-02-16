@@ -226,11 +226,11 @@ The second functionality of the Includes is the handling of special configuratio
 
 The Include-File in turn can also contain Includes. A path name in an Include can also be a search string   
 
-[Path]\[Search pattern]  
+`[Path]\[Search pattern]`  
 
 The @ can be used to include the path of the loaded config in the IncludePath.  
 
-i.e. D:\Icon.xml -->   @\Special.xml --> D:\Special.xml 
+i.e. `D:\Icon.xml` -->   `@\Special.xml` --> `D:\Special.xml` 
   
 
 An Include-File must have the same structure as the ICON.xml   
@@ -317,7 +317,7 @@ also see <https://msdn.microsoft.com/en-us/library/system.net.sockets.socket.sen
 ---  
 ##Configuration &#60;ICONNetwork&#62;##
 
-Here, you can enter Hosts that apply for ICON as well as Hosts for the operating system defined under "C:\Windows\System32\drivers\etc\hosts".  
+Here, you can enter Hosts that apply for ICON as well as Hosts for the operating system defined under "`C:\Windows\System32\drivers\etc\hosts`".  
 
 Example:
   
@@ -337,7 +337,7 @@ Before ICON attempts a resolution via DNS, it uses the IP address under &#60;ICO
 The order would then be as follows:
 
   1.   Resolution via &#60;ICONNetwork&#62;
-  2.   Resolution via C:\Windows\System32\drivers\etc\hosts
+  2.   Resolution via `C:\Windows\System32\drivers\etc\hosts`
   3.   Resolution via DNS
 
 ---  
@@ -615,20 +615,20 @@ Denotes a reference. (i.e. there is a member with the name source).
 
 Another option is to use the references provided internally by ICON:
 
-*  __SEQCNT :  Sequence number of the message
-*  __CHKSUM_1 :  creates a check sum of the telegram length by adding up the bytes
-*  __ERROR : Specifies the error of the telegram (used, for example, for creating the standard acknowledgement)
-*  __NOW : Returns the current timestamp in the format specified in the lower strings
-*  DATE : Returns the current timestamp in the format specified in the lower strings
-*  TIME : Returns the current timestamp in the format specified in the lower strings
+*  `__SEQCNT` :  Sequence number of the message
+*  `__CHKSUM_1` :  creates a check sum of the telegram length by adding up the bytes
+*  `__ERROR` : Specifies the error of the telegram (used, for example, for creating the standard acknowledgement)
+*  `__NOW` : Returns the current timestamp in the format specified in the lower strings
+*  `DATE` : Returns the current timestamp in the format specified in the lower strings
+*  `TIME` : Returns the current timestamp in the format specified in the lower strings
 
 
 **function name(??):**  
 
 The round brackets describe a function call. In the function call, a maximum of one reference can also be used as a parameter. Currently supported functions are:
 
-*  INC : Increments the value of the variable, which was transferred as a parameter and returns this value
-*  LEN : Determines the length of the variable, which was transferred as a parameter
+*  `INC` : Increments the value of the variable, which was transferred as a parameter and returns this value
+*  `LEN` : Determines the length of the variable, which was transferred as a parameter
 
 
 **isIdentifier:**  

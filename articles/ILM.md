@@ -62,14 +62,14 @@ Then, this data can be licensed on the licensing page. If this finishes successf
 
 On the computer to be licensed, go to the folder  
 
-"C:\ProgramData\insite\license"
+`"C:\ProgramData\insite\license"`
 
 
 ![ILM_data_ex_1.png](../images/ILM_data_ex_1.png)
 
 Copy both folders to this target directory on your local hard drive:  
 
-[path specified in ILM]\[name of the computer]
+`[path specified in ILM]\[name of the computer]`
 
 
 ![ILM_data_ex_2.png](../images/ILM_data_ex_2.png)
@@ -96,9 +96,9 @@ By clicking the button *Activate selected Licenses*, all files are activated, wh
 The activated license is stored in the *licensed*-folder, whose filepath is determined as follows:
 
 *  If a *localhost*-file was activated, the folder can be found in  
-	"C:\ProgramData\insite\license\licensed"
+	`"C:\ProgramData\insite\license\licensed"`
 *  If a remote-file was activated, it can be found in  
-	[path specified in ILM]\[name of the computer]\licensed
+	`[path specified in ILM]\[name of the computer]\licensed`
 
 With *Activate license from file*, an OpenFile-dialog box is opened and the file to be activated can be selected. The created license is then stored to the same directory. Distributing the licenses is also possible from this page, at which one can select specific computers, all computers, or those computers for which a license was just activated.  
 
@@ -115,7 +115,6 @@ The display next to *Items to license* shows the status of the activation:
 In command-line mode, the program is started from a command-line or a batch file with the following call:
   
 
-ILMWebApiClient -c -l&#60;ProductKey&#62; -s&#60;path to .lics-file&#62; -u&#60;Username&#62; -p&#60;Password&#62;
   
 
 The client receives the ProductKey from insite or can copy it to the clipboard by clicking the license entry in GUI-Mode (see [2.3 "Licensing"](#licensing)).

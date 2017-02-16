@@ -170,6 +170,9 @@ The PLC must reset bit 0 after the NOK case has been detected.
 This section contains the definition of the data areas. The following structure applies here:
   
 
+*  `#<Name in the data areas list>;<filename>;<BackupByPLC>`
+*  `*<DB>,<Offset>,<Length>[<Filter>[<Filter>[...]]]`
+*  `[*<DB>,<Offset>,<Length>[<Filter>[<Filter>[...]]]]`
 *  `[...]`
 *  `...`
 
@@ -207,6 +210,7 @@ One or more filter expressions can be attached to a data area definition (see [S
 The syntax for a filter expression is as follows:
   
 
+`;<Offset>[:<Length>]=<Filter value>`
   
 
 with:

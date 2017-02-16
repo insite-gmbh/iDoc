@@ -104,6 +104,7 @@ Per default, the entire data block is read from the PLC and – in the case of t
 All the selections you make on the main window and in the FilterEditor can be saved in a pattern file. If you later open the same or a different PLC project and reload the saved pattern file, the AWLConverter will (try to) match the selections you made to the new symbolic content of the selected S7-project.
   
 
+We support different formats of such a pattern file. The `XMLPatternReaderWriter` is to save and restore the data like described above. The `ParasaveReaderWriter` can be used to apply the configuration from a given Parasave.ini, but you can not write any changes back to the ini.
 
 ---  
 #Installation#

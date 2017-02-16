@@ -115,6 +115,7 @@ The display next to *Items to license* shows the status of the activation:
 In command-line mode, the program is started from a command-line or a batch file with the following call:
   
 
+`ILMWebApiClient -c -l<ProductKey> -s<path to .lics-file> -u<Username> -p<Password>`
   
 
 The client receives the ProductKey from insite or can copy it to the clipboard by clicking the license entry in GUI-Mode (see [2.3 "Licensing"](#licensing)).

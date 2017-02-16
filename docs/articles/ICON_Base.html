@@ -8,7 +8,7 @@
     <title>Documentation and Procedure </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Documentation and Procedure ">
-    <meta name="generator" content="docfx 2.8.2.0">
+    <meta name="generator" content="docfx 2.9.3.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -216,9 +216,9 @@
 <p>An example of this would be an implementation that communicates with the PLC via the SerialSink while you do not use the same scanner (or the same scanner ports) on every computer. In this case, you cannot configure any port at all, instead you can outsource the configuration in other files. The main benefit of this is not always having to customise the config when a port is added or removed, but simply create or remove a file and then restart ICON.  </p>
 <p>The second functionality of the Includes is the handling of special configurations. If the config and Include-Config contain the same configuration parameters, the configuration is overwritten. Therefore, if minor details vary, instead of having to create a completely new configuration, only the different parameters need to be packed into an IncludeFile.   </p>
 <p>The Include-File in turn can also contain Includes. A path name in an Include can also be a search string   </p>
-<p>[Path][Search pattern]  </p>
+<p><code>[Path]\[Search pattern]</code>  </p>
 <p>The @ can be used to include the path of the loaded config in the IncludePath.  </p>
-<p>i.e. D:\Icon.xml --&gt;   @\Special.xml --&gt; D:\Special.xml </p>
+<p>i.e. <code>D:\Icon.xml</code> --&gt;   <code>@\Special.xml</code> --&gt; <code>D:\Special.xml</code> </p>
 <p>An Include-File must have the same structure as the ICON.xml   </p>
 <p>The name of ICONConfig must also be the same.  </p>
 <hr>
@@ -288,7 +288,7 @@ The system will slow down considerably when activating tracing due to the huge n
 </ul>
 <hr>
 <h2 id="configuration-60iconnetwork62">Configuration &#60;ICONNetwork&#62;</h2>
-<p>Here, you can enter Hosts that apply for ICON as well as Hosts for the operating system defined under &quot;C:\Windows\System32\drivers\etc\hosts&quot;.  </p>
+<p>Here, you can enter Hosts that apply for ICON as well as Hosts for the operating system defined under &quot;<code>C:\Windows\System32\drivers\etc\hosts</code>&quot;.  </p>
 <p>Example:</p>
 <pre><code class="lang-html">&lt;ICONNetwork&gt;
     &lt;ICONHosts&gt;
@@ -302,7 +302,7 @@ The system will slow down considerably when activating tracing due to the huge n
 <p>The order would then be as follows:</p>
 <ol>
 <li>Resolution via &#60;ICONNetwork&#62;</li>
-<li>Resolution via C:\Windows\System32\drivers\etc\hosts</li>
+<li>Resolution via <code>C:\Windows\System32\drivers\etc\hosts</code></li>
 <li>Resolution via DNS</li>
 </ol>
 <hr>
@@ -499,18 +499,18 @@ The system will slow down considerably when activating tracing due to the huge n
 <p>Denotes a reference. (i.e. there is a member with the name source).   </p>
 <p>Another option is to use the references provided internally by ICON:</p>
 <ul>
-<li>__SEQCNT :  Sequence number of the message</li>
-<li>__CHKSUM_1 :  creates a check sum of the telegram length by adding up the bytes</li>
-<li>__ERROR : Specifies the error of the telegram (used, for example, for creating the standard acknowledgement)</li>
-<li>__NOW : Returns the current timestamp in the format specified in the lower strings</li>
-<li>DATE : Returns the current timestamp in the format specified in the lower strings</li>
-<li>TIME : Returns the current timestamp in the format specified in the lower strings</li>
+<li><code>__SEQCNT</code> :  Sequence number of the message</li>
+<li><code>__CHKSUM_1</code> :  creates a check sum of the telegram length by adding up the bytes</li>
+<li><code>__ERROR</code> : Specifies the error of the telegram (used, for example, for creating the standard acknowledgement)</li>
+<li><code>__NOW</code> : Returns the current timestamp in the format specified in the lower strings</li>
+<li><code>DATE</code> : Returns the current timestamp in the format specified in the lower strings</li>
+<li><code>TIME</code> : Returns the current timestamp in the format specified in the lower strings</li>
 </ul>
 <p><strong>function name(??):</strong>  </p>
 <p>The round brackets describe a function call. In the function call, a maximum of one reference can also be used as a parameter. Currently supported functions are:</p>
 <ul>
-<li>INC : Increments the value of the variable, which was transferred as a parameter and returns this value</li>
-<li>LEN : Determines the length of the variable, which was transferred as a parameter</li>
+<li><code>INC</code> : Increments the value of the variable, which was transferred as a parameter and returns this value</li>
+<li><code>LEN</code> : Determines the length of the variable, which was transferred as a parameter</li>
 </ul>
 <p><strong>isIdentifier:</strong>  </p>
 <p>Used for the parse rules, for more details, please refer to the chapter <a href="#RequestParseRule/IncomingParseRule">RequestParseRule</a>.  </p>

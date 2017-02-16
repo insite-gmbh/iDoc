@@ -8,7 +8,7 @@
     <title>ILM </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="ILM ">
-    <meta name="generator" content="docfx 2.8.2.0">
+    <meta name="generator" content="docfx 2.9.3.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -107,10 +107,10 @@ After double-clicking the application, a window appears. To begin, the user must
 <hr>
 <h3 id="manual-dataexchange">Manual DataExchange</h3>
 <p>On the computer to be licensed, go to the folder  </p>
-<p>&quot;C:\ProgramData\insite\license&quot;</p>
+<p><code>&quot;C:\ProgramData\insite\license&quot;</code></p>
 <p><img src="../images/ILM_data_ex_1.png" alt="ILM_data_ex_1.png"></p>
 <p>Copy both folders to this target directory on your local hard drive:  </p>
-<p>[path specified in ILM][name of the computer]</p>
+<p><code>[path specified in ILM]\[name of the computer]</code></p>
 <p><img src="../images/ILM_data_ex_2.png" alt="ILM_data_ex_2.png"></p>
 <p>This results in the following file structure:</p>
 <p><img src="../images/ILM_data_ex_3.png" alt="ILM_data_ex_3.png"></p>
@@ -123,8 +123,8 @@ After double-clicking the application, a window appears. To begin, the user must
 <p>By clicking the button <em>Activate selected Licenses</em>, all files are activated, which were selected in <em>Items to license</em>.  </p>
 <p>The activated license is stored in the <em>licensed</em>-folder, whose filepath is determined as follows:</p>
 <ul>
-<li>If a <em>localhost</em>-file was activated, the folder can be found in<br> &quot;C:\ProgramData\insite\license\licensed&quot;</li>
-<li>If a remote-file was activated, it can be found in<br> [path specified in ILM][name of the computer]\licensed</li>
+<li>If a <em>localhost</em>-file was activated, the folder can be found in<br> <code>&quot;C:\ProgramData\insite\license\licensed&quot;</code></li>
+<li>If a remote-file was activated, it can be found in<br> <code>[path specified in ILM]\[name of the computer]\licensed</code></li>
 </ul>
 <p>With <em>Activate license from file</em>, an OpenFile-dialog box is opened and the file to be activated can be selected. The created license is then stored to the same directory. Distributing the licenses is also possible from this page, at which one can select specific computers, all computers, or those computers for which a license was just activated.  </p>
 <p>The display next to <em>Items to license</em> shows the status of the activation:</p>
@@ -137,7 +137,7 @@ After double-clicking the application, a window appears. To begin, the user must
 <h1 id="command-line-mode">Command-line mode</h1>
 <p><a name="Command-line mode"></a>
 In command-line mode, the program is started from a command-line or a batch file with the following call:</p>
-<p>ILMWebApiClient -c -l&#60;ProductKey&#62; -s&#60;path to .lics-file&#62; -u&#60;Username&#62; -p&#60;Password&#62;</p>
+<p><code>ILMWebApiClient -c -l&lt;ProductKey&gt; -s&lt;path to .lics-file&gt; -u&lt;Username&gt; -p&lt;Password&gt;</code></p>
 <p>The client receives the ProductKey from insite or can copy it to the clipboard by clicking the license entry in GUI-Mode (see <a href="#licensing">2.3 &quot;Licensing&quot;</a>).</p>
 <p>During this process, different status notifications will appear in the console (unless the program was started by a batch file, the &quot;Enter&quot;-key has to be pressed at the end). On successful completion, there will be a license file (&quot;&#42;.lic&quot;) in the directory of the licensing source file (&quot;&#42;.lics&quot;).</p>
 <hr>

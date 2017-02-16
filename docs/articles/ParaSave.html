@@ -8,7 +8,7 @@
     <title>ParaSave </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="ParaSave ">
-    <meta name="generator" content="docfx 2.8.2.0">
+    <meta name="generator" content="docfx 2.9.3.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -121,10 +121,10 @@
 <h1 id="appendix">Appendix</h1>
 <hr>
 <h2 id="registry-entries">Registry Entries</h2>
-<table><tr><th>Key: </th><th> HKEY_LOCAL_MACHINE\Software\insite GmbH\ParaSave\Setting</th></tr>
+<table><tr><th>Key: </th><th> <code>HKEY_LOCAL_MACHINE\Software\insite GmbH\ParaSave\Setting</code></th></tr>
 <tr><td>Character string: </td><td> ConfigFile</td></tr>
 <tr><td>Values:     </td><td> Name of the configuration file. The default value is </td></tr>
-<tr><td>   </td><td> F:\DH\INSITE\ParaSave.INI.</td></tr>
+<tr><td>   </td><td> <code>F:\DH\INSITE\ParaSave.INI.</code></td></tr>
 </table>
 
 
@@ -234,32 +234,32 @@
 <p><a name="section_blocks"></a>
 This section contains the definition of the data areas. The following structure applies here:</p>
 <ul>
-<li>&#35;&#60;Name in the data areas list&#62;;&#60;filename&#62;;&#60;BackupByPLC&#62;</li>
-<li>&amp;&#35;42;&#60;DB&#62;,&#60;Offset&#62;,&#60;Length&#62;[&#60;Filter&#62;[&#60;Filter&#62;[...]]]</li>
-<li>[&amp;&#35;42;&#60;DB&#62;,&#60;Offset&#62;,&#60;Length&#62;[&#60;Filter&#62;[&#60;Filter&#62;[...]]]]</li>
-<li>[...]</li>
-<li>...</li>
+<li><code>#&lt;Name in the data areas list&gt;;&lt;filename&gt;;&lt;BackupByPLC&gt;</code></li>
+<li><code>*&lt;DB&gt;,&lt;Offset&gt;,&lt;Length&gt;[&lt;Filter&gt;[&lt;Filter&gt;[...]]]</code></li>
+<li><code>[*&lt;DB&gt;,&lt;Offset&gt;,&lt;Length&gt;[&lt;Filter&gt;[&lt;Filter&gt;[...]]]]</code></li>
+<li><code>[...]</code></li>
+<li><code>...</code></li>
 </ul>
 <p>A backup of the data block by the PLC is possible (control word, bit 1) by the flag &#60;BackupByPLC&#62; (default false‚ true if &quot;1&quot;).
 The filter expressions are optional. More on filter definition below.</p>
 <p>Example of the dialogue shown above:</p>
 <ul>
 <li><strong>[BLOCKS]</strong></li>
-<li><p>&#35;Hand scanner crankcase;C:\Temp\Backup1.txt;1        </p>
+<li><p><code>#Hand scanner crankcase;C:\Temp\Backup1.txt;1</code>        </p>
 <ul>
 <li>&#42;100,10,3    </li>
 <li>&#42;100,20,10    </li>
 <li>&#42;100,24,3    </li>
 </ul>
 </li>
-<li><p>&#35;Options DB99;C:\Temp\Backup2.txt        </p>
+<li><p><code>#Options DB99;C:\Temp\Backup2.txt</code>        </p>
 <ul>
 <li>&#42;99,10,10    </li>
 <li>&#42;99,20,10    </li>
 <li>&#42;99,24,3    </li>
 </ul>
 </li>
-<li><p>&#35;Other;C:\Temp\Backup3.txt;1        </p>
+<li><p><code>#Other;C:\Temp\Backup3.txt;1</code>        </p>
 <ul>
 <li>&#42;99,8,4    </li>
 <li>&#42;99,20,10    </li>
@@ -272,7 +272,7 @@ The filter expressions are optional. More on filter definition below.</p>
 <p>Filter expressions can be applied to individual parts of a data area. The data area is then and&#39;ed bit by bit (logical &quot;and&quot; operation) with the filter expression when comparing the dataset and when writing the file back to the PLC. Thus, it is possible to protect dynamic areas from being overwritten or from performing comparisons regardless of the current temporary data.</p>
 <p>One or more filter expressions can be attached to a data area definition (see <a href="#section_blocks">Section [BLOCKS]</a> in Ini file above).  </p>
 <p>The syntax for a filter expression is as follows:</p>
-<p>;&#60;Offset&#62;[:&#60;Length&#62;]=&#60;Filter value&#62;</p>
+<p><code>;&lt;Offset&gt;[:&lt;Length&gt;]=&lt;Filter value&gt;</code></p>
 <p>with:</p>
 <table>
  <tr><th>&#60;Offset&#62; </th><td> word offset, relative to the start of the data area</td></tr>
@@ -285,8 +285,8 @@ The filter expressions are optional. More on filter definition below.</p>
 <hr>
 <h3 id="filter-example-1-comparing-filtered-data">Filter example 1 (comparing, filtered data)</h3>
 <p>Imagine a data block defined like this: </p>
-<p>[BLOCKS]  </p>
-<p>&#35;Hand scanner crankcase;C:\Temp\Backup1.txt;1  </p>
+<p><code>[BLOCKS]</code>  </p>
+<p>&#35;Hand scanner crankcase;<code>C:\Temp\Backup1.txt;1</code>  </p>
 <p>&#42;100,20,10;2:2=0xF1F0;6:4=0</p>
 <p>Two filter expressions are applied here:</p>
 <ol>
@@ -322,8 +322,8 @@ The filter expressions are optional. More on filter definition below.</p>
 <p>When writing filtered data, things get a bit more complex and the following formula applies:</p>
 <p>NEWPLCDATA = (PLCDATA AND NOT FILTER) OR (FILEDATA AND FILTER)</p>
 <p>Imagine the same data block and the same filters as in the previous example</p>
-<p>[BLOCKS]  </p>
-<p>&#35;Hand scanner crankcase;C:\Temp\Backup1.txt;1  </p>
+<p><code>[BLOCKS]</code>  </p>
+<p>&#35;Hand scanner crankcase;<code>C:\Temp\Backup1.txt;1</code>  </p>
 <p>&#42;100,20,10;2:2=0xF1F0;6:4=0</p>
 <p>The current PLC data content of the 10-byte-block is (as before)</p>
 <p>0xAA 0x99 0x8B 0x44 0x66 0x55 0x77 0x88 0x99 0xAA</p>

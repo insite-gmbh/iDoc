@@ -12,7 +12,7 @@ cases of user management.
 
 iAuth supports the following interfaces for the communication whith the clients:
 
-```
+```json
   "Global": {
     "UseSignalR": false,
     "UseSignalRWithWebSockets": false,
@@ -25,18 +25,22 @@ iAuth supports the following interfaces for the communication whith the clients:
 
 ## REST
 
-Overall it supports a REST interfaces to sign-in/out or poll the user states. This interfaces can also manage the configuration of iAut, so by using it, you can add/remove/update
-the usermanagement. (currently not persistent -> this means after a restart the changes are lost). By using swagger (http://localhost:5000/swagger/ui), you can test iAuth and ot's REST interface.
+Overall it supports a REST interfaces to sign-in/out or poll the user states. This interfaces can also manage the configuration of iAuth, so by using it, you can add/remove/update
+the user-management. (currently not persistent -> this means after a restart the changes are lost). By using swagger (http://localhost:5000/swagger/ui), you can test iAuth and its REST interface.
 Using the controllers for App, AppUser and User is only allowed for users of type `Admin`.
 
 ![iAuth_Swagger.png](../images/iAuth_Swagger.png)
 
 ## SignalR
-```"UseSignalR": true```
-```"UseSignalRWithWebSockets": true```
+```json
+"UseSignalR": true
+```
+```json
+"UseSignalRWithWebSockets": true
+```
 
-SignalR can also be used for getting notifications of user changes. For this, a client has to subscribe to the AuthHub with it's AppId. By configuration you can specify that SignalR should use WebSockets for 
-the communication. By default SignalR uses autonegotiation to find the fastes communication way, which was normally websocket if it is activted.
+SignalR can also be used for getting notifications of user changes. For this, a client has to subscribe to the AuthHub with its AppId. By configuration, you can specify that SignalR should use WebSockets for 
+the communication. By default, SignalR uses autonegotiation to find the fastest communication way, which normally was websocket, if it is activated.
 The server side interface of SignalR is the following:
 
 ```cs
@@ -65,14 +69,18 @@ The Authentication structure which will be exchanged, has the following structur
 ```
 
 ## WebSockets
-```"UseWebSockets": true```
+```json
+"UseWebSockets": true
+```
 
-WebSockets can be used for the user state change update mechanismus also without SignalR, for this you have to set this option to true.
+WebSockets can also be used for the user state change update mechanism without SignalR. For this, you have to set this option to true.
 On the client side you have to start the websocket with the following path:
 
-```"ws://" + IpAddress + "/ws";```
+```
+"ws://" + IpAddress + "/ws";
+```
 
-If the connection was opend, you can register the client by sending the AppId of the application over the socket. On any update of the user state, you will get an message which holds an `Authentication`
+If the connection was opened, you can register the client by sending the AppId of the application over the socket. On any update of the user state, you will get an message which holds an `Authentication`
  JSON object in the data property. 
 .
 
@@ -101,7 +109,7 @@ self.start = function(){
 iAuth also provides PLC access to get the user from Plc or set the current Data in the PLC. 
 
 
-```
+```json
 "Plc": {
   "ConnectionString": "Data Source=127.0.0.1:102,0,2",
   "Area": "DB250",
@@ -111,11 +119,11 @@ iAuth also provides PLC access to get the user from Plc or set the current Data 
 }
 ```
 
-* The `ConnectionString` is to specify the PLC connection, for this you have to add the following parameters: [IP-Address:Port,Rack,Slot} .
+* The `ConnectionString` is to specify the PLC connection, for this you have to add the following parameters: [IP-Address:Port,Rack,Slot] .
 * The `Area` specifies the datablock in the PLC where the data should be read or written.
 * The `Address` specifies the Type (W=Word) and the Offset(188 bytes -> if you used bits, the offset should be the bit offset (Byteoffset * 8 + Bitnumber)) of the data.
-* The `App` specifies the App which should used for the plc, this is importent, because the PLC uses the valies in the `Data` field which was specified in the AppUser to find the correct user.
-* The `DefaultValue` specifies the state where no user is logged in, or the fallbackuser, if a user should always be active if no other is active.
+* The `App` specifies the App which should used for the plc. This is important, because the PLC uses the values in the `Data` field, which was specified in the AppUser, to find the correct user.
+* The `DefaultValue` specifies the state where no user is logged in, or the fallbackuser, if a user should always be active and if no other user is active.
 
 
 # Password Management
@@ -129,7 +137,7 @@ The user configuration is used to specify users for the system.
 | Admin      | Admin   |     XXX    |     10         | [guid] |
 | Joe        | Active  |     XXX    |     10         | [guid] |
 
-* The `Name` is free to define and is should be used case sensitive.
+* The `Name` is free to define and it should be used case sensitive.
 * The `LogoutTimeInMin` can specified per user (maximum time a user can be logged in).
 * The `Password` is an encrypted key (so see how you can generate it, see Commandline)
 * The `Id` is to identify the user
@@ -143,7 +151,7 @@ The user configuration is used to specify users for the system.
 
 ### Example
 
-```
+```json
   ...
   "Auth": {
     ...
@@ -156,6 +164,7 @@ The user configuration is used to specify users for the system.
         "LogoutTimeInMin": 10
       },
     ...
+    ]
   }
   ...
 ```
@@ -163,7 +172,7 @@ The user configuration is used to specify users for the system.
 
 ## App Users
 
-To setup each application which uses iAut, you have to assigne an name with an key.
+To setup each application which uses iAuth, you have to assigne a name with an key.
 (if an application will get the auth-state , it uses the Id for the request)
 
 |    Name     |    Id       | LogoutTimeInMin |
@@ -173,12 +182,12 @@ To setup each application which uses iAut, you have to assigne an name with an k
 
 
 * The `Name` is free to define and is should be used case sensitive.
-* The `LogoutTimeInMin` can specified per app (maximum time a user can be logged in  (if a user and an app have specified this value, the lowest value will be used)).
+* The `LogoutTimeInMin` can specified per app (maximum time a user can be logged in; if a user and an app have specified this value, the lowest value will be used).
 * The `Id` is to identify the application
 
 ### Example
 
-```
+```json
   ...
   "Auth": {
     ...
@@ -190,12 +199,13 @@ To setup each application which uses iAut, you have to assigne an name with an k
       }
     ],
   ...
+  }
 ```
 
 ## App-User Relation
 
-This section is to map the user with the apps and specify additional data to exchange.
-e.g. If HMI asks for current AuthState it will get a number (e.g. 9) as the result. 
+This section is to map the user with the apps and specify additional data to exchange.  
+For example, if HMI asks for current AuthState, it will get a number (e.g. 9) as the result. 
 
 |     AppId       |    UserId      | Data       |
 |:----------------|:--------------:|:----------:|
@@ -204,22 +214,23 @@ e.g. If HMI asks for current AuthState it will get a number (e.g. 9) as the resu
 
 * The `AppId` is the Id of a specified app.
 * The `UserId` is the Id of a specified user.
-* The `Data` field specifies some additional data which will be sent to the client we it signs in, or requests an state update.
+* The `Data` field specifies some additional data which will be sent to the client we it signs in, or requests a state update.
 
 
 ## Security key
-To handle security like password encryption, iAuth generates an keyfile if nothing is found. The path of this file can be specified in the configuration.
-Attention: If this file will be changed, the password which were created with this file could no longer be encrypted.
+To handle security like password encryption, iAuth generates a keyfile if nothing is found. The path of this file can be specified in the configuration.
+Attention: If this file is changed, the passwords which were created with this file could no longer be encrypted.
 
-```
+```json
   "Auth": {
     "KeyFile": ".\\iAuth.key",
+  }
 ```
 
 ## Logging
-Logging can be specified one in the Logging section of the appsettings.json and otherwise in the nlog.config. For more details look at Nlog documentation.
+Logging can be specified for one in the Logging section of the appsettings.json and otherwise in the nlog.config. For more details, look at the Nlog documentation. <!-- link Nlog documentation at some point? -->
 
-```
+```json
   "Logging": {
     "NLogConfig" :  "nlog.config",
     "IncludeScopes": false,
@@ -234,17 +245,17 @@ Logging can be specified one in the Logging section of the appsettings.json and 
 ## Commandline
 
 ```
-Copyright (c) insite-gmbh 2017");
+Copyright (c) insite-gmbh 2017
 
-iAuth is intended to be run as windows service. Use one of the following options:");
-  --register-service                      Registers and starts this program as a windows service named \"" + ServiceDisplayName + "\"");
-							All additional arguments will be passed to ASP.NET Core's WebHostBuilder.");   
-  --unregister-service                    Removes the windows service creatd by --register-service.");
-  --interactive                           Runs the underlying asp.net core app.");
+iAuth is intended to be run as windows service. Use one of the following options:
+  --register-service                      Registers and starts this program as a windows service named [ServiceDisplayName]
+							All additional arguments will be passed to ASP.NET Core's WebHostBuilder. 
+  --unregister-service                    Removes the windows service creatd by --register-service.
+  --interactive                           Runs the underlying asp.net core app.
 
-  --config                                Specifies the path to the config file.");
-  --appsettings                           Set the name of the config file [default=appsettings].");
+  --config                                Specifies the path to the config file.
+  --appsettings                           Set the name of the config file [default=appsettings].
   --urls="http://localhost:10000/"        Application bounded url
-e.g. :");
-iAuth --register-service  --config=\"C:\\Path\\To\\Configs\" --appsettings=\"appsettings\"");
+e.g. :
+iAuth --register-service  --config="C:\Path\To\Configs" --appsettings="appsettings"
 ```

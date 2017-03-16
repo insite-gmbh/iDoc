@@ -251,6 +251,7 @@ In the Globals section, application-wide settings are performed.</p>
                  type=&quot;string&quot;&gt; &lt;/ConfigValue&gt;
     &lt;ConfigValue name=&quot;SocketTimeout&quot; type=&quot;int&quot;&gt;30000&lt;/ConfigValue&gt;
     &lt;ConfigValue name=&quot;SocketSendBufferSize&quot; type=&quot;int&quot;&gt;8192&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;UseCaches&quot; type=&quot;bool&quot;&gt;false&lt;/ConfigValue&gt;
 &lt;/ICONGlobals&gt;
 </code></pre><ul>
 <li><strong>LookAndFeel:</strong> Specifies the representation mode of the GUI. The possible values are &quot;Tab&quot; and &quot;Tree&quot;. For more details, see the section <a href="#gui_of_icon">GUI of ICON</a>.</li>
@@ -284,6 +285,8 @@ The system will slow down considerably when activating tracing due to the huge n
 <p>and <a href="https://msdn.microsoft.com/en-us/library/system.net.sockets.socket.receivetimeout%28v=vs.110%29.aspx">https://msdn.microsoft.com/en-us/library/system.net.sockets.socket.receivetimeout%28v=vs.110%29.aspx</a></p>
 </li>
 <li><p><strong>SocketSendBufferSize:</strong> Specifies the buffer size of the sockets for sending. If set to 0, no buffering will take place.<br>also see <a href="https://msdn.microsoft.com/en-us/library/system.net.sockets.socket.sendbuffersize%28v=vs.110%29.aspx">https://msdn.microsoft.com/en-us/library/system.net.sockets.socket.sendbuffersize%28v=vs.110%29.aspx</a></p>
+</li>
+<li><p><strong>UseCaches:</strong> Specifies if a data cache is used by the diagnosis pages or not.</p>
 </li>
 </ul>
 <hr>

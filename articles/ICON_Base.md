@@ -272,6 +272,7 @@ In the Globals section, application-wide settings are performed.
                  type="string"> </ConfigValue>
     <ConfigValue name="SocketTimeout" type="int">30000</ConfigValue>
     <ConfigValue name="SocketSendBufferSize" type="int">8192</ConfigValue>
+    <ConfigValue name="UseCaches" type="bool">false</ConfigValue>
 </ICONGlobals>
 ```  
 
@@ -312,7 +313,7 @@ also see: <https://msdn.microsoft.com/en-us/library/system.net.sockets.socket.se
 *  **SocketSendBufferSize:** Specifies the buffer size of the sockets for sending. If set to 0, no buffering will take place.  
 also see <https://msdn.microsoft.com/en-us/library/system.net.sockets.socket.sendbuffersize%28v=vs.110%29.aspx>
 
-
+* **UseCaches:** Specifies if a data cache is used by the diagnosis pages or not.
 
 ---  
 ##Configuration &#60;ICONNetwork&#62;##

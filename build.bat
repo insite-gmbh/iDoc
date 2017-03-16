@@ -1,12 +1,17 @@
+@echo off
 REM This script build the site under the folder docs where the ghpage is referenced
 REM To use this script you have to download docfx  https://github.com/dotnet/docfx/releases
-@echo off
+set DOCFXVERSION=""
+if not exist %programdata%\chocolatey\choco.exe GOTO CHECK
 powershell (gi %programdata%\chocolatey\bin\docfx.exe).versioninfo.FileVersion>> "temp.txt"
 set /p DOCFXVERSION=<"temp.txt"
 del "temp.txt"
 
-IF "%DOCFXVERSION%" == "2.12.1.0" GOTO RUN
-call scripts/update_docFX.bat
+:CHECK
+	IF "%DOCFXVERSION%" == "2.12.1.0" GOTO RUN
+	call ./scripts/update_docFX.bat %~dp0 build.bat
+GOTO:EOF
 
 :RUN
-docfx build docfx.json
+	docfx build docfx.json
+GOTO:EOF

@@ -1,6 +1,8 @@
 # ICON Base Release Notes
 |date      | change description |
 |----------|:-------------|
+|16.03.2017| Added automatic handling of corrupt spooler files.  |
+|16.02.2017| Created lock free implementation for the slot cache by using concurrent dictionary. Added new Global config value to activate sendslotchages in UI. |
 |10.02.2017| Fixed a bug in BMW01 protocol implementation. (In some messages the byteorder was not correct.) |
 |03.01.2017| Some changes to allow payloadconverter to handle multiple messages at the same time. |
 |20.12.2016| Add GlobalSetting to setup ProcessPriority. |

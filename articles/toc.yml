@@ -67,6 +67,8 @@
     items: 
     - name: Release Notes
       href: release_notes/XLAdapter.release_notes.md
+  - name: Release Notes
+    href: release_notes/IDAT.release_notes.md
 - name: ILM
   href: ILM.md
   items:

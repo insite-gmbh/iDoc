@@ -1,6 +1,7 @@
 # AWLConverter - Release Notes
 |date      | change description |
 |----------|:-------------|
+|19.04.2017|Fixed a bug in instance db creation and also in iDatTemplate.|
 |15.02.2017|Optimized parasave converter. Now we also remove items which are in backup and filter.|
 |07.02.2017|Change data type of TimeOfDay to Span instead of DateTime and update InacSM reference to newer version.|
 |30.12.2016|Optimized filter add, remove (always insert at correct position); Use filter dialog also if no ReaderWriter was selected; Add some info messages.|

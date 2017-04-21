@@ -1,6 +1,8 @@
 # IDAT - Release Notes
 |date      | change description |
 |----------|:-------------|
+|21.04.2017| fixed a bug in bit calculation and filter calculation |
+|19.04.2017| fixed a bug in writing/reading bits.  |
 |02.02.2017| fixed an alignment bug after succeeding BOOL vars |
 |29.12.2016| fixed bug in native member extraction |
 |02.12.2016| fixed bug in offset calculation after an array |

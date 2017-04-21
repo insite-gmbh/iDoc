@@ -1,6 +1,7 @@
 # PLCDataManager - Release Notes
 |date      | change description |
 |----------|:-------------|
+|21.04.2017| fixed a bug in bit calculation and filter calculation |
 |19.04.2017| fixed a bug in writing/reading bits. optimized file storing (do not save file if an error occurred) |
 |02.12.2016| fix bug in offset calculation after an array |
 |01.12.2016| fix bug in multidimensional array calculation |

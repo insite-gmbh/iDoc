@@ -1,6 +1,7 @@
 # IPOT - Release Notes
 |date      | change description |
 |----------|:-------------|
+|07.10.2016| fixed a bug in condition editor (removing items) |
 |16.08.2016| after an event, actions can also be executed for other objects, now the notifyAction can also fire all the other events |
 |28.07.2016| try to find window handles if they are invalide|
 |24.05.2016| disable restart on error only for observed programms|

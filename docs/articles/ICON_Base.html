@@ -853,11 +853,11 @@ An ICON Socket depicts a fix in the configuration parameterised active(client) o
     &lt;ConfigValue name=&quot;KeepAliveTime&quot; type=&quot;int&quot;&gt;0&lt;/ConfigValue&gt;
     &lt;ConfigValue name=&quot;KeepAliveInterval&quot; type=&quot;int&quot;&gt;0&lt;/ConfigValue&gt;
     &lt;ConfigValue name=&quot;MaxSocketLatencyTime&quot; type=&quot;int&quot;&gt;0&lt;/ConfigValue&gt;
-    &lt;ConfigValue name=&quot;SocketLatencyMeasurementType&quot; type=&quot;string&quot;&gt;Inherit
-    &lt;/ConfigValue&gt;
-&lt;ConfigValue name=&quot;SpoolAlways&quot; type=&quot;bool&quot;&gt;false&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;SocketLatencyMeasurementType&quot; type=&quot;string&quot;&gt;Inherit&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;SpoolAlways&quot; type=&quot;bool&quot;&gt;false&lt;/ConfigValue&gt;
     &lt;ConfigValue name=&quot;ReceiveBehaviour&quot; type=&quot;string&quot;&gt;OnlyProtocolData&lt;/ConfigValue&gt;
     &lt;ConfigValue name=&quot;ForceClientConnect&quot; type=&quot;bool&quot;&gt;false&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;SuppressAcknowledge&quot; type=&quot;bool&quot;&gt;false&lt;/ConfigValue&gt;
         OPTIONAL &lt;Section Type=&quot;Spooler&quot; \&gt;
 &lt;/ICONModule&gt;
 </code></pre><p>Meaning of the individual parameters:</p>
@@ -886,8 +886,9 @@ An ICON Socket depicts a fix in the configuration parameterised active(client) o
 <li><strong>ProtocolAndRawData:</strong> An incoming telegram is parsed, if a telegram is detected after a specified protocol impl, it is forwarded. If residual data remains that does not constitute any valid protocol impl telegram, it is still forwarded. (This option with RFC1006 is default true)     </li>
 </ul>
 </li>
-<li><p><strong>ForceClientConnect:</strong> false or true, if true, connection attempts take place every second</p>
+<li><p><strong>ForceClientConnect:</strong> false or true, if true, connection attempts take place every second.</p>
 </li>
+<li><strong>SuppressAcknowledge:</strong> This socket do not wait for an ack for sent messages.</li>
 </ul>
 <p><strong>When a TCP socket is initialised, the Keep-Alive-Timeout is set to 2 hours and the Keep-Alive-Interval is set to 1 second.</strong></p>
 <hr>
@@ -2043,6 +2044,37 @@ namespace ICON.Communication.Modules.Adapters
 </ul>
 <p>Parameterisation of the telegrams:  </p>
 <p>{[BuildRuleName]{|[AttributeName=AttributeValue]};}</p>
+<h2 id="message-dispatcher">Message Dispatcher</h2>
+<p>A MessageDispatcher Module can broadcast an input message to various sinks.</p>
+<hr>
+<h4 id="configuration-10">Configuration</h4>
+<pre><code class="lang-html">&lt;ICONModule Name=&quot;MessageDispatcher&quot; Assembly=&quot;MessageDispatcher.dll&quot;&gt;
+    &lt;ConfigValue name=&quot;DispatchMode&quot; type=&quot;int&quot;&gt;2&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;Name&quot; type=&quot;string&quot;&gt;AckMessageDispatcher&lt;/ConfigValue&gt;
+    &lt;Section Type=&quot;Sinks&quot;&gt;
+        &lt;Sink name=&quot;MemBasedSinkTCP&quot; default=&#39;true&#39; noAck=&quot;true&quot; /&gt;
+        &lt;Sink name=&quot;Client1&quot; noAck=&quot;true&quot; /&gt;
+        &lt;Sink name=&quot;Client2&quot; noAck=&quot;true&quot; /&gt;
+    &lt;/Section&gt;
+    &lt;Section Type=&quot;Spooler&quot;&gt;
+        ...
+    &lt;/Section&gt;
+&lt;/ICONModule&gt;
+</code></pre><p>Meaning of the individual parameters:</p>
+<ul>
+<li><strong>DispatchMode:</strong> Here, the UserDefined Protocol must be specified which has the BuildRule necessary for starting the telegram.</li>
+<li><strong>Name:</strong> Parameterisation of the telegram that is sent when starting ICON</li>
+<li><strong>Sinks:</strong> This section contains all sinks to dispatch to.<ul>
+<li><strong>Sink:</strong> A dispatch entry:<ul>
+<li><strong>name:</strong> The name of the sink.</li>
+<li><strong>default:</strong> The default sink. (This sink gets the origin message)</li>
+<li><strong>noAck:</strong> false if you do not want to wait for an ack.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Spooler:</strong> A spooler is necessary for this module (see sppoler)</li>
+</ul>
 <hr>
 <h1 id="example-configurations">Example Configurations</h1>
 <hr>
@@ -2409,26 +2441,6 @@ namespace ICON.Communication.Modules.Adapters
 </table>
 
 
-
-
-
-<hr>
-<h1 id="change-directory">Change Directory</h1>
-<table><tr><th>Benjamin Prömmer </th><th> 2014-07-21 </th><th> New creation</th></tr>
-<tr><td>Benjamin Prömmer </td><td> 2014-07-29 </td><td> Screenshots updated</td></tr>
-<tr><td>Benjamin Prömmer </td><td> 2014-07-31 </td><td> New SpoolerGUI parameter updated and screenshot</td></tr>
-<tr><td>   </td><td>    </td><td> added to PlcUserLevel.</td></tr>
-<tr><td>Benjamin Prömmer </td><td> 2014-08-04 </td><td> Description added to Includes</td></tr>
-<tr><td>Benjamin Prömmer </td><td> 2014-08-11 </td><td> ICONSocket ReceiveBehaviours</td></tr>
-<tr><td>Benjamin Prömmer </td><td> 2014-11-10 </td><td> Update JIS</td></tr>
-<tr><td>Benjamin Prömmer </td><td> 2014-12-12 </td><td> ModuleInstanceManager</td></tr>
-<tr><td>Benjamin Prömmer </td><td> 2015-03-26 </td><td> Configuration of ReceiveOnlyRawData supplemented</td></tr>
-<tr><td>Benjamin Prömmer </td><td> 2015-04-09 </td><td> UseSocketBasedReceiveThread in</td></tr>
-<tr><td>   </td><td>    </td><td> ICONGlobals updated</td></tr>
-<tr><td>Karsten Gorkow </td><td> 2015-09-17 </td><td> Added socket latency measurement</td></tr>
-<tr><td>   </td><td>    </td><td> (globals and socket).</td></tr>
-<tr><td>Benjamin Prömmer </td><td> 2015-09-18 </td><td> SocketDataBufferIncreaseAction</td></tr>
-</table>
 
 
             </article>

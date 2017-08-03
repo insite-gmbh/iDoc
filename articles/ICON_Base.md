@@ -1263,11 +1263,11 @@ An ICON Socket depicts a fix in the configuration parameterised active(client) o
     <ConfigValue name="KeepAliveTime" type="int">0</ConfigValue>
     <ConfigValue name="KeepAliveInterval" type="int">0</ConfigValue>
     <ConfigValue name="MaxSocketLatencyTime" type="int">0</ConfigValue>
-    <ConfigValue name="SocketLatencyMeasurementType" type="string">Inherit
-    </ConfigValue>
-<ConfigValue name="SpoolAlways" type="bool">false</ConfigValue>
+    <ConfigValue name="SocketLatencyMeasurementType" type="string">Inherit</ConfigValue>
+    <ConfigValue name="SpoolAlways" type="bool">false</ConfigValue>
     <ConfigValue name="ReceiveBehaviour" type="string">OnlyProtocolData</ConfigValue>
     <ConfigValue name="ForceClientConnect" type="bool">false</ConfigValue>
+    <ConfigValue name="SuppressAcknowledge" type="bool">false</ConfigValue>
         OPTIONAL <Section Type="Spooler" \>
 </ICONModule>
 ```  
@@ -1296,7 +1296,8 @@ Meaning of the individual parameters:
   *  **OnlyRawData:** Only raw data is sent or received on the connection. This means that no parsing, splitting or assembling of the incoming data is performed, each telegram is forwarded. *Attention*, acknowledgements are not handled then either. This means that a raw data telegram cannot be an acknowledgement.	
   *  **ProtocolAndRawData:** An incoming telegram is parsed, if a telegram is detected after a specified protocol impl, it is forwarded. If residual data remains that does not constitute any valid protocol impl telegram, it is still forwarded. (This option with RFC1006 is default true) 	
 
-*  **ForceClientConnect:** false or true, if true, connection attempts take place every second
+*  **ForceClientConnect:** false or true, if true, connection attempts take place every second.
+*  **SuppressAcknowledge:** This socket do not wait for an ack for sent messages.
 
 **When a TCP socket is initialised, the Keep-Alive-Timeout is set to 2 hours and the Keep-Alive-Interval is set to 1 second.**
 
@@ -2742,6 +2743,41 @@ Parameterisation of the telegrams:
 
 \{[BuildRuleName]\{|[AttributeName=AttributeValue]\};\}
 
+
+##Message Dispatcher##
+
+A MessageDispatcher Module can broadcast an input message to various sinks.
+
+---  
+####Configuration####
+ 
+  
+```html
+<ICONModule Name="MessageDispatcher" Assembly="MessageDispatcher.dll">
+    <ConfigValue name="DispatchMode" type="int">2</ConfigValue>
+    <ConfigValue name="Name" type="string">AckMessageDispatcher</ConfigValue>
+    <Section Type="Sinks">
+        <Sink name="MemBasedSinkTCP" default='true' noAck="true" />
+        <Sink name="Client1" noAck="true" />
+        <Sink name="Client2" noAck="true" />
+    </Section>
+    <Section Type="Spooler">
+        ...
+    </Section>
+</ICONModule>
+```  
+
+Meaning of the individual parameters:
+
+*  **DispatchMode:** Here, the UserDefined Protocol must be specified which has the BuildRule necessary for starting the telegram.
+*  **Name:** Parameterisation of the telegram that is sent when starting ICON
+*  **Sinks:** This section contains all sinks to dispatch to.
+    *  **Sink:** A dispatch entry:
+        *  **name:** The name of the sink.
+        *  **default:** The default sink. (This sink gets the origin message)
+        *  **noAck:** false if you do not want to wait for an ack.
+*  **Spooler:** A spooler is necessary for this module (see sppoler)
+
 ---  
 #Example Configurations#
 
@@ -3190,27 +3226,5 @@ In order to also work with umlauts in the configuration file, some configuration
 </table>
 
 
-
-
-
----  
-#Change Directory#
-
-
-<table><tr><th>Benjamin Prömmer </th><th> 2014-07-21 </th><th> New creation</th></tr>
-<tr><td>Benjamin Prömmer </td><td> 2014-07-29 </td><td> Screenshots updated</td></tr>
-<tr><td>Benjamin Prömmer </td><td> 2014-07-31 </td><td> New SpoolerGUI parameter updated and screenshot</td></tr>
-<tr><td>   </td><td>    </td><td> added to PlcUserLevel.</td></tr>
-<tr><td>Benjamin Prömmer </td><td> 2014-08-04 </td><td> Description added to Includes</td></tr>
-<tr><td>Benjamin Prömmer </td><td> 2014-08-11 </td><td> ICONSocket ReceiveBehaviours</td></tr>
-<tr><td>Benjamin Prömmer </td><td> 2014-11-10 </td><td> Update JIS</td></tr>
-<tr><td>Benjamin Prömmer </td><td> 2014-12-12 </td><td> ModuleInstanceManager</td></tr>
-<tr><td>Benjamin Prömmer </td><td> 2015-03-26 </td><td> Configuration of ReceiveOnlyRawData supplemented</td></tr>
-<tr><td>Benjamin Prömmer </td><td> 2015-04-09 </td><td> UseSocketBasedReceiveThread in</td></tr>
-<tr><td>   </td><td>    </td><td> ICONGlobals updated</td></tr>
-<tr><td>Karsten Gorkow </td><td> 2015-09-17 </td><td> Added socket latency measurement</td></tr>
-<tr><td>   </td><td>    </td><td> (globals and socket).</td></tr>
-<tr><td>Benjamin Prömmer </td><td> 2015-09-18 </td><td> SocketDataBufferIncreaseAction</td></tr>
-</table>
 
   

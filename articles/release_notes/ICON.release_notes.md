@@ -1,6 +1,7 @@
 # ICON Base Release Notes
 |date      | change description |
 |----------|:-------------|
+|03.08.2017| Added new configuration parameter (SuppressAcknowledge). Allow more the one clients with RFC1006-Server.
 |06.04.2017| Fixed a bug where spooler refresh remains locked, when WorkOnNextMessageFromSpooler throws a exception.
 |23.03.2017| Added locking to PayloadconverterAdapter to avoid the problem when sending more then one message at the same time.  |
 |16.03.2017| Added automatic handling of corrupt spooler files.  |

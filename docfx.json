@@ -32,7 +32,9 @@
           "articles/**.md",
           "articles/**/toc.yml",
           "about/**.md",
+          "about/**/toc.yml",
           "public/**.md",
+          "public/**/toc.yml",
           "toc.yml",
           "*.md"
         ],

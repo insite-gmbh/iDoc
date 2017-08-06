@@ -896,6 +896,7 @@ An ICON Socket depicts a fix in the configuration parameterised active(client) o
 <p>The SocketManager can dynamically create active sockets, if the attributes necessary for this were set by a WACC protocol. Besides the active sockets, passive connections can be parameterised as well. The management of several sockets enables the SocketManager to decide which connection is used to send based on the telegram destination.</p>
 <hr>
 <h3 id="configuration-2">Configuration</h3>
+<p>For detailed description of the parameters see <a href="#ICONSocket.dll">ICONSocket</a></p>
 <pre><code class="lang-html">&lt;ICONModule Name=&quot;Socketmanager&quot; Assembly=&quot;SocketManagement.dll&quot;&gt;
     &lt;ConfigValue name=&quot;DoAutomaticReconnect&quot; type=&quot;bool&quot;&gt;1&lt;/ConfigValue&gt;
     &lt;ConfigValue name=&quot;ProtImpl&quot; type=&quot;string&quot;&gt; &lt;/ConfigValue&gt;
@@ -903,6 +904,9 @@ An ICON Socket depicts a fix in the configuration parameterised active(client) o
     &lt;ConfigValue name=&quot;Sink&quot; type=&quot;string&quot;&gt;&lt;/ConfigValue&gt;
     &lt;ConfigValue name=&quot;MaxHandshakeTime&quot; type=&quot;int&quot;&gt;10000&lt;/ConfigValue&gt;
     &lt;ConfigValue name=&quot;MaxIdleTime&quot; type=&quot;int&quot;&gt;60&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;FrameSize&quot; type=&quot;int&quot;&gt;1024&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;KeepAliveTime&quot; type=&quot;int&quot;&gt;0&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;KeepAliveInterval&quot; type=&quot;int&quot;&gt;0&lt;/ConfigValue&gt;
     &lt;ConfigValue name=&quot;SpoolAlways&quot; type=&quot;bool&quot;&gt;false&lt;/ConfigValue&gt;
     &lt;Section Type=&quot;Spooler&quot; \&gt;
     &lt;PassiveEndPoint Name=&quot;Listener&quot; \&gt;
@@ -1774,7 +1778,7 @@ namespace ICON.Communication.Modules.Adapters
 <p>A router can be switched between any modules and is used to distribute messages to various sinks.</p>
 <hr>
 <h3 id="databasedmsgrouter">DataBasedMsgRouter</h3>
-<p>This router decides which sink a message is to be forwarded to based on the message data (date of the attribute or payload, ...)</p>
+<p>This router decides, based on the message data (date of the attribute or payload, ...), which sink receives the message.</p>
 <pre><code class="lang-html">&lt;ICONModule Name=&quot;BandRooter&quot; Assembly=&quot;DataBasedMsgRouter.dll&quot;&gt;
     &lt;ConfigValue name=&quot;DispatchMode&quot; type=&quot;int&quot;&gt;2&lt;/ConfigValue&gt;
     &lt;ConfigValue name=&quot;Name&quot; type=&quot;string&quot;&gt;BandRooter&lt;/ConfigValue&gt;
@@ -1790,15 +1794,17 @@ namespace ICON.Communication.Modules.Adapters
 &lt;/ICONModule&gt;
 </code></pre><p>Meaning of the individual parameters:</p>
 <ul>
-<li><strong>Sink:</strong> A default sink can be specified here, so if none of the sinks defined in &quot;Sinks&quot; apply, the the telegram will be forwarded to the default sink</li>
-<li><strong>DeleteNonRoutableMsg:</strong> Suppresses the error which occurs if no default sink is specified and no sink can be determined</li>
+<li><strong>Sink:</strong> A default sink can be specified here, so if none of the sinks defined in &quot;Sinks&quot; apply, then the telegram will be forwarded to the default sink.</li>
+<li><strong>DeleteNonRoutableMsg:</strong> Suppresses the error which occurs if no default sink is specified and no sink can be determined.</li>
 </ul>
 <p><img src="../images/warning_icon.png" alt="warning_icon.png">
  The telegrams which do not find any sinks are then deleted.</p>
 <hr>
 <h4 id="sinks">Sinks</h4>
+<p>This section contains the selection criteria for each sink. It is also possible to specify a sink more then once, to use more different criteria for it.</p>
 <pre><code class="lang-html">&lt;Section Type=&quot;Sinks&quot; Data=&quot;Payload=114,2&quot;&gt;
     &lt;Sink name=&quot;Band1&quot; &gt;&#39;01&#39;&lt;/Sink&gt;
+    &lt;Sink name=&quot;Band1&quot; &gt;&#39;03&#39;&lt;/Sink&gt;
     &lt;Sink name=&quot;Band2&quot; &gt;&#39;02&#39;&lt;/Sink&gt;
 &lt;/Section&gt;
 </code></pre><p>Meaning of the individual parameters:</p>
@@ -2043,7 +2049,8 @@ namespace ICON.Communication.Modules.Adapters
 <li><strong>Shutdown:</strong> Parameterisation of the telegram that is sent when ICON is shut down</li>
 </ul>
 <p>Parameterisation of the telegrams:  </p>
-<p>{[BuildRuleName]{|[AttributeName=AttributeValue]};}</p>
+<p><strong>{[BuildRuleName]{|[AttributeName=AttributeValue]};}</strong></p>
+<hr>
 <h2 id="message-dispatcher">Message Dispatcher</h2>
 <p>A MessageDispatcher Module can broadcast an input message to various sinks.</p>
 <hr>
@@ -2367,8 +2374,22 @@ namespace ICON.Communication.Modules.Adapters
 <pre><code class="lang-html">&lt;ICONModule Name=&quot;SocketManager&quot; Assembly=&quot;SocketManagement.dll&quot;&gt;
     &lt;Section Type=&quot;Spooler&quot; \&gt;
 &lt;/ICONModule&gt;
-</code></pre><hr>
-<h1 id="a-data-transport-sequence-in-icon">A Data Transport Sequence in ICON</h1>
+</code></pre><h2 id="example-of-a-data-mirror">Example of a data mirror</h2>
+<pre><code class="lang-html">&lt;ICONConfig&gt;
+    &lt;ICONProtocols&gt;
+        &lt;ICONStandardProtocol ImplementingClass=&quot;???_ICONMsgFactory&quot; /&gt;
+    &lt;/ICONProtocols&gt;
+    &lt;ICONModuleInstances&gt;
+        &lt;ICONModule Name=&quot;EndPoint1&quot; Assembly=&quot;ICONSocket.dll&quot;&gt;
+            &lt;ConfigValue name=&quot;Sink&quot; type=&quot;string&quot;&gt;EndPoint1&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;Protocol&quot; type=&quot;string&quot;&gt;Tcp&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;Host&quot; type=&quot;string&quot;&gt;127.0.0.1&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;Port&quot; type=&quot;string&quot;&gt;1101&lt;/ConfigValue&gt;
+            &lt;ConfigValue name=&quot;ProtImpl&quot; type=&quot;string&quot;&gt;???_ICONMsgFactory&lt;/ConfigValue&gt;
+        &lt;/ICONModule&gt;       
+    &lt;/ICONModuleInstances&gt;
+&lt;/ICONConfig&gt;
+</code></pre><p>This configuration allows you to connect with an other implementation tho this sever and all sent messages will be sent back.</p>
 <hr>
 <h1 id="installation">Installation</h1>
 <p>The installation requires</p>

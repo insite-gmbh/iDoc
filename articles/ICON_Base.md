@@ -1232,18 +1232,18 @@ The MemBasedMsgSink GUI behaves in exactly the same way as described in the prev
 
 
 ---  
-#Module#
+# Module #
 
 <a name="Module"></a>
 
 ---  
-##ICONSocket.dll##
+## ICONSocket.dll ##
 
 <a name="ICONSocket.dll"></a>
 An ICON Socket depicts a fix in the configuration parameterised active(client) or passive(server) socket connection. As of now, the TCP and RFC1006 protocol are supported. 
 
 ---  
-###Configuration###
+### Configuration ###
 
   
 ```html
@@ -1309,6 +1309,7 @@ The SocketManager can dynamically create active sockets, if the attributes neces
 ---  
 ###Configuration###
 
+For detailed description of the parameters see [ICONSocket](#ICONSocket.dll)
   
 ```html
 <ICONModule Name="Socketmanager" Assembly="SocketManagement.dll">
@@ -1318,6 +1319,9 @@ The SocketManager can dynamically create active sockets, if the attributes neces
     <ConfigValue name="Sink" type="string"></ConfigValue>
     <ConfigValue name="MaxHandshakeTime" type="int">10000</ConfigValue>
     <ConfigValue name="MaxIdleTime" type="int">60</ConfigValue>
+    <ConfigValue name="FrameSize" type="int">1024</ConfigValue>
+    <ConfigValue name="KeepAliveTime" type="int">0</ConfigValue>
+    <ConfigValue name="KeepAliveInterval" type="int">0</ConfigValue>
     <ConfigValue name="SpoolAlways" type="bool">false</ConfigValue>
     <Section Type="Spooler" \>
     <PassiveEndPoint Name="Listener" \>
@@ -2408,7 +2412,7 @@ A router can be switched between any modules and is used to distribute messages 
 ---  
 ###DataBasedMsgRouter###
 
-This router decides which sink a message is to be forwarded to based on the message data (date of the attribute or payload, ...)
+This router decides, based on the message data (date of the attribute or payload, ...), which sink receives the message.
   
 ```html
 <ICONModule Name="BandRooter" Assembly="DataBasedMsgRouter.dll">
@@ -2429,22 +2433,22 @@ This router decides which sink a message is to be forwarded to based on the mess
 
 Meaning of the individual parameters:
 
-*  **Sink:** A default sink can be specified here, so if none of the sinks defined in "Sinks" apply, the the telegram will be forwarded to the default sink
-*  **DeleteNonRoutableMsg:** Suppresses the error which occurs if no default sink is specified and no sink can be determined
+*  **Sink:** A default sink can be specified here, so if none of the sinks defined in "Sinks" apply, then the telegram will be forwarded to the default sink.
+*  **DeleteNonRoutableMsg:** Suppresses the error which occurs if no default sink is specified and no sink can be determined.
 
 
 ![warning_icon.png](../images/warning_icon.png)
  The telegrams which do not find any sinks are then deleted.
 
 ---  
-####Sinks####
- 
-  
+#### Sinks ####
 
+This section contains the selection criteria for each sink. It is also possible to specify a sink more then once, to use more different criteria for it.
   
 ```html
 <Section Type="Sinks" Data="Payload=114,2">
     <Sink name="Band1" >'01'</Sink>
+    <Sink name="Band1" >'03'</Sink>
     <Sink name="Band2" >'02'</Sink>
 </Section>
 ```  
@@ -2458,12 +2462,12 @@ Meaning of the individual parameters:
 
 
 ---  
-##JisImpl.dll##
+## JisImpl.dll ##
 
 The JisImpl handles the functionality of JISReceive as a seperate module here.
 
 ---  
-###Configuration###
+### Configuration ###
 
   
 ```html
@@ -2741,9 +2745,9 @@ Meaning of the individual parameters:
 
 Parameterisation of the telegrams:  
 
-\{[BuildRuleName]\{|[AttributeName=AttributeValue]\};\}
+**\{[BuildRuleName]\{|[AttributeName=AttributeValue]\};\}**
 
-
+--- 
 ##Message Dispatcher##
 
 A MessageDispatcher Module can broadcast an input message to various sinks.
@@ -3133,20 +3137,33 @@ If, for example, a passive endpoint is instantiated, an active partner will cert
 ```  
 
 
+##Example of a data mirror##
 
----  
-#A Data Transport Sequence in ICON#
+```html
+<ICONConfig>
+    <ICONProtocols>
+        <ICONStandardProtocol ImplementingClass="???_ICONMsgFactory" />
+    </ICONProtocols>
+    <ICONModuleInstances>
+        <ICONModule Name="EndPoint1" Assembly="ICONSocket.dll">
+            <ConfigValue name="Sink" type="string">EndPoint1</ConfigValue>
+            <ConfigValue name="Protocol" type="string">Tcp</ConfigValue>
+            <ConfigValue name="Host" type="string">127.0.0.1</ConfigValue>
+            <ConfigValue name="Port" type="string">1101</ConfigValue>
+            <ConfigValue name="ProtImpl" type="string">???_ICONMsgFactory</ConfigValue>
+        </ICONModule>       
+    </ICONModuleInstances>
+</ICONConfig>
+```  
 
-	
+This configuration allows you to connect with an other implementation tho this sever and all sent messages will be sent back.
 
 ---  
 #Installation#
 
 The installation requires
 
-  1.   Microsoft .NET Framework 3.5 Servicepack 1
-  2.   Microsoft Visual C++ 2008 Redistributable Package
-  3.   Microsoft Visual C++ 2010 Redistributable Package
+  1.   Microsoft .NET Framework 4
 
 to be installed and available on the destination under Windows.  
 

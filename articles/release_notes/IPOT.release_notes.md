@@ -1,6 +1,7 @@
 # IPOT - Release Notes
 |date      | change description |
 |----------|:-------------|
+|25.10.2017| Trim condition input data. Installed new InacS7.dll |
 |22.08.2017| Some updates to support WebInterface. |
 |07.10.2016| fixed a bug in condition editor (removing items) |
 |16.08.2016| after an event, actions can also be executed for other objects, now the notifyAction can also fire all the other events |

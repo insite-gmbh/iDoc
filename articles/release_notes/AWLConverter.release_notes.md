@@ -1,6 +1,7 @@
 # AWLConverter - Release Notes
 |date      | change description |
 |----------|:-------------|
+|30.08.2017|Minor fixes in NGTemplate |
 |19.04.2017|Fixed a bug in instance db creation and also in iDatTemplate.|
 |15.02.2017|Optimized parasave converter. Now we also remove items which are in backup and filter.|
 |07.02.2017|Change data type of TimeOfDay to Span instead of DateTime and update InacSM reference to newer version.|

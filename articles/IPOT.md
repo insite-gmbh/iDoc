@@ -520,9 +520,33 @@ This action allows the WindowParent to be reset to the Desktop.
 <tr><td>eventActions </td><td> See *IPOTObject*</td></tr>
 </table>
 
-  
 
+###PLCConnectionString###
 
+We support a couple of plc access types in IPOT. You can configure these types by setting up the Access Type property in the connection string:
+```xml
+<plcConnctionString>Access Type=InacS7;Data Source=127.0.0.1:102,0,2;Receive Timeout=5000;Connection Type=Pg;</plcConnctionString>
+```
+
+Other types are only supported, if the dll is installed in the binary folder.
+
+* InacS7 (default): Data Source [IP]:[PORT],[RACK],[SLOT]
+* LibNoDave: Data Source [IP]:[PORT],[RACK],[SLOT]
+* Snap7: Data Source [IP],[RACK],[SLOT]
+
+| Parameter | DefaultValue | | Description |    
+| --------- |:------------:|:-----------:| :-----------|    
+| Connection  |  Type = Pg |  | Type of the PLC connection (used by PLC). (Pg, Op, Basic) |
+| Receive Timeout | 5000 |  | Maximum of time a receive could last. |
+| Connect Timeout | 5000 |  | Maximum of time a connect could last. |
+| Reconnect | false | | If connection get's lost try reconnect. |
+| KeepAliveTime | 0u | | https://technet.microsoft.com/en-us/library/cc957549.aspx |
+| KeepAliveInterval | 0u | | https://technet.microsoft.com/en-us/library/cc957548.aspx |
+| PduSize | 960 | | Maximum size we could handle in one datagram (will be updated while connect handshake) |
+| Sleeptime After Max Pending Calls Reached | 5 | | As the name says, in ms. |
+| Maximum Parallel Jobs | 1 | | Used by Simatic Manager -> best performance with 1 |
+| Maximum Parallel Calls | 4 | | Used by InacS7 to controll the parallelity |
+| Use Threads | true | | Used by InacS7 and means TaskCreationOptions.LongRunning if is set to true |
 
 ---  
 ##IPOTObject##

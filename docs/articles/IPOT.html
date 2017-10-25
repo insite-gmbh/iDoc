@@ -393,9 +393,93 @@ An action can be parameterised on any events. Even a chain of actions is possibl
 </table>
 
 
-
-
-
+<h3 id="plcconnectionstring">PLCConnectionString</h3>
+<p>We support a couple of plc access types in IPOT. You can configure these types by setting up the Access Type property in the connection string:</p>
+<pre><code class="lang-xml">&lt;plcConnctionString&gt;Access Type=InacS7;Data Source=127.0.0.1:102,0,2;Receive Timeout=5000;Connection Type=Pg;&lt;/plcConnctionString&gt;
+</code></pre><p>Other types are only supported, if the dll is installed in the binary folder.</p>
+<ul>
+<li>InacS7 (default): Data Source [IP]:[PORT],[RACK],[SLOT]</li>
+<li>LibNoDave: Data Source [IP]:[PORT],[RACK],[SLOT]</li>
+<li>Snap7: Data Source [IP],[RACK],[SLOT]</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th style="text-align:center">DefaultValue</th>
+<th style="text-align:center"></th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Connection</td>
+<td style="text-align:center">Type = Pg</td>
+<td style="text-align:center"></td>
+<td style="text-align:left">Type of the PLC connection (used by PLC). (Pg, Op, Basic)</td>
+</tr>
+<tr>
+<td>Receive Timeout</td>
+<td style="text-align:center">5000</td>
+<td style="text-align:center"></td>
+<td style="text-align:left">Maximum of time a receive could last.</td>
+</tr>
+<tr>
+<td>Connect Timeout</td>
+<td style="text-align:center">5000</td>
+<td style="text-align:center"></td>
+<td style="text-align:left">Maximum of time a connect could last.</td>
+</tr>
+<tr>
+<td>Reconnect</td>
+<td style="text-align:center">false</td>
+<td style="text-align:center"></td>
+<td style="text-align:left">If connection get&#39;s lost try reconnect.</td>
+</tr>
+<tr>
+<td>KeepAliveTime</td>
+<td style="text-align:center">0u</td>
+<td style="text-align:center"></td>
+<td style="text-align:left"><a href="https://technet.microsoft.com/en-us/library/cc957549.aspx">https://technet.microsoft.com/en-us/library/cc957549.aspx</a></td>
+</tr>
+<tr>
+<td>KeepAliveInterval</td>
+<td style="text-align:center">0u</td>
+<td style="text-align:center"></td>
+<td style="text-align:left"><a href="https://technet.microsoft.com/en-us/library/cc957548.aspx">https://technet.microsoft.com/en-us/library/cc957548.aspx</a></td>
+</tr>
+<tr>
+<td>PduSize</td>
+<td style="text-align:center">960</td>
+<td style="text-align:center"></td>
+<td style="text-align:left">Maximum size we could handle in one datagram (will be updated while connect handshake)</td>
+</tr>
+<tr>
+<td>Sleeptime After Max Pending Calls Reached</td>
+<td style="text-align:center">5</td>
+<td style="text-align:center"></td>
+<td style="text-align:left">As the name says, in ms.</td>
+</tr>
+<tr>
+<td>Maximum Parallel Jobs</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center"></td>
+<td style="text-align:left">Used by Simatic Manager -&gt; best performance with 1</td>
+</tr>
+<tr>
+<td>Maximum Parallel Calls</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center"></td>
+<td style="text-align:left">Used by InacS7 to controll the parallelity</td>
+</tr>
+<tr>
+<td>Use Threads</td>
+<td style="text-align:center">true</td>
+<td style="text-align:center"></td>
+<td style="text-align:left">Used by InacS7 and means TaskCreationOptions.LongRunning if is set to true</td>
+</tr>
+</tbody>
+</table>
 <hr>
 <h2 id="ipotobject">IPOTObject</h2>
 <p>This object is required for parameterising and managing an application. All settings and events for the application can be parameterised here.</p>
@@ -561,7 +645,7 @@ An action can be parameterised on any events. Even a chain of actions is possibl
 
 
 
-<yamlheader start="711" end="715">##Configuration &amp;#60;log4net&amp;#62;##
+<yamlheader start="735" end="739">##Configuration &amp;#60;log4net&amp;#62;##
 
 For setting options and additional information on this 3rd party component, please refer to page: &lt;http://logging.apache.org/log4net/&gt;</yamlheader><h1 id="installation">Installation</h1>
 <p>This requires that </p>

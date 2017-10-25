@@ -1,6 +1,7 @@
 # WinCCAlarmServer - Release Notes
 |date      | change description |
 |----------|:-------------|
+|25.10.2017| Upgraded to .netFramework4.0; Changed internal Ticker from WinForms Ticker to CycleExecutor |
 |28.07.2016| Update SeqId after reset, add some traces and try to handle lastSeqId bug.|
 |18.03.2016| Added new parameter to configure filter.|
 |26.05.2015| Create internal error message if we have a broken database connection, and handle also not PLC markers .|

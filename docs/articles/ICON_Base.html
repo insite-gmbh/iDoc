@@ -337,6 +337,31 @@ The system will slow down considerably when activating tracing due to the huge n
 <li><strong>ConnectAsLeanServer:</strong> If true, <em>BrowseServerAddressSpace</em>, <em>ItemProperties</em> and <em>ConnectionPoints</em> are deactivated (e.g. necessary for WinAC-OPC-Server)</li>
 </ul>
 <hr>
+<h3 id="specific-parameters-for-access-via-inacs7">Specific Parameters for Access via InacS7</h3>
+<pre><code class="lang-html">&lt;ICONPlc Name=&quot;MainPLC&quot;&gt;
+    &lt;ConfigValue name=&quot;InacS7RemoteHost&quot; type=&quot;string&quot;&gt;192.168.0.145&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;InacS7Port&quot; type=&quot;int&quot;&gt;102&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;InacS7RackNr&quot; type=&quot;int&quot;&gt;0&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;InacS7SlotNr&quot; type=&quot;int&quot;&gt;2&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;InacS7Timeout&quot; type=&quot;int&quot;&gt;5000&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;InacS7EnableDebug&quot; type=&quot;int&quot;&gt;false&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;InacS7AllowParallelJobs&quot; type=&quot;int&quot;&gt;false&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;InacS7AllowAsyncJobs&quot; type=&quot;int&quot;&gt;false&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;InacS7UseThreads&quot; type=&quot;int&quot;&gt;true&lt;/ConfigValue&gt;
+    ...
+&lt;/ICONPlc&gt;
+</code></pre><ul>
+<li><strong>InacS7RemoteHost:</strong> Address of the remote control (= local IP)</li>
+<li><strong>InacS7Port:</strong> Port of the PLC</li>
+<li><strong>InacS7RackNr:</strong> Rack number</li>
+<li><strong>InacS7SlotNr:</strong> Slot number</li>
+<li><strong>InacS7Timeout:</strong> Timeout</li>
+<li><strong>InacS7EnableDebug:</strong> Write debugmessages.</li>
+<li><strong>InacS7AllowParallelJobs:</strong> Allow parallel communication with the plc  (Multiple read and writes at the same time).</li>
+<li><strong>InacS7AllowAsyncJobs:</strong> Work asynchronious.</li>
+<li><strong>InacS7UseThreads:</strong> Start a Thread for each call.</li>
+</ul>
+<hr>
 <h3 id="specific-parameters-for-acces-via-aglink">Specific Parameters for Acces via AGLink</h3>
 <pre><code class="lang-html">&lt;ICONPlc Name=&quot;MainPLC&quot;&gt;
     &lt;ConfigValue name=&quot;AGLinkDevice&quot; type=&quot;int&quot;&gt;0&lt;/ConfigValue&gt;

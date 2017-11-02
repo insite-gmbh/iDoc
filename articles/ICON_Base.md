@@ -380,6 +380,37 @@ Here, any number of PLCs can be configured. Enter a section for each PLC.
 *  **ConnectAsLeanServer:** If true, *BrowseServerAddressSpace*, *ItemProperties* and *ConnectionPoints* are deactivated (e.g. necessary for WinAC-OPC-Server)
 
 ---  
+###Specific Parameters for Access via InacS7###
+
+  
+```html
+<ICONPlc Name="MainPLC">
+    <ConfigValue name="InacS7RemoteHost" type="string">192.168.0.145</ConfigValue>
+    <ConfigValue name="InacS7Port" type="int">102</ConfigValue>
+    <ConfigValue name="InacS7RackNr" type="int">0</ConfigValue>
+    <ConfigValue name="InacS7SlotNr" type="int">2</ConfigValue>
+    <ConfigValue name="InacS7Timeout" type="int">5000</ConfigValue>
+    <ConfigValue name="InacS7EnableDebug" type="int">false</ConfigValue>
+    <ConfigValue name="InacS7AllowParallelJobs" type="int">false</ConfigValue>
+    <ConfigValue name="InacS7AllowAsyncJobs" type="int">false</ConfigValue>
+    <ConfigValue name="InacS7UseThreads" type="int">true</ConfigValue>
+    ...
+</ICONPlc>
+```  
+
+
+*  **InacS7RemoteHost:** Address of the remote control (= local IP)
+*  **InacS7Port:** Port of the PLC
+*  **InacS7RackNr:** Rack number
+*  **InacS7SlotNr:** Slot number
+*  **InacS7Timeout:** Timeout
+*  **InacS7EnableDebug:** Write debugmessages.
+*  **InacS7AllowParallelJobs:** Allow parallel communication with the plc  (Multiple read and writes at the same time).
+*  **InacS7AllowAsyncJobs:** Work asynchronious.
+*  **InacS7UseThreads:** Start a Thread for each call.
+
+
+---  
 ###Specific Parameters for Acces via AGLink###
 
   

@@ -74,268 +74,339 @@
 <thead>
 <tr>
 <th>date</th>
+<th>version</th>
 <th style="text-align:left">change description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
+<td>11.01.2018</td>
+<td>v1.0.6</td>
+<td style="text-align:left">Optimized Spooler performance (RefreshOnlyIfVisible, Locking, ...) and fixed some Bugs. Improve Socket logging and fixes bugs. Added handling of opc deactivate items exception when ICON is shutting down.</td>
+</tr>
+<tr>
 <td>03.08.2017</td>
+<td></td>
 <td style="text-align:left">Added new configuration parameter (SuppressAcknowledge). Allow more the one clients with RFC1006-Server.</td>
 </tr>
 <tr>
 <td>06.04.2017</td>
+<td></td>
 <td style="text-align:left">Fixed a bug where spooler refresh remains locked, when WorkOnNextMessageFromSpooler throws a exception.</td>
 </tr>
 <tr>
 <td>23.03.2017</td>
+<td></td>
 <td style="text-align:left">Added locking to PayloadconverterAdapter to avoid the problem when sending more then one message at the same time.</td>
 </tr>
 <tr>
 <td>16.03.2017</td>
+<td></td>
 <td style="text-align:left">Added automatic handling of corrupt spooler files.</td>
 </tr>
 <tr>
 <td>16.02.2017</td>
+<td></td>
 <td style="text-align:left">Created lock free implementation for the slot cache by using concurrent dictionary. Added new Global config value to activate sendslotchages in UI.</td>
 </tr>
 <tr>
 <td>10.02.2017</td>
+<td></td>
 <td style="text-align:left">Fixed a bug in BMW01 protocol implementation. (In some messages the byteorder was not correct.)</td>
 </tr>
 <tr>
 <td>03.01.2017</td>
+<td></td>
 <td style="text-align:left">Some changes to allow payloadconverter to handle multiple messages at the same time.</td>
 </tr>
 <tr>
 <td>20.12.2016</td>
+<td></td>
 <td style="text-align:left">Add GlobalSetting to setup ProcessPriority.</td>
 </tr>
 <tr>
 <td>07.12.2016</td>
+<td></td>
 <td style="text-align:left">Moved background task to own thread.</td>
 </tr>
 <tr>
 <td>21.11.2016</td>
+<td></td>
 <td style="text-align:left">Small fixes on ForceLastConnection.</td>
 </tr>
 <tr>
 <td>18.11.2016</td>
+<td></td>
 <td style="text-align:left">Update InacS7 and add new functionality called ForceLastConnection</td>
 </tr>
 <tr>
 <td>12.10.2016</td>
+<td></td>
 <td style="text-align:left">Remove lock in message dispatcher because we get messages from both sides. Update to new InacS7 version.</td>
 </tr>
 <tr>
 <td>11.10.2016</td>
+<td></td>
 <td style="text-align:left">Update alarmhandling for PDEM to set the correct alarmcount in all cases.</td>
 </tr>
 <tr>
 <td>13.09.2016</td>
+<td></td>
 <td style="text-align:left">change unlocking mechanism of middle module (e.g. Payloadconverter).</td>
 </tr>
 <tr>
 <td>12.08.2016</td>
+<td></td>
 <td style="text-align:left">Fixed bug in edit spooler item (JIS Receive).</td>
 </tr>
 <tr>
 <td>02.08.2016</td>
+<td></td>
 <td style="text-align:left">add config property AddIdentifierToMirror for JIS Receive, to add the identifier length to the mirror entry length.</td>
 </tr>
 <tr>
 <td>13.07.2016</td>
+<td></td>
 <td style="text-align:left">remove locking from Payloadconverter, because of incompatibility to older configurations.</td>
 </tr>
 <tr>
 <td>21.06.2016</td>
+<td></td>
 <td style="text-align:left">Fix culture in alamserver interface to de-DE, becuase winccAlarmserver use allways this format.</td>
 </tr>
 <tr>
 <td>09.06.2016</td>
+<td></td>
 <td style="text-align:left">add receive puffer to serial module, to handle more than one receive to detect data</td>
 </tr>
 <tr>
 <td>09.05.2016</td>
+<td></td>
 <td style="text-align:left">Refactoring, Handling of Socket Send-Timout ....</td>
 </tr>
 <tr>
 <td>13.04.2016</td>
+<td></td>
 <td style="text-align:left">Refactoring, Log improving, Array Usage optimization in protocol detector, ....</td>
 </tr>
 <tr>
 <td>12.04.2016</td>
+<td></td>
 <td style="text-align:left">Reimplemented singleton timer to use tasks instead of threads, do much resource cleaning to avoid increasing memory with ModuleInstanceManager, update of inacS7 and fix a bug in the InacS7Accessor</td>
 </tr>
 <tr>
 <td>06.04.2016</td>
+<td></td>
 <td style="text-align:left">Fixed a bug in Payloadconverter, improve logging, add SocketSendBufferSize as global configuration value</td>
 </tr>
 <tr>
 <td>30.03.2016</td>
+<td></td>
 <td style="text-align:left">optimize logging, use dispatcher for EventDistributor, bug fix in ModuleManager</td>
 </tr>
 <tr>
 <td>25.03.2016</td>
+<td></td>
 <td style="text-align:left">more locking changes and spooler bit delegation for JIS</td>
 </tr>
 <tr>
 <td>18.03.2016</td>
+<td></td>
 <td style="text-align:left">fix message locking after error problem</td>
 </tr>
 <tr>
 <td>14.03.2016</td>
+<td></td>
 <td style="text-align:left">optimize logging in ModuleInstanceManager, bug fix LatencyMonitor and SpecialBeginReceiveThread</td>
 </tr>
 <tr>
 <td>22.02.2016</td>
+<td></td>
 <td style="text-align:left">bug fix in singleton timer</td>
 </tr>
 <tr>
 <td>18.02.2016</td>
+<td></td>
 <td style="text-align:left">add SocketTimeout as global configuration value</td>
 </tr>
 <tr>
 <td>03.02.2016</td>
+<td></td>
 <td style="text-align:left">bug fix in repeatMsgs of history spooler</td>
 </tr>
 <tr>
 <td>21.12.2015</td>
+<td></td>
 <td style="text-align:left">bug fixes in Slottracker and connection GUI, because of a problem with ModulInstancemanager; integration of INACS7</td>
 </tr>
 <tr>
 <td>10.12.2015</td>
+<td></td>
 <td style="text-align:left">update LibNoDave and Snap7 because of bug fixes</td>
 </tr>
 <tr>
 <td>18.11.2015</td>
+<td></td>
 <td style="text-align:left">update MsgDispatcher -&gt; NoAck Attribut</td>
 </tr>
 <tr>
 <td>05.10.2015</td>
+<td></td>
 <td style="text-align:left">update MsgDispatcher and Socket</td>
 </tr>
 <tr>
 <td>30.09.2015</td>
+<td></td>
 <td style="text-align:left">extended Exception-handling for Socket</td>
 </tr>
 <tr>
 <td>16.09.2015</td>
+<td></td>
 <td style="text-align:left">on a send slot reset the ack code will now set to 0</td>
 </tr>
 <tr>
 <td>15.09.2015</td>
+<td></td>
 <td style="text-align:left">added mote ReceiveBehavior (EatData and ReadAndReset)</td>
 </tr>
 <tr>
 <td>18.08.2015</td>
+<td></td>
 <td style="text-align:left">added socket latency measurement (Globals and Socket) -&gt; beta state</td>
 </tr>
 <tr>
 <td>13.08.2015</td>
+<td></td>
 <td style="text-align:left">bug fix if Dns-Resolve is not working (now better cpu usage</td>
 </tr>
 <tr>
 <td>07.08.2015</td>
+<td></td>
 <td style="text-align:left">suppress exception of splash screen</td>
 </tr>
 <tr>
 <td>21.07.2015</td>
+<td></td>
 <td style="text-align:left">on msg retry we now reset the $$Created$$ attribute, to avoid stop processing by msg delay time</td>
 </tr>
 <tr>
 <td>16.07.2015</td>
+<td></td>
 <td style="text-align:left">bug fix when you use server socket with more the one clients</td>
 </tr>
 <tr>
 <td>10.07.2015</td>
+<td></td>
 <td style="text-align:left">created new module MessageDispatcher -&gt; beta version</td>
 </tr>
 <tr>
 <td>03.07.2015</td>
+<td></td>
 <td style="text-align:left">raise Icon to .Net40, remove old RFC1006 implementation</td>
 </tr>
 <tr>
 <td>01.06.2015</td>
+<td></td>
 <td style="text-align:left">change socket close if receive buffer will not processed</td>
 </tr>
 <tr>
 <td>26.05.2015</td>
+<td></td>
 <td style="text-align:left">add log entries for JISSendImpl, added AlarmServerConnectionStateMsg</td>
 </tr>
 <tr>
 <td>30.04.2015</td>
+<td></td>
 <td style="text-align:left">added lock for pending messages, improve logging, trim for ModulInstanceManager keys</td>
 </tr>
 <tr>
 <td>24.04.2015</td>
+<td></td>
 <td style="text-align:left">set MaxReceiveBuffer size from 16k to 64k,  bug fix UD_Protocol -&gt; error on big data</td>
 </tr>
 <tr>
 <td>21.04.2015</td>
+<td></td>
 <td style="text-align:left">improve logging in alarm inheritance</td>
 </tr>
 <tr>
 <td>10.04.2015</td>
+<td></td>
 <td style="text-align:left">improve logging for JISImpl -&gt; On a put into lay-and band-spooler the data will be logged</td>
 </tr>
 <tr>
 <td>01.04.2015</td>
+<td></td>
 <td style="text-align:left">added new option (UseSocketBasedReceiveThread) to give every socket his own DataReceive Thread -&gt; Reason: sometimes data are available in the buffe but no callback was fired.</td>
 </tr>
 <tr>
 <td>26.03.2015</td>
+<td></td>
 <td style="text-align:left">extend exception handling for check running process, the Eventdistributor did not wait for ack anymore, ICONSocket write a debug output if data are available in the buffer an would not be processed</td>
 </tr>
 <tr>
 <td>13.03.2015</td>
+<td></td>
 <td style="text-align:left">performance optimization in diagnosis view of send and receive slots</td>
 </tr>
 <tr>
 <td>09.03.2015</td>
+<td></td>
 <td style="text-align:left">bug fix in DataBasedInstanceManager shutdown</td>
 </tr>
 <tr>
 <td>06.03.2015</td>
+<td></td>
 <td style="text-align:left">change GetIpAddress for plc access to remove blanks from the address, bug fixes and optimization of DataBasedMsgRooter and DataBasedInstanceManager</td>
 </tr>
 <tr>
 <td>03.03.2015</td>
+<td></td>
 <td style="text-align:left">optimize data extractor for DataBasedMsgRouter and DataBasedModuleInstanceManager</td>
 </tr>
 <tr>
 <td>17.02.2015</td>
+<td></td>
 <td style="text-align:left">optimize S7AlarmManagement to handle parallel Graph7 alarms</td>
 </tr>
 <tr>
 <td>03.02.2015</td>
+<td></td>
 <td style="text-align:left">optimize socket error handling to prevent stop of receive routine once an internal error occurred</td>
 </tr>
 <tr>
 <td>12.12.2014</td>
+<td></td>
 <td style="text-align:left">optimize JIS module to use it as FIFO</td>
 </tr>
 <tr>
 <td>20.11.2014</td>
+<td></td>
 <td style="text-align:left">extend S7AlarmManagement to use it with prodiag.ini</td>
 </tr>
 <tr>
 <td>13.11.2014</td>
+<td></td>
 <td style="text-align:left">optimize JIS module to use it as FIFO</td>
 </tr>
 <tr>
 <td>21.10.2014</td>
+<td></td>
 <td style="text-align:left">added new module for dynamic module instantiation, and add step chain support for pdiag.xml</td>
 </tr>
 <tr>
 <td>04.08.2014</td>
+<td></td>
 <td style="text-align:left">added support for &quot;Includes&quot; to separate the configuration file into different files</td>
 </tr>
 <tr>
 <td>29.07.2014</td>
+<td></td>
 <td style="text-align:left">added state bar to show some states and password levels</td>
 </tr>
 <tr>
 <td>14.07.2014</td>
+<td></td>
 <td style="text-align:left">implementation of RFC1006 in C#, switch to Visual Studio 2013</td>
 </tr>
 </tbody>

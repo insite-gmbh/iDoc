@@ -99,7 +99,7 @@
 <h2 id="database-connection-not-ok-and-no-client-connection">Database connection not ok and no client connection</h2>
 <p><img src="../images/WinCC_dbnok_noclient.png" alt="WinCC_dbnok_noclient.png"></p>
 <hr>
-<h2 id="database-conenction-ok-and-a-client-is-connected">Database conenction ok and a client is connected</h2>
+<h2 id="database-connection-ok-and-a-client-is-connected">Database connection ok and a client is connected</h2>
 <p><img src="../images/WinCC_dbok_client_connected.png" alt="WinCC_dbok_client_connected.png"></p>
 <hr>
 <h1 id="files">Files</h1>
@@ -125,6 +125,10 @@
 <p>Example of the above server port:</p>
 <pre><code class="lang-html">&lt;TCPIPPort&gt;7777&lt;/TCPIPPort&gt;
 </code></pre><hr>
+<h4 id="allow-disabling-of-db-polling-in-ui">Allow disabling of DB polling in UI</h4>
+<p><strong>Element:</strong> AllowDisablingOfDBPolling  </p>
+<p><strong>Default:</strong> true</p>
+<hr>
 <h4 id="connection-string-to-the-database">Connection string to the database</h4>
 <p><strong>Element:</strong> DBConnectionString  </p>
 <p><strong>Default:</strong> Data Source=.$\backslash\backslash$SQLEXPRESS;Initial Catalog=ARCHIV1;Integrated Security=True</p>
@@ -228,6 +232,10 @@
 <p><strong>Element:</strong> UseUnfilteredQuery  </p>
 <p><strong>Default:</strong> false</p>
 <hr>
+<h4 id="use-a-databsae-filter-by-time-and-seqid-to-determine-unhandled-entries">Use a databsae filter by time and seqid to determine unhandled entries</h4>
+<p><strong>Element:</strong> UseChronologicalFilter  </p>
+<p><strong>Default:</strong> (depending on UseChronologicalOrderToVerifyMsgPair )</p>
+<hr>
 <h4 id="number-of-days-the-log-files-are-kept-before-being-deleted">Number of days the log files are kept before being deleted</h4>
 <p><strong>Element:</strong> DaysToKeepLogfiles  </p>
 <p><strong>Default:</strong> 7</p>
@@ -247,19 +255,6 @@
 <p>A log file is generated in the current work directory daily - the name of the file is made up as follows:</p>
 <p>LOG&#95;YYYYMMDD.txt  </p>
 <p>(<strong>Y</strong>ear, <strong>M</strong>onth, <strong>D</strong>ay)</p>
-<hr>
-<h1 id="change-directory">Change Directory</h1>
-<table><tr><th>Author </th><th> Date </th><th> Remarks</th></tr>
-<tr><td>Karsten Gorkow </td><td> May 2009 </td><td> First version</td></tr>
-<tr><td>Karsten Gorkow </td><td> May 2011 </td><td> Changes from the past updates retained:</td></tr>
-<tr><td>   </td><td>    </td><td> Format of the configuration file</td></tr>
-<tr><td>   </td><td>    </td><td> Flags for controlling the allocation of leaving</td></tr>
-<tr><td>   </td><td>    </td><td> message for the pending alarm</td></tr>
-<tr><td>Karsten Gorkow </td><td> September 2011 </td><td> Default values for configuration file corrected</td></tr>
-<tr><td>   </td><td>    </td><td> Missing configuration entries documented</td></tr>
-<tr><td>Karsten Gorkow </td><td> November 2013 </td><td> Flags added for detecting pending alarms</td></tr>
-</table>
-
 
             </article>
           </div>

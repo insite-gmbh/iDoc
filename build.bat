@@ -5,7 +5,7 @@ set DOCFXVERSION=""
 if not exist %programdata%\chocolatey\choco.exe GOTO CHECK
 powershell (gi %programdata%\chocolatey\bin\docfx.exe).versioninfo.FileVersion>> "temp.txt"
 set /p DOCFXVERSION=<"temp.txt"
-del "temp.txt"
+del temp.txt
 
 :CHECK
 	IF "%DOCFXVERSION%" == "2.12.1.0" GOTO RUN

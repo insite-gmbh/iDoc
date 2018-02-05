@@ -48,7 +48,7 @@ The application window essentially represents four main states:
 
 
 ---  
-##Database conenction ok and a client is connected##
+##Database connection ok and a client is connected##
 
 
 
@@ -98,6 +98,15 @@ Example of the above server port:
 ```html
 <TCPIPPort>7777</TCPIPPort>
 ```  
+
+---  
+####Allow disabling of DB polling in UI####
+   
+
+**Element:** AllowDisablingOfDBPolling  
+
+**Default:** true
+
 
 
 ---  
@@ -317,6 +326,14 @@ This field can be filled with a semicolon-separated list of message numbers. (e.
 **Default:** false
 
 ---  
+####Use a databsae filter by time and seqid to determine unhandled entries####
+   
+
+**Element:** UseChronologicalFilter  
+
+**Default:** (depending on UseChronologicalOrderToVerifyMsgPair )
+
+---  
 ####Number of days the log files are kept before being deleted####
    
 
@@ -359,18 +376,5 @@ LOG&#95;YYYYMMDD.txt
 
 (**Y**ear, **M**onth, **D**ay)
 
----  
-#Change Directory#
-
-<table><tr><th>Author </th><th> Date </th><th> Remarks</th></tr>
-<tr><td>Karsten Gorkow </td><td> May 2009 </td><td> First version</td></tr>
-<tr><td>Karsten Gorkow </td><td> May 2011 </td><td> Changes from the past updates retained:</td></tr>
-<tr><td>   </td><td>    </td><td> Format of the configuration file</td></tr>
-<tr><td>   </td><td>    </td><td> Flags for controlling the allocation of leaving</td></tr>
-<tr><td>   </td><td>    </td><td> message for the pending alarm</td></tr>
-<tr><td>Karsten Gorkow </td><td> September 2011 </td><td> Default values for configuration file corrected</td></tr>
-<tr><td>   </td><td>    </td><td> Missing configuration entries documented</td></tr>
-<tr><td>Karsten Gorkow </td><td> November 2013 </td><td> Flags added for detecting pending alarms</td></tr>
-</table>
 
   

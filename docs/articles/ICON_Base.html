@@ -1233,7 +1233,7 @@ The GUI can be configured as follows:</p>
     &lt;ConfigValue name=&quot;Offset&quot; type=&quot;int&quot;&gt;0&lt;/ConfigValue&gt;   
       &lt;ConfigValue name=&quot;WaitingFallingAckReady&quot; type=&quot;bool&quot;&gt;false&lt;/ConfigValue&gt;    
         &lt;ConfigValue name=&quot;MaxHandshakeTime&quot; type=&quot;int&quot;&gt;10000&lt;/ConfigValue&gt;
-        &lt;ConfigValue name=&quot;MaxPrefetchByteCount&quot; type=&quot;int&quot;&gt;100&lt;/ConfigValue&gt;
+        &lt;ConfigValue name=&quot;MaxPrefetchByteCount&quot; type=&quot;int&quot;&gt;200&lt;/ConfigValue&gt;
       &lt;ConfigValue name=&quot;MsgExecutionMode&quot; 
 type=&quot;string&quot;&gt;ThreadBasedExecutor&lt;/ConfigValue&gt;
 
@@ -1255,7 +1255,7 @@ type=&quot;string&quot;&gt;ThreadBasedExecutor&lt;/ConfigValue&gt;
 <li><strong>WaitingFallingAckReady:</strong> If set to true, the handshake cycle waits until the ReadyAck falls</li>
 <li><strong>WaitForFallingAck:</strong> like WaitingFallingAckReady</li>
 <li><strong>MaxHandshakeTime:</strong> </li>
-<li><strong>MaxPrefetchByteCount:</strong> Specifies the minimum length of the first bytes when reading from a DB. Default value = 0</li>
+<li><strong>MaxPrefetchByteCount:</strong> Specifies the minimum length of the bytes when reading from a DB. e.g. If DB length is 300 and requested lenght is 6, 200 bytes will be read. But if DB lenght is 100 and request is 6, then only 100 bytes will be read.</li>
 <li><strong>MsgExecutionMode:</strong> Possible Specifications:            <ul>
 <li>AsynchronousExecutionPattern        </li>
 <li>ThreadPoolBasedExecutor        </li>

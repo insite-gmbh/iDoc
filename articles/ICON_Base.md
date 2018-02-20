@@ -1735,7 +1735,7 @@ This module should be used if the PLC should serve as a data source. Herem a tra
     <ConfigValue name="Offset" type="int">0</ConfigValue>   
       <ConfigValue name="WaitingFallingAckReady" type="bool">false</ConfigValue>    
         <ConfigValue name="MaxHandshakeTime" type="int">10000</ConfigValue>
-        <ConfigValue name="MaxPrefetchByteCount" type="int">100</ConfigValue>
+        <ConfigValue name="MaxPrefetchByteCount" type="int">200</ConfigValue>
       <ConfigValue name="MsgExecutionMode" 
 type="string">ThreadBasedExecutor</ConfigValue>
 
@@ -1759,7 +1759,7 @@ Meaning of the individual parameters:
 *  **WaitingFallingAckReady:** If set to true, the handshake cycle waits until the ReadyAck falls
 *  **WaitForFallingAck:** like WaitingFallingAckReady
 *  **MaxHandshakeTime:** 
-*  **MaxPrefetchByteCount:** Specifies the minimum length of the first bytes when reading from a DB. Default value = 0
+*  **MaxPrefetchByteCount:** Specifies the minimum length of the bytes when reading from a DB. e.g. If DB length is 300 and requested lenght is 6, 200 bytes will be read. But if DB lenght is 100 and request is 6, then only 100 bytes will be read.
 *  **MsgExecutionMode:** Possible Specifications:			
   *  AsynchronousExecutionPattern		
   *  ThreadPoolBasedExecutor		

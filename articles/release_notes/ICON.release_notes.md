@@ -1,6 +1,7 @@
 # ICON Base Release Notes
 |date      |version      | change description |
 |----------|-------------|:-------------|
+|20.02.2018|v1.0.7| Splitted Ui Slotcache from one per instance to one per page, because with multible connections it is possible to have different DB lenght for the same db number. Added db size cache entry only if read if read is ok.  Added InacS7 V1.0.14.  |
 |11.01.2018|v1.0.6| Optimized Spooler performance (RefreshOnlyIfVisible, Locking, ...) and fixed some Bugs. Improve Socket logging and fixes bugs. Added handling of opc deactivate items exception when ICON is shutting down. |
 |03.08.2017|| Added new configuration parameter (SuppressAcknowledge). Allow more the one clients with RFC1006-Server.
 |06.04.2017|| Fixed a bug where spooler refresh remains locked, when WorkOnNextMessageFromSpooler throws a exception.

@@ -2446,9 +2446,9 @@ A router can be switched between any modules and is used to distribute messages 
 This router decides, based on the message data (date of the attribute or payload, ...), which sink receives the message.
   
 ```html
-<ICONModule Name="BandRooter" Assembly="DataBasedMsgRouter.dll">
+<ICONModule Name="BandRouter" Assembly="DataBasedMsgRouter.dll">
     <ConfigValue name="DispatchMode" type="int">2</ConfigValue>
-    <ConfigValue name="Name" type="string">BandRooter</ConfigValue>
+    <ConfigValue name="Name" type="string">BandRouter</ConfigValue>
     <ConfigValue name="Sink" type="string"></ConfigValue>
     <ConfigValue name="DeleteNonRoutableMsg" type="bool">false</ConfigValue>
     <Section Type="Sinks" Data="Payload=114,2">
@@ -2669,7 +2669,7 @@ An Instance Manage Module can change the parameters during runtime. This means t
     <ConfigValue name="DispatchMode" type="int">2</ConfigValue>
     <ConfigValue name="Name" type="string">ModuleInstanceManager</ConfigValue>
     <ConfigValue name="Sink" type="string">TCPSinkPlc</ConfigValue>
-    <ConfigValue name="Router" type="string">MsgRooter</ConfigValue>
+    <ConfigValue name="Router" type="string">MsgRouter</ConfigValue>
     <Section Type="Instances" StartStopShutdown="Payload=114,2:'01':'02':'03'" >
         <Parameter name="id">Payload=116,2</Parameter>
         <Parameter name="offset">Payload=117,1</Parameter>
@@ -2753,7 +2753,7 @@ This EventDistributor distributes the events in the form of telegrams. Thus, for
 <ICONModule Name="EventDistributor"  Assembly="TcpEventDistributor.dll">
     <ConfigValue name="DispatchMode" type="int">2</ConfigValue>
     <ConfigValue name="Name" type="string">EventDistributor</ConfigValue>
-    <ConfigValue name="Sink" type="string">MsgRooter</ConfigValue>
+    <ConfigValue name="Sink" type="string">MsgRouter</ConfigValue>
     <ConfigValue name="ProtImpl" type="string"></ConfigValue>
     <ConfigValue name="Start" 
                  type="string">Icon|Ziel='HEAD   '|Payload='UP';</ConfigValue>

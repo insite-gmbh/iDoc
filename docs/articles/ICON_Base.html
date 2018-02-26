@@ -172,8 +172,8 @@
              %property{methodName} (%file:%line) (%property{modulePath})%newline&quot; /&gt;
         &lt;/layout&gt;
     &lt;/appender&gt;
-    &lt;appender name=&quot;PDEMConverter&quot; type=&quot;log4net.Appender.RollingFileAppender&quot;&gt;
-        &lt;file value=&quot;PDEMConverter.log&quot; /&gt;
+    &lt;appender name=&quot;Converter&quot; type=&quot;log4net.Appender.RollingFileAppender&quot;&gt;
+        &lt;file value=&quot;Converter.log&quot; /&gt;
         &lt;appendToFile value=&quot;true&quot; /&gt;
         &lt;immediateFlush value=&quot;true&quot; /&gt;
         &lt;maxSizeRollBackups value=&quot;-1&quot; /&gt;
@@ -192,9 +192,9 @@
         &lt;level value=&quot;ALL&quot; /&gt;
         &lt;appender-ref ref=&quot;RollingFile&quot; /&gt;
     &lt;/root&gt;
-    &lt;logger name=&quot;PDEMConverter&quot;&gt;
+    &lt;logger name=&quot;Converter&quot;&gt;
         &lt;level value=&quot;ALL&quot; /&gt;
-        &lt;appender-ref ref=&quot;PDEMConverter&quot; /&gt;
+        &lt;appender-ref ref=&quot;Converter&quot; /&gt;
     &lt;/logger&gt;
   &lt;/log4net&gt;
 &lt;/ICONConfig&gt;
@@ -297,7 +297,7 @@ The system will slow down considerably when activating tracing due to the huge n
     &lt;ICONHosts&gt;
         &lt;Host IP=&quot;192.168.0.144&quot; Name=&quot;rg&quot; comment=&quot;my local machine&quot; /&gt;
         &lt;Host IP=&quot;192.168.0.156&quot; Name=&quot;traceability&quot; comment=&quot;database machine&quot; /&gt;
-        &lt;Host IP=&quot;127.0.0.1&quot; Name=&quot;PDEM&quot; comment=&quot;the PDEM host&quot; /&gt;
+        &lt;Host IP=&quot;127.0.0.1&quot; Name=&quot;SYSX&quot; comment=&quot;the SYSX host&quot; /&gt;
         &lt;Host IP=&quot;192.168.0.145&quot; Name=&quot;YMNB7TEST&quot; comment=&quot;localhost&quot; /&gt;        
     &lt;/ICONHosts&gt;
 &lt;/ICONNetwork&gt;
@@ -440,67 +440,67 @@ The system will slow down considerably when activating tracing due to the huge n
        &lt;__TIME&gt;HH:mm:ss&lt;/__TIME&gt;
    &lt;/FormatStrings&gt;
    &lt;RequestParseRule minLength=&quot;56&quot;   maxLength=500 &gt;
-       &lt;Member name=&quot;Quelle&quot; offset=&quot;0&quot; type=&quot;nchar(8)&quot;/&gt;
-       &lt;Member name=&quot;Ziel&quot; offset=&quot;8&quot; type=&quot;nchar(8)&quot;/&gt;
-       &lt;Member name=&quot;Kennung&quot; offset=&quot;16&quot; type=&quot;nchar(4)&quot; value=&quot;&#39;XYZ-&#39;&quot;
+       &lt;Member name=&quot;Source&quot; offset=&quot;0&quot; type=&quot;nchar(8)&quot;/&gt;
+       &lt;Member name=&quot;Destination&quot; offset=&quot;8&quot; type=&quot;nchar(8)&quot;/&gt;
+       &lt;Member name=&quot;ProtocolIdentifier&quot; offset=&quot;16&quot; type=&quot;nchar(4)&quot; value=&quot;&#39;XYZ-&#39;&quot;
                isIdentifier=&quot;true&quot;/&gt;
        &lt;Member name=&quot;Type&quot; offset=&quot;20&quot; type=&quot;nchar(4)&quot; /&gt;
        &lt;Member name=&quot;Version&quot; offset=&quot;24&quot; type=&quot;nchar(2)&quot;  value=&quot;&#39;5 &#39;&quot;
                isIdentifier=&quot;true&quot;/&gt;
-       &lt;Member name=&quot;Zeichencodierung&quot; offset=&quot;26&quot; type=&quot;nchar(20)&quot;
+       &lt;Member name=&quot;Encoding&quot; offset=&quot;26&quot; type=&quot;nchar(20)&quot;
                value=&quot;&#39;ISO-8859-1 &#39;&quot; isIdentifier=&quot;true&quot;/&gt;
-       &lt;Member name=&quot;LfdNr&quot; offset=&quot;46&quot; type=&quot;nchar(4)&quot;/&gt;
+       &lt;Member name=&quot;OngoingNumber&quot; offset=&quot;46&quot; type=&quot;nchar(4)&quot;/&gt;
        &lt;Member name=&quot;PayloadLength&quot; offset=&quot;50&quot; type=&quot;nchar(6)&quot;
                markerType = &quot;headerEnd&quot;/&gt;
        &lt;Member name=&quot;Payload&quot; offset=&quot;56&quot; type=&quot;binary($PayloadLength)&quot;/&gt;
    &lt;/RequestParseRule&gt;
    &lt;DefaultResponseBuildRule&gt;
-       &lt;Member name=&quot;QQuelle&quot;  offset=&quot;0&quot;    type=&quot;nchar(8)&quot;  value=&quot;$Ziel&quot;/&gt;
-       &lt;Member name=&quot;QZiel&quot;    offset=&quot;8&quot;    type=&quot;nchar(8)&quot;  value=&quot;$Quelle&quot;/&gt;
-       &lt;Member name=&quot;QKennung&quot; offset=&quot;16&quot;   type=&quot;nchar(4)&quot;  value=&quot;&#39;XYZ-&#39;&quot;/&gt;
+       &lt;Member name=&quot;QSource&quot;  offset=&quot;0&quot;    type=&quot;nchar(8)&quot;  value=&quot;$Destination&quot;/&gt;
+       &lt;Member name=&quot;QDestination&quot;    offset=&quot;8&quot;    type=&quot;nchar(8)&quot;  value=&quot;$Source&quot;/&gt;
+       &lt;Member name=&quot;QProtocolIdentifier&quot; offset=&quot;16&quot;   type=&quot;nchar(4)&quot;  value=&quot;&#39;XYZ-&#39;&quot;/&gt;
        &lt;Member name=&quot;QType&quot;    offset=&quot;20&quot;   type=&quot;nchar(4)&quot;  value=&quot;&#39;QUIT&#39;&quot;/&gt;
        &lt;Member name=&quot;QVersion&quot; offset=&quot;24&quot;   type=&quot;nchar(2)&quot;  value=&quot;$Version&quot;/&gt;
-       &lt;Member name=&quot;QZeichencodierung&quot; offset=&quot;26&quot; type=&quot;nchar(20)&quot;
-               value=&quot;$Zeichencodierung&quot;/&gt;
-       &lt;Member name=&quot;QLfdNr&quot;   offset=&quot;46&quot;   type=&quot;nchar(4)&quot;  value=&quot;$LfdNr&quot;/&gt;
+       &lt;Member name=&quot;QEncoding&quot; offset=&quot;26&quot; type=&quot;nchar(20)&quot;
+               value=&quot;$Encoding&quot;/&gt;
+       &lt;Member name=&quot;QOngoingNumber&quot;   offset=&quot;46&quot;   type=&quot;nchar(4)&quot;  value=&quot;$OngoingNumber&quot;/&gt;
        &lt;Member name=&quot;AckPayloadLength&quot; offset=&quot;50&quot;     type=&quot;numeric(-6)&quot; 
                value=&quot;&#39;23    &#39;&quot; markerType = &quot;headerEnd&quot;/&gt;/&gt;
        &lt;Member name=&quot;QStatus&quot; offset=&quot;56&quot;   type=&quot;numeric(-4)&quot; value=&quot;$__ERROR&quot;/&gt;
-       &lt;Member name=&quot;QDatum&quot;  offset=&quot;60&quot;   type=&quot;nchar(10)&quot;  value=&quot;$__DATE&quot;/&gt;
-       &lt;Member name=&quot;QZeit&quot;   offset=&quot;70&quot;   type=&quot;nchar(8)&quot;   value=&quot;$__TIME&quot;/&gt;
-       &lt;Member name=&quot;QPruefsumme&quot;  offset=&quot;78&quot;
+       &lt;Member name=&quot;QDate&quot;  offset=&quot;60&quot;   type=&quot;nchar(10)&quot;  value=&quot;$__DATE&quot;/&gt;
+       &lt;Member name=&quot;QTime&quot;   offset=&quot;70&quot;   type=&quot;nchar(8)&quot;   value=&quot;$__TIME&quot;/&gt;
+       &lt;Member name=&quot;QChecksum&quot;  offset=&quot;78&quot;
                type=&quot;binary(1)&quot;  value=&quot;$__CHKSUM_1&quot;/&gt;
    &lt;/DefaultResponseBuildRule&gt;
    &lt;AckParseRule minLength=&quot;56&quot;&gt;
-       &lt;Member name=&quot;Quelle&quot;  offset=&quot;0&quot;     type=&quot;nchar(8)&quot; value=&quot;$Ziel&quot;/&gt;
-       &lt;Member name=&quot;Ziel&quot;  offset=&quot;8&quot;       type=&quot;nchar(8)&quot; value=&quot;$Quelle&quot;/&gt;
-       &lt;Member name=&quot;Kennung&quot;  offset=&quot;16&quot;   type=&quot;nchar(4)&quot;   value=&quot;&#39;XYZ-&#39;&quot;
+       &lt;Member name=&quot;Source&quot;  offset=&quot;0&quot;     type=&quot;nchar(8)&quot; value=&quot;$Destination&quot;/&gt;
+       &lt;Member name=&quot;Destination&quot;  offset=&quot;8&quot;       type=&quot;nchar(8)&quot; value=&quot;$Source&quot;/&gt;
+       &lt;Member name=&quot;ProtocolIdentifier&quot;  offset=&quot;16&quot;   type=&quot;nchar(4)&quot;   value=&quot;&#39;XYZ-&#39;&quot;
                isIdentifier=&quot;true&quot;/&gt;
        &lt;Member name=&quot;Type&quot;   offset=&quot;20&quot;     type=&quot;nchar(4)&quot;     value=&quot;&#39;QUIT&#39;&quot;
                isIdentifier=&quot;true&quot;/&gt;
        &lt;Member name=&quot;Version&quot; offset=&quot;24&quot;    type=&quot;nchar(2)&quot;    value=&quot;&#39;5 &#39;&quot;
                isIdentifier=&quot;true&quot;/&gt;
-       &lt;Member name=&quot;Zeichencodierung&quot; offset=&quot;26&quot;   type=&quot;nchar(20)&quot;
-               value=&quot;$Zeichencodierung&quot;/&gt;
-       &lt;Member name=&quot;LfdNr&quot;  offset=&quot;46&quot;     type=&quot;nchar(4)&quot; value=&quot;$LfdNr&quot;/&gt;
+       &lt;Member name=&quot;Encoding&quot; offset=&quot;26&quot;   type=&quot;nchar(20)&quot;
+               value=&quot;$Encoding&quot;/&gt;
+       &lt;Member name=&quot;OngoingNumber&quot;  offset=&quot;46&quot;     type=&quot;nchar(4)&quot; value=&quot;$OngoingNumber&quot;/&gt;
        &lt;Member name=&quot;PayloadLength&quot;  offset=&quot;50&quot;        type=&quot;nchar(6)&quot;
                value=&quot;&#39;23    &#39;&quot; isIdentifier=&quot;true&quot;/&gt;
        &lt;Member name=&quot;Status&quot;       offset=&quot;56&quot;        type=&quot;numeric(-4)&quot; /&gt;
-       &lt;Member name=&quot;Datum&quot;        offset=&quot;60&quot;        type=&quot;nchar(10)&quot;/&gt;
-       &lt;Member name=&quot;Uhrzeit&quot;      offset=&quot;70&quot;        type=&quot;nchar(8)&quot;/&gt;
-       &lt;Member name=&quot;Pruefsumme&quot;   offset=&quot;78&quot;        type=&quot;binary(1)&quot;/&gt;
+       &lt;Member name=&quot;Date&quot;        offset=&quot;60&quot;        type=&quot;nchar(10)&quot;/&gt;
+       &lt;Member name=&quot;Time&quot;      offset=&quot;70&quot;        type=&quot;nchar(8)&quot;/&gt;
+       &lt;Member name=&quot;Checksum&quot;   offset=&quot;78&quot;        type=&quot;binary(1)&quot;/&gt;
    &lt;/AckParseRule&gt;
    &lt;RequestBuildRule&gt;
-       &lt;Member name=&quot;Quelle&quot;  offset=&quot;0&quot;   type=&quot;nchar(8)&quot;/&gt;
-       &lt;Member name=&quot;Ziel&quot;  offset=&quot;8&quot; type=&quot;nchar(8)&quot;/&gt;
-       &lt;Member name=&quot;Kennung&quot; offset=&quot;16&quot; type=&quot;nchar(8)&quot;  value=&quot;&#39;XYZ-DATA&#39;&quot;/&gt;
+       &lt;Member name=&quot;Source&quot;  offset=&quot;0&quot;   type=&quot;nchar(8)&quot;/&gt;
+       &lt;Member name=&quot;Destination&quot;  offset=&quot;8&quot; type=&quot;nchar(8)&quot;/&gt;
+       &lt;Member name=&quot;ProtocolIdentifier&quot; offset=&quot;16&quot; type=&quot;nchar(8)&quot;  value=&quot;&#39;XYZ-DATA&#39;&quot;/&gt;
        &lt;Member name=&quot;Version&quot; offset=&quot;24&quot; type=&quot;nchar(2)&quot; value=&quot;&#39;5 &#39;&quot;/&gt;
-       &lt;Member name=&quot;Zeichencodierung&quot; offset=&quot;26&quot; type=&quot;nchar(20)&quot; 
+       &lt;Member name=&quot;Encoding&quot; offset=&quot;26&quot; type=&quot;nchar(20)&quot; 
                value=&quot;&#39;US-ASCII            &#39;&quot;/&gt;
-       &lt;Member name=&quot;LfdNr&quot;      offset=&quot;46&quot;  type=&quot;nchar(4)&quot; value=&quot;$__SEQCNT&quot;/&gt;
+       &lt;Member name=&quot;OngoingNumber&quot;      offset=&quot;46&quot;  type=&quot;nchar(4)&quot; value=&quot;$__SEQCNT&quot;/&gt;
        &lt;Member name=&quot;PayloadLength&quot; offset=&quot;50&quot;  type=&quot;numeric(-6)&quot;/&gt;
        &lt;Member name=&quot;Payload&quot;      offset=&quot;56&quot;     type=&quot;binary($PayloadLength)&quot;/&gt;
-       &lt;Member name=&quot;Pruefsumme&quot;     type=&quot;binary(1)&quot;  value=&quot;$__CHKSUM_1&quot;/&gt;
+       &lt;Member name=&quot;Checksum&quot;     type=&quot;binary(1)&quot;  value=&quot;$__CHKSUM_1&quot;/&gt;
    &lt;/RequestBuildRule&gt;
 &lt;/ICONUserDefinedProtocol&gt;
 </code></pre><hr>
@@ -609,7 +609,7 @@ The system will slow down considerably when activating tracing due to the huge n
 <hr>
 <h2 id="spooling">Spooling</h2>
 <p><a name="Spooling"></a>
-The spooling can be activated at <a href="#ICONSocket.dll">ICONSockets</a>, AlarmPDEMConverter and at <a href="#MemBasedMsgSink.dll">MemBasedMsgSink.dll</a>, etc. An active spooling accepts the data transfer from the source and forwards this decoupled to the sink. The spooling can be configured in multiple ways. See following chapter.</p>
+The spooling can be activated at <a href="#ICONSocket.dll">ICONSockets</a>, AlarmConverter and at <a href="#MemBasedMsgSink.dll">MemBasedMsgSink.dll</a>, etc. An active spooling accepts the data transfer from the source and forwards this decoupled to the sink. The spooling can be configured in multiple ways. See following chapter.</p>
 <hr>
 <h3 id="configuration-spooler">Configuration Spooler</h3>
 <p>Example:</p>
@@ -650,7 +650,7 @@ A manual spooler does not execute its Puts automatically but only when triggered
 <h3 id="spooler-persistor">Spooler Persistor</h3>
 <p><a name="Spooler_Persistor"></a></p>
 <pre><code class="lang-html">&lt;Section Type=&quot;Persistor&quot;&gt;
-    &lt;ConfigValue name=&#39;Filename&#39; type=&#39;string&#39;&gt;SpoolerDatei&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&#39;Filename&#39; type=&#39;string&#39;&gt;SpoolerFile&lt;/ConfigValue&gt;
     &lt;ConfigValue name=&quot;ReorgFragmentationFactor&quot; type=&quot;int&quot;&gt;0&lt;/ConfigValue&gt;
     &lt;ConfigValue name=&quot;FlushWatchdogTimeout&quot; type=&quot;int&quot;&gt;5000&lt;/ConfigValue&gt;
 &lt;/Section&gt;
@@ -663,13 +663,13 @@ A manual spooler does not execute its Puts automatically but only when triggered
 <h2 id="multi-xml-configurations">Multi-XML Configurations</h2>
 <p>You can use the (Root) section &quot;&#60;ICONConfigs&#62;&quot; to keep multiple configurations in a single XML file. Add all your existing configurations to the XML file as follows:</p>
 <pre><code class="lang-html">&lt;ICONConfigs&gt;
-    &lt;ICONConfig Name = &#39;Meine Konfig 1&#39;&gt;
+    &lt;ICONConfig Name = &#39;My Config1&#39;&gt;
     &lt;/ICONConfig&gt;
-    &lt;ICONConfig Name = &#39;Meine Konfig 2&#39;&gt;
+    &lt;ICONConfig Name = &#39;My Config2&#39;&gt;
     &lt;/ICONConfig&gt;
-    &lt;ICONConfig Name = &#39;Meine Konfig 3&#39;&gt;
+    &lt;ICONConfig Name = &#39;My Config3&#39;&gt;
     &lt;/ICONConfig&gt;
-    &lt;ICONConfig Name = &#39;Meine Konfig X&#39;&gt;
+    &lt;ICONConfig Name = &#39;My ConfigX&#39;&gt;
     &lt;/ICONConfig&gt;
 &lt;/ICONConfigs&gt;
 </code></pre><p>ICON will then offer you a selection window when starting, where you can execute the required configuration.</p>
@@ -732,7 +732,7 @@ As stated above, deleting this &quot;&#42;&#42;&#42;&quot;-row will delete all m
 <pre><code class="lang-html">&lt;Section Type=&quot;GUI&quot;&gt;
     &lt;ConfigValue name=&quot;UserLevelModule&quot; type=&quot;string&quot;&gt;PLCUserLevel&lt;/ConfigValue&gt;
     &lt;ConfigValue name=&quot;Group&quot; type=&quot;string&quot;&gt;Spooler&lt;/ConfigValue&gt;
-    &lt;ConfigValue name=&quot;Label&quot; type=&quot;string&quot;&gt;Mein Spooler&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;Label&quot; type=&quot;string&quot;&gt;My Spooler&lt;/ConfigValue&gt;
     &lt;ConfigValue name=&#39;ShowItemsFirst&#39; type=&#39;int&#39;&gt;25&lt;/ConfigValue&gt;
     &lt;ConfigValue name=&#39;ShowItemsLast&#39; type=&#39;int&#39;&gt;15&lt;/ConfigValue&gt;
     &lt;ConfigValue name=&#39;AllowSpoolerItemUpDownMove&#39; type=&#39;bool&#39;&gt;false&lt;/ConfigValue&gt;
@@ -742,9 +742,9 @@ As stated above, deleting this &quot;&#42;&#42;&#42;&quot;-row will delete all m
     &lt;ConfigValue name=&#39;EditItemValue&#39; type=&#39;string&#39;&gt;&lt;/ConfigValue&gt;
     &lt;ConfigValue name=&quot;FirstColumnIsRowNumber&quot; type=&quot;bool&quot;&gt;false&lt;/ConfigValue&gt;
     &lt;Section Type=&quot;Columns&quot;&gt;
-        &lt;Column name=&quot;!1AnzahlTeile&quot; data=&quot;Payload=112,2&quot; /&gt;
+        &lt;Column name=&quot;!1NumberOfPars&quot; data=&quot;Payload=112,2&quot; /&gt;
         &lt;Column name=&quot;!2Band&quot; data=&quot;Payload=114,2&quot; /&gt;
-        &lt;Column name=&quot;!3Motornummer&quot; data=&quot;Payload=116,10&quot; /&gt;
+        &lt;Column name=&quot;!3Enginenumber&quot; data=&quot;Payload=116,10&quot; /&gt;
         &lt;Column name=&quot;ZZData&quot; data=&quot;Payload=116&quot; /&gt;
      &lt;/Section&gt;
 &lt;/Section&gt;
@@ -862,7 +862,7 @@ In the upper left corner the configured &quot;Label&quot; is displayed for ident
 An ICON Socket depicts a fix in the configuration parameterised active(client) or passive(server) socket connection. As of now, the TCP and RFC1006 protocol are supported. </p>
 <hr>
 <h3 id="configuration-1">Configuration</h3>
-<pre><code class="lang-html">&lt;ICONModule Name=&quot;MeinSocket&quot; Assembly=&quot;ICONSocket.dll&quot;&gt;
+<pre><code class="lang-html">&lt;ICONModule Name=&quot;MySocket&quot; Assembly=&quot;ICONSocket.dll&quot;&gt;
     &lt;ConfigValue name=&quot;Protocol&quot; type=&quot;string&quot;&gt;Tcp&lt;/ConfigValue&gt;
     &lt;ConfigValue name=&quot;Host&quot; type=&quot;string&quot;&gt;*&lt;/ConfigValue&gt;
     &lt;ConfigValue name=&quot;Port&quot; type=&quot;string&quot;&gt;0&lt;/ConfigValue&gt;
@@ -1006,12 +1006,12 @@ The serial ports are only started if these also exist when starting ICON. This m
 This module should be used if the Plc should serve as a data sink. Here, a transfer handshake takes place with the Plc.</p>
 <hr>
 <h3 id="configuration-4">Configuration</h3>
-<pre><code class="lang-html">&lt;ICONModule Name=&quot;Datenkonsument&quot; Assembly=&quot;PLCBasedMsgImpl.dll&quot;&gt;
+<pre><code class="lang-html">&lt;ICONModule Name=&quot;DataSink&quot; Assembly=&quot;PLCBasedMsgImpl.dll&quot;&gt;
     &lt;ConfigValue name=&quot;MaxHandshakeTime&quot; type=&quot;int&quot;&gt;10000&lt;/ConfigValue&gt;
     &lt;ConfigValue name=&quot;DoMultiSlotHandshake&quot; type=&quot;bool&quot;&gt;true&lt;/ConfigValue&gt;
     &lt;Section Type=&quot;Slot&quot;&gt;
         &lt;ConfigValue name=&quot;Impl&quot; type=&quot;string&quot;&gt;PlcBasedMsgImpl.dll&lt;/ConfigValue&gt;
-        &lt;ConfigValue name=&quot;Name&quot; type=&quot;string&quot;&gt;PDEMSinkPlc&lt;/ConfigValue&gt;
+        &lt;ConfigValue name=&quot;Name&quot; type=&quot;string&quot;&gt;SYSXSinkPlc&lt;/ConfigValue&gt;
         &lt;ConfigValue name=&quot;Accessor&quot; type=&quot;string&quot;&gt;MainOPC&lt;/ConfigValue&gt;
         &lt;ConfigValue name=&quot;ObservedGroupUpdateRate&quot; type=&quot;int&quot;&gt;20&lt;/ConfigValue&gt;
         &lt;ConfigValue name=&quot;Poll&quot; type=&quot;int&quot;&gt;1&lt;/ConfigValue&gt;
@@ -1223,9 +1223,9 @@ The GUI can be configured as follows:</p>
 <pre><code class="lang-html">&lt;ICONModule Name=&quot;Datenlieferant&quot; Assembly=&quot;MemBasedMsgSource.dll&quot;&gt;
     &lt;ConfigValue name=&quot;OnMessageCreated&quot; type=&quot;string&quot;&gt;AModul&lt;/ConfigValue&gt;
     &lt;ConfigValue name=&quot;DispatchMode&quot; type=&quot;int&quot;&gt;2&lt;/ConfigValue&gt;
-    &lt;ConfigValue name=&quot;Sink&quot; type=&quot;string&quot;&gt;PDEMPassiveEndPoint&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;Sink&quot; type=&quot;string&quot;&gt;SYSXPassiveEndPoint&lt;/ConfigValue&gt;
     &lt;ConfigValue name=&quot;Impl&quot; type=&quot;string&quot;&gt;PlcBasedMsgImpl.dll&lt;/ConfigValue&gt;
-    &lt;ConfigValue name=&quot;Name&quot; type=&quot;string&quot;&gt;PDEMSourcePlc&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;Name&quot; type=&quot;string&quot;&gt;SYSXSourcePlc&lt;/ConfigValue&gt;
     &lt;ConfigValue name=&quot;Accessor&quot; type=&quot;string&quot;&gt;MainOPC&lt;/ConfigValue&gt;
     &lt;ConfigValue name=&quot;ObservedGroupUpdateRate&quot; type=&quot;int&quot;&gt;20&lt;/ConfigValue&gt;
     &lt;ConfigValue name=&quot;Poll&quot; type=&quot;int&quot;&gt;1&lt;/ConfigValue&gt;
@@ -1375,7 +1375,7 @@ type=&quot;string&quot;&gt;ThreadBasedExecutor&lt;/ConfigValue&gt;
 
 <hr>
 <h5 id="extended-configuration-1">Extended Configuration</h5>
-<pre><code class="lang-html">&lt;ICONModule Name=&quot;Datenlieferant&quot; Assembly=&quot;MemBasedMsgSource.dll&quot;&gt;
+<pre><code class="lang-html">&lt;ICONModule Name=&quot;DataSource&quot; Assembly=&quot;MemBasedMsgSource.dll&quot;&gt;
 ...
     &lt;ConfigValue name=&quot;Slots&quot; type=&quot;int&quot;&gt;10&lt;/ConfigValue&gt;
 ...
@@ -1515,7 +1515,7 @@ type=&quot;string&quot;&gt;ThreadBasedExecutor&lt;/ConfigValue&gt;
 
 <hr>
 <h5 id="extended-configuration-2">Extended Configuration</h5>
-<pre><code class="lang-html">&lt;ICONModule Name=&quot;Datenlieferant&quot; Assembly=&quot;MemBasedMsgSource.dll&quot;&gt;
+<pre><code class="lang-html">&lt;ICONModule Name=&quot;DataSource&quot; Assembly=&quot;MemBasedMsgSource.dll&quot;&gt;
 ...
 &lt;ConfigValue name=&quot;AliveFlagCycle&quot; type=&quot;int&quot;&gt;1000&lt;/ConfigValue&gt;
       &lt;ConfigValue name=&quot;DataDb&quot; type=&quot;int&quot;&gt;0&lt;/ConfigValue&gt;
@@ -1626,7 +1626,7 @@ type=&quot;string&quot;&gt;ThreadBasedExecutor&lt;/ConfigValue&gt;
             &lt;Section Type=&quot;File&quot;&gt;
                 &lt;ConfigValue name=&quot;Filemoniker&quot; type=&quot;string&quot;&gt;AT&lt;/ConfigValue&gt;
                 &lt;ConfigValue name=&quot;Filename&quot; 
-                  type=&quot;string&quot;&gt;C:\ICON\Config\AntFtsSequenz.txt&lt;/ConfigValue&gt;
+                  type=&quot;string&quot;&gt;C:\ICON\Config\AntFtsSequence.txt&lt;/ConfigValue&gt;
                 &lt;ConfigValue name=&quot;Separator&quot; type=&quot;string&quot;&gt;|&lt;/ConfigValue&gt;
                 &lt;ConfigValue name=&quot;KeyColumn&quot; type=&quot;string&quot;&gt;7,11&lt;/ConfigValue&gt;
                 &lt;ConfigValue name=&quot;LineSize&quot; type=&quot;int&quot;&gt;60&lt;/ConfigValue&gt;
@@ -1642,7 +1642,7 @@ type=&quot;string&quot;&gt;ThreadBasedExecutor&lt;/ConfigValue&gt;
             &lt;Section Type=&quot;File&quot;&gt;
                 &lt;ConfigValue name=&quot;Filemoniker&quot; type=&quot;string&quot;&gt;A2&lt;/ConfigValue&gt;
                 &lt;ConfigValue name=&quot;Filename&quot; 
-                      type=&quot;string&quot;&gt;C:\ICON\Config\AntFtsSequenz2.txt&lt;/ConfigValue&gt;
+                      type=&quot;string&quot;&gt;C:\ICON\Config\AntFtsSequence2.txt&lt;/ConfigValue&gt;
                 &lt;ConfigValue name=&quot;Separator&quot; type=&quot;string&quot;&gt;|&lt;/ConfigValue&gt;
                 &lt;ConfigValue name=&quot;KeyColumn&quot; type=&quot;string&quot;&gt;5&lt;/ConfigValue&gt;
                 &lt;ConfigValue name=&quot;LineSize&quot; type=&quot;int&quot;&gt;60&lt;/ConfigValue&gt;
@@ -1659,7 +1659,7 @@ type=&quot;string&quot;&gt;ThreadBasedExecutor&lt;/ConfigValue&gt;
             &lt;Section Type=&quot;File&quot;&gt;
                 &lt;ConfigValue name=&quot;Filemoniker&quot; type=&quot;string&quot;&gt;BZ&lt;/ConfigValue&gt;
                 &lt;ConfigValue name=&quot;Filename&quot; 
-                 type=&quot;string&quot;&gt;C:\ICON\Config\FTS_Stationszeiten.txt&lt;/ConfigValue&gt;
+                 type=&quot;string&quot;&gt;C:\ICON\Config\FTS_StationTimes.txt&lt;/ConfigValue&gt;
                 &lt;ConfigValue name=&quot;Separator&quot; type=&quot;string&quot;&gt;;&lt;/ConfigValue&gt;
                 &lt;ConfigValue name=&quot;KeyColumn&quot; type=&quot;string&quot;&gt;0,0&lt;/ConfigValue&gt;
                 &lt;ConfigValue name=&quot;LineSize&quot; type=&quot;int&quot;&gt;300&lt;/ConfigValue&gt;
@@ -1804,9 +1804,9 @@ namespace ICON.Communication.Modules.Adapters
 <hr>
 <h3 id="databasedmsgrouter">DataBasedMsgRouter</h3>
 <p>This router decides, based on the message data (date of the attribute or payload, ...), which sink receives the message.</p>
-<pre><code class="lang-html">&lt;ICONModule Name=&quot;BandRooter&quot; Assembly=&quot;DataBasedMsgRouter.dll&quot;&gt;
+<pre><code class="lang-html">&lt;ICONModule Name=&quot;BandRouter&quot; Assembly=&quot;DataBasedMsgRouter.dll&quot;&gt;
     &lt;ConfigValue name=&quot;DispatchMode&quot; type=&quot;int&quot;&gt;2&lt;/ConfigValue&gt;
-    &lt;ConfigValue name=&quot;Name&quot; type=&quot;string&quot;&gt;BandRooter&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;Name&quot; type=&quot;string&quot;&gt;BandRouter&lt;/ConfigValue&gt;
     &lt;ConfigValue name=&quot;Sink&quot; type=&quot;string&quot;&gt;&lt;/ConfigValue&gt;
     &lt;ConfigValue name=&quot;DeleteNonRoutableMsg&quot; type=&quot;bool&quot;&gt;false&lt;/ConfigValue&gt;
     &lt;Section Type=&quot;Sinks&quot; Data=&quot;Payload=114,2&quot;&gt;
@@ -1982,7 +1982,7 @@ namespace ICON.Communication.Modules.Adapters
     &lt;ConfigValue name=&quot;DispatchMode&quot; type=&quot;int&quot;&gt;2&lt;/ConfigValue&gt;
     &lt;ConfigValue name=&quot;Name&quot; type=&quot;string&quot;&gt;ModuleInstanceManager&lt;/ConfigValue&gt;
     &lt;ConfigValue name=&quot;Sink&quot; type=&quot;string&quot;&gt;TCPSinkPlc&lt;/ConfigValue&gt;
-    &lt;ConfigValue name=&quot;Router&quot; type=&quot;string&quot;&gt;MsgRooter&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;Router&quot; type=&quot;string&quot;&gt;MsgRouter&lt;/ConfigValue&gt;
     &lt;Section Type=&quot;Instances&quot; StartStopShutdown=&quot;Payload=114,2:&#39;01&#39;:&#39;02&#39;:&#39;03&#39;&quot; &gt;
         &lt;Parameter name=&quot;id&quot;&gt;Payload=116,2&lt;/Parameter&gt;
         &lt;Parameter name=&quot;offset&quot;&gt;Payload=117,1&lt;/Parameter&gt;
@@ -2054,16 +2054,16 @@ namespace ICON.Communication.Modules.Adapters
 <pre><code class="lang-html">&lt;ICONModule Name=&quot;EventDistributor&quot;  Assembly=&quot;TcpEventDistributor.dll&quot;&gt;
     &lt;ConfigValue name=&quot;DispatchMode&quot; type=&quot;int&quot;&gt;2&lt;/ConfigValue&gt;
     &lt;ConfigValue name=&quot;Name&quot; type=&quot;string&quot;&gt;EventDistributor&lt;/ConfigValue&gt;
-    &lt;ConfigValue name=&quot;Sink&quot; type=&quot;string&quot;&gt;MsgRooter&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;Sink&quot; type=&quot;string&quot;&gt;MsgRouter&lt;/ConfigValue&gt;
     &lt;ConfigValue name=&quot;ProtImpl&quot; type=&quot;string&quot;&gt;&lt;/ConfigValue&gt;
     &lt;ConfigValue name=&quot;Start&quot; 
-                 type=&quot;string&quot;&gt;Icon|Ziel=&#39;HEAD   &#39;|Payload=&#39;UP&#39;;&lt;/ConfigValue&gt;
+                 type=&quot;string&quot;&gt;Icon|Destination=&#39;HEAD   &#39;|Payload=&#39;UP&#39;;&lt;/ConfigValue&gt;
     &lt;ConfigValue name=&quot;Restart&quot; 
-                 type=&quot;string&quot;&gt;Icon|Ziel=&#39;HEAD   &#39;|Payload=&#39;RS&#39;;&lt;/ConfigValue&gt;
+                 type=&quot;string&quot;&gt;Icon|Destination=&#39;HEAD   &#39;|Payload=&#39;RS&#39;;&lt;/ConfigValue&gt;
     &lt;ConfigValue name=&quot;Stop&quot; 
-                 type=&quot;string&quot;&gt;Icon|Ziel=&#39;HEAD   &#39;|Payload=&#39;DO&#39;;&lt;/ConfigValue&gt;
+                 type=&quot;string&quot;&gt;Icon|Destination=&#39;HEAD   &#39;|Payload=&#39;DO&#39;;&lt;/ConfigValue&gt;
     &lt;ConfigValue name=&quot;Shutdown&quot; 
-                 type=&quot;string&quot;&gt;Icon|Ziel=&#39;HEAD   &#39;|Payload=&#39;SD&#39;;&lt;/ConfigValue&gt;
+                 type=&quot;string&quot;&gt;Icon|Destination=&#39;HEAD   &#39;|Payload=&#39;SD&#39;;&lt;/ConfigValue&gt;
 &lt;/ICONModule&gt;
 </code></pre><p>Meaning of the individual parameters:</p>
 <ul>
@@ -2307,8 +2307,8 @@ namespace ICON.Communication.Modules.Adapters
         &lt;ICONStandardProtocol ImplementingClass=&quot;ISIT01_ICONMsgFactory&quot; /&gt;
     &lt;/ICONProtocols&gt;
     &lt;ICONModuleInstances&gt;
-        &lt;ICONModule Name=&quot;PlcQuelle&quot; Assembly=&quot;MemBasedMsgSource.dll&quot;&gt;
-            &lt;ConfigValue name=&quot;Sink&quot; type=&quot;string&quot;&gt;PlcSenke&lt;/ConfigValue&gt;
+        &lt;ICONModule Name=&quot;PlcSource&quot; Assembly=&quot;MemBasedMsgSource.dll&quot;&gt;
+            &lt;ConfigValue name=&quot;Sink&quot; type=&quot;string&quot;&gt;PlcSink&lt;/ConfigValue&gt;
             &lt;ConfigValue name=&quot;Slots&quot; type=&quot;int&quot;&gt;1&lt;/ConfigValue&gt;
             &lt;ConfigValue name=&quot;Impl&quot; type=&quot;string&quot;&gt;PlcBasedMsgImpl.dll&lt;/ConfigValue&gt;
             &lt;ConfigValue name=&quot;Accessor&quot; type=&quot;string&quot;&gt;MainOPC&lt;/ConfigValue&gt;
@@ -2316,7 +2316,7 @@ namespace ICON.Communication.Modules.Adapters
             &lt;ConfigValue name=&quot;DB&quot; type=&quot;int&quot;&gt;402&lt;/ConfigValue&gt;
             &lt;ConfigValue name=&quot;Offset&quot; type=&quot;int&quot;&gt;0&lt;/ConfigValue&gt;   
         &lt;/ICONModule&gt;
-        &lt;ICONModule Name=&quot;PlcSenke&quot; Assembly=&quot;MemBasedMsgSink.dll&quot;&gt;
+        &lt;ICONModule Name=&quot;PlcSink&quot; Assembly=&quot;MemBasedMsgSink.dll&quot;&gt;
             &lt;Section Type=&quot;Slot&quot;&gt;
                 &lt;ConfigValue name=&quot;Impl&quot; 
                              type=&quot;string&quot;&gt;PlcBasedMsgImpl.dll&lt;/ConfigValue&gt;
@@ -2346,8 +2346,8 @@ namespace ICON.Communication.Modules.Adapters
         &lt;ICONStandardProtocol ImplementingClass=&quot;WACC04_ICONMsgFactory&quot; /&gt;
     &lt;/ICONProtocols&gt;
     &lt;ICONModuleInstances&gt;
-        &lt;ICONModule Name=&quot;PlcQuelle&quot; Assembly=&quot;MemBasedMsgSource.dll&quot;&gt;
-            &lt;ConfigValue name=&quot;Sink&quot; type=&quot;string&quot;&gt;TcpSenke&lt;/ConfigValue&gt;
+        &lt;ICONModule Name=&quot;PlcSource&quot; Assembly=&quot;MemBasedMsgSource.dll&quot;&gt;
+            &lt;ConfigValue name=&quot;Sink&quot; type=&quot;string&quot;&gt;TcpSink&lt;/ConfigValue&gt;
             &lt;ConfigValue name=&quot;Slots&quot; type=&quot;int&quot;&gt;1&lt;/ConfigValue&gt;
             &lt;ConfigValue name=&quot;Impl&quot; type=&quot;string&quot;&gt;PlcBasedMsgImpl.dll&lt;/ConfigValue&gt;
             &lt;ConfigValue name=&quot;Accessor&quot; type=&quot;string&quot;&gt;MainOPC&lt;/ConfigValue&gt;
@@ -2355,7 +2355,7 @@ namespace ICON.Communication.Modules.Adapters
             &lt;ConfigValue name=&quot;DB&quot; type=&quot;int&quot;&gt;402&lt;/ConfigValue&gt;
             &lt;ConfigValue name=&quot;Offset&quot; type=&quot;int&quot;&gt;0&lt;/ConfigValue&gt;   
         &lt;/ICONModule&gt;
-        &lt;ICONModule Name=&quot;TcpSenke&quot; Assembly=&quot;ICONSocket.dll&quot;&gt;
+        &lt;ICONModule Name=&quot;TcpSink&quot; Assembly=&quot;ICONSocket.dll&quot;&gt;
             &lt;ConfigValue name=&quot;Protocol&quot; type=&quot;string&quot;&gt;Tcp&lt;/ConfigValue&gt;
             &lt;ConfigValue name=&quot;Host&quot; type=&quot;string&quot;&gt;192.168.0.144&lt;/ConfigValue&gt;
             &lt;ConfigValue name=&quot;Port&quot; type=&quot;string&quot;&gt;1001&lt;/ConfigValue&gt;
@@ -2382,7 +2382,7 @@ namespace ICON.Communication.Modules.Adapters
         &lt;ICONStandardProtocol ImplementingClass=&quot;WACC04_ICONMsgFactory&quot; /&gt;
     &lt;/ICONProtocols&gt;
     &lt;ICONModuleInstances&gt;
-        &lt;ICONModule Name=&quot;PlcQuelle&quot; Assembly=&quot;MemBasedMsgSource.dll&quot;&gt;
+        &lt;ICONModule Name=&quot;PlcSource&quot; Assembly=&quot;MemBasedMsgSource.dll&quot;&gt;
             &lt;ConfigValue name=&quot;Sink&quot; type=&quot;string&quot;&gt;SocketManager&lt;/ConfigValue&gt;
             &lt;ConfigValue name=&quot;Slots&quot; type=&quot;int&quot;&gt;1&lt;/ConfigValue&gt;
             &lt;ConfigValue name=&quot;Impl&quot; type=&quot;string&quot;&gt;PlcBasedMsgImpl.dll&lt;/ConfigValue&gt;

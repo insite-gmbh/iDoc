@@ -273,6 +273,8 @@ In the Globals section, application-wide settings are performed.
     <ConfigValue name="SocketTimeout" type="int">30000</ConfigValue>
     <ConfigValue name="SocketSendBufferSize" type="int">8192</ConfigValue>
     <ConfigValue name="UseCaches" type="bool">false</ConfigValue>
+    <ConfigValue name="ReportMemoryAndHandlesInterval" type="int">60000</ConfigValue>
+    <ConfigValue name="LogFreeDriveSpace" type="bool">true</ConfigValue>
 </ICONGlobals>
 ```  
 
@@ -314,6 +316,9 @@ also see: <https://msdn.microsoft.com/en-us/library/system.net.sockets.socket.se
 also see <https://msdn.microsoft.com/en-us/library/system.net.sockets.socket.sendbuffersize%28v=vs.110%29.aspx>
 
 * **UseCaches:** Specifies if a data cache is used by the diagnosis pages or not.
+* **ReportMemoryAndHandlesInterval:** Configure the interval on ICON creates a report of used memory and handles.
+* **LogFreeDriveSpace:** If this option is true, ICON writes a Info-Logentry with the free memory of drive.
+
 
 ---  
 ##Configuration &#60;ICONNetwork&#62;##

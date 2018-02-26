@@ -252,6 +252,8 @@ In the Globals section, application-wide settings are performed.</p>
     &lt;ConfigValue name=&quot;SocketTimeout&quot; type=&quot;int&quot;&gt;30000&lt;/ConfigValue&gt;
     &lt;ConfigValue name=&quot;SocketSendBufferSize&quot; type=&quot;int&quot;&gt;8192&lt;/ConfigValue&gt;
     &lt;ConfigValue name=&quot;UseCaches&quot; type=&quot;bool&quot;&gt;false&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;ReportMemoryAndHandlesInterval&quot; type=&quot;int&quot;&gt;60000&lt;/ConfigValue&gt;
+    &lt;ConfigValue name=&quot;LogFreeDriveSpace&quot; type=&quot;bool&quot;&gt;true&lt;/ConfigValue&gt;
 &lt;/ICONGlobals&gt;
 </code></pre><ul>
 <li><strong>LookAndFeel:</strong> Specifies the representation mode of the GUI. The possible values are &quot;Tab&quot; and &quot;Tree&quot;. For more details, see the section <a href="#gui_of_icon">GUI of ICON</a>.</li>
@@ -288,6 +290,8 @@ The system will slow down considerably when activating tracing due to the huge n
 </li>
 <li><p><strong>UseCaches:</strong> Specifies if a data cache is used by the diagnosis pages or not.</p>
 </li>
+<li><strong>ReportMemoryAndHandlesInterval:</strong> Configure the interval on ICON creates a report of used memory and handles.</li>
+<li><strong>LogFreeDriveSpace:</strong> If this option is true, ICON writes a Info-Logentry with the free memory of drive.</li>
 </ul>
 <hr>
 <h2 id="configuration-60iconnetwork62">Configuration &#60;ICONNetwork&#62;</h2>

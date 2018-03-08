@@ -1,6 +1,7 @@
 # IDAT - Release Notes
 |date      | change description |
 |----------|:-------------|
+|08.03.2018| if there is an exception while executing commands in file comparer, de copied file will be deleted, to redo the operation on next run.|
 |21.04.2017| fixed a bug in bit calculation and filter calculation |
 |19.04.2017| fixed a bug in writing/reading bits.  |
 |02.02.2017| fixed an alignment bug after succeeding BOOL vars |

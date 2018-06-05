@@ -33,7 +33,7 @@ The special features and setting options of the software are described below.
 ---  
 ##System Environment##
 
-The software is written in C&#35; with Visual Studio 2013 for the .NET framework 4.5.2.
+The software is written in C&#35; with Visual Studio 2017 for the .NET framework 4.6.1.
 
 ---  
 #User Interface#
@@ -99,17 +99,26 @@ The terminology in certain controls of the AWLConverter is derived from it's use
 Per default, the entire data block is read from the PLC and – in the case of the PLCDataManager - saved in a file. You can narrow down the saved items, by picking only the items you really need to save. This can decrease the memory usage on the disk and increase performance.
 
 ---  
-#Using Pattern Files#
+#Pattern#
+
+In order not to have to start all over again, we have built a support in the form of patterns. We support different formats for this functionality.
+
+##XmlPattern##
 
 All the selections you make on the main window and in the FilterEditor can be saved in a pattern file. If you later open the same or a different PLC project and reload the saved pattern file, the AWLConverter will (try to) match the selections you made to the new symbolic content of the selected S7-project.
   
+##Parasave##
 
-We support different formats of such a pattern file. The `XMLPatternReaderWriter` is to save and restore the data like described above. The `ParasaveReaderWriter` can be used to apply the configuration from a given Parasave.ini, but you can not write any changes back to the ini.
+In remembrance of our outdated program Parasave there is now also the possibility to use the Parasave.ini file as a pattern. So you can upgrade the Parasave-Configuration to our new tools.
+
+##DirectoryPattern##
+
+In order to be able to import already created files that were not backed up in an xml pattern, there is now also the DirectoryPattern, which omits the settings from the generated cs files by selecting a directory with these files.
 
 ---  
 #Installation#
 
-This requires the "Microsoft .NET Framework 4.5.2" to be installed and available on the destination system under Windows.
+This requires the "Microsoft .NET Framework 4.6.1" to be installed and available on the destination system under Windows.
   
 
 The application files can be copied to any directory. The application can be started directly from this directory.

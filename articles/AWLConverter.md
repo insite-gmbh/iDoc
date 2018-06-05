@@ -107,7 +107,7 @@ In order not to have to start all over again, we have built a support in the for
 
 All the selections you make on the main window and in the FilterEditor can be saved in a pattern file. If you later open the same or a different PLC project and reload the saved pattern file, the AWLConverter will (try to) match the selections you made to the new symbolic content of the selected S7-project.
   
-##Parasave##
+##ParasavePattern##
 
 In remembrance of our outdated program Parasave there is now also the possibility to use the Parasave.ini file as a pattern. So you can upgrade the Parasave-Configuration to our new tools.
 

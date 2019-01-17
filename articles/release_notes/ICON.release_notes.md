@@ -1,6 +1,7 @@
 # ICON Base Release Notes
 |date      |version      | change description |
 |----------|-------------|:-------------|
+|17.01.2019|v1.0.11|Added spezialised Linq Extensions which are also threadsafe and more performant then the original ones (Fixed Spooler bug). Updated all nuget packages to current version  |
 |18.10.2018|v1.0.10|OPC UA Improvements |
 |16.03.2018|v1.0.9|Changed .Net Framework to 4.6.1; Added OPC UA Support; Did some source cleanup, IMproved DiagnosisControl performance |
 |26.02.2018|v1.0.8|Fixed MemBasedMsgSourceConverter:now we have one instance per Sink/Source because with different plc connections it is possible to have DBs with the same number but different size!! Updated InacS7 version. Added new global config entries ReportMemoryAndHandlesInterval and LogFreeDriveSpace to configure the time and logging of this. Changed some UI texts. Changed some log entries from DEBUG to WARNING or ERROR. Fixed ValidationTime ( if noting was set from plc, also the max validation time of the spooler doesn't work) -> if plc time was 00:00:00 automatically the spooler time will be used. otherwise, the smalles one of the both |

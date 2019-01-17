@@ -1,6 +1,8 @@
 # ICON Base Release Notes
 |date      |version      | change description |
 |----------|-------------|:-------------|
+|18.10.2018|v1.0.10|OPC UA Improvements |
+|16.03.2018|v1.0.9|Changed .Net Framework to 4.6.1; Added OPC UA Support; Did some source cleanup, IMproved DiagnosisControl performance |
 |26.02.2018|v1.0.8|Fixed MemBasedMsgSourceConverter:now we have one instance per Sink/Source because with different plc connections it is possible to have DBs with the same number but different size!! Updated InacS7 version. Added new global config entries ReportMemoryAndHandlesInterval and LogFreeDriveSpace to configure the time and logging of this. Changed some UI texts. Changed some log entries from DEBUG to WARNING or ERROR. Fixed ValidationTime ( if noting was set from plc, also the max validation time of the spooler doesn't work) -> if plc time was 00:00:00 automatically the spooler time will be used. otherwise, the smalles one of the both |
 |20.02.2018|v1.0.7| Splitted Ui Slotcache from one per instance to one per page, because with multible connections it is possible to have different DB lenght for the same db number. Added db size cache entry only if read is ok.  Added InacS7 V1.0.14.  |
 |11.01.2018|v1.0.6| Optimized Spooler performance (RefreshOnlyIfVisible, Locking, ...) and fixed some Bugs. Improve Socket logging and fixes bugs. Added handling of opc deactivate items exception when ICON is shutting down. |

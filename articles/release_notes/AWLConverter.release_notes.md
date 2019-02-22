@@ -1,7 +1,11 @@
 # AWLConverter - Release Notes
 |date      |version      | change description |
 |----------|-------------|:-------------|
-|17.10.2018|v1.18.0| Some bugfixes (Filter, TIA, ...) |
+|22.02.2019|v1.19.3|added tia datatypes, ignore devices without software component in tia |
+|26.01.2019|v1.19.2|fixed disposed object bug, fixed assembly reference |
+|25.01.2019|v1.19.1|ArrayDB support,  InstanceDb support, Fixed TIA Project load, fixed array of udt reading |
+|23.01.2019|v1.19.0|TIA 15.1 Support |
+|17.10.2018|v1.18.0|Some bugfixes (Filter, TIA, ...) |
 |07.06.2018|v1.17.2|Fixed: Bug while filtering the Main Level of Variables in NgTemplate; Created a DirectoryPatternReaderWriter which works on Directories; UI Redesign; Changed to .Net Framework 4.6.1; Added TIA support |
 |28.05.2018|v1.17.1|Fixed Template prefix issue. |
 |28.05.2018|v1.17.0|Added Template prefixing to support papper. Updated Log4Net |

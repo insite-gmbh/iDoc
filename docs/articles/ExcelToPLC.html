@@ -8,7 +8,7 @@
     <title>IDAT Application Scenario </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="IDAT Application Scenario ">
-    <meta name="generator" content="docfx 2.12.1.0">
+    <meta name="generator" content="docfx 2.40.12.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -75,57 +75,57 @@
 <p><strong>Transferring data from Excel to a PLC</strong></p>
 <p><strong>insite GmbH</strong></p>
 <hr>
-<h1 id="introduction">Introduction</h1>
+<h1 id="introduction">Introduction#</h1>
 <p>A request to automatically transfer data from a Microsoft Excel Sheet to a PLC led to the development of a set of components that together form the IDAT family. Though this task could have been done by programming a &quot;monolithic&quot; application that exactly satisfies this request, we chose to implement small components that can be used as building blocks and could be exchanged later if, say, the origin of the data would be a database or a plain text file instead of an Excel sheet, or the receiver of the data will be a certain microprocessor system instead of a Siemens S7 PLC. The flexibility of this approach has a drawback: the orchestration of small components to form an application as seen by the user, involves some configuration that may get more complex. This document aims to make these configuration tasks clearer and may serve as a starting point to a user who wants to alter the functionality of the existing application e.g. for transferring different data.</p>
 <p><strong>Please open the configuration file &quot;IMON.xml&quot; and the DDF</strong><br> <strong>&quot;IDATSchrauberDB.xml&quot; in a text editor for looking up things while reading this guide in order to get a better understanding of what is explained here.</strong></p>
-<h3 id="plc">PLC</h3>
+<h3 id="plc">PLC###</h3>
 <p>How data is organized and viewed in a PLC.</p>
 <hr>
-<h3 id="component-oriented-software">Component Oriented Software</h3>
+<h3 id="component-oriented-software">Component Oriented Software###</h3>
 <p>Not necessary, but it will help, if you are aware of the separation of an application into small building blocks, know how to handle EXEs and DLLs and what an interface, a plug-in or &quot;inversion of control&quot; is.</p>
 <hr>
-<h3 id="xml-xpath">XML, XPath</h3>
+<h3 id="xml-xpath">XML, XPath###</h3>
 <p>How to work on XML files, how elements and attributes are defined and what a well-formed XML document is. What XPath is and how it is used.</p>
 <hr>
-<h3 id="c35-ienumerable">C&#35;, IEnumerable</h3>
+<h3 id="c35-ienumerable">C&#35;, IEnumerable###</h3>
 <p>If you need to implement difficult queries to get the data from Excel and to layout to the format that is used in the PLC, you should know the extension methods of IEnumerable or LINQ.</p>
 <hr>
-<h2 id="definitions-acronyms-abbreviations">Definitions, Acronyms, Abbreviations</h2>
+<h2 id="definitions-acronyms-abbreviations">Definitions, Acronyms, Abbreviations##</h2>
 <ul>
 <li><strong>Data Definition File (DDF):</strong> A file that describes the structure of single or combined variables and defines the mapping of these variables.</li>
 <li><strong>Mapping:</strong> Variables are mapped to a defined data or memory area. </li>
 </ul>
 <hr>
-<h1 id="overview-of-the-implemented-functionality">Overview of the Implemented Functionality</h1>
+<h1 id="overview-of-the-implemented-functionality">Overview of the Implemented Functionality#</h1>
 <p>To start, here is an overview of the separate functions that make-up the application. They may include subsequent points with a more detailed explanation about the specific functionality and how this functionality could be seen in a more generic way. </p>
 <hr>
-<h2 id="observe-a-certain-excel-file-for-changes">Observe a Certain Excel File for Changes</h2>
+<h2 id="observe-a-certain-excel-file-for-changes">Observe a Certain Excel File for Changes##</h2>
 <p><a name="Observe_a_Certain_Excel_File_for_Changes"></a>
 As soon as somebody saves changes in the Excel data, the application detects the modification and starts to transfer the data to the PLC.</p>
 <hr>
-<h3 id="specific-case">Specific Case</h3>
+<h3 id="specific-case">Specific Case###</h3>
 <p>Do a cyclic check of the file information data of the Excel file and compare the actual modification time to the last detected modification time. If the modification time has changed, transfer the Excel data to the PLC.</p>
 <hr>
-<h3 id="generic-case">Generic Case</h3>
+<h3 id="generic-case">Generic Case###</h3>
 <p>Do a cyclic check of the file information of one or more files on disk. Compare each modification time and if a certain file has changed, send an event along with the path of the changed file to another component. This is how the &quot;file monitoring&quot; component is implemented. Via its configuration you simply tell this component which file(s) to observe and which component the receiver of the &quot;file changed&quot;-event is. </p>
 <hr>
-<h4 id="even-more-generic-separation-of-monitor-and-comparer">Even more generic: Separation of monitor and comparer</h4>
+<h4 id="even-more-generic-separation-of-monitor-and-comparer">Even more generic: Separation of monitor and comparer####</h4>
 <p><a name="Even_more_generic:_Separation_of_monitor_and_comparer"></a>
 To be exact, above functionality is implemented in an even more generic way, by separating the monitor from the comparer. The monitor is responsible to create change events and uses one or more comparer(s) to detect changes. Below, you can see that such a comparer can also be implemented to compare e.g. PLC data. This means the monitor stays the same, but the comparer changes.</p>
 <hr>
-<h2 id="extract-data-from-the-changed-excel-file-and-convert-it-to-data-format-used-in-the-plc">Extract Data from the Changed Excel File and Convert it to Data Format used in the PLC</h2>
+<h2 id="extract-data-from-the-changed-excel-file-and-convert-it-to-data-format-used-in-the-plc">Extract Data from the Changed Excel File and Convert it to Data Format used in the PLC##</h2>
 <p>Only a certain part of the data in the Excel file is transferred to the PLC. In the specific case, the selection of data and its location on the spreadsheet is well known. Putting this information statically into the application, would be a bad design flaw, since the data selection may change in the future. So there’s a need to be able to define the extracted and transferred data with a query expression. Since the queried data is normally not arranged as successive lines or a simple rectangle of cells, the query expression can get quite complex. Furthermore, the arrangement of the Excel data normally does not fit the layout of the data in the PLC. So along with the purpose of extracting the data, the query expression also needs to define the conversion to the destination format that is used in the PLC.</p>
 <hr>
-<h3 id="querying-data-from-an-excel-sheet">Querying Data from an Excel Sheet</h3>
+<h3 id="querying-data-from-an-excel-sheet">Querying Data from an Excel Sheet###</h3>
 <p>An Excel sheet is a two-dimensional matrix of cells, with each cell containing a single value. Therefore, we developed a simple &quot;query language&quot; that in general deals with the extraction of a rectangular part of this matrix (which, of course, in turn is a matrix). Such a (sub-)matrix equals a C&#35; type of IEnumerable&#60;IEnumerable&#60;string&#62;&#62; and you can append any method that is defined for IEnumerable in C&#35; (Select, Skip, ToList, Where, Aggregate, ...) to modify the final content and the layout of the data. So some knowledge in C&#35; and especially in the extension methods of IEnumerable is a great benefit to understand how the Excel data processing is done. There’s a new documentation called &quot;Matrix User Guide&quot; that contains some examples how to use the query language or – as the Matrix User Guide states – how to build a valid &quot;data moniker&quot;.</p>
 <hr>
-<h3 id="evaluating-queries">Evaluating Queries</h3>
+<h3 id="evaluating-queries">Evaluating Queries###</h3>
 <p>Since the queries can get quite complex we could supply a tool to test the matrix monikers. It is called “Test Matrix” and is not officially supported nor documented, but you can use it to test if your monikers work as expected. </p>
 <hr>
-<h2 id="transferring-data-to-plc">Transferring Data to PLC</h2>
+<h2 id="transferring-data-to-plc">Transferring Data to PLC##</h2>
 <p>The data exchange with the PLC is done by a component called “Executor”. The executor takes a DDF and executes the read and write operations on the mappings that are defined in the DDF. </p>
 <hr>
-<h3 id="phases-of-execution">Phases of Execution</h3>
+<h3 id="phases-of-execution">Phases of Execution###</h3>
 <p><a name="Phases_of_Execution"></a>
 When the executor processes a DDF, it goes through several phases of execution:</p>
 <p><strong>1.) Replace constants:</strong> Constants are referenced by &#35;&#60;name of constant&#62;&#35;. All constants are defined at the beginning of the file inside the XML element &#60;Consts&#62;. The executor walks through the DDF and replaces each occurrence of a constant with its value.</p>
@@ -142,12 +142,12 @@ When the executor processes a DDF, it goes through several phases of execution:<
 <p><strong>4.) Execute all active read operations:</strong> The variables defined inside a read operation are read from the PLC and an output file is written. The output file is very similar to the DDF but has nested data.</p>
 <p>The pre-execution phase and therefore the possibility to integrate PLC data into the DDF before executing the actual write and read operations, enable the user to realize a kind of protocol for data exchange between the PLC and the executor.</p>
 <hr>
-<h3 id="play-with-the-executor">Play with the Executor</h3>
+<h3 id="play-with-the-executor">Play with the Executor###</h3>
 <p>You can test the executor and play with it by using an unsupported tool called &quot;ExecutorCmdLineHost&quot;. It allows you to execute a DDF against a PLC. If you observe the created output files and the data in the PLC you will get a good understanding of how the Executor works. See the manual &quot;XLAdapter.docx&quot; for details.</p>
 <p><strong>Attention: The ExecutorCmdLineHost must be handled with care, since you may overwrite data in the PLC when running it!</strong></p>
-<yamlheader start="145" end="149">##Observe PLC for Data Requests##
+<yamlheader start="145" end="150">##Observe PLC for Data Requests##
 
-As already stated in [Even More Generic: Separation of Monitor and Comparer](#Even_more_generic:_Separation_of_monitor_and_comparer), beside a comparer for file information, a comparer for PLC data is also available. Therefore, the implemented system is able to initiate a transfer from Excel to PLC not only when it detects a change in an Excel file but also when it detects a change in some PLC flag or similar. The PLC uses the flag IfRead.UpdateRequired for this purpose.</yamlheader><h1 id="configuration-file-imonxml">Configuration File IMON.xml</h1>
+As already stated in [Even More Generic: Separation of Monitor and Comparer](#Even_more_generic:_Separation_of_monitor_and_comparer), beside a comparer for file information, a comparer for PLC data is also available. Therefore, the implemented system is able to initiate a transfer from Excel to PLC not only when it detects a change in an Excel file but also when it detects a change in some PLC flag or similar. The PLC uses the flag IfRead.UpdateRequired for this purpose.</yamlheader><h1 id="configuration-file-imonxml">Configuration File IMON.xml#</h1>
 <p><a name="Configuration_File_IMON.xml"></a>
 What follows is a commented version of an IMON.xml configuration file. Not all details are explained, its purpose is to give you an overview of what is configured here.</p>
 <pre><code class="lang-html">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
@@ -288,7 +288,7 @@ What follows is a commented version of an IMON.xml configuration file. Not all d
   &lt;/log4net&gt;
 &lt;/Setup&gt;
 </code></pre><hr>
-<h1 id="ddf-idatschrauberdbxml">DDF IDATSchrauberDB.xml</h1>
+<h1 id="ddf-idatschrauberdbxml">DDF IDATSchrauberDB.xml#</h1>
 <p><a name="DDF_IDATSchrauberDB.xmlDDF"></a>
 What follows is a commented version of a data definition file. Not all details are explained, its purpose is to give you an overview of what is configured here. To understand how the reference to the Excel data is defined, take a look at the &quot;Matrix User Guide&quot;. There is a real-world example explained that matches the DDF described here.</p>
 <pre><code class="lang-html">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
@@ -512,7 +512,7 @@ What follows is a commented version of a data definition file. Not all details a
     &lt;/Mappings&gt;
 &lt;/DataDef&gt;
 </code></pre><hr>
-<h1 id="document-history">Document History</h1>
+<h1 id="document-history">Document History#</h1>
 <table><tr><th>Author </th><th> Date </th><th> Remarks</th></tr>
 <tr><td>Karsten Gorkow </td><td> 2014-01-22 </td><td> Initial revision.</td></tr>
 </table>

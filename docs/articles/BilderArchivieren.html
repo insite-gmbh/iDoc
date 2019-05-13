@@ -8,7 +8,7 @@
     <title>Software Specification </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Software Specification ">
-    <meta name="generator" content="docfx 2.12.1.0">
+    <meta name="generator" content="docfx 2.40.12.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -77,10 +77,10 @@
 
 <p><strong>insite GmbH</strong></p>
 <hr>
-<h1 id="introduction">Introduction</h1>
+<h1 id="introduction">Introduction#</h1>
 <p>The Archive Images program is used to move images (e.g. from V60) to an archive server. In the course of this, all special characters are also replaced by permitted characters (see <a href="#appendix_c">Appendix C</a>).</p>
 <hr>
-<h1 id="interface">Interface</h1>
+<h1 id="interface">Interface#</h1>
 <p><img src="../images/BilderArchivieren_Interface.png" alt="BilderArchivieren_Interface.png"></p>
 <ol>
 <li>Starts the monitoring (Auto archiving) (see <a href="#functional_description">Functional description</a>)</li>
@@ -92,7 +92,7 @@
 <li>Log output</li>
 </ol>
 <hr>
-<h2 id="status-display">Status display</h2>
+<h2 id="status-display">Status display##</h2>
 <p><a name="status_display"></a></p>
 <p><img src="../images/BilderArchivieren_Status_notrunning.png" alt="BilderArchivieren_Status_notrunning.png">
  No action is running. (Program is in stop mode)  </p>
@@ -101,15 +101,15 @@
 <p><img src="../images/BilderArchivieren_Status_active_m.png" alt="BilderArchivieren_Status_active_m.png">
  Manual archiving is active  </p>
 <hr>
-<h1 id="functional-description">Functional description</h1>
+<h1 id="functional-description">Functional description#</h1>
 <p><a name="functional_description"></a>
 The V60 program saves the evaluated images locally in a directory.</p>
 <p>The ArchiveImages program is informed via FileSystemEvents when a file has been created or deleted using a filter that must be set (e.g. &#42;.jpg). Once the set bulk number of the files has been reached, this bulk is moved to the Archive Server. The directory structure of the Archive Server can be defined by means of format options in the configuration file.</p>
 <p>From version 1.0.0.8 it is now possible to also specify multiple sources. The number of files of the source can then be calculated from the total files in all sources.</p>
 <hr>
-<h1 id="configuration-file">Configuration file</h1>
+<h1 id="configuration-file">Configuration file#</h1>
 <hr>
-<h2 id="path">Path</h2>
+<h2 id="path">Path##</h2>
 <p>The path for the configuration files is searched in the following order:</p>
 <ol>
 <li>HKEY&#95;CURRENT&#95;USER\Software\Insite Gmbh\BilderArchivieren (Character string: config)</li>
@@ -118,7 +118,7 @@ The V60 program saves the evaluated images locally in a directory.</p>
 </ol>
 <p>If the file is not found in any of the defined paths, the application is terminated.</p>
 <hr>
-<h2 id="settings-in-the-configuration-file-xml-format">Settings in the configuration file (XML format)</h2>
+<h2 id="settings-in-the-configuration-file-xml-format">Settings in the configuration file (XML format)##</h2>
 <pre><code class="lang-html">&lt;?xml version=&quot;1.0&quot;?&gt;
 &lt;!-- Konfigurations-Datei fuer BilderArchivieren. --&gt;
 &lt;config name=&quot;BilderArchivieren&quot;&gt;
@@ -136,7 +136,7 @@ The V60 program saves the evaluated images locally in a directory.</p>
   &lt;/settings&gt;
 &lt;/config&gt;
 </code></pre><hr>
-<h3 id="common">common</h3>
+<h3 id="common">common###</h3>
 <p><strong>autoscan:</strong>  </p>
 <table>
  <tr><th>Data type </th><td> BOOL</td></tr>
@@ -200,7 +200,7 @@ The V60 program saves the evaluated images locally in a directory.</p>
 
 
 <hr>
-<h3 id="performance">performance</h3>
+<h3 id="performance">performance###</h3>
 <p><strong>processpriority:</strong>  </p>
 <table>
  <tr><th>Data type </th><td> STRING</td></tr>
@@ -267,7 +267,7 @@ The V60 program saves the evaluated images locally in a directory.</p>
 
 
 <hr>
-<h3 id="filter">filter</h3>
+<h3 id="filter">filter###</h3>
 <p><strong>extension:</strong>  </p>
 <table>
  <tr><th>Data type </th><td> STRING</td></tr>
@@ -307,20 +307,20 @@ The V60 program saves the evaluated images locally in a directory.</p>
 
 
 <hr>
-<h3 id="source">source</h3>
+<h3 id="source">source###</h3>
 <hr>
-<h3 id="dest">dest</h3>
+<h3 id="dest">dest###</h3>
 <hr>
-<h3 id="log">log</h3>
+<h3 id="log">log###</h3>
 <hr>
-<h1 id="appendix-a">Appendix A</h1>
+<h1 id="appendix-a">Appendix A#</h1>
 <hr>
-<h1 id="appendix-b">Appendix B</h1>
+<h1 id="appendix-b">Appendix B#</h1>
 <hr>
-<h1 id="appendix-c">Appendix C</h1>
+<h1 id="appendix-c">Appendix C#</h1>
 <p><a name="appendix_c"></a></p>
 <hr>
-<h1 id="document-history">Document History</h1>
+<h1 id="document-history">Document History#</h1>
 
             </article>
           </div>

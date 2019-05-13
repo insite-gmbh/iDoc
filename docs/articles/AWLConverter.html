@@ -8,7 +8,7 @@
     <title>Software Specification </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Software Specification ">
-    <meta name="generator" content="docfx 2.12.1.0">
+    <meta name="generator" content="docfx 2.40.12.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -77,28 +77,28 @@
 
 <p><strong>insite GmbH</strong></p>
 <hr>
-<h1 id="introduction">Introduction</h1>
+<h1 id="introduction">Introduction#</h1>
 <p>The AWLConverter is a software application that converts the data definitions in a Siemens S7 project to XML- or C&#35;-source-files. The conversion to XML format generates data definition files (DDFs) that can be used in different tools of the IDAT family. The conversion to C&#35;-source-files generates files for INAX (<strong>IN</strong>site <strong>A</strong>utomation framewor<strong>X</strong>).</p>
 <hr>
-<h2 id="purpose-and-objective">Purpose and Objective</h2>
+<h2 id="purpose-and-objective">Purpose and Objective##</h2>
 <p>Easy creation of files that map PLC/S7 data structures.</p>
 <hr>
-<h2 id="definitions-acronyms-abbreviations">Definitions, Acronyms, Abbreviations</h2>
+<h2 id="definitions-acronyms-abbreviations">Definitions, Acronyms, Abbreviations##</h2>
 <ul>
 <li><strong>Data Definition File (DDF):</strong> A file which describes the structure of single or combined variables and defines the mapping of these variables.</li>
 <li><strong>Mapping:</strong> Variables are mapped to a defined data or memory area. </li>
 </ul>
 <hr>
-<h1 id="general-description">General Description</h1>
+<h1 id="general-description">General Description#</h1>
 <p>The special features and setting options of the software are described below. </p>
 <hr>
-<h2 id="system-environment">System Environment</h2>
+<h2 id="system-environment">System Environment##</h2>
 <p>The software is written in C&#35; with Visual Studio 2017 for the .NET framework 4.6.1.</p>
 <hr>
-<h1 id="user-interface">User Interface</h1>
+<h1 id="user-interface">User Interface#</h1>
 <p>The application is dialog-based. The usage is straightforward, though some features need a bit of explanation.</p>
 <hr>
-<h2 id="mainwindow-controls">MainWindow Controls</h2>
+<h2 id="mainwindow-controls">MainWindow Controls##</h2>
 <p>The application features tool tips for all controls. Here, you see a more detailed explanation of the function behind each control:</p>
 <p><img src="../images/AWLConverter_main_window_controls.png" alt="AWLConverter_main_window_controls.png"></p>
 <p><strong>Common symbols:</strong>  </p>
@@ -117,7 +117,7 @@
 <li>Pattern reader writer. (This are reader writer modules to save and restore patterns in different formats)</li>
 </ol>
 <hr>
-<h2 id="filtereditor-controls">FilterEditor Controls</h2>
+<h2 id="filtereditor-controls">FilterEditor Controls##</h2>
 <p>By clicking on a grid line (a PLC data block) in the main window, the FilterEditor opens. It allows you to select/deselect certain items from a data block for backup/restore.\</p>
 <p><img src="../images/AWLConverter_filter_editor_controls.png" alt="AWLConverter_filter_editor_controls.png"></p>
 <ol>
@@ -129,24 +129,24 @@
 <li>Apply the changes.</li>
 </ol>
 <hr>
-<h1 id="using-the-filtereditor">Using the FilterEditor</h1>
+<h1 id="using-the-filtereditor">Using the FilterEditor#</h1>
 <hr>
-<h2 id="unrestored-items">Unrestored Items</h2>
+<h2 id="unrestored-items">Unrestored Items##</h2>
 <p>The terminology in certain controls of the AWLConverter is derived from it&#39;s use to create files for the PLCDataManager. At least &quot;unrestored items&quot; are items that will be excluded from write operations to the PLC. So normally all items inside a data block are read from the PLC but the &quot;unrestored&quot; items will not be written back on a restore operation. Imagine a data block, where a single item could be a production counter, others could be a set of configuration values that you just entered to optimize the machine&#39;s performance. Though you want to back-up your settings and maybe restore them at a later time, you don&#39;t want to override the production counter on a restore! In this case you would declare the production counter to be an &quot;unrestored item&quot;.</p>
 <hr>
-<h2 id="subsets-of-items-for-back-up">Subsets of Items for Back-up</h2>
+<h2 id="subsets-of-items-for-back-up">Subsets of Items for Back-up##</h2>
 <p>Per default, the entire data block is read from the PLC and – in the case of the PLCDataManager - saved in a file. You can narrow down the saved items, by picking only the items you really need to save. This can decrease the memory usage on the disk and increase performance.</p>
 <hr>
-<h1 id="pattern">Pattern</h1>
+<h1 id="pattern">Pattern#</h1>
 <p>In order not to have to start all over again, we have built a support in the form of patterns. We support different formats for this functionality.</p>
-<h2 id="xmlpattern">XmlPattern</h2>
+<h2 id="xmlpattern">XmlPattern##</h2>
 <p>All the selections you make on the main window and in the FilterEditor can be saved in a pattern file. If you later open the same or a different PLC project and reload the saved pattern file, the AWLConverter will (try to) match the selections you made to the new symbolic content of the selected S7-project.</p>
-<h2 id="parasavepattern">ParasavePattern</h2>
+<h2 id="parasavepattern">ParasavePattern##</h2>
 <p>In remembrance of our outdated program Parasave there is now also the possibility to use the Parasave.ini file as a pattern. So you can upgrade the Parasave-Configuration to our new tools.</p>
-<h2 id="directorypattern">DirectoryPattern</h2>
+<h2 id="directorypattern">DirectoryPattern##</h2>
 <p>In order to be able to import already created files that were not backed up in an xml pattern, there is now also the DirectoryPattern, which omits the settings from the generated cs files by selecting a directory with these files.</p>
 <hr>
-<h1 id="installation">Installation</h1>
+<h1 id="installation">Installation#</h1>
 <p>This requires the &quot;Microsoft .NET Framework 4.6.1&quot; to be installed and available on the destination system under Windows.</p>
 <p>The application files can be copied to any directory. The application can be started directly from this directory.</p>
 

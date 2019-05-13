@@ -8,7 +8,7 @@
     <title>Software Specification </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Software Specification ">
-    <meta name="generator" content="docfx 2.12.1.0">
+    <meta name="generator" content="docfx 2.40.12.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -77,28 +77,28 @@
 
 <p><strong>insite GmbH</strong></p>
 <hr>
-<h1 id="introduction">Introduction</h1>
+<h1 id="introduction">Introduction#</h1>
 <p>XLAdapter (XL stands for Excel) is a software application for the transport of data. &quot;Transport&quot; means data is transported from one source to a target.</p>
 <hr>
-<h2 id="purpose-and-objective">Purpose and Objective</h2>
+<h2 id="purpose-and-objective">Purpose and Objective##</h2>
 <p>The original idea is the transmission of data from Excel to the PLC. The architecture of the XLAdapter (modular connection of Reader, Writer, Converter and Resolver) allows a wide variety of module implementations to be used. This creates the possibility at present of using an ExcelReader, LibNoDaveWriter, S7Converter and a user-specific ExcelPlcResolver.</p>
 <hr>
-<h2 id="definitions-acronyms-abbreviations">Definitions, Acronyms, Abbreviations</h2>
+<h2 id="definitions-acronyms-abbreviations">Definitions, Acronyms, Abbreviations##</h2>
 <ul>
 <li><strong>LibNoDave:</strong> A free library for the communication with a PLC.</li>
 </ul>
 <hr>
-<h1 id="general-description">General Description</h1>
+<h1 id="general-description">General Description#</h1>
 <p>The special features and setting options of the software are described below.</p>
 <hr>
-<h2 id="system-environment">System Environment</h2>
+<h2 id="system-environment">System Environment##</h2>
 <p>The software is written with C&#35; Visual Studio 2010 for the Target framework .NET 4.0.</p>
 <p><img src="../images/warning_icon.png" alt="warning_icon.png">
 .NET 4.5 is not used since it does not guarantee any compatibility with XP.</p>
 <hr>
-<h2 id="the-functions-at-a-glance">The Functions at a Glance</h2>
+<h2 id="the-functions-at-a-glance">The Functions at a Glance##</h2>
 <hr>
-<h3 id="xladaptertestexe">XLAdapterTest.exe</h3>
+<h3 id="xladaptertestexe">XLAdapterTest.exe###</h3>
 <p>This program is intended for developers to test the software.</p>
 <p>An existing configuration file named &quot;AddressResolver.xml&quot; in the application directory is detected and loaded by XLAdapter. If you would like to use other configuration files, you can transfer an argument with the complete directory and file name to XLAdapterTest.exe when starting.</p>
 <p>The structure of the &quot;AddressResolver.xml&quot; is like the configuration file of &quot;ExecutorCmdLineHost.exe&quot; (see the <a href="#ExecutorCmdLineHost.exe">next chapter</a>).</p>
@@ -109,14 +109,14 @@
 <p>With Varname you can enter a Resolver Text to determine whether the syntax is consistent. The &quot;ExecutorCmdLineHost&quot; program is started virtually with the &quot;Run executor&quot; button. If an exception should occur, this is displayed in the State.</p>
 <p>The next chapter &#39;ExecutorCmdLineHost.exe&quot; contains more information.</p>
 <hr>
-<h3 id="executorcmdlinehostexe">ExecutorCmdLineHost.exe</h3>
+<h3 id="executorcmdlinehostexe">ExecutorCmdLineHost.exe###</h3>
 <p><a name="ExecutorCmdLineHost.exe"></a>
 ExecutorCmdLineHost.exe is activated as follows:  </p>
 <p>Usage: ExecutorCmdLineHost.exe -d&#60;datadeffile&#62; [-c&#60;configfile&#62;] [-o&#60;outputfile&#62;]  </p>
 <p>The data of the file is mandatory here for the data definition. The config file is &quot;execconf.xml&quot; by default if you do not specify any other. A config file must be available, however.  </p>
 <p>The output file, in which the written data is output in Hex format, is optional.</p>
 <hr>
-<h4 id="example-config-file">Example Config File</h4>
+<h4 id="example-config-file">Example Config File####</h4>
 <pre><code class="lang-html">&lt;Setup&gt;
     &lt;Assemblies&gt;
         &lt;Assembly path=&quot;ResolverImpl.dll&quot;/&gt;
@@ -148,7 +148,7 @@ ExecutorCmdLineHost.exe is activated as follows:  </p>
     &lt;/Instances&gt;
 &lt;/Setup&gt;
 </code></pre><hr>
-<h4 id="example-data-definition-file">Example Data Definition File</h4>
+<h4 id="example-data-definition-file">Example Data Definition File####</h4>
 <pre><code class="lang-html">&lt;DataDef Endianness=&quot;Host-Endianess&quot; Encoding=&quot;Base16&quot; 
          xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; 
          xmlns=&quot;http://www.insite-gmbh.de/IDAT/DataDef&quot; 
@@ -201,7 +201,7 @@ selector=&quot;100&quot; offset=&quot;0&quot; type=&quot;BinaryFile&quot;&gt;
     &lt;/Mappings&gt;
 &lt;/DataDef&gt;
 </code></pre><hr>
-<h1 id="installation">Installation</h1>
+<h1 id="installation">Installation#</h1>
 <p>This requires that </p>
 <ol>
 <li>Microsoft .NET Framework 4.0 Servicepack 1 and</li>
@@ -237,7 +237,7 @@ selector=&quot;100&quot; offset=&quot;0&quot; type=&quot;BinaryFile&quot;&gt;
 <li>log4net.dll (286.720 Bytes)</li>
 </ul>
 <p>These files can be copied to any directory and XLAdapter.exe or ExecutorCmdLineHost can then be started from there.</p>
-<h1 id="document-history">Document History</h1>
+<h1 id="document-history">Document History#</h1>
 <table><tr><th>Author </th><th> Date </th><th> Remarks</th></tr>
 <tr><td>Ralf Gedrat </td><td> September 2012 </td><td> Creation</td></tr>
 <tr><td>Karsten Gorkow </td><td> January 2016 </td><td> Minor Changes</td></tr>

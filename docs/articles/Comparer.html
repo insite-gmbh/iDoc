@@ -8,7 +8,7 @@
     <title>Software Specification </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Software Specification ">
-    <meta name="generator" content="docfx 2.12.1.0">
+    <meta name="generator" content="docfx 2.40.12.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -77,13 +77,13 @@
 
 <p><strong>insite GmbH</strong></p>
 <hr>
-<h1 id="introduction">Introduction</h1>
+<h1 id="introduction">Introduction#</h1>
 <p>A Comparer is a software component that is part of the IDAT system and is used for a cyclical comparison of data. Various comparers exist, depending on the type of data they observe. Depending on the comparison results, different actions can be defined.</p>
 <hr>
-<h2 id="purpose-and-objective">Purpose and Objective</h2>
+<h2 id="purpose-and-objective">Purpose and Objective##</h2>
 <p>A Comparer is an interchangeable component that monitors and compares data (files, Excel data, PLC data ...)</p>
 <hr>
-<h2 id="definitions-acronyms-abbreviations">Definitions, Acronyms, Abbreviations</h2>
+<h2 id="definitions-acronyms-abbreviations">Definitions, Acronyms, Abbreviations##</h2>
 <ul>
 <li><strong>PLC:</strong> Programmable Logic Controller</li>
 <li><strong>SPS:</strong> Speicher Programmierbare Steuerung</li>
@@ -92,21 +92,21 @@
 <li><strong>Mapping:</strong> A variable is mapped to a defined data area</li>
 </ul>
 <hr>
-<h1 id="general-description">General Description</h1>
+<h1 id="general-description">General Description#</h1>
 <p>The special features and setting options of the software are described below. </p>
 <hr>
-<h2 id="system-environment">System Environment</h2>
+<h2 id="system-environment">System Environment##</h2>
 <p>The software is written in C&#35; with Visual Studio 2010 for the Target framework .NET 4.0. </p>
 <p><img src="../images/warning_icon.png" alt="warning_icon.png">
  .NET 4.5 is not used since it does not guarantee any compatibility with XP.</p>
 <hr>
-<h2 id="framework">Framework</h2>
+<h2 id="framework">Framework##</h2>
 <p>This components are a part of IDAT and are also configured using the IoC components of IDAT (for more details, please refer to the chapter Configuration).</p>
 <hr>
-<h2 id="host-application">Host application</h2>
+<h2 id="host-application">Host application##</h2>
 <p>In this installation and use case, there is one host application that uses comparers. It is called &quot;IMON&quot; and has it&#39;s own &quot;IMON User Guide&quot;.</p>
 <hr>
-<h1 id="comparers">Comparers</h1>
+<h1 id="comparers">Comparers#</h1>
 <p>The following section examines the currently existing comparers and points out the options and configurations.</p>
 <p>All comparers are linked to the application by implementing the following interface:</p>
 <pre><code class="lang-javascript">arer
@@ -119,11 +119,12 @@
         void Stop();
     }
 }
+
 </code></pre><hr>
-<h2 id="filecomparer">FileComparer</h2>
+<h2 id="filecomparer">FileComparer##</h2>
 <p>This component compares files as well as their contents if necessary (see <a href="#ContentComparison">ContentComparison</a>). On a change of the monitored file, an event can be created.</p>
 <hr>
-<h3 id="configuration">Configuration</h3>
+<h3 id="configuration">Configuration###</h3>
 <pre><code class="lang-html">&lt;Comparer impl=&quot;IMONFileComparer&quot;&gt;
     &lt;PollingCycle&gt;10&lt;/PollingCycle&gt;
     &lt;Source&gt;&lt;![CDATA[D:\Test.xlsx]]&gt;&lt;/Source&gt;
@@ -147,7 +148,7 @@
 
 
 <hr>
-<h4 id="execute">Execute</h4>
+<h4 id="execute">Execute####</h4>
 <pre><code class="lang-html">&lt;Executor&gt;
     &lt;Execute filter=&quot;(.*\.xlsx)&quot; eventHandler=&quot;IDATExecutor&quot; 
              errorEventHandler=&quot;IDATErrorExecutor&quot;  
@@ -156,7 +157,7 @@
              eventHandler=&quot;C:\Execute.bat&quot; /&gt;
 &lt;/Executor&gt;
 </code></pre><hr>
-<h5 id="contentcomparison">ContentComparison</h5>
+<h5 id="contentcomparison">ContentComparison#####</h5>
 <p><a name="ContentComparison"></a></p>
 <table><tr><th>Attribute </th><th> Description</th></tr>
 <tr><td>filter </td><td> RegEx file filter (e.g.: .&#42;.xlsx for all xlsx files )</td></tr>
@@ -170,7 +171,7 @@
 
 
 <hr>
-<h2 id="datacomparer">DataComparer</h2>
+<h2 id="datacomparer">DataComparer##</h2>
 <p>This component was developed to integrate interfaces to the PLC. For example, you can implement a handshake protocol that works on different flags written/read by the PLC and the PC to implement a safe data exchange mechanism. You can declare actions that depend on a certain flag in the PLC so it is executed when a certain condition is met.</p>
 <p>Such actions can be</p>
 <ul>
@@ -180,7 +181,7 @@
 </ul>
 <p>and more.</p>
 <hr>
-<h3 id="configuration-1">Configuration</h3>
+<h3 id="configuration-1">Configuration###</h3>
 <pre><code class="lang-html">&lt;Comparer impl=&quot;IMONDataComparer&quot;&gt;
     &lt;PollingCycle&gt;3&lt;/PollingCycle&gt;
     &lt;DataDefFilename&gt;D:\IDATSchrauberDB.xml&lt;/DataDefFilename&gt;
@@ -219,7 +220,7 @@
 
 
 <hr>
-<h4 id="action">Action</h4>
+<h4 id="action">Action####</h4>
 <pre><code class="lang-html">&lt;Action readVar=&quot;IfRead.WriteEnabled&quot; compValue=&quot;false&quot; edge=&quot;true&quot;
                 writeVar=&quot;IfWrite.DataWritten&quot; writeValue=&quot;false&quot; 
                 errorEventHandler=&quot;IDATErrorExecutor&quot; errorValueName=&quot;CurrentErrorCode&quot; 
@@ -276,10 +277,10 @@
 <pre><code class="lang-html">&lt;Action writeVar=&quot;IfError.ErrorCode &quot; eventHandler=&quot;IDATExecutor&quot; /&gt;
 </code></pre><p>The variable ErrorOccured is written with each call (i.e. cyclic), the value to be written is the value entered in the DDF.</p>
 <hr>
-<h1 id="installation">Installation</h1>
+<h1 id="installation">Installation#</h1>
 <p>The different comparers come as DLLs and are installed via a simple copy operation together with the other IDAT files.</p>
 <hr>
-<h1 id="change-directory">Change Directory</h1>
+<h1 id="change-directory">Change Directory#</h1>
 <table><tr><th>Author </th><th> Date </th><th> Remarks</th></tr>
 <tr><td>Benjamin Prömmer </td><td> August 2013 </td><td> Creation</td></tr>
 <tr><td>Karsten Gorkow </td><td> 2016-01-15 </td><td> Revised document</td></tr>

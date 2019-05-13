@@ -8,7 +8,7 @@
     <title>Matrix </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Matrix ">
-    <meta name="generator" content="docfx 2.12.1.0">
+    <meta name="generator" content="docfx 2.40.12.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -78,38 +78,38 @@
 
 <p><strong>insite GmbH</strong></p>
 <hr>
-<h1 id="introduction">Introduction</h1>
+<h1 id="introduction">Introduction#</h1>
 <p>The main purpose of this document is to describe a query language that is used to reference and convert data from a data source that stores data in a 2D-matrix or a two-dimensional array. The concrete case uses an Excel sheet as the data source. Different components of the IDAT family of tools may use these queries.</p>
 <hr>
-<h2 id="main-dll">Main DLL</h2>
+<h2 id="main-dll">Main DLL##</h2>
 <p>The query language is realised in a DLL called &quot;MatrixResolver.dll&quot;.</p>
 <hr>
-<h2 id="test-application">Test Application</h2>
+<h2 id="test-application">Test Application##</h2>
 <p>Since a query can get quite complex, a front-end application to the MatrixResolver.dll exists. &quot;TestMatrix&quot; displays the result of a certain query as a grid. You can use it for testing or evaluating a query.</p>
 <hr>
-<h2 id="document-audience">Document Audience</h2>
+<h2 id="document-audience">Document Audience##</h2>
 <p>Users of the IDAT family of tools that have to deal with data export/import from/to Excel. To understand the building of complex queries, you will need some knowledge about C&#35; and you should know the extension methods of IEnumerable or LINQ.</p>
 <hr>
-<h1 id="general-description">General Description</h1>
+<h1 id="general-description">General Description#</h1>
 <hr>
-<h2 id="system-requirements">System Requirements</h2>
+<h2 id="system-requirements">System Requirements##</h2>
 <p>The application and DLLs were developed in C&#35; for the .NET framework 4.5 and above.  </p>
 <p>The MatrixResolver uses LibXL, which is a library to access Excel data.</p>
 <hr>
-<h2 id="overview">Overview</h2>
+<h2 id="overview">Overview##</h2>
 <hr>
-<h3 id="matrixresolverdll">MatrixResolver.dll</h3>
+<h3 id="matrixresolverdll">MatrixResolver.dll###</h3>
 <hr>
-<h4 id="configuration">Configuration</h4>
+<h4 id="configuration">Configuration####</h4>
 <p>When creating a MatrixResolver you can supply the parameter &quot;OptionBase1&quot;. If set to true, all array indices are 1-based, which is the default. If you want to switch to the more &quot;programmer-friendly&quot; 0-based array indices, you want to set OptionBase1 to false.</p>
 <hr>
-<h4 id="reading">Reading</h4>
+<h4 id="reading">Reading####</h4>
 <p>The method Resolve wants the data moniker and the data reader as parameters and returns the queried matrix as an IEnumerable&#60;IEnumerable&#60;string&#62;&#62; typed object.</p>
 <hr>
-<h4 id="writing">Writing</h4>
+<h4 id="writing">Writing####</h4>
 <p>The method &quot;UpdateData&quot; wants the data moniker, a data reader/writer and an instance of an IEnumerable&#60;IEnumerable&#60;string&#62;&#62; typed object that contains the data to be written. If the data is omitted a new Excel workbook and a sheet will be created.</p>
 <hr>
-<h3 id="testmatrix">TestMatrix</h3>
+<h3 id="testmatrix">TestMatrix###</h3>
 <p><img src="../images/Matrix_TestMatrix.png" alt="Matrix_TestMatrix.png"></p>
 <ol>
 <li>Enter the data moniker here. This is a combo box. Used monikers are preserved and you can recall them by clicking the downward arrow on the right side. To delete monikers from the list, select it and press &quot;Shift + Del&quot;.</li>
@@ -128,10 +128,10 @@
 <li>Data grid that shows the result of the query/moniker and can be used to update data in the Excel file.</li>
 </ol>
 <hr>
-<h1 id="querymoniker-syntax">Query/Moniker Syntax</h1>
+<h1 id="querymoniker-syntax">Query/Moniker Syntax#</h1>
 <p>A moniker is divided into two parts. The first one deals with the selection of a (sub-)matrix (a rectangular area of cells). The syntax for this part was developed by insite. The second part more or less is plain C&#35;. Since the returned matrix of the first part is an instance of an object of type IEnumerable&#60;IEnumerable&#60;string&#62;&#62; you can use all C&#35; extension methods for IEnumerable&#60;T&#62; (Select, Where, Take, Skip ...). Refer to different sources on the web regarding C&#35; and IEnumerable or consult a C&#35; programming book to learn more.</p>
 <hr>
-<h2 id="basic-selection-of-a-matrix">Basic selection of a Matrix</h2>
+<h2 id="basic-selection-of-a-matrix">Basic selection of a Matrix##</h2>
 <p><a name="basic_selection_of_a_matrix"></a>
 The basic pattern for this part is:</p>
 <p>&#60;filename&#62;[!&#60;sheetname&#62;[!&#60;matrixselection&#62;]]  </p>
@@ -156,7 +156,7 @@ The basic pattern for this part is:</p>
 <p>%latextableend
 You can also nest the Matrix function. </p>
 <hr>
-<h4 id="examples-for-advanced-matrix-selection">Examples for advanced Matrix selection</h4>
+<h4 id="examples-for-advanced-matrix-selection">Examples for advanced Matrix selection####</h4>
 <p>Base for these examples is the following table. OptionBase1 is always true.</p>
 <table><tr><th>Prod </th><th> Type </th><th> Cat </th><th> Price </th><th>  </th><th> Notes
 
@@ -201,12 +201,12 @@ You can also nest the Matrix function. </p>
 <p>C&quot;C&quot;R&quot;C&quot;.Margin(UntilEmpty, GroupSameSequence, 3, 2)  </p>
 <p><img src="../images/Matrix_ex_adv2.png" alt="Matrix_ex_adv2.png"></p>
 <hr>
-<h2 id="refining-the-query">Refining the query</h2>
+<h2 id="refining-the-query">Refining the query##</h2>
 <p>As already said, the basic selection as described in section <a href="#basic_selection_of_a_matrix">Basic Selection of a Matrix</a> returns an object of the type IEnumerable&#60;IEnumerable&#60;string&#62;&#62;. The resolver is aware of this and is able to apply all C&#35; extension methods for this type to the returned matrix. This enables you to write quite complex queries that filter, transform and/or select data from the matrix in nearly endless ways. The explanation of these concepts is beyond the scope of this document, we invite you to search the web for C&#35; and especially the extension methods for the IEnumerable&#60;T&#62; generic type. You may use this link as a starting point:  </p>
 <p><a href="https://msdn.microsoft.com/en-us/library/ckzcawb8%28v=vs.110%29.aspx0">https://msdn.microsoft.com/en-us/library/ckzcawb8%28v=vs.110%29.aspx0</a></p>
 <p>The following real-world examples make partially use of this concept. </p>
 <hr>
-<h2 id="real-world-example-for-matrix-selection-and-transformation">Real-World example for Matrix selection and transformation</h2>
+<h2 id="real-world-example-for-matrix-selection-and-transformation">Real-World example for Matrix selection and transformation##</h2>
 <p>Data records for screw drivers have to be queried from an Excel file to get finally transferred to a PLC. Here is a screenshot of a part of the sheet:</p>
 <p><img src="../images/Matrix_rw_ex.png" alt="Matrix_rw_ex.png"></p>
 <p>The query C&quot;FLM130&quot;R&quot;FLM130&quot;.Margin(0,1,14,GroupSameSequence) returns</p>
@@ -217,6 +217,7 @@ You can also nest the Matrix function. </p>
   (index == 1 || index == 2 || index == 4 || index == 5 
     || index == 6 || index == 7 
     || (index &gt;= 11 &amp;&amp; index &lt;= 14))).ToList())
+
 </code></pre><p>This results in reduced data with the structure  </p>
 <p><img src="../images/Matrix_rw_ex_datastruct.png" alt="Matrix_rw_ex_datastruct.png"></p>
 <p>Then, the clause</p>
@@ -239,6 +240,7 @@ You can also nest the Matrix function. </p>
   }, 
   list =&gt; { return list.Skip(1); }
 )
+
 </code></pre><p>renders the data to the format used in the PLC.</p>
 <p>Finally, the data looks like this:  </p>
 <p><img src="../images/Matrix_rw_ex_enddatastruct.png" alt="Matrix_rw_ex_enddatastruct.png"></p>
@@ -251,8 +253,9 @@ x.Where((y, index) =&gt; (index == 1 || index == 2 || index == 4
 (list, item) =&gt; { if (list.Count &lt; 1) { list.Add(item); } else {  List&lt;string&gt; 
 r = list.First(); for (int i = 9; i &gt;= 6; i--) { item.Insert(i, r[i]); }
 list.Add(item); } return list; }, list =&gt; { return list.Skip(1); })}
+
 </code></pre><hr>
-<h1 id="document-history">Document History</h1>
+<h1 id="document-history">Document History#</h1>
 <table><tr><th>Author </th><th> Date </th><th> Notes
 
 </th></tr>

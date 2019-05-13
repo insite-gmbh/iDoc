@@ -8,7 +8,7 @@
     <title>Documentation and Procedure Description </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Documentation and Procedure Description ">
-    <meta name="generator" content="docfx 2.12.1.0">
+    <meta name="generator" content="docfx 2.40.12.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -77,10 +77,10 @@
 <p><strong>I</strong>nsite <strong>CO</strong>mmunication <strong>N</strong>ode  </p>
 <p><strong>insite GmbH</strong></p>
 <hr>
-<h1 id="introduction">Introduction</h1>
+<h1 id="introduction">Introduction#</h1>
 <p>This document describes the functionality of the customer-specific modules for BMW.</p>
 <hr>
-<h2 id="definitions-acronyms-abbreviations">Definitions, acronyms, abbreviations</h2>
+<h2 id="definitions-acronyms-abbreviations">Definitions, acronyms, abbreviations##</h2>
 <ul>
 <li><strong>ICON: I</strong>nsite <strong>CO</strong>mmunication <strong>N</strong>ode</li>
 <li><strong>TCP/IP:</strong> The TCP network protocol (Transmission Control Protocol) based on the IP (Internet protocol) concerns endpoint-related connections, the so-called sockets. A socket can act as a client, server or listener. In order to describe a broader and more general designation for the states of the sockets, we want to use the terms &quot;Passive&quot; and &quot;Active&quot;. In other words, there is an active and a passive connection partner. With these designations we conform with protocols such as FTP (File Transfer Protocol) or UDP (User Datagram Protocol). Unlike with connectionless protocols such as UDP, in the case of TCP there are endpoint-related connection partners that normally connect from the active partner to the passive partner. A socket&#39;s own endpoint (active as well as passive) we call LocalEndpoint and the endpoint of the connection partner we call RemoteEndpoint.</li>
@@ -91,12 +91,12 @@
 <li><strong>Spooler:</strong> Buffer for messages (also persistent)</li>
 </ul>
 <hr>
-<h2 id="configuration-60iconprotocols62">Configuration &#60;ICONProtocols&#62;</h2>
+<h2 id="configuration-60iconprotocols62">Configuration &#60;ICONProtocols&#62;##</h2>
 <p>The Default Server Port and Default Local Server Port can be set directly as standard in this section.</p>
 <pre><code class="lang-html">&lt;ConfigValue name=&quot;TCPIPDefaultServerPort&quot; type=&quot;int&quot;&gt;30001&lt;/ConfigValue&gt;
 &lt;ConfigValue name=&quot;TCPIPDefaultLocalServerPort&quot; type=&quot;int&quot;&gt;30002&lt;/ConfigValue&gt;
 </code></pre><hr>
-<h3 id="protocols">Protocols</h3>
+<h3 id="protocols">Protocols###</h3>
 <p>You can activate protocols, for example, by the following entry:</p>
 <pre><code class="lang-html">&lt;ICONStandardProtocol ImplementingClass=&quot;WACC04_ICONMsgFactory&quot; /&gt;
 &lt;ICONStandardProtocol ImplementingClass=&quot;BMW_02_ICONMsgFactory&quot; /&gt;
@@ -112,7 +112,7 @@
 <p>Incoming telegram = E</p>
 <p>W=E[:Offset,value at the position Offset[|value at the position Offset +1][|…]…]</p>
 <hr>
-<h4 id="bmw9501-ackpolicy">BMW&#95;01 AckPolicy</h4>
+<h4 id="bmw9501-ackpolicy">BMW&#95;01 AckPolicy####</h4>
 <pre><code class="lang-html">&lt;ICONAckPolicy Name=&quot;BMW_01_AckHandling&quot;&gt;
     &lt;AckRule Rule=&quot;9013=9000:16,33|32&quot;/&gt;
     &lt;AckRule Rule=&quot;1001=1102:48,39|39&quot;/&gt;
@@ -141,7 +141,7 @@
     &lt;AckRule Rule=&quot;X=Y&quot;/&gt;
 &lt;/ICONAckPolicy&gt;
 </code></pre><hr>
-<h4 id="bmw9502-ackpolicy">BMW&#95;02 AckPolicy</h4>
+<h4 id="bmw9502-ackpolicy">BMW&#95;02 AckPolicy####</h4>
 <pre><code class="lang-html">&lt;ICONAckPolicy Name=&quot;BMW_02_AckHandling&quot;&gt;
     &lt;AckRule Rule=&quot;*&quot; Type=&quot;Header&quot; /&gt;
     &lt;AckRule Rule=&quot;MOSC_ANFR=MOSC_ANFR&quot; Forward=&quot;True&quot; /&gt;
@@ -177,13 +177,13 @@
 <p>The default value for incoming telegrams is Forward=&quot;True&quot;  </p>
 <p>In the case of acknowledgements, it is the reverse. If the telegram is an acknowledgement, then the default value is Forward =&quot;False&quot;</p>
 <hr>
-<h1 id="module">Module</h1>
+<h1 id="module">Module#</h1>
 <h2 id="a-namemodulea"><a name="Module"></a></h2>
-<h2 id="alarmmanager">AlarmManager</h2>
+<h2 id="alarmmanager">AlarmManager##</h2>
 <p>The AlarmManager reads out information from the PLC device, links this with TCP telegrams received from the WinCCAlarmServer and thereby sets up a fault message cache. It receives telegrams via a Listener for executing initialisations or resets as well as for returning information. In addition, it forwards telegrams to the PLC. It processes events triggered by the PLC.  </p>
 <p>An interface consisting of a control and status word is defined for the control and responses of this module.</p>
 <hr>
-<h3 id="plc-control-and-status-word-alarmmanagement">PLC Control and Status Word AlarmManagement</h3>
+<h3 id="plc-control-and-status-word-alarmmanagement">PLC Control and Status Word AlarmManagement###</h3>
 <p>The PLC can influence the functions of the application via a control word. The following bits are defined at present:</p>
 <table><tr><th colspan="4">Structure of PLC control word:</th></tr>
 <tr><th>Bit No </th><th> Enum </th><th> Impl. </th><th> Description</th></tr>
@@ -233,7 +233,7 @@
 
 
 <hr>
-<h3 id="alarmmanager-configuration">AlarmManager Configuration</h3>
+<h3 id="alarmmanager-configuration">AlarmManager Configuration###</h3>
 <pre><code class="lang-html">&lt;ICONModule Name=&quot;AlarmManager&quot; Assembly=&quot;AlarmManagement.dll&quot;&gt;
     &lt;ConfigValue name=&quot;DispatchMode&quot; type=&quot;int&quot;&gt;2&lt;/ConfigValue&gt;
     &lt;ConfigValue name=&quot;DestinationHost&quot; type=&quot;string&quot;&gt;PDEM&lt;/ConfigValue&gt;
@@ -340,10 +340,10 @@ OR     &lt;Section Type=&quot;IPST&quot;&gt;
 <li><strong>AlarmServerHost:</strong> Is the IP-Address of the WinAlarmServer</li>
 <li><strong>AlarmServerPort:</strong> Is the IP-Port of the WinAlarmServer</li>
 <li><strong>AlarmServerEncoding:</strong> Specifies the encoding of the received data of the WinAlarmServer</li>
-<li><p><strong>AlarmServerType:</strong> <em>TCP</em> or <em>S7</em>        </p>
+<li><p><strong>AlarmServerType:</strong> <em>TCP</em> or <em>S7</em>       </p>
 <ul>
-<li><em>TCP:</em> ALM2TCP or WinCCAlarmServer    </li>
-<li><em>S7:</em> ICON itself    </li>
+<li><em>TCP:</em> ALM2TCP or WinCCAlarmServer </li>
+<li><em>S7:</em> ICON itself  </li>
 </ul>
 </li>
 <li><p><strong>FrameSize:</strong> Specifies the FrameSize of the RFC1006 telegram</p>
@@ -356,7 +356,7 @@ OR     &lt;Section Type=&quot;IPST&quot;&gt;
 <li><strong>SinkPlcFixPayloadLength:</strong> The data transmitted to the PLC should always have the same block size. If the parameter is greater than 0, then this block size is always generated. If the data is greater, it is truncated, if it is less, it is filled with zeros</li>
 </ul>
 <hr>
-<h4 id="subsection-type-pdemipst">Subsection Type PDEM/IPST</h4>
+<h4 id="subsection-type-pdemipst">Subsection Type PDEM/IPST####</h4>
 <pre><code class="lang-html">&lt;Section Type=&quot;PDEM&quot;&gt;
     &lt;ConfigValue name=&quot;CPENameSearchStartIndex&quot; type=&quot;int&quot;&gt;0&lt;/ConfigValue&gt;
     &lt;ConfigValue name=&quot;CPENameSearchLength&quot; type=&quot;int&quot;&gt;24&lt;/ConfigValue&gt;
@@ -398,17 +398,17 @@ OR     &lt;Section Type=&quot;IPST&quot;&gt;
 <li><strong>NoAlarmForwardingInfoMsg:</strong> This parameter specifies the text that is forwarded if the forwarding of fault messages is deselected or selected via the PLC interface (Bit0). With this parameter it is possible to use umlauts (see Umlauts in the configuration file).</li>
 <li><strong>PlantOffInfoMsg:</strong> This parameter specifies the text that is forwarded if the forwarding of fault messages is deselected or selected via the PLC interface (Bit4). This message has higher priority than the NoAlarmForwarding message. With this parameter it is possible to use umlauts (see Umlauts in the configuration file).</li>
 <li><strong>AdditionalInfoDB:</strong> DB number of the DBS where the extended information is located.</li>
-<li><p><strong>AdditionalInfoDelimiter:</strong> Hex value that is searched for in the telegram. This value declares the start and end character for an offset in the DB. For example (I am a text that indicates an error. §10§ This is the error.) This text is parsed            </p>
+<li><p><strong>AdditionalInfoDelimiter:</strong> Hex value that is searched for in the telegram. This value declares the start and end character for an offset in the DB. For example (I am a text that indicates an error. §10§ This is the error.) This text is parsed         </p>
 <ul>
-<li>I am a text that indicates an error.    </li>
-<li>10    </li>
-<li>This is the error.    </li>
+<li>I am a text that indicates an error. </li>
+<li>10   </li>
+<li>This is the error.   </li>
 </ul>
 <ul>
 <li>Additional info is now searched for in the Additional Info DB at offset 10.        <ul>
-<li>Info1 = Offset 10, Length 4 -&#62; uint    </li>
-<li>Info2 = Offset 14, Length 4 -&#62; uint    </li>
-<li>Info3 = Offset 18, Length 4 -&#62; uint    </li>
+<li>Info1 = Offset 10, Length 4 -&#62; uint  </li>
+<li>Info2 = Offset 14, Length 4 -&#62; uint  </li>
+<li>Info3 = Offset 18, Length 4 -&#62; uint  </li>
 </ul>
 </li>
 </ul>
@@ -419,7 +419,7 @@ OR     &lt;Section Type=&quot;IPST&quot;&gt;
 <li><strong>ShowAlarmForwardingStateInGui:</strong> Displays a text in the status bar if the alarm forwarding is deactivated.</li>
 </ul>
 <hr>
-<h5 id="pdem">PDEM</h5>
+<h5 id="pdem">PDEM#####</h5>
 <p>Specific sections for PDEM are:</p>
 <pre><code class="lang-html">&lt;Section Type=&quot;EngineNumberProviding&quot;&gt;
     &lt;ConfigValue name=&quot;DefaultAccessor&quot; type=&quot;string&quot;&gt;MainOPC&lt;/ConfigValue&gt;
@@ -453,10 +453,10 @@ OR     &lt;Section Type=&quot;IPST&quot;&gt;
                  Comment=&quot;TE&quot; Comment2=&quot;&quot; /&gt;
 &lt;/Section&gt;
 </code></pre><hr>
-<h5 id="pdem-enginenumberproviding">PDEM EngineNumberProviding</h5>
+<h5 id="pdem-enginenumberproviding">PDEM EngineNumberProviding#####</h5>
 <p>...</p>
 <hr>
-<h5 id="pdem-notifyclasses">PDEM NotifyClasses</h5>
+<h5 id="pdem-notifyclasses">PDEM NotifyClasses#####</h5>
 <pre><code class="lang-html">&lt;Section Type=&quot;NotifyClasses&quot;&gt;
     &lt;ConfigValue name=&quot;Default&quot; type=&quot;int&quot;&gt;6&lt;/ConfigValue&gt;
     &lt;ConfigValue name=&quot;PriorityCancelMsg&quot; 
@@ -471,13 +471,13 @@ OR     &lt;Section Type=&quot;IPST&quot;&gt;
 <li><strong>PriorityCancelMsg:</strong> If this message is detected, the saved priorities are deleted.</li>
 <li><strong>AdditionalPriorityCancelMsg:</strong> This parameter can be defined as often as required, hence it is possible to declare multiple CancelMsgs.</li>
 <li>With the ConfigValue PriorityCancelMsg it is possible to use umlauts (see Umlauts in the configuration file).</li>
-<li><p><strong>NotifyClass:</strong>        </p>
+<li><p><strong>NotifyClass:</strong>     </p>
 <ul>
 <li><strong>Id:</strong> This value is searched for in the message text. &quot;&quot; -&#62; no search    </li>
 <li><strong>Prio:</strong> An integer, this value compared with the value of the priority from Pdiag. 0 -&#62; no comparison    </li>
-<li><strong>Name:</strong> The alarm code assigned to the message which is identified by the type.    </li>
-<li><strong>Save:</strong> Specifies that the code of this message should be saved in order to be inherited from other messages. (For information on using, see <a href="#Save_and_Inherit">Save and Inherit</a>)    </li>
-<li><strong>Inherit:</strong> Specifies that the saved code should be inherited. (For information on using, see <a href="#Save_and_Inherit">Save and Inherit</a>)    </li>
+<li><strong>Name:</strong> The alarm code assigned to the message which is identified by the type.  </li>
+<li><strong>Save:</strong> Specifies that the code of this message should be saved in order to be inherited from other messages. (For information on using, see <a href="#Save_and_Inherit">Save and Inherit</a>)  </li>
+<li><strong>Inherit:</strong> Specifies that the saved code should be inherited. (For information on using, see <a href="#Save_and_Inherit">Save and Inherit</a>)  </li>
 </ul>
 </li>
 <li><p>If the message class cannot be assigned, then the default value is used. </p>
@@ -485,7 +485,7 @@ OR     &lt;Section Type=&quot;IPST&quot;&gt;
 <li>With the ConfigValue PriorityCancelMsg as well as with the attributes comment and comment2 it is possible to use umlauts (see Umlauts in the configuration file).</li>
 </ul>
 <hr>
-<h5 id="pdem-plcdevices">PDEM PlcDevices</h5>
+<h5 id="pdem-plcdevices">PDEM PlcDevices#####</h5>
 <p><a name="PDEM_PlcDevices"></a>
 The AlarmManager also includes the following parameters in the &quot;PlcDevices&quot; section:</p>
 <ul>
@@ -497,11 +497,11 @@ The AlarmManager also includes the following parameters in the &quot;PlcDevices&
 </ul>
 <p>The Accessor, DB, Offset, ObservedGroupUpdateRate and Poll parameters of this section define a MemBasedMsgSource with a PLC implementation.</p>
 <hr>
-<h5 id="pdem-plcdevices-plc-structure">PDEM PlcDevices PLC structure</h5>
+<h5 id="pdem-plcdevices-plc-structure">PDEM PlcDevices PLC structure#####</h5>
 <p>FaultTextLabel: If this text is found in the telegram, then the fault is assigned to this device. If the fault label has the value &quot;Default&quot;, then, this device is also used. If no other suitable entry was found.  </p>
 <p><strong>!!!Attention!!!</strong> If the Default character sequence is found in the search range, the search is stopped immediately and the settings for Default are applied</p>
 <hr>
-<h5 id="pdem-plcdevices-pdem">PDEM PlcDevices PDEM</h5>
+<h5 id="pdem-plcdevices-pdem">PDEM PlcDevices PDEM#####</h5>
 <table><tr><th colspan="4">Structure of the entry:</th></tr>
 <tr><th>Offset </th><th> Designation </th><th> Size </th><th> Description</th></tr>
 <tr><td>0 </td><td> ID </td><td> 2 </td><td> System ID of PDEM</td></tr>
@@ -513,7 +513,7 @@ The AlarmManager also includes the following parameters in the &quot;PlcDevices&
 
 
 <hr>
-<h5 id="pdem-plcdevices-ipst">PDEM PlcDevices IPST</h5>
+<h5 id="pdem-plcdevices-ipst">PDEM PlcDevices IPST#####</h5>
 <table><tr><th colspan="4">Structure of the entry:</th></tr>
 <tr><th>Offset </th><th> Designation </th><th> Size </th><th> Description</th></tr>
 <tr><td>0 </td><td> Source </td><td> 32 </td><td> Computer name</td></tr>
@@ -545,7 +545,7 @@ The AlarmManager also includes the following parameters in the &quot;PlcDevices&
 
 
 <hr>
-<h5 id="subsection-type-plcerrors">Subsection Type PlcErrors</h5>
+<h5 id="subsection-type-plcerrors">Subsection Type PlcErrors#####</h5>
 <pre><code class="lang-html">&lt;Section Type=&quot;PlcErrors&quot;&gt;
     &lt;ConfigValue name=&quot;Accessor&quot; type=&quot;string&quot;&gt;MainOPC&lt;/ConfigValue&gt;
     &lt;ConfigValue name=&quot;DB&quot; type=&quot;int&quot;&gt;419&lt;/ConfigValue&gt;
@@ -585,7 +585,7 @@ The AlarmManager also includes the following parameters in the &quot;PlcDevices&
 </ul>
 <p>The Accessor, DB, Offset, ObservedGroupUpdateRate and Poll parameters of this section define a MemBasedMsgSource with a PLC implementation.</p>
 <hr>
-<h5 id="subsection-type-plcerrors-plc-structure">Subsection Type PlcErrors PLC Structure</h5>
+<h5 id="subsection-type-plcerrors-plc-structure">Subsection Type PlcErrors PLC Structure#####</h5>
 <table><tr><th colspan="4">Structure of the entry:</th></tr>
 <tr><th>Offset </th><th> Designation </th><th> Size </th><th> Description</th></tr>
 <tr><td>OffsetCodes </td><td> Error number </td><td> 2 </td><td> Here, an array [1..Entries] of INT must</td></tr>
@@ -601,11 +601,11 @@ The AlarmManager also includes the following parameters in the &quot;PlcDevices&
 
 
 <hr>
-<h5 id="subsection-type-plcerrors-errors-structure">Subsection Type PlcErrors Errors Structure</h5>
+<h5 id="subsection-type-plcerrors-errors-structure">Subsection Type PlcErrors Errors Structure#####</h5>
 <p>Error=[errorNumber]=[errorCode];[errorcodeExtended];[textfilepath]</p>
 <p>e.g.: &#60;Errors Error=&quot;0=0;1;RF300&#95;ASM&#95;Fehler.txt&quot;/&#62;</p>
 <hr>
-<h5 id="subsection-type-plcerrors-text-file-structure">Subsection Type PlcErrors Text-File-Structure</h5>
+<h5 id="subsection-type-plcerrors-text-file-structure">Subsection Type PlcErrors Text-File-Structure#####</h5>
 <table><tr><th>Code </th><th> Text</th></tr>
 </table>
 
@@ -614,7 +614,7 @@ The AlarmManager also includes the following parameters in the &quot;PlcDevices&
 <p>02;DetailDiag:Establishment of connection not possible  </p>
 <p>03;DetailDiag:Connection aborted  </p>
 <hr>
-<h5 id="ipst">IPST</h5>
+<h5 id="ipst">IPST#####</h5>
 <p>Specific Section of IPST are:</p>
 <pre><code class="lang-html">&lt;Section Type=&quot;NotifyClasses&quot;&gt;
     &lt;ConfigValue name=&quot;DefaultC&quot; type=&quot;string&quot;&gt;T&lt;/ConfigValue&gt;
@@ -640,29 +640,29 @@ The AlarmManager also includes the following parameters in the &quot;PlcDevices&
     &lt;/NotifyClass&gt;
 &lt;/Section&gt;
 </code></pre><hr>
-<h5 id="ipst-notifyclasses">IPST NotifyClasses</h5>
+<h5 id="ipst-notifyclasses">IPST NotifyClasses#####</h5>
 <p><a name="IPST_NotifyClasses"></a></p>
 <ul>
 <li><strong>PriorityCancelMsg:</strong> If this message is detected, the saved priorities are deleted.</li>
 <li><strong>SuppressedAlarmCode:</strong> All alarms that have a name (attribute name from NotifyClass) equal to this value are not forwarded.</li>
 <li><strong>AdditionalPriorityCancelMsg:</strong> This parameter can be defined as often as required, hence it is possible to declare multiple CancelMsgs.</li>
 <li>With the ConfigValue PriorityCancelMsg it is possible to use umlauts (see Umlauts in the configuration file).</li>
-<li><strong>NotifyClass:</strong>    <ul>
+<li><strong>NotifyClass:</strong> <ul>
 <li><strong>Id:</strong> This value is searched for in the message text. „“ -&#62; no search</li>
 <li><strong>Prio:</strong> An integer, this value compared with the value of the priority from Pdiag. 0 -&#62; no comparison</li>
 <li><strong>Name:</strong> The alarm code assigned to the message which is identified by the type.</li>
 <li><strong>Save:</strong> Specifies that the code of this message should be saved in order to be inherited from other messages. (For information on using, see <a href="#Save_and_Inherit">Save and Inherit</a>)</li>
-<li><strong>Inherit:</strong> Specifies that the saved code should be inherited. (For information on using, see <a href="#Save_and_Inherit">Save and Inherit</a>)    </li>
+<li><strong>Inherit:</strong> Specifies that the saved code should be inherited. (For information on using, see <a href="#Save_and_Inherit">Save and Inherit</a>)  </li>
 </ul>
 </li>
 </ul>
 <p>If the message class cannot be assigned, then the default value is used. Default There are values for C=Coming, L=Leaving and R=Resettable respectively.</p>
 <p>With the ConfigValue PriorityCancelMsg as well as with the attributes comment and comment2 it is possible to use umlauts (see Umlauts in the configuration file).</p>
 <hr>
-<h5 id="ipst-plcdevices">IPST PlcDevices</h5>
+<h5 id="ipst-plcdevices">IPST PlcDevices#####</h5>
 <p><a href="#PDEM_PlcDevices">See PDEM</a></p>
 <hr>
-<h4 id="subsection-type-plc">Subsection Type Plc</h4>
+<h4 id="subsection-type-plc">Subsection Type Plc####</h4>
 <pre><code class="lang-html">&lt;Section Type=&quot;Plc&quot;&gt;
     &lt;ConfigValue name=&quot;Accessor&quot; type=&quot;string&quot;&gt;MainOPC&lt;/ConfigValue&gt;
     &lt;ConfigValue name=&quot;DB&quot; type=&quot;int&quot;&gt;498&lt;/ConfigValue&gt;
@@ -670,63 +670,63 @@ The AlarmManager also includes the following parameters in the &quot;PlcDevices&
     &lt;ConfigValue name=&quot;Poll&quot; type=&quot;int&quot;&gt;0&lt;/ConfigValue&gt;
 &lt;/Section&gt;
 </code></pre><hr>
-<h4 id="subsection-type-spooler">Subsection Type Spooler</h4>
+<h4 id="subsection-type-spooler">Subsection Type Spooler####</h4>
 <p>See Spooling</p>
 <hr>
-<h3 id="alarmmanager-procedure">AlarmManager Procedure</h3>
+<h3 id="alarmmanager-procedure">AlarmManager Procedure###</h3>
 <hr>
-<h4 id="pdem-1">PDEM</h4>
+<h4 id="pdem-1">PDEM####</h4>
 <hr>
-<h5 id="behaviour-when-starting-the-module">Behaviour when starting the module</h5>
+<h5 id="behaviour-when-starting-the-module">Behaviour when starting the module#####</h5>
 <ol>
 <li>Starting the socket</li>
 <li>Read in AlarmCache from file and log the read in alarms (message output per alarm: Temporary alarms MsgText ...)</li>
 <li>Read in PLC data</li>
 <li>ControllerSocketSink declared        <ol>
 <li>No:                </li>
-<li>Create ICONRestartInfo per system Id                        <ol>
-<li>Create 9002 telegram            </li>
-<li>Send fault with R (Reset)                </li>
-<li>Alarms &#60;= 0: A Message Telegram with R;&#95;;                </li>
-<li>Alarms &#62; 0: For each message a message telegram with R;?;                                        </li>
+<li>Create ICONRestartInfo per system Id                     <ol>
+<li>Create 9002 telegram           </li>
+<li>Send fault with R (Reset)              </li>
+<li>Alarms &#60;= 0: A Message Telegram with R;&#95;;             </li>
+<li>Alarms &#62; 0: For each message a message telegram with R;?;                                     </li>
 </ol>
 </li>
-<li>Connect Alarm server (Send Connect Telegram  --&gt;  Alarm server sends all pending alarms)            </li>
-<li>Yes:                </li>
-<li>Wait until the ControllerSocket is connected and then carry out the steps described in 4.1 (&quot;No:&quot;)            </li>
+<li>Connect Alarm server (Send Connect Telegram  --&gt;  Alarm server sends all pending alarms)         </li>
+<li>Yes:               </li>
+<li>Wait until the ControllerSocket is connected and then carry out the steps described in 4.1 (&quot;No:&quot;)           </li>
 </ol>
 </li>
 </ol>
 <hr>
-<h5 id="behaviour-when-terminating-the-module">Behaviour when terminating the module</h5>
+<h5 id="behaviour-when-terminating-the-module">Behaviour when terminating the module#####</h5>
 <ol>
 <li>Disconnect alarm server connection (send disconnect telegram)</li>
 <li>Write alarms in alarm cache file</li>
 </ol>
 <hr>
-<h5 id="behaviour-when-connectingdisconnecting-from-alarm-server">Behaviour when connecting/disconnecting from alarm server</h5>
+<h5 id="behaviour-when-connectingdisconnecting-from-alarm-server">Behaviour when connecting/disconnecting from alarm server#####</h5>
 <ul>
 <li><strong>Connect:</strong> Send connect telegram to alarm server  --&gt;  Alarm server sends all pending alarms. This only applies if ControllerSocketSink is not declared. Otherwise, this first occurs when the ControllerSocket is connected.</li>
 <li><strong>Disconnect:</strong> Send all alarms as leaving.</li>
 </ul>
 <hr>
-<h5 id="behaviour-on-receiving-a-reset">Behaviour on receiving a reset</h5>
+<h5 id="behaviour-on-receiving-a-reset">Behaviour on receiving a reset#####</h5>
 <p>Reset = 9002</p>
 <ol>
 <li>Telegram receipt</li>
 <li>Transmit AlarmServerConnect telegram if no connection exists yet</li>
 <li>Depending on the setting:        <ol>
 <li>Bit AckMachineState = false                </li>
-<li>Determine number of pending faults            </li>
-<li>Bit AckMachineState = true                </li>
-<li>Number of pending faults = 0            </li>
+<li>Determine number of pending faults           </li>
+<li>Bit AckMachineState = true             </li>
+<li>Number of pending faults = 0         </li>
 </ol>
 </li>
 <li>9002 Transmit telegram for each system ID</li>
 <li>Send all pending alarms if the number I &#62; 0 &amp;&amp; order type == 2</li>
 </ol>
 <hr>
-<h5 id="behaviour-when-changing-interfaces">Behaviour when changing interfaces</h5>
+<h5 id="behaviour-when-changing-interfaces">Behaviour when changing interfaces#####</h5>
 <p>CommandBitsPLC.NoAlarmForwarding:  </p>
 <p>0  --&gt;  1: Send all alarms as going and then transmit a NoAlarmForwarding = True Message  </p>
 <p>1  --&gt;  0: Send all pending alarms and then transmit a NoAlarmForwarding = False Message</p>
@@ -734,60 +734,60 @@ The AlarmManager also includes the following parameters in the &quot;PlcDevices&
 <p>0  --&gt;  1: Reset Reinitbit and send a 9013 telegram for each system Id
 If the spooler is full, a spooler status telegram is transmitted and the bit StateBitsPC. SpoolerWarning set. If the level has fallen below, the message is sent again and the bits StateBitsPC.SpoolerFull and StateBitsPC. SpoolerWarning reset again.</p>
 <hr>
-<h5 id="behaviour-when-sending-the-last-leaving-alarm">Behaviour when sending the last leaving alarm</h5>
+<h5 id="behaviour-when-sending-the-last-leaving-alarm">Behaviour when sending the last leaving alarm#####</h5>
 <p>No change to the normal sequence.</p>
 <hr>
-<h4 id="ips-t">IPS-T</h4>
+<h4 id="ips-t">IPS-T####</h4>
 <hr>
-<h5 id="behaviour-when-starting-the-module-1">Behaviour when starting the module</h5>
+<h5 id="behaviour-when-starting-the-module-1">Behaviour when starting the module#####</h5>
 <p><a name="Behaviour_when_starting_the_module1"></a></p>
 <ol>
 <li>Starting the socket</li>
 <li>Read in AlarmCache from file and log the read in alarms (message output per alarm: Temporary alarms MsgText ...)</li>
 <li>Read in PLC data</li>
 <li>ControllerSocketSink declared        <ol>
-<li>Yes:                </li>
-<li>Create ICONRestartInfo per CPE                        <ol>
+<li>Yes:               </li>
+<li>Create ICONRestartInfo per CPE                       <ol>
 <li>Create CPEInit telegram            </li>
-<li>Send fault with R (Reset)                </li>
-<li>Alarms &#60;= 0: A Message Telegram with R;&#95;;                </li>
-<li>Alarms &#62; 0: For each message a message telegram with R;?;                                        </li>
+<li>Send fault with R (Reset)              </li>
+<li>Alarms &#60;= 0: A Message Telegram with R;&#95;;             </li>
+<li>Alarms &#62; 0: For each message a message telegram with R;?;                                     </li>
 </ol>
 </li>
-<li>Connect Alarm server (transmit no connect telegram)            </li>
+<li>Connect Alarm server (transmit no connect telegram)          </li>
 <li>No:                </li>
-<li>Wait until the ControllerSocket is connected and then carry out the steps described in 4.1 (&quot;Yes:&quot;)            </li>
+<li>Wait until the ControllerSocket is connected and then carry out the steps described in 4.1 (&quot;Yes:&quot;)          </li>
 </ol>
 </li>
 </ol>
 <hr>
-<h5 id="behaviour-when-terminating-the-module-1">Behaviour when terminating the module</h5>
+<h5 id="behaviour-when-terminating-the-module-1">Behaviour when terminating the module#####</h5>
 <ol>
 <li>Disconnect alarm server connection (send disconnect telegram)</li>
 <li>Write alarms in alarm cache file</li>
 </ol>
 <hr>
-<h5 id="behaviour-when-connectingdisconnecting-from-alarm-server-1">Behaviour when connecting/disconnecting from alarm server</h5>
+<h5 id="behaviour-when-connectingdisconnecting-from-alarm-server-1">Behaviour when connecting/disconnecting from alarm server#####</h5>
 <p><strong>Connect:</strong> Send connect telegram to alarm server  --&gt;  Alarm server sends all pending alarms. This only applies if ControllerSocketSink is declared and the socket is also connected.</p>
 <hr>
-<h5 id="behaviour-on-receiving-a-reset-1">Behaviour on receiving a reset</h5>
+<h5 id="behaviour-on-receiving-a-reset-1">Behaviour on receiving a reset#####</h5>
 <p>Reset = IPSTINIT</p>
 <p>Pseudo telegram: &quot;XXXX;R;&#95;;T;PID=;TYP=;CID=;SNR=;MPR=;TEXT=&quot;  </p>
 <ol>
 <li>Telegram receipt</li>
 <li>Transmit AlarmServerConnect telegram if no connection exists yet</li>
 <li>Depending on the setting:        <ol>
-<li>IPSTINITSendPseudoMessage = true                </li>
+<li>IPSTINITSendPseudoMessage = true               </li>
 <li>Generate and send pseudo telegram        </li>
 <li>Send all pending telegrams with updated timestamp            </li>
-<li>IPSTINITSendPseudoMessage = false                </li>
-<li>Procedure like <a href="#Behaviour_when_starting_the_module1">point 4 when starting the module</a>        </li>
+<li>IPSTINITSendPseudoMessage = false              </li>
+<li>Procedure like <a href="#Behaviour_when_starting_the_module1">point 4 when starting the module</a>      </li>
 <li>Send all pending telegrams with updated timestamp            </li>
 </ol>
 </li>
 </ol>
 <hr>
-<h5 id="behaviour-when-changing-interfaces-1">Behaviour when changing interfaces</h5>
+<h5 id="behaviour-when-changing-interfaces-1">Behaviour when changing interfaces#####</h5>
 <p>CommandBitsPLC.NoAlarmForwarding:  </p>
 <p>0  --&gt;  1: Send all alarms as going and then transmit a NoAlarmForwarding = True Message  </p>
 <p>1  --&gt;  0: Send all pending alarms with updated timestamp and then transmit a NoAlarmForwarding = False Message</p>
@@ -795,10 +795,10 @@ If the spooler is full, a spooler status telegram is transmitted and the bit Sta
 <p>0  --&gt;  1: Reset Reinitbit and send a CPE&#95;Init for each CPE</p>
 <p>If the spooler is full, the bit StateBitsPC.SpoolerWarning is set. If the level has fallen below, the bits StateBitsPC.SpoolerFull and StateBitsPC.SpoolerWarning is reset again. (no telegram traffic occurs)</p>
 <hr>
-<h5 id="behaviour-when-sending-the-last-leaving-alarm-1">Behaviour when sending the last leaving alarm</h5>
+<h5 id="behaviour-when-sending-the-last-leaving-alarm-1">Behaviour when sending the last leaving alarm#####</h5>
 <p>The last alarm of each CPE is not sent as &#39;L&#39; for Leaving but as &#39;R&#39; for Reset.</p>
 <hr>
-<h4 id="save-and-inherit">Save and Inherit</h4>
+<h4 id="save-and-inherit">Save and Inherit####</h4>
 <p><a name="Save_and_Inherit"></a>
 The disruption reason of the messages can be modified by using the <em>save and inherit</em> setting of <a href="#IPST_NotifyClasses">NotifyClasses</a>. If a coming alarm with <em>technical</em> priority is received and is declared technically as save, this priority will be saved for this device. If additional alarms are now received for this device whose NotifyClass is marked with inherit, the priority of this alarm will then be overwritten by the priority previously saved. This will continue until a PriorityCancel Message is received.</p>
 <p>If a device is identified as Default (see <a href="#PDEM_PlcDevices">PLCDevices</a>  --&gt;  FaultTextLabel), then this inherit will be slightly more complicated. The default device also inherits from the other devices (in the sequence order by which the code occurs), and another device in turn.also inherits from the default device.</p>
@@ -810,7 +810,7 @@ The disruption reason of the messages can be modified by using the <em>save and 
 <p><img src="../images/ICON_Components_Alarmmanagement_3_1.png" alt="ICON_Components_Alarmmanagement_3_1.png"></p>
 <p><img src="../images/ICON_Components_Alarmmanagement_3_2.png" alt="ICON_Components_Alarmmanagement_3_2.png"></p>
 <hr>
-<h2 id="alarmpdemconverter">AlarmPDEMConverter</h2>
+<h2 id="alarmpdemconverter">AlarmPDEMConverter##</h2>
 <p>Before the &quot;AlarmPDEMConverter&quot; module can be used, it must be attached between the AlarmManager and the passive endpoints.</p>
 <p>Therefore, the endpoint configurations refer to the converter via the Sink parameter.  </p>
 <p>Example:</p>
@@ -919,8 +919,9 @@ The disruption reason of the messages can be modified by using the <em>save and 
          {10, 13},   //DLF   -&gt;  DLF
          {11, 12}    //EIO   -&gt;  EIO
         };
+
 </code></pre><hr>
-<h3 id="conversion-table">Conversion Table</h3>
+<h3 id="conversion-table">Conversion Table###</h3>
 <p>The following table describes the translation of the telegrams:  </p>
 <table><tr><th colspan="4">Source</th>  <th colspan="4">Target</th></tr>
 <tr><th>Tele-ID </th><th> Description </th><th> Src </th><th> Target </th><th> ID </th><th> Description </th><th> Src </th><th> Target</th></tr>
@@ -983,13 +984,13 @@ The disruption reason of the messages can be modified by using the <em>save and 
 <p><img src="../images/ICON_Components_struct_alloc1.png" alt="ICON_Components_struct_alloc1.png"></p>
 <p><img src="../images/ICON_Components_struct_alloc2.png" alt="ICON_Components_struct_alloc2.png"></p>
 <hr>
-<h3 id="overview">Overview</h3>
+<h3 id="overview">Overview###</h3>
 <hr>
-<h1 id="example-configurations">Example Configurations</h1>
+<h1 id="example-configurations">Example Configurations#</h1>
 <hr>
-<h2 id="b3x-bx8">B3X, BX8</h2>
+<h2 id="b3x-bx8">B3X, BX8##</h2>
 <hr>
-<h3 id="icon95allg-pc677-win7-profinet">ICON&#95;Allg (PC677 Win7-Profinet)</h3>
+<h3 id="icon95allg-pc677-win7-profinet">ICON&#95;Allg (PC677 Win7-Profinet)###</h3>
 <pre><code class="lang-html">&lt;ICONConfig Name=&quot;Allgemein&quot;&gt;
     &lt;ICONGlobals&gt;
         &lt;ConfigValue name=&quot;Traceing&quot; type=&quot;bool&quot;&gt;false&lt;/ConfigValue&gt;
@@ -1232,7 +1233,7 @@ The disruption reason of the messages can be modified by using the <em>save and 
                 &lt;Section Type=&quot;Persistor&quot;&gt;
                     &lt;ConfigValue name=&quot;Filename&quot; type=&quot;string&quot;&gt;TxTele&lt;/ConfigValue&gt;
                     &lt;ConfigValue name=&quot;ReorgFragmentationFactor&quot;
-                                        type=&quot;int&quot;&gt;0&lt;/ConfigValue&gt;
+                                       type=&quot;int&quot;&gt;0&lt;/ConfigValue&gt;
                     &lt;ConfigValue name=&quot;FlushWatchdogTimeout&quot;
                                  type=&quot;int&quot;&gt;5000&lt;/ConfigValue&gt;            
                 &lt;/Section&gt;
@@ -1292,7 +1293,7 @@ The disruption reason of the messages can be modified by using the <em>save and 
     &lt;/log4net&gt;
 &lt;/ICONConfig&gt;
 </code></pre><hr>
-<h3 id="icon95ipm-pc677-win7-profinet--62-b3x-bx8">ICON&#95;IPM (PC677 Win7-Profinet -&#62; B3X, BX8)</h3>
+<h3 id="icon95ipm-pc677-win7-profinet--62-b3x-bx8">ICON&#95;IPM (PC677 Win7-Profinet -&#62; B3X, BX8)###</h3>
 <pre><code class="lang-html">&lt;ICONConfig Name=&quot;IPM&quot;&gt;
   &lt;ICONGlobals&gt;
     &lt;ConfigValue name=&quot;Traceing&quot; type=&quot;bool&quot;&gt;false&lt;/ConfigValue&gt;
@@ -1570,7 +1571,7 @@ The disruption reason of the messages can be modified by using the <em>save and 
   &lt;/log4net&gt;
 &lt;/ICONConfig&gt;
 </code></pre><hr>
-<h3 id="icon95ipsc-pc677-win7-profinet--62-b3x-bx8">ICON&#95;IPSC (PC677 Win7-Profinet -&#62; B3X, BX8)</h3>
+<h3 id="icon95ipsc-pc677-win7-profinet--62-b3x-bx8">ICON&#95;IPSC (PC677 Win7-Profinet -&#62; B3X, BX8)###</h3>
 <pre><code class="lang-html">&lt;ICONConfig Name=&quot;IPS-C&quot;&gt;
 
   &lt;ICONGlobals&gt;
@@ -1932,7 +1933,7 @@ The disruption reason of the messages can be modified by using the <em>save and 
   &lt;/log4net&gt;
 &lt;/ICONConfig&gt;
 </code></pre><hr>
-<h3 id="icon95ipst-pc677-win7-profinet--62-b3x-bx8">ICON&#95;IPST (PC677 Win7-Profinet -&#62; B3X, BX8)</h3>
+<h3 id="icon95ipst-pc677-win7-profinet--62-b3x-bx8">ICON&#95;IPST (PC677 Win7-Profinet -&#62; B3X, BX8)###</h3>
 <pre><code class="lang-html">&lt;ICONConfig Name=&quot;IPS-T&quot;&gt;
 
   &lt;ICONGlobals&gt;
@@ -2349,12 +2350,12 @@ The disruption reason of the messages can be modified by using the <em>save and 
   &lt;/log4net&gt;
 &lt;/ICONConfig&gt;
 </code></pre><hr>
-<h2 id="band7">Band7</h2>
+<h2 id="band7">Band7##</h2>
 <hr>
-<h3 id="icon95allg">ICON&#95;Allg</h3>
+<h3 id="icon95allg">ICON&#95;Allg###</h3>
 <p>Since several different PLC standards prevail on Band 7, there is a main configuration (ICON.xml) that is extended by Include files or can be overwritten.</p>
 <hr>
-<h4 id="icon-main-configuration">ICON (Main configuration)</h4>
+<h4 id="icon-main-configuration">ICON (Main configuration)####</h4>
 <p>This main configuration searches for include files in the folder where the configuration is also located. The search pattern is ICON&#95;allg&#42;.xml</p>
 <pre><code class="lang-html">&lt;ICONConfig Name=&quot;Band7&quot;&gt;
   &lt;!-- Allg --&gt;
@@ -3192,7 +3193,7 @@ The disruption reason of the messages can be modified by using the <em>save and 
 
 &lt;/ICONConfig&gt;
 </code></pre><hr>
-<h4 id="icon95allg95695bst-include-file">ICON&#95;Allg&#95;6&#95;BST (Include File)</h4>
+<h4 id="icon95allg95695bst-include-file">ICON&#95;Allg&#95;6&#95;BST (Include File)####</h4>
 <p>This file contains the extended settings for 6 BSTs.</p>
 <pre><code class="lang-html">&lt;ICONConfig Name=&quot;Band7&quot;&gt;
   &lt;!-- 6 BSTs --&gt;
@@ -3217,7 +3218,7 @@ The disruption reason of the messages can be modified by using the <em>save and 
 
 &lt;/ICONConfig&gt;
 </code></pre><hr>
-<h4 id="icon95allg95hap-include-file">ICON&#95;Allg&#95;HAP (Include File)</h4>
+<h4 id="icon95allg95hap-include-file">ICON&#95;Allg&#95;HAP (Include File)####</h4>
 <p>This file contains the extended settings for manual workstations. Measures are taken to ensure that the inheritance of the AlarmManagement is changed since a PriorityCancelMessage is virtually never sent at manual workstations.</p>
 <pre><code class="lang-html">&lt;ICONConfig Name=&quot;Band7&quot;&gt;
   &lt;!-- HAP no SAVE --&gt;
@@ -3241,7 +3242,7 @@ The disruption reason of the messages can be modified by using the <em>save and 
 
 &lt;/ICONConfig&gt;
 </code></pre><hr>
-<h4 id="icon95allg95ipsc-include-file-for-iconxml">ICON&#95;Allg&#95;IPSC (Include File for ICON.xml)</h4>
+<h4 id="icon95allg95ipsc-include-file-for-iconxml">ICON&#95;Allg&#95;IPSC (Include File for ICON.xml)####</h4>
 <pre><code class="lang-html">&lt;ICONConfig Name=&quot;Band7&quot;&gt;
   &lt;!-- IPSC --&gt;
 
@@ -3378,9 +3379,9 @@ The disruption reason of the messages can be modified by using the <em>save and 
 
 &lt;/ICONConfig&gt;
 </code></pre><hr>
-<h3 id="icon95jis95receive">ICON&#95;JIS&#95;Receive</h3>
+<h3 id="icon95jis95receive">ICON&#95;JIS&#95;Receive###</h3>
 <hr>
-<h4 id="icon95jis95receive-main-file-for-jis95receive">ICON&#95;JIS&#95;Receive (Main file for JIS&#95;Receive)</h4>
+<h4 id="icon95jis95receive-main-file-for-jis95receive">ICON&#95;JIS&#95;Receive (Main file for JIS&#95;Receive)####</h4>
 <pre><code class="lang-html">&lt;ICONConfig Name=&quot;JIS Receive&quot;&gt;
   &lt;Includes&gt;
     &lt;Include&gt;@\ICON_JIS_Receive_Band2.xml&lt;/Include&gt;
@@ -3637,7 +3638,7 @@ The disruption reason of the messages can be modified by using the <em>save and 
   &lt;/log4net&gt;
 &lt;/ICONConfig&gt;
 </code></pre><hr>
-<h4 id="icon95jis95receive95band2-include-file-for-jis95receive">ICON&#95;JIS&#95;Receive&#95;Band2 (Include file for JIS&#95;Receive)</h4>
+<h4 id="icon95jis95receive95band2-include-file-for-jis95receive">ICON&#95;JIS&#95;Receive&#95;Band2 (Include file for JIS&#95;Receive)####</h4>
 <pre><code class="lang-html">&lt;ICONConfig Name=&quot;JIS Receive&quot;&gt;
 
     &lt;ICONModuleInstances&gt;   
@@ -3734,9 +3735,9 @@ The disruption reason of the messages can be modified by using the <em>save and 
 
 &lt;/ICONConfig&gt;
 </code></pre><hr>
-<h3 id="icon95jis95send">ICON&#95;JIS&#95;Send</h3>
+<h3 id="icon95jis95send">ICON&#95;JIS&#95;Send###</h3>
 <hr>
-<h4 id="icon95jis95send-band7">ICON&#95;JIS&#95;Send (Band7)</h4>
+<h4 id="icon95jis95send-band7">ICON&#95;JIS&#95;Send (Band7)####</h4>
 <pre><code class="lang-html">&lt;ICONConfig Name=&quot;JIS Receive&quot;&gt;
 
     &lt;ICONModuleInstances&gt;   
@@ -3832,7 +3833,7 @@ The disruption reason of the messages can be modified by using the <em>save and 
 
  &lt;/ICONConfig&gt;
 </code></pre><hr>
-<h4 id="icon95jis95send952-band7">ICON&#95;JIS&#95;Send&#95;2 (Band7)</h4>
+<h4 id="icon95jis95send952-band7">ICON&#95;JIS&#95;Send&#95;2 (Band7)####</h4>
 <pre><code class="lang-html">&lt;ICONConfig Name=&quot;JIS Send&quot;&gt;
   &lt;ICONModuleInstances&gt;
     &lt;ICONModule Name=&quot;JisSendSource_2&quot; Assembly=&quot;MemBasedMsgSource.dll&quot;&gt;
@@ -3921,9 +3922,9 @@ The disruption reason of the messages can be modified by using the <em>save and 
   &lt;/ICONModuleInstances&gt;
 &lt;/ICONConfig&gt;
 </code></pre><hr>
-<h3 id="icon95serial">ICON&#95;Serial</h3>
+<h3 id="icon95serial">ICON&#95;Serial###</h3>
 <hr>
-<h4 id="icon95serial-band7">ICON&#95;Serial (Band7)</h4>
+<h4 id="icon95serial-band7">ICON&#95;Serial (Band7)####</h4>
 <pre><code class="lang-html">&lt;ICONConfig Name=&quot;ICON-Serial&quot; &gt;
   &lt;Includes&gt;
     &lt;Include&gt;@\ICON_Serial_COM*.xml&lt;/Include&gt;
@@ -4049,7 +4050,7 @@ The disruption reason of the messages can be modified by using the <em>save and 
   &lt;/log4net&gt;
 &lt;/ICONConfig&gt;
 </code></pre><hr>
-<h4 id="icon95serial95com951-band7">ICON&#95;Serial&#95;COM&#95;1 (Band7)</h4>
+<h4 id="icon95serial95com951-band7">ICON&#95;Serial&#95;COM&#95;1 (Band7)####</h4>
 <pre><code class="lang-html">&lt;ICONConfig Name=&quot;ICON-Serial&quot;&gt;
   &lt;ICONModuleInstances&gt;
 
@@ -4076,7 +4077,7 @@ The disruption reason of the messages can be modified by using the <em>save and 
   &lt;/ICONModuleInstances&gt;
 &lt;/ICONConfig&gt;
 </code></pre><hr>
-<h4 id="icon95serial95tcp951-band7">ICON&#95;Serial&#95;TCP&#95;1 (Band7)</h4>
+<h4 id="icon95serial95tcp951-band7">ICON&#95;Serial&#95;TCP&#95;1 (Band7)####</h4>
 <pre><code class="lang-html">&lt;ICONConfig Name=&quot;ICON-Serial&quot;&gt;
   &lt;ICONModuleInstances&gt;
 
@@ -4123,7 +4124,7 @@ The disruption reason of the messages can be modified by using the <em>save and 
 
 &lt;/ICONConfig&gt;
 </code></pre><hr>
-<h1 id="change-directory">Change directory</h1>
+<h1 id="change-directory">Change directory#</h1>
 <table><tr><th>Author </th><th> Date </th><th> Remarks</th></tr>
 <tr><td>Benjamin Prömmer </td><td> 2014-07-21 </td><td> New creation</td></tr>
 <tr><td>Benjamin Prömmer </td><td> 2014-09-25 </td><td> Extension of AlarmManagement</td></tr>

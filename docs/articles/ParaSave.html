@@ -8,7 +8,7 @@
     <title>ParaSave </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="ParaSave ">
-    <meta name="generator" content="docfx 2.12.1.0">
+    <meta name="generator" content="docfx 2.40.12.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -74,16 +74,16 @@
 
 <p><strong>Data backup tool for PLC data blocks</strong>  </p>
 <hr>
-<h1 id="general-information">General Information</h1>
+<h1 id="general-information">General Information#</h1>
 <p>ParaSave is used to backup, restore and compare data blocks of a PLC in/of CSV files on a PC. OPC is used for communication between PLC and PC. The parameterisation of ParaSave mostly takes place via an ini file (see Appendix). The individual functions can be selected from a Windows user interface or started &quot;unsupervised&quot; via command line parameters (s. Automatic mode).</p>
 <hr>
-<h1 id="user-interface">User Interface</h1>
+<h1 id="user-interface">User Interface#</h1>
 <hr>
-<h2 id="manual-mode">Manual Mode</h2>
+<h2 id="manual-mode">Manual Mode##</h2>
 <p><img src="../images/ParaSave_UI_ManualMode.png" alt="ParaSave_UI_ManualMode.png"></p>
 <p>In &quot;manual&quot; mode ParaSave has the above user interface. The data areas that can be backed-up and restored to/from the PLC are displayed in a list. Individual data areas can be activated/deactivated (&quot;option checkmark&quot; next to the area name). The actions that can be triggered using the buttons under the data area list always refer to all selected data areas. It is possible to control which areas are displayed in the list using the entries in the ini file (see <a href="#settings_in_ini_file">Appendix</a>). The buttons in the &quot;logbook&quot; frame in the upper right corner allows you to display, hide and print out the application logbook. The backup procedure for the areas marked with (&#42;) can be triggered by the PLC. A bit is provided in the control word for this purpose. If this is set, ParaSave performs the backup procedure automatically for these areas. The individual areas are set via the configuration files (see below).</p>
 <hr>
-<h2 id="automatic-mode">Automatic Mode</h2>
+<h2 id="automatic-mode">Automatic Mode##</h2>
 <p>No user interface appears in &quot;automatic mode&quot; by default. Depending on the command line parameters, ParaSave executes the required function and then terminates again automatically. Automatic backup, comparison and restore is currently supported. In the logbook, corresponding entries are performed in automatic mode, too. The following parameters are supported:</p>
 <table>
  <tr><th>&quot;ParaSave –c&quot; </th><td> Automatic compare (c = &quot;compare&quot;)</td></tr>
@@ -97,10 +97,10 @@
 <p>The automatic comparison has a special feature: If the comparison should fail (NOK), a specific bit in a freely definable data word is set in the PLC (see &quot;PLC Interface&quot;). This bit is reset (OK) if a further automatic comparison run or manually triggered comparison across all data areas no longer results in any differences.</p>
 <p>Using the additional &#39;-v&#39; parameter, the user interface can be made visible during the course of the function even in automatic mode.</p>
 <hr>
-<h1 id="plc-interface">PLC Interface</h1>
+<h1 id="plc-interface">PLC Interface#</h1>
 <p>The data blocks that can be saved by the PLC and restored again in the PLC can be set in data block, offset and length via the INI file (see Appendix). Furthermore, a bit within a status word will serve as an interface to the PLC in case of an automatic comparison. The data block and offset of the control word and status word can also be set via the INI file. </p>
 <hr>
-<h2 id="status-word">Status Word</h2>
+<h2 id="status-word">Status Word##</h2>
 <table>
  <tr><th>Bit 0: </th><td> If set, then the last comparison NOK</td></tr>
  <tr><th>Bit 1: </th><td> Backup request executed by PLC</td></tr>
@@ -109,7 +109,7 @@
 
 <p>The PLC must reset bit 0 after the NOK case has been detected.</p>
 <hr>
-<h2 id="control-word">Control Word</h2>
+<h2 id="control-word">Control Word##</h2>
 <table>
  <tr><th>Bit 0: </th><td> not used</td></tr>
  <tr><th>Bit 1: </th><td> Backup request of the blocks marked with &quot;SichernDurchSPS&quot;</td></tr>
@@ -118,119 +118,119 @@
 
 
 <hr>
-<h1 id="appendix">Appendix</h1>
+<h1 id="appendix">Appendix#</h1>
 <hr>
-<h2 id="registry-entries">Registry Entries</h2>
+<h2 id="registry-entries">Registry Entries##</h2>
 <table><tr><th>Key: </th><th> <code>HKEY_LOCAL_MACHINE\Software\insite GmbH\ParaSave\Setting</code></th></tr>
 <tr><td>Character string: </td><td> ConfigFile</td></tr>
-<tr><td>Values:     </td><td> Name of the configuration file. The default value is </td></tr>
+<tr><td>Values:  </td><td> Name of the configuration file. The default value is </td></tr>
 <tr><td>   </td><td> <code>F:\DH\INSITE\ParaSave.INI.</code></td></tr>
 </table>
 
 
 
 <hr>
-<h2 id="settings-in-ini-file">Settings in INI file</h2>
+<h2 id="settings-in-ini-file">Settings in INI file##</h2>
 <h2 id="a-namesettingsininifilea"><a name="settings_in_ini_file"></a></h2>
-<h3 id="section-sps">Section [SPS]</h3>
+<h3 id="section-sps">Section [SPS]###</h3>
 <ul>
 <li><p><strong>OPCServerName</strong>        </p>
 <ul>
-<li>String    </li>
-<li>Name of the OPC server. This name corresponds to the COM object and is used to initialise the server    </li>
-<li>Default: &quot;OPCServer.WinAC&quot;    </li>
+<li>String </li>
+<li>Name of the OPC server. This name corresponds to the COM object and is used to initialise the server   </li>
+<li>Default: &quot;OPCServer.WinAC&quot; </li>
 </ul>
 </li>
-<li><p><strong>OPCPartnerName</strong>        </p>
+<li><p><strong>OPCPartnerName</strong>       </p>
 <ul>
-<li>String    </li>
+<li>String </li>
 <li>Name of the connection partner when using the SimaticNet OPC server    </li>
 </ul>
 </li>
 <li><p><strong>OPCConnectionName</strong>        </p>
 <ul>
-<li>String    </li>
+<li>String </li>
 <li>Name of the connection when using the SimaticNet OPC server    </li>
 </ul>
 </li>
-<li><p><strong>OPCServerPollZyklus</strong>        </p>
+<li><p><strong>OPCServerPollZyklus</strong>      </p>
 <ul>
 <li>Integer    </li>
-<li>Poll cycle of the OPC server    </li>
-<li>Default: 500    </li>
+<li>Poll cycle of the OPC server   </li>
+<li>Default: 500   </li>
 </ul>
 </li>
-<li><p><strong>OPCMaxBlockSize</strong>        </p>
+<li><p><strong>OPCMaxBlockSize</strong>      </p>
 <ul>
 <li>Integer    </li>
-<li>Maximum block size for data transmission via OPC. Any block that exceeds this value is divided automatically into several read/write tasks. A &quot;0&quot; means an unlimited block size.     </li>
-<li>Default: 0    </li>
+<li>Maximum block size for data transmission via OPC. Any block that exceeds this value is divided automatically into several read/write tasks. A &quot;0&quot; means an unlimited block size.   </li>
+<li>Default: 0 </li>
 </ul>
 </li>
-<li><p><strong>AccessMode</strong>        </p>
+<li><p><strong>AccessMode</strong>       </p>
 <ul>
-<li>String    </li>
-<li>Access mode on PLC. Possible values &quot;OPC&quot;, &quot;OPCSinumeric&quot; or &quot;OPCSimaticNet&quot;.    </li>
-<li>Default: &quot;OPC&quot;    </li>
+<li>String </li>
+<li>Access mode on PLC. Possible values &quot;OPC&quot;, &quot;OPCSinumeric&quot; or &quot;OPCSimaticNet&quot;.  </li>
+<li>Default: &quot;OPC&quot; </li>
 </ul>
 </li>
-<li><p><strong>HandshakeTimeout</strong>        </p>
-<ul>
-<li>Integer    </li>
-<li>Defines the period of time after which a timeout is detected when acknowledgement signals are exchanged with the PLC. If 0, no timeout is triggered – the application goes into an endless loop until the required signal of the PLC is set.    </li>
-<li>Time in milliseconds.    </li>
-<li>Default: 5000    </li>
-</ul>
-</li>
-<li><p><strong>HandshakeSleepTime</strong>        </p>
+<li><p><strong>HandshakeTimeout</strong>     </p>
 <ul>
 <li>Integer    </li>
-<li>Specifies how long the application is paused before an acknowledgement signal is polled once again    </li>
-<li>Time in milliseconds.    </li>
-<li>Default: 100    </li>
+<li>Defines the period of time after which a timeout is detected when acknowledgement signals are exchanged with the PLC. If 0, no timeout is triggered – the application goes into an endless loop until the required signal of the PLC is set.   </li>
+<li>Time in milliseconds.  </li>
+<li>Default: 5000  </li>
 </ul>
 </li>
-<li><p><strong>StatusWordDB</strong>        </p>
+<li><p><strong>HandshakeSleepTime</strong>       </p>
 <ul>
 <li>Integer    </li>
-<li>Number of the data block with the status word    </li>
-<li>Default: 100    </li>
+<li>Specifies how long the application is paused before an acknowledgement signal is polled once again </li>
+<li>Time in milliseconds.  </li>
+<li>Default: 100   </li>
 </ul>
 </li>
-<li><p><strong>StatusWortOffset</strong>        </p>
+<li><p><strong>StatusWordDB</strong>     </p>
+<ul>
+<li>Integer    </li>
+<li>Number of the data block with the status word  </li>
+<li>Default: 100   </li>
+</ul>
+</li>
+<li><p><strong>StatusWortOffset</strong>     </p>
 <ul>
 <li>Integer    </li>
 <li>Offset of the status word within the DB    </li>
-<li>Default: 0    </li>
+<li>Default: 0 </li>
 </ul>
 </li>
 <li><p><strong>ControlWordDB</strong>        </p>
 <ul>
 <li>Integer    </li>
-<li>Number of the data block with the control word    </li>
-<li>Default: 100    </li>
+<li>Number of the data block with the control word </li>
+<li>Default: 100   </li>
 </ul>
 </li>
 <li><p><strong>ControlWordOffset</strong>        </p>
 <ul>
 <li>Integer    </li>
-<li>Offset of the control word within the DB.    </li>
-<li>Default: 2    </li>
+<li>Offset of the control word within the DB.  </li>
+<li>Default: 2 </li>
 </ul>
 </li>
 </ul>
 <hr>
-<h3 id="section-log">Section [LOG]</h3>
+<h3 id="section-log">Section [LOG]###</h3>
 <ul>
 <li><ul>
-<li>Integer    </li>
-<li>Number of log messages that are recorded.    </li>
-<li>Default: 1000    </li>
+<li>Integer  </li>
+<li>Number of log messages that are recorded.  </li>
+<li>Default: 1000  </li>
 </ul>
 </li>
 </ul>
 <hr>
-<h3 id="section-blocks">Section [BLOCKS]</h3>
+<h3 id="section-blocks">Section [BLOCKS]###</h3>
 <p><a name="section_blocks"></a>
 This section contains the definition of the data areas. The following structure applies here:</p>
 <ul>
@@ -245,30 +245,30 @@ The filter expressions are optional. More on filter definition below.</p>
 <p>Example of the dialogue shown above:</p>
 <ul>
 <li><strong>[BLOCKS]</strong></li>
-<li><p><code>#Hand scanner crankcase;C:\Temp\Backup1.txt;1</code>        </p>
+<li><p><code>#Hand scanner crankcase;C:\Temp\Backup1.txt;1</code>      </p>
 <ul>
-<li>&#42;100,10,3    </li>
-<li>&#42;100,20,10    </li>
-<li>&#42;100,24,3    </li>
+<li>&#42;100,10,3  </li>
+<li>&#42;100,20,10 </li>
+<li>&#42;100,24,3  </li>
 </ul>
 </li>
-<li><p><code>#Options DB99;C:\Temp\Backup2.txt</code>        </p>
+<li><p><code>#Options DB99;C:\Temp\Backup2.txt</code>      </p>
 <ul>
-<li>&#42;99,10,10    </li>
-<li>&#42;99,20,10    </li>
-<li>&#42;99,24,3    </li>
+<li>&#42;99,10,10  </li>
+<li>&#42;99,20,10  </li>
+<li>&#42;99,24,3   </li>
 </ul>
 </li>
-<li><p><code>#Other;C:\Temp\Backup3.txt;1</code>        </p>
+<li><p><code>#Other;C:\Temp\Backup3.txt;1</code>       </p>
 <ul>
 <li>&#42;99,8,4    </li>
-<li>&#42;99,20,10    </li>
-<li>&#42;99,16,5    </li>
+<li>&#42;99,20,10  </li>
+<li>&#42;99,16,5   </li>
 </ul>
 </li>
 </ul>
 <hr>
-<h2 id="using-filters">Using Filters</h2>
+<h2 id="using-filters">Using Filters##</h2>
 <p>Filter expressions can be applied to individual parts of a data area. The data area is then and&#39;ed bit by bit (logical &quot;and&quot; operation) with the filter expression when comparing the dataset and when writing the file back to the PLC. Thus, it is possible to protect dynamic areas from being overwritten or from performing comparisons regardless of the current temporary data.</p>
 <p>One or more filter expressions can be attached to a data area definition (see <a href="#section_blocks">Section [BLOCKS]</a> in Ini file above).  </p>
 <p>The syntax for a filter expression is as follows:</p>
@@ -283,7 +283,7 @@ The filter expressions are optional. More on filter definition below.</p>
 
 <p>The filter value always covers just 2 bytes (word length) which are applied repeatedly over &#60;length&#62; byte, i.e. word by word. A length specification with an odd number of bytes means that the last byte in the data area is and&#39;ed with the high byte of the filter value.</p>
 <hr>
-<h3 id="filter-example-1-comparing-filtered-data">Filter example 1 (comparing, filtered data)</h3>
+<h3 id="filter-example-1-comparing-filtered-data">Filter example 1 (comparing, filtered data)###</h3>
 <p>Imagine a data block defined like this: </p>
 <p><code>[BLOCKS]</code>  </p>
 <p>&#35;Hand scanner crankcase;<code>C:\Temp\Backup1.txt;1</code>  </p>
@@ -318,7 +318,7 @@ The filter expressions are optional. More on filter definition below.</p>
 
 <p>So after filtering both data blocks are considered to be equal. We could say, that the formula for the comparison is (PLCDATA AND FILTER) = (FILEDATE AND FILTER).</p>
 <hr>
-<h3 id="filter-example-2-writing-filtered-data">Filter example 2 (writing filtered data)</h3>
+<h3 id="filter-example-2-writing-filtered-data">Filter example 2 (writing filtered data)###</h3>
 <p>When writing filtered data, things get a bit more complex and the following formula applies:</p>
 <p>NEWPLCDATA = (PLCDATA AND NOT FILTER) OR (FILEDATA AND FILTER)</p>
 <p>Imagine the same data block and the same filters as in the previous example</p>

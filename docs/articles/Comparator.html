@@ -8,7 +8,7 @@
     <title>Software Specification </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Software Specification ">
-    <meta name="generator" content="docfx 2.12.1.0">
+    <meta name="generator" content="docfx 2.40.12.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -77,13 +77,13 @@
 
 <p><strong>insite GmbH</strong></p>
 <hr>
-<h1 id="introduction">Introduction</h1>
+<h1 id="introduction">Introduction#</h1>
 <p>The Comparator is a software application which is part of the <strong>IDAT</strong> system and used for comparing data.</p>
 <hr>
-<h2 id="purpose-and-objective">Purpose and Objective</h2>
+<h2 id="purpose-and-objective">Purpose and Objective##</h2>
 <p>A Comparator is an interchangeable component. The data read from a PLC is checked for changes. These components can be interchanged depending on what the comparison and feedback should be like.</p>
 <hr>
-<h2 id="definitions-acronyms-abbreviations">Definitions, Acronyms, Abbreviations</h2>
+<h2 id="definitions-acronyms-abbreviations">Definitions, Acronyms, Abbreviations##</h2>
 <ul>
 <li><strong>PLC:</strong> Programmable Logic Controller</li>
 <li><strong>SPS:</strong> Speicher Programmierbare Steuerung (German for PLC)</li>
@@ -92,28 +92,28 @@
 <li><strong>Mapping:</strong> A variable is mapped to a defined data area</li>
 </ul>
 <hr>
-<h1 id="general-description">General Description</h1>
+<h1 id="general-description">General Description#</h1>
 <p>The special features and setting options of the software are described below.</p>
 <hr>
-<h2 id="system-environment">System Environment</h2>
+<h2 id="system-environment">System Environment##</h2>
 <p>The software is written with C&#35; Visual Studio 2010 for the Target framework .NET 4.0.</p>
 <p><img src="../images/warning_icon.png" alt="warning_icon.png">
  .NET 4.5 is not used since it does not guarantee any compatibility with XP.</p>
 <hr>
-<h2 id="framework">Framework</h2>
+<h2 id="framework">Framework##</h2>
 <p>The Comparators are a part of IDAT, and are also configured using the IoC components of IDAT. (For more details, please refer to the chapter Configuration)</p>
 <hr>
-<h2 id="test-and-standalone-program">Test and Standalone Program</h2>
+<h2 id="test-and-standalone-program">Test and Standalone Program##</h2>
 <hr>
-<h3 id="comparatortestexe">ComparatorTest.exe</h3>
+<h3 id="comparatortestexe">ComparatorTest.exe###</h3>
 <p>This software tool is used to test the Comparator.</p>
 <hr>
-<h3 id="comparatorcmdlinehostexe">ComparatorCmdLineHost.exe</h3>
+<h3 id="comparatorcmdlinehostexe">ComparatorCmdLineHost.exe###</h3>
 <p>The ComparatorCmdLineHost.exe is started as follows:</p>
 <p>Usage: ComparatorCmdLineHost.exe -d&#60;datadeffile&#62; [-c&#60;configfile&#62;] [-o&#60;outputfile&#62;]</p>
 <p>The data of the file is mandatory here for the data definition. The config file is &quot;execconf.xml&quot; by default if you do not specify any other. However, a config file must be available. The output file, in which the written data is output in Hex format, is optional.</p>
 <hr>
-<h1 id="comparators">Comparators</h1>
+<h1 id="comparators">Comparators#</h1>
 <p>The following section examines the currently existing Comparators and points out the options and configurations.</p>
 <p>All Comparators are linked to the application of the following interface:</p>
 <pre><code class="lang-javascript">.Interfaces
@@ -133,9 +133,10 @@
         void Stop();
     }
 }
+
 </code></pre><p>The RunOnce method additionally returns true in the case of OK.</p>
 <hr>
-<h2 id="comparatoruc">ComparatorUC</h2>
+<h2 id="comparatoruc">ComparatorUC##</h2>
 <p>This Comparator is used e.g. for the PLCDataManager application.</p>
 <p>It compares the transferred data definitions and returns the negative comparison result via the ResultSink.</p>
 <p>Possible events are:</p>
@@ -147,6 +148,7 @@
             A_Equal_B,
             A_Unequal_B
         }
+
 </code></pre><p>The results are transferred to the ResultSink as a string in the following format:</p>
 <p>[EventDef]&#60;[Mapping]-[VarName]&#62;[{INDEX]}</p>
 <p><strong>Examples:</strong>  </p>
@@ -154,7 +156,7 @@
 <p>A&#95;Unequal&#95;B&#60;AnAbWahl:1005.0.BSTAnAbWahl-BSTAnAbWahl.Bearbeiten[1].Destination&#62;  </p>
 <p>A&#95;Unequal&#95;B&#60;BSTOrg:1000.0.Org-Org.UDT&#95;Organisation&#95;BST.ZP&#95;name&#62;{16}  </p>
 <hr>
-<h2 id="comparatorxladapter">ComparatorXLAdapter</h2>
+<h2 id="comparatorxladapter">ComparatorXLAdapter##</h2>
 <p>This Comparator, as the name implies, is used for the XLAdapter.</p>
 <p>With this Comparator an additional configuration file must be created in order to declare the variables and events to be compared.</p>
 <p>Here is an example:</p>
@@ -187,7 +189,7 @@
     &lt;/Comparator&gt;
 &lt;/Comparators&gt;
 </code></pre><hr>
-<h1 id="installation">Installation</h1>
+<h1 id="installation">Installation#</h1>
 <p>This requires that</p>
 <ol>
 <li>Microsoft .NET Framework 4.0 Servicepack 1 and</li>
@@ -195,14 +197,14 @@
 </ol>
 <p>are installed and available on the destination system under Windows.</p>
 <hr>
-<h2 id="files-generated-during-runtime">Files generated during runtime</h2>
+<h2 id="files-generated-during-runtime">Files generated during runtime##</h2>
 <p>XLAdapterExecutor.exe or ExecutorCmdLineHost.exe generate files independently.</p>
 <p>Here are the meanings:</p>
 <ol>
 <li><strong>Log files:</strong> Files configured for Log4net</li>
 </ol>
 <hr>
-<h1 id="change-directory">Change directory</h1>
+<h1 id="change-directory">Change directory#</h1>
 <table><tr><th>Author </th><th> Date </th><th> Remarks</th></tr>
 <tr><td>Ralf Gedrat </td><td> September 2012 </td><td> Creation</td></tr>
 <tr><td>Benjamin Prömmer </td><td> January 2013 </td><td> Extension to several Comparators</td></tr>

@@ -8,7 +8,7 @@
     <title>Software Specification </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Software Specification ">
-    <meta name="generator" content="docfx 2.12.1.0">
+    <meta name="generator" content="docfx 2.40.12.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -77,13 +77,13 @@
 <p><strong>I</strong>nsite <strong>P</strong>rocess <strong>O</strong>bservation <strong>T</strong>ool  </p>
 <p><strong>insite GmbH</strong></p>
 <hr>
-<h1 id="introduction">Introduction</h1>
+<h1 id="introduction">Introduction#</h1>
 <p>IPOT (Insite Process Observation Tool) is a modular configurable software application for monitoring, starting and controlling processes and their windows.</p>
 <hr>
-<h2 id="purpose-and-objective">Purpose and Objective</h2>
+<h2 id="purpose-and-objective">Purpose and Objective##</h2>
 <p>On an automation computer it is necessary to monitor and control several different programs. Even though you can fall back on Windows tools in the process, the program IPOT is much more convenient and powerful for this purpose.</p>
 <hr>
-<h2 id="definitions-acronyms-abbreviations">Definitions, acronyms, abbreviations</h2>
+<h2 id="definitions-acronyms-abbreviations">Definitions, acronyms, abbreviations##</h2>
 <ul>
 <li><strong>IPOT:</strong> Insite Process Observation Tool</li>
 <li><strong>PLC:</strong> Programmable Logic Controller</li>
@@ -95,13 +95,13 @@
 <li><strong>Observer:</strong> Defines observations that, in turn, can fire events</li>
 </ul>
 <hr>
-<h1 id="general-description">General Description</h1>
+<h1 id="general-description">General Description#</h1>
 <p>The special features and setting options of the software are described below.</p>
 <hr>
-<h2 id="system-environment">System Environment</h2>
+<h2 id="system-environment">System Environment##</h2>
 <p>The software is written with C&#35; Visual Studio 2012 for the target framework .NET 4.</p>
 <hr>
-<h2 id="start-parameter">Start parameter</h2>
+<h2 id="start-parameter">Start parameter##</h2>
 <p>IPOT can be started with different parameters. Since an IPOT is a single instance application, if an IPOT instance is already running, the parameters are transferred to the existing instance and the current instance is terminated again.</p>
 <table><tr><th>Param </th><th> Param </th><th> Description</th></tr>
 <tr><th>Short </th><th> Long </th><th>   </th></tr>
@@ -150,7 +150,7 @@ IPOT.exe -cD:\Data\DH\Configs\Insite\IPOT.config –vArchiveImages</p>
 <p>IPOT.exe -cD:\Data\DH\Configs\Insite\IPOT.config -eArchiveImages</p>
 <p><strong>IPOT is started (if it is not yet running) and the application with the ID ArchiveImages is set to Obser=false, this change is saved and the application is then terminated. (If the corresponding actions were declared.)</strong>  </p>
 <p>IPOT.exe -cD:\Data\DH\Configs\Insite\IPOT.config -uArchiveImages.Observe=false –s -eArchiveImages</p>
-<h3 id="runtime-mode">Runtime Mode</h3>
+<h3 id="runtime-mode">Runtime Mode###</h3>
 <p><img src="../images/IPOT_runtime_mode.png" alt="IPOT_runtime_mode.png"></p>
 <p>The tiles represent the individual processes, if a tile is red, the process is not found, or the file to be started is not available.</p>
 <p><strong>Colour definition:</strong></p>
@@ -161,26 +161,26 @@ IPOT.exe -cD:\Data\DH\Configs\Insite\IPOT.config –vArchiveImages</p>
 <p><strong>Process or window not found:</strong>  </p>
 <p><img src="../images/IPOT_process_not_found.png" alt="IPOT_process_not_found.png"></p>
 <hr>
-<h3 id="engineering-mode">Engineering Mode</h3>
+<h3 id="engineering-mode">Engineering Mode###</h3>
 <p>Press the button in the top left hand corner to switch over to the Engineering Mode. In this mode you can view as well as change the individual observations. Finding windows is facilitated by the search function that you can find in the bottom right-hand corner of the Engineering Mode when opening the Expander. Simply drag the target icon onto the window from which you need data and add this by selecting the IPOTObject and clicking on &quot;Add&quot;.  </p>
 <p>The old configuration with the extension .bak is saved by pressing the Save button and your changes are written to the new configuration. Each change is active immediately, but if the Save button is not pressed, then the changes will be lost when you exit. If a new object is added, it first becomes active after restarting the Observer!</p>
 <p><img src="../images/IPOT_engineering_mode1.png" alt="IPOT_engineering_mode1.png"></p>
 <p><img src="../images/IPOT_engineering_mode2.png" alt="IPOT_engineering_mode2.png"></p>
 <hr>
-<h2 id="version-information-of-all-loaded-assemblies">Version information of all loaded assemblies</h2>
+<h2 id="version-information-of-all-loaded-assemblies">Version information of all loaded assemblies##</h2>
 <p><img src="../images/IPOT_version_info_assemblies.png" alt="IPOT_version_info_assemblies.png"></p>
 <p>To obtain information about all assemblies currently loaded, you can click on the INSITE-LOG in the upper right-hand corner. By clicking, all information is collected and displayed in a list. The entries of the list can be selected and copied to the clipboard by Copy&amp;Paste. Clicking once again closes this version display and a new standard interface of IPOT is displayed again.</p>
 <hr>
-<h2 id="password-protection">Password protection</h2>
+<h2 id="password-protection">Password protection##</h2>
 <p><img src="../images/IPOT_pw_protect1.png" alt="IPOT_pw_protect1.png"></p>
 <p><img src="../images/IPOT_pw_protect2.png" alt="IPOT_pw_protect2.png"></p>
 <p><img src="../images/IPOT_pw_protect3.png" alt="IPOT_pw_protect3.png"></p>
 <p>If a password is specified, this will be requested when terminating and changing to the Engineering Mode. If the password is correct, the green icon will appear, which simultaneously functions as a logoff button. As long as the password not valid, the red icon appears, which you can also use to terminate the input.</p>
 <hr>
-<h2 id="how-does-ipot-work">How does IPOT work?</h2>
+<h2 id="how-does-ipot-work">How does IPOT work?##</h2>
 <p>IPOT works event-based. At various places in the application, defined events are fired that can be linked to actions via the parameterisation. This principle of Action  --&gt;  Reaction runs through the entire application, whereby any action in the application can be controlled via the parameterisation. This results in a freely configurable and very flexible program that can be used for a wide variety of applications.</p>
 <hr>
-<h1 id="web-interface">Web-Interface</h1>
+<h1 id="web-interface">Web-Interface#</h1>
 <p>IPOT also supports a WebAPI interface, the commands which are described in start parameters can also be used via this interface. These commands are HTTP Post requests.</p>
 <p>Example:  </p>
 <p><strong>IPOT starts (if it&#39;s not already running) and the group is set to IH.</strong>  </p>
@@ -188,16 +188,16 @@ IPOT.exe -cD:\Data\DH\Configs\Insite\IPOT.config –vArchiveImages</p>
 <p>Host: <a href="http://localhost:8091">http://localhost:8091</a>  </p>
 <p>-cD:\Daten\DH\Konfigs\Insite\IPOT.config –gIH</p>
 <hr>
-<h1 id="components">Components</h1>
+<h1 id="components">Components#</h1>
 <p>IPOT consists of several subcomponents. These are divided into two main groups (Observers and Actions). </p>
 <hr>
-<h2 id="observers">Observers</h2>
+<h2 id="observers">Observers##</h2>
 <p>Observers are started from IPOT and fire events to objects. These processing events can then be configured.</p>
 <hr>
-<h3 id="processobserver">ProcessObserver</h3>
+<h3 id="processobserver">ProcessObserver###</h3>
 <p>The ProcessObserver checks cyclically until all marked objects are connected with IPOT. As soon as a component loses the connection again and a MinDownTime is parameterised, the Observer is executed again on this component. As long as a connection of the component with IPOT exists, the IPOTObject assumes all functions, which also include observation.</p>
 <hr>
-<h4 id="configuration">Configuration</h4>
+<h4 id="configuration">Configuration####</h4>
 <pre><code class="lang-html">&lt;component id=&quot;PlcObserver&quot; service=&quot;IPOT.Arch.Interfaces.IObserver, Interfaces&quot; 
            type=&quot;IPOT.Components.Observers.PlcObserver, PlcObserver&quot;
            lifestyle=&quot;singleton&quot;&gt;
@@ -217,10 +217,10 @@ IPOT.exe -cD:\Data\DH\Configs\Insite\IPOT.config –vArchiveImages</p>
 
 
 <hr>
-<h3 id="keyobserver">KeyObserver</h3>
+<h3 id="keyobserver">KeyObserver###</h3>
 <p>Various HotKeys and their functions can be parameterised on objects for the KeyObserver. By pressing a key, the parameterised event is then fired to the configured IPOT object/s.</p>
 <hr>
-<h4 id="configuration-1">Configuration</h4>
+<h4 id="configuration-1">Configuration####</h4>
 <pre><code class="lang-html">&lt;component id=&quot;KeyObserver&quot; service=&quot;IPOT.Arch.Interfaces.IObserver, Interfaces&quot; 
            type=&quot;IPOT.Components.Observers.KeyObserver, KeyObserver&quot; 
            lifestyle=&quot;singleton&quot;&gt;
@@ -248,10 +248,10 @@ IPOT.exe -cD:\Data\DH\Configs\Insite\IPOT.config –vArchiveImages</p>
 
 
 <hr>
-<h3 id="plcobserver">PlcObserver</h3>
+<h3 id="plcobserver">PlcObserver###</h3>
 <p>The PlcObserver checks cyclically whether anything has changed on the Plc data specified. If a change occurs, the PlcTrigger-event is fired for the respective object. Additionally, various triggers and their functions can also be parameterised on objects. When the trigger occurs, the parameterised event is then fired to the configured IPOT object/s.</p>
 <hr>
-<h4 id="configuration-2">Configuration</h4>
+<h4 id="configuration-2">Configuration####</h4>
 <pre><code class="lang-html">&lt;component id=&quot;ProcessObserver&quot; service=&quot;IPOT.Arch.Interfaces.IObserver, Interfaces&quot; 
            type=&quot;IPOT.Components.Observers.ProcessObserver, ProcessObserver&quot;
            lifestyle=&quot;singleton&quot;&gt;
@@ -280,75 +280,75 @@ IPOT.exe -cD:\Data\DH\Configs\Insite\IPOT.config –vArchiveImages</p>
 
 
 <hr>
-<h2 id="action-actions">Action (Actions)</h2>
+<h2 id="action-actions">Action (Actions)##</h2>
 <p><a name="Action (Actions)"></a>
 An action can be parameterised on any events. Even a chain of actions is possible. Actions, in turn, can fire events on which further actions can be parameterised.</p>
 <hr>
-<h3 id="findprocessorwindowaction">FindProcessOrWindowAction</h3>
+<h3 id="findprocessorwindowaction">FindProcessOrWindowAction###</h3>
 <p>Only the process or window is searched for depending on whether a window was parameterised for the action.</p>
 <p><strong>Parameters used:</strong>  </p>
 <p>ProcessName, WindowTitle, WindowClass</p>
 <hr>
-<h3 id="processstartaction">ProcessStartAction</h3>
+<h3 id="processstartaction">ProcessStartAction###</h3>
 <p>If the restart is not disabled, the process is started here.</p>
 <p><strong>Parameters used:</strong>  </p>
 <p>WorkingDir, ExecutablePath, ExecutableName, Arguments</p>
 <hr>
-<h3 id="processstopaction">ProcessStopAction</h3>
+<h3 id="processstopaction">ProcessStopAction###</h3>
 <p>In case the process is running, a Close is searched for here, if the termination takes longer than 5000 ms, the process is terminated hard.</p>
 <hr>
-<h3 id="setwindowplacementaction">SetWindowPlacementAction</h3>
+<h3 id="setwindowplacementaction">SetWindowPlacementAction###</h3>
 <p>This action can change the style of the window and set the size and position.</p>
 <p><strong>Parameters used:</strong>  </p>
 <p>RemoveWindowStyles, ShowMode, Left, Top, Right, Bottom</p>
 <hr>
-<h3 id="minimizewindowaction">MinimizeWindowAction</h3>
+<h3 id="minimizewindowaction">MinimizeWindowAction###</h3>
 <p>This action minimizes the size of the window.</p>
 <hr>
-<h3 id="restoreshowmodeaction">RestoreShowModeAction</h3>
+<h3 id="restoreshowmodeaction">RestoreShowModeAction###</h3>
 <p><strong>Parameters used:</strong>  </p>
 <p>ShowMode</p>
 <hr>
-<h3 id="showwindowaction">ShowWindowAction</h3>
+<h3 id="showwindowaction">ShowWindowAction###</h3>
 <p>This action brings the window into the foreground and sets the Show Mode</p>
 <p><strong>Parameters used:</strong>  </p>
 <p>GUIShowMode</p>
 <hr>
-<h3 id="taskbarhideaction">TaskBarHideAction</h3>
+<h3 id="taskbarhideaction">TaskBarHideAction###</h3>
 <p>This action hides the taskbar. (AutoHide)</p>
 <hr>
-<h3 id="taskbarunhideaction">TaskBarUnHideAction</h3>
+<h3 id="taskbarunhideaction">TaskBarUnHideAction###</h3>
 <p>This action resets the taskbar to visible.</p>
 <hr>
-<h3 id="notifyipotobjectaction">NotifyIPOTObjectAction</h3>
+<h3 id="notifyipotobjectaction">NotifyIPOTObjectAction###</h3>
 <p>This action sends a Notified Event to the IPOTObjects parameterised in Notify.</p>
 <p><strong>Parameters used:</strong>  </p>
 <p>Notify</p>
 <hr>
-<h3 id="checkconditionaction">CheckConditionAction</h3>
+<h3 id="checkconditionaction">CheckConditionAction###</h3>
 <p>This action checks an additional condition. If this condition is not met, the Autostart is deactivated by the Observer until the condition is met.</p>
 <p><strong>Parameters used:</strong>  </p>
 <p>Condition</p>
 <hr>
-<h3 id="noaction">NoAction</h3>
+<h3 id="noaction">NoAction###</h3>
 <p>This action has no task, its only purpose is to overwrite a default value.</p>
 <hr>
-<h3 id="propertykeyoverrideaction">PropertyKeyOverrideAction</h3>
+<h3 id="propertykeyoverrideaction">PropertyKeyOverrideAction###</h3>
 <p>This action allows the extension of existing settings. Here, for example, it is possible to transfer an argument from the Plc to a program.</p>
 <p><strong>Parameters used:</strong>  </p>
 <p>KeyOverride</p>
 <hr>
-<h3 id="setwindowparentaction">SetWindowParentAction</h3>
+<h3 id="setwindowparentaction">SetWindowParentAction###</h3>
 <p>This action allows the WindowParent to be changed.</p>
 <p><strong>Parameters used:</strong>  </p>
 <p>ParentProcessName, ParentWindowTitle, ParentWindowClass</p>
 <hr>
-<h3 id="resetwindowparentaction">ResetWindowParentAction</h3>
+<h3 id="resetwindowparentaction">ResetWindowParentAction###</h3>
 <p>This action allows the WindowParent to be reset to the Desktop.</p>
 <hr>
-<h1 id="configuration-in-detail">Configuration in Detail</h1>
+<h1 id="configuration-in-detail">Configuration in Detail#</h1>
 <hr>
-<h2 id="ipotconfiguration">IPOTConfiguration</h2>
+<h2 id="ipotconfiguration">IPOTConfiguration##</h2>
 <pre><code class="lang-html">&lt;component id=&quot;Config&quot; service=&quot;IPOT.Arch.Interfaces.IIPOTConfiguration, Interfaces&quot; 
            type=&quot;IPOT.Arch.IPOTConfiguration, IPOTConfiguration&quot;
            lifestyle=&quot;singleton&quot;&gt;
@@ -393,7 +393,7 @@ An action can be parameterised on any events. Even a chain of actions is possibl
 </table>
 
 
-<h3 id="plcconnectionstring">PLCConnectionString</h3>
+<h3 id="plcconnectionstring">PLCConnectionString###</h3>
 <p>We support a couple of plc access types in IPOT. You can configure these types by setting up the Access Type property in the connection string:</p>
 <pre><code class="lang-xml">&lt;plcConnctionString&gt;Access Type=InacS7;Data Source=127.0.0.1:102,0,2;Receive Timeout=5000;Connection Type=Pg;&lt;/plcConnctionString&gt;
 </code></pre><p>Other types are only supported, if the dll is installed in the binary folder.</p>
@@ -481,7 +481,7 @@ An action can be parameterised on any events. Even a chain of actions is possibl
 </tbody>
 </table>
 <hr>
-<h2 id="ipotobject">IPOTObject</h2>
+<h2 id="ipotobject">IPOTObject##</h2>
 <p>This object is required for parameterising and managing an application. All settings and events for the application can be parameterised here.</p>
 <pre><code class="lang-html">&lt;component id=&quot;Parasave&quot; service=&quot;IPOT.Arch.Interfaces.IIPOTObject, Interfaces&quot;
            type=&quot;IPOT.Arch.IPOTObject, IPOTObject&quot; lifestyle=&quot;singleton&quot;&gt;
@@ -575,8 +575,8 @@ An action can be parameterised on any events. Even a chain of actions is possibl
 <tr><td>   </td><td> There are two types of conditions at present:</td></tr>
 <tr><td>   </td><td> 1. PlcCondition: </td></tr>
 <tr><td>   </td><td> Plc:[Selector (DB,MB,EB + Number)],[Offset(for Bits Offset.Bit)],</td></tr>
-<tr><td>   </td><td> [Length (do not specify for bits!)]=<a href="The value comparison&lt;/td&gt;&lt;/tr&gt;
-&lt;tr&gt;&lt;td&gt;   &lt;/td&gt;&lt;td&gt; takes place with IgnoreCase">value</a> e.g.: Plc:DB2,1.0=true</td></tr>
+<tr><td>   </td><td> [Length (do not specify for bits!)]=[value](The value comparison</td></tr>
+<tr><td>   </td><td> takes place with IgnoreCase) e.g.: Plc:DB2,1.0=true</td></tr>
 <tr><td>   </td><td> 2. WmiCondition:</td></tr>
 <tr><td>   </td><td> e.g.: Wmi:Select &#42; From Win32&#95;PnPEntity Where Caption = </td></tr>
 <tr><td>   </td><td> &quot;WIBU - CodeMeter-Stick USB Device&quot;</td></tr>
@@ -609,7 +609,7 @@ An action can be parameterised on any events. Even a chain of actions is possibl
 
 
 <hr>
-<h3 id="prop">prop</h3>
+<h3 id="prop">prop###</h3>
 <table><tr><th>Parameter </th><th> Description</th></tr>
 <tr><td>id </td><td> Unique application ID</td></tr>
 <tr><td>prop </td><td> Dictionary of all settings</td></tr>
@@ -619,11 +619,11 @@ An action can be parameterised on any events. Even a chain of actions is possibl
 
 
 <hr>
-<h3 id="eventactions">eventActions</h3>
+<h3 id="eventactions">eventActions###</h3>
 <pre><code class="lang-html">&lt;entry key=&quot;[Event]&quot;&gt;[Action];[DelayTime][;[Action][DelayTime]]&lt;/entry&gt;
 </code></pre><table><tr><th>Parameter </th><th> Description</th></tr>
 <tr><td>event </td><td> See <a href="#Appendix_A">Appendix A</a></td></tr>
-<tr><td>Action </td><td> See <a href="#Action (Actions)">Actions</a></td></tr>
+<tr><td>Action </td><td> See [Actions](#Action (Actions))</td></tr>
 <tr><td>DelayTime </td><td> Delay time for execution of the action</td></tr>
 </table>
 
@@ -632,12 +632,12 @@ An action can be parameterised on any events. Even a chain of actions is possibl
 
 
 <hr>
-<h3 id="defaulteventactions">defaultEventActions</h3>
+<h3 id="defaulteventactions">defaultEventActions###</h3>
 <p>Here, default settings can be defined for all events. Therefore, if an event should not be declared in the object, this entry is used.</p>
 <pre><code class="lang-html">&lt;entry key=&quot;[Event]&quot;&gt;[Action];[DelayTime][;[Action][DelayTime]]&lt;/entry&gt;
 </code></pre><table><tr><th>Parameter </th><th> Description</th></tr>
 <tr><td>event </td><td> See <a href="#Appendix_A">Appendix A</a></td></tr>
-<tr><td>Action </td><td> See <a href="#Action (Actions)">Actions</a></td></tr>
+<tr><td>Action </td><td> See [Actions](#Action (Actions))</td></tr>
 <tr><td>DelayTime </td><td> Delay time for execution of the action</td></tr>
 </table>
 
@@ -645,9 +645,9 @@ An action can be parameterised on any events. Even a chain of actions is possibl
 
 
 
-<yamlheader start="735" end="739">##Configuration &amp;#60;log4net&amp;#62;##
+<yamlheader start="735" end="741">##Configuration &amp;#60;log4net&amp;#62;##
 
-For setting options and additional information on this 3rd party component, please refer to page: &lt;http://logging.apache.org/log4net/&gt;</yamlheader><h1 id="installation">Installation</h1>
+For setting options and additional information on this 3rd party component, please refer to page: &lt;http://logging.apache.org/log4net/&gt;</yamlheader><h1 id="installation">Installation#</h1>
 <p>This requires that </p>
 <ol>
 <li>Microsoft .NET Framework 4.5.2</li>
@@ -657,9 +657,9 @@ For setting options and additional information on this 3rd party component, plea
 <p><img src="../images/warning_icon.png" alt="warning_icon.png">
  The directory must be a local directory and not a network drive!</p>
 <hr>
-<h1 id="appendix-a">Appendix A</h1>
+<h1 id="appendix-a">Appendix A#</h1>
 <h2 id="a-nameappendixaa"><a name="Appendix_A"></a></h2>
-<h2 id="events">Events</h2>
+<h2 id="events">Events##</h2>
 <table><tr><th>Parameter </th><th> Description</th></tr>
 <tr><td>ProcessNotRunning </td><td> This event is fired from the FindProcessOrWindowAction</td></tr>
 <tr><td>   </td><td> if the process was not found</td></tr>
@@ -727,7 +727,7 @@ For setting options and additional information on this 3rd party component, plea
 
 
 <hr>
-<h1 id="change-directory">Change directory</h1>
+<h1 id="change-directory">Change directory#</h1>
 <table><tr><th>Author </th><th> Date </th><th> Remarks</th></tr>
 <tr><td>Benjamin Prömmer </td><td> 2013-08-22 </td><td> Creation</td></tr>
 <tr><td>Benjamin Prömmer </td><td> 2013-08-26 </td><td> Extended by password entry</td></tr>

@@ -8,7 +8,7 @@
     <title>PLCDataManager </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="PLCDataManager ">
-    <meta name="generator" content="docfx 2.12.1.0">
+    <meta name="generator" content="docfx 2.40.12.0">
     
     <link rel="shortcut icon" href="../favicon.ico">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -74,13 +74,13 @@
 
 
 <hr>
-<h1 id="introduction">Introduction</h1>
+<h1 id="introduction">Introduction#</h1>
 <p>PLCDataManager is a software application that one one hand makes it possible to backup, restore and compare data modules of a PLC to or from an XML file, while on the other hand, the online/offline data can also be visualized and changed via structured views. The OPC, ODK and LibNoDave interfaces can be used for communication with the PLC.</p>
 <hr>
-<h2 id="purpose-and-objective">Purpose and Objective</h2>
+<h2 id="purpose-and-objective">Purpose and Objective##</h2>
 <p>Creation of module backups so that they can be reloaded again if necessary.</p>
 <hr>
-<h2 id="definitions-acronyms-abbreviations">Definitions, Acronyms, Abbreviations</h2>
+<h2 id="definitions-acronyms-abbreviations">Definitions, Acronyms, Abbreviations##</h2>
 <ul>
 <li><strong>PLC:</strong> Programmable Logic Controller</li>
 <li><strong>SPS:</strong> Speicher Programmierbare Steuerung</li>
@@ -91,19 +91,19 @@
 <li><strong>UC:</strong> User Control </li>
 </ul>
 <hr>
-<h1 id="general-description">General Description</h1>
+<h1 id="general-description">General Description#</h1>
 <p>The special features and setting options of the software are described below. </p>
 <hr>
-<h2 id="system-environment">System Environment</h2>
+<h2 id="system-environment">System Environment##</h2>
 <p>The software is written with C&#35; Visual Studio 2010 for the Target framework .NET 4.0. </p>
 <p><img src="../images/warning_icon.png" alt="warning_icon.png">
  .NET 4.5 is not used since it does not guarantee any compatibility with XP.</p>
 <hr>
-<h2 id="system-start">System Start</h2>
+<h2 id="system-start">System Start##</h2>
 <p>When starting the application, all information is read from a XML configuration file.</p>
 <p>An existing configuration file named &quot;PLCDataManagerConfig.xml&quot; in the application directory is detected and loaded by PLCDataManager. If you would like to use other configuration files, you can supply a different configuration file name via the command line when starting the PLCDataManager. </p>
 <hr>
-<h3 id="command-line-parameters">Command Line Parameters</h3>
+<h3 id="command-line-parameters">Command Line Parameters###</h3>
 <table><tr><th>Short </th><th> Long </th><th> Type </th><th> Default value </th><th> Description</th></tr>
 <tr><th>name </th><th> name </th><th>    </th><th>    </th><th>   </th></tr>
 <tr><td>f </td><td> file </td><td> Parameter </td><td> PLCDataManager </td><td>Configuration file</td></tr>
@@ -128,7 +128,7 @@
 
 
 <hr>
-<h3 id="automatic-mode">Automatic Mode</h3>
+<h3 id="automatic-mode">Automatic Mode###</h3>
 <p>These parameters enable executing the application in automatic mode. The c, s and r switches are not allowed simultaneously. There is, however, a prioritization if all three are specified:</p>
 <table><tr><th>Priority </th><th> Action</th></tr>
 <tr><td>1 </td><td> Restore</td></tr>
@@ -142,18 +142,18 @@
 
 <p>The automatic comparison has a special feature: If the comparison should fail (NOK), a specific bit in a freely definable data word is set in the PLC (see &quot;PLC Interface&quot;). This bit is reset (OK) if a further automatic comparison run or manually triggered comparison no longer results in any differences.</p>
 <hr>
-<h3 id="plc-triggered-mode">PLC-triggered Mode</h3>
+<h3 id="plc-triggered-mode">PLC-triggered Mode###</h3>
 <p>A backup can also be initiated by the PLC. A special interface has to be supplied for this purpose. Furthermore, the files that are backed-up by a PLC-trigger can be different from the ones used in manual or automatic mode. See below for more details.</p>
 <hr>
-<h2 id="data-handling">Data Handling</h2>
+<h2 id="data-handling">Data Handling##</h2>
 <p>The data is saved in a data definition file.</p>
 <p><img src="../images/warning_icon.png" alt="warning_icon.png">
  If the underlying structure of the data definitions changes, then the old backup file must be deleted before it is possible to create a new backup. Otherwise, the old structure applies!</p>
 <hr>
-<h1 id="user-interface">User Interface</h1>
+<h1 id="user-interface">User Interface#</h1>
 <p>Apart from the normal control elements, the user interface includes the IDATUC that is responsible for displaying the structures. The individual sections of the interface are described in detail below.</p>
 <hr>
-<h2 id="control-elements">Control Elements</h2>
+<h2 id="control-elements">Control Elements##</h2>
 <p><img src="../images/PLCDataManager_control_overview.png" alt="PLCDataManager_control_overview.png"></p>
 <table>
  <tr><th>[1] </th><td colspan="2">Select and deselect</td></tr>
@@ -186,7 +186,7 @@
 
 
 <hr>
-<h2 id="progress-displays-and-feedbacks">Progress Displays and Feedbacks</h2>
+<h2 id="progress-displays-and-feedbacks">Progress Displays and Feedbacks##</h2>
 <p>When executing an action, the following control elements are displayed.  </p>
 <p><img src="../images/PLCDataManager_control_elements.png" alt="PLCDataManager_control_elements.png"></p>
 <p>A positive feedback during a comparison turns the TextBox green. The control elements first disappear after clicking on the TextBox.  </p>
@@ -194,12 +194,12 @@
 <p>A negative feedback during a comparison, or an error, turns the TextBox red. The control elements first disappear after clicking on the TextBox.  </p>
 <p><img src="../images/PLCDataManager_neg_feedback.png" alt="PLCDataManager_neg_feedback.png"></p>
 <hr>
-<h2 id="structure-display-and-data-manipulation">Structure Display and Data Manipulation</h2>
+<h2 id="structure-display-and-data-manipulation">Structure Display and Data Manipulation##</h2>
 <p>The item for displaying and manipulating the structure is the core of this application and is also located at its centre. This control element maps the structures existing in the PLC. Hence, you can view, compare or change the current PLC data as well as the backed-up data.</p>
 <p>Thanks to this type of data processing, a &quot;Byte-Bit-Offset&quot; (as common in the PLC-world) no longer has to be used, nor do the values have to be converted. It is also no longer necessary to know the details of all data types, such as the length information contained in the first two bits of a string, in order to manipulate them. This element does this by itself. If, however, it is important for you to see the addresses or the hexadecimal or binary values, this is possible, too. The representation of the values can easily be switched over using the &quot;Type&quot; column and the addresses can be displayed by activating the &quot;Address&quot; column (the addresses are displayed in pointer format).</p>
 <p><img src="../images/PLCDataManager_structure_display.png" alt="PLCDataManager_structure_display.png"></p>
 <hr>
-<h3 id="possible-columns">Possible Columns</h3>
+<h3 id="possible-columns">Possible Columns###</h3>
 <p>It is also possible to display other columns (for details on how to do this, please see the chapter <a href="#Configuration">Configuration</a>).  </p>
 <p>This figure shows the possible columns:</p>
 <p><img src="../images/PLCDataManager_poss_columns.png" alt="PLCDataManager_poss_columns.png"></p>
@@ -217,15 +217,15 @@
 
 
 <hr>
-<h3 id="online-mode">Online Mode</h3>
+<h3 id="online-mode">Online Mode###</h3>
 <p><img src="../images/PLCDataManager_online_mode.png" alt="PLCDataManager_online_mode.png"></p>
 <p>With this button it is possible to activate an online mode and to deactivate it again. In the online operating mode, all variables currently visible in the structure display are updated cyclically with the current data in the PLC.</p>
 <hr>
-<h1 id="configuration">Configuration</h1>
+<h1 id="configuration">Configuration#</h1>
 <p><a name="Configuration"></a>
 The configuration of the application is divided into two files. The first file (called &quot;PLCDataManager.exe.config&quot;) contains the settings for the user interface, whereas the &quot;PLCDataManager.xml&quot;-file contains the settings for the application. </p>
 <hr>
-<h2 id="configuration-of-the-user-interface-ui">Configuration of the User Interface (UI)</h2>
+<h2 id="configuration-of-the-user-interface-ui">Configuration of the User Interface (UI)##</h2>
 <pre><code class="lang-html">&lt;?xml version=&quot;1.0&quot;?&gt;
 &lt;configuration&gt;
 &lt;configSections&gt;
@@ -274,7 +274,7 @@ The configuration of the application is divided into two files. The first file (
 
 
 <hr>
-<h2 id="configuration-of-the-application">Configuration of the Application</h2>
+<h2 id="configuration-of-the-application">Configuration of the Application##</h2>
 <pre><code class="lang-html">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
 &lt;Setup&gt;
     &lt;Assemblies&gt;
@@ -339,31 +339,31 @@ PLCDataManagers/PLCDataManager[@name=&#39;PLCDataManager&#39;]/OutPaths]]&gt;
     &lt;/Instances&gt;
 &lt;/Setup&gt;
 </code></pre><hr>
-<h3 id="assemblies">Assemblies</h3>
+<h3 id="assemblies">Assemblies###</h3>
 <p>In this section, all required assemblies are specified.</p>
 <hr>
-<h3 id="instances">Instances</h3>
+<h3 id="instances">Instances###</h3>
 <p>In this section, all required instances of the defined assemblies are configured.</p>
 <hr>
-<h4 id="resolvers">Resolvers</h4>
+<h4 id="resolvers">Resolvers####</h4>
 <p>In this section, the Resolver is parametrized. The default configuration is sufficient for this application, you should not change it.</p>
 <hr>
-<h4 id="converters">Converters</h4>
+<h4 id="converters">Converters####</h4>
 <p>In this section, the Converter is parametrized. The default configuration of the S7 converter is sufficient for this application, you should not change it.</p>
 <hr>
-<h4 id="comparators">Comparators</h4>
+<h4 id="comparators">Comparators####</h4>
 <p>In this section, the Comparators are parametrized. The default configuration of the UC Comparator is sufficient for this application, you should not change it.</p>
 <hr>
-<h4 id="binaryreaderwriters">BinaryReaderWriters</h4>
+<h4 id="binaryreaderwriters">BinaryReaderWriters####</h4>
 <p>In this section, the BinaryReaderWriters are parametrized. Two instances are required for this application.</p>
 <p>The first <strong>BinaryReaderWriter</strong> must be configured for online access. You can select between <em>OPC</em>, <em>ODK</em>, <em>Snap7</em> and <em>LibNoDave</em> as the communication path to the PLC. For <em>ODK</em> and <em>LibNoDave</em> the default configuration is sufficient in most cases, for <em>OPC</em> please see an example at the beginning of this chapter (for further details, please refer to the documentation of the relevant BinaryReaderWriter).</p>
 <p>The second BinaryReaderWriter <strong>&quot;DataDefReaderWriter&quot;</strong> is configured for offline access.  </p>
 <p><img src="../images/warning_icon.png" alt="warning_icon.png">
  You must not change any setting for this instance, since the application may not work correctly afterwards! Furthermore, these settings are deprecated and updated versions of this application will use an internal, hard-coded instance for offline access.</p>
 <hr>
-<h4 id="plcdatamanagers">PLCDataManagers</h4>
+<h4 id="plcdatamanagers">PLCDataManagers####</h4>
 <hr>
-<h5 id="plcdatamanager">PLCDataManager</h5>
+<h5 id="plcdatamanager">PLCDataManager#####</h5>
 <p><a name="PLCDataManager"></a>
 In this section, the paths and commands of the application are declared.</p>
 <table><tr><th>Variable </th><th> Description</th></tr>
@@ -415,7 +415,7 @@ In this section, the paths and commands of the application are declared.</p>
 
 
 <hr>
-<h1 id="data-definition-file">Data Definition File</h1>
+<h1 id="data-definition-file">Data Definition File#</h1>
 <pre><code class="lang-html">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
 &lt;DataDef Endianness=&quot;Host-Endianess&quot; Encoding=&quot;Base16&quot;
          xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
@@ -475,16 +475,16 @@ In this section, the paths and commands of the application are declared.</p>
   &lt;/Mappings&gt;
 &lt;/DataDef&gt;
 </code></pre><hr>
-<h2 id="types">Types</h2>
+<h2 id="types">Types##</h2>
 <p>This section is filled by the Tool AWLConverter and contains the definitions of the data blocks. For further details, please refer to the documentation for AWLConverter.</p>
 <hr>
-<h2 id="vars">Vars</h2>
+<h2 id="vars">Vars##</h2>
 <p>In this section, variables are declared that are elements of the element type declared in Types. These variables can then be used in the mappings.</p>
 <hr>
-<h2 id="mappings">Mappings</h2>
+<h2 id="mappings">Mappings##</h2>
 <p>Variables can be mapped to different data areas and read and write operations can then be executed via the mappings. Additionally, filters can be declared, too. These filters only apply to write operations. A filtered variable is not rewritten to the PLC.</p>
 <hr>
-<h1 id="plc-interface">PLC-Interface</h1>
+<h1 id="plc-interface">PLC-Interface#</h1>
 <p>The data modules that can be backed-up by a PLC-trigger-bit must be parametrized in the configuration (<a href="#PLCDataManager">&quot;DefPathsPLCTriggered&quot;</a>). Furthermore, any bit will serve the purpose of an interface to the PLC in case of an automatic comparison. The data area must be declared via a data definition and the bits required must be specified in the configuration.</p>
 <p><strong>Currently supported bits are:</strong></p>
 <p><strong>Control Bits:</strong></p>
@@ -551,7 +551,7 @@ In this section, the paths and commands of the application are declared.</p>
 &lt;SaveFinished&gt;PLCinterface.status.Sichern_beendet&lt;/SaveFinished&gt;
 &lt;BatchJobCancelled&gt;PLCinterface.status.BatchJobCancelled&lt;/BatchJobCancelled&gt;
 </code></pre><hr>
-<h1 id="installation">Installation</h1>
+<h1 id="installation">Installation#</h1>
 <p>A successful installation requires that </p>
 <ol>
 <li>Microsoft .NET Framework 4.0 Servicepack 1 </li>
@@ -598,7 +598,7 @@ In this section, the paths and commands of the application are declared.</p>
 
 
 <p>These files can be copied to any directory and the application can then be started from there.</p>
-<h1 id="document-history">Document history</h1>
+<h1 id="document-history">Document history#</h1>
 <table><tr><th>Author </th><th> Date </th><th> Remarks</th></tr>
 <tr><td>Benjamin Prömmer </td><td> January 2013 </td><td> Creation</td></tr>
 <tr><td>Ralf Gedrat </td><td> January 2013 </td><td> Brief editing</td></tr>

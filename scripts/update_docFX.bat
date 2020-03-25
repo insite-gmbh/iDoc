@@ -43,7 +43,7 @@ GOTO:EOF
     pushd "%CD%"
     CD /D "%~dp0"
     :--------------------------------------    
-    choco install docfx -version 2.12.1 -y
+    choco install docfx -version 2.45.1 -y
 GOTO:EOF
 
 

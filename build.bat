@@ -8,7 +8,8 @@ set /p DOCFXVERSION=<"temp.txt"
 del temp.txt
 
 :CHECK
-	IF "%DOCFXVERSION%" == "2.40.12.60008" GOTO RUN
+    ECHO %DOCFXVERSION%
+	IF "%DOCFXVERSION%" == "2.45.1.5651" GOTO RUN
 	call ./scripts/update_docFX.bat %~dp0 build.bat
 GOTO:EOF
 
